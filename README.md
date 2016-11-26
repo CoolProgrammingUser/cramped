@@ -1,2 +1,2 @@
 # Cramped
-This is me, in a nutshell.
+This is me in a nutshell.
