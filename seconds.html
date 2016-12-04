@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>
+            Countdowns
+        </title>
         <script>
-            document.getElementById("time").innerHTML = new Date();
+            var date = new Date();
+            document.getElementById("time").innerHTML = date;
         </script>
         <style>
         </style>
     </head>
     <body>
+        <p>
+            Trial number = 1
+        </p>
         <select name="month">
             <option value="January">
                 January
@@ -148,7 +155,6 @@
                 GMT
             </option>
         </select>
-        <br>
         <p id="time">
         </p>
     </body>
