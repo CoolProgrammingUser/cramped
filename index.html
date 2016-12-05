@@ -11,7 +11,7 @@
                 if(rawFile.readyState === 4) {
                     if(rawFile.status === 200 || rawFile.status == 0) {
                         var allText = rawFile.responseText;  // sets allText to a single string of the whole file
-                        document.body.appendChild(allText);
+                        document.body.appendChild(eval(allText));
                     }
                 }
             }
