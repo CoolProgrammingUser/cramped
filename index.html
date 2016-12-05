@@ -5,17 +5,19 @@
             Cramped
         </title>
         <script>
-            (var rawFile = new XMLHttpRequest();
-            rawFile.open("GET", "https://coolprogramminguser.github.io/Experimentation/Text.txt", false);
-            rawFile.onreadystatechange = function () {
-                if(rawFile.readyState === 4) {
-                    if(rawFile.status === 200 || rawFile.status == 0) {
-                        var allText = rawFile.responseText;  // sets allText to a single string of the whole file
-                        document.getElementById("navigation").innerHTML = allText;
+            window.addEventListener("load", function() {
+                var rawFile = new XMLHttpRequest();
+                rawFile.open("GET", "https://coolprogramminguser.github.io/Experimentation/Text.txt", false);
+                rawFile.onreadystatechange = function () {
+                    if(rawFile.readyState === 4) {
+                        if(rawFile.status === 200 || rawFile.status == 0) {
+                            var allText = rawFile.responseText;  // sets allText to a single string of the whole file
+                            document.getElementById("navigation").innerHTML = allText;
+                        }
                     }
                 }
-            }
-            rawFile.send(null);)();
+                rawFile.send(null);
+            });
         </script>
         <link rel="stylesheet" href="formatting.css">
         <style>
@@ -24,7 +26,7 @@
     <head>
     <body>
         <p>
-            Trial number = 2
+            Trial number = 3
         </p>
         <!-- <iframe src="navigation.html"></iframe> -->
         <p>
