@@ -5,24 +5,14 @@
             Cramped
         </title>
         <script>
-            var rawFile = new XMLHttpRequest();
-            rawFile.open("GET", "https://coolprogramminguser.github.io/Cramped/navigation.html", false);
-            rawFile.onreadystatechange = function () {
-                if(rawFile.readyState === 4) {
-                    if(rawFile.status === 200 || rawFile.status == 0) {
-                        var allText = rawFile.responseText;  // sets allText to a single string of the whole file
-                        document.body.appendChild(eval(allText));
-                    }
-                }
-            }
-            rawFile.send(null);
         </script>
         <link rel="stylesheet" href="formatting.css">
         <style>
         </style>
+        <!-- <link rel="import" href="/path/to/template.html"> could be used as a part of importing HTML in the future. -->
     <head>
     <body>
-        <!-- <iframe src="navigation.html"></iframe> -->
+        <iframe src="navigation.html"></iframe>
         <p>
             This is me in a nutshell.
         </p>
