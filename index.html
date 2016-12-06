@@ -7,6 +7,7 @@
         <script>
             window.addEventListener("load", function() {
                 var nav = document.createElement("nav");
+                nav.id = "navigation";
                 document.body.appendChild(nav);
                 var rawFile = new XMLHttpRequest();
                 rawFile.open("GET", "navigation.html", false);
@@ -14,7 +15,7 @@
                     if(rawFile.readyState === 4) {
                         if(rawFile.status === 200 || rawFile.status == 0) {
                             var allText = rawFile.responseText;  // sets allText to a single string of the whole file
-                            document.nav.innerHTML = allText;
+                            document.getElementById("navigation").innerHTML = allText;
                         }
                     }
                 }
@@ -28,7 +29,7 @@
     <head>
     <body>
         <p>
-            Trial number = 8
+            Trial number = 9
         </p>
         <!-- <iframe src="navigation.html"></iframe> -->
         <p>
