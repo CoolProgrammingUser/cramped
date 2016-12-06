@@ -8,6 +8,7 @@ body {
     text-align: center;
 }
 nav {
+    float: left;
     width: 20em;
     border: .1em solid black;
     text-align: left;
