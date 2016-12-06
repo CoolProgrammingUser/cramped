@@ -39,7 +39,7 @@
     </head>
     <body>
         <p>
-            Trial number = 19
+            Trial number = 20
         </p>
         <select name="month">
             <option value="" disabled selected>
@@ -183,11 +183,17 @@
         <input type="text" id="year" placeholder="Year"/>
         <input type="text" id="time" placeholder="Time"/>
         <select name="am/pm">
+            <option value="" disabled selected>
+                Time format
+            </option>
             <option value="am">
                 am
             </option>
             <option value="pm">
                 pm
+            </option>
+            <option value="24-hour">
+                24-hour
             </option>
         </select>
         <button onclick="stuff">
