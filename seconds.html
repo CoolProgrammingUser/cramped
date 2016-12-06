@@ -9,6 +9,7 @@
             var timeNumber = 1;
             window.addEventListener("load", function() {
                 makeCountdown("Christmas", "December 25, 2016 00:00:00");
+                makeCountdown("my birthday", "March 11, 2016 00:00:00");
                 refresh();
             });
             function makeCountdown(label, date) {
@@ -22,7 +23,11 @@
             function refresh() {
                 for (var time=1; time<timeNumber; time++) {
                     var element = document.getElementById(time);
-                    element.innerHTML = element.label + ": " + (Date.parse(element.date) - Date.parse(new Date()))/1000 + " seconds";
+                    var seconds = String(Math.ceil((Date.parse(element.date) - Date.parse(new Date()))/1000));
+                    for (var index=3; index<seconds.length; index+=3) {
+                        seconds = seconds.slice(0, -index) + "," + seconds.slice(-index);
+                    }
+                    element.innerHTML = element.label + ": " + seconds + " seconds";
                 }
                 setTimeout(refresh, 1000);
             }
@@ -33,7 +38,7 @@
     </head>
     <body>
         <p>
-            Trial number = 13
+            Trial number = 14
         </p>
         <select name="month">
             <option value="January">
