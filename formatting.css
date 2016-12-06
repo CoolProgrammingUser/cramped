@@ -6,10 +6,10 @@ a:hover {
 }
 body {
     background: blue; /* For browsers that do not support gradients */
-    background: -webkit-radial-gradient(circle, white, blue, white); /* Safari */
-    background: -o-radial-gradient(circle, white, blue, white); /* Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(circle, white, blue, white); /* Firefox 3.6 to 15 */
-    background: radial-gradient(circle, white, blue, white); /* Standard syntax */
+    background: -webkit-radial-gradient(white, blue, white); /* Safari */
+    background: -o-radial-gradient(white, blue, white); /* Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(white, blue, white); /* Firefox 3.6 to 15 */
+    background: radial-gradient(white, blue, white); /* Standard syntax */
     text-align: center;
 }
 nav {
