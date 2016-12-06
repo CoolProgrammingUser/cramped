@@ -24,7 +24,7 @@
             function refresh() {
                 for (var time=1; time<timeNumber; time++) {
                     var element = document.getElementById(time);
-                    element.innerHTML = element.label + ": " + (Date.parse(element.date) - Date.parse(new Date())) + " seconds";
+                    element.innerHTML = element.label + ": " + (Date.parse(element.date) - Date.parse(new Date()))/1000 + " seconds";
                 }
                 setTimeout(refresh, 1000);
             }
@@ -35,7 +35,7 @@
     </head>
     <body>
         <p>
-            Trial number = 11
+            Trial number = 12
         </p>
         <select name="month">
             <option value="January">
