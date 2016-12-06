@@ -13,6 +13,11 @@
                 makeCountdown("my birthday", "March 11, 2017 00:00:00");
                 refresh();
             });
+            function calculate() {
+                makeCountdown(document.text,
+                    document.month + " " + document.day + ", " + document.year + document.time + (document.timeFormat=="PM"?" PM":"")
+                );
+            }
             function makeCountdown(label, date) {
                 var paragraph = document.createElement("p");
                 paragraph.id = timeNumber;
@@ -39,8 +44,9 @@
     </head>
     <body>
         <p>
-            Trial number = 0
+            Trial number = 1
         </p>
+        <input type="text" name="text" placeholder="Label"/>
         <select name="month">
             <option value="" disabled selected>
                 Month
@@ -180,23 +186,23 @@
                 31
             </option>
         </select>
-        <input type="text" id="year" placeholder="Year"/>
-        <input type="text" id="time" placeholder="Time"/>
-        <select name="am/pm">
+        <input type="text" name="year" placeholder="Year"/>
+        <input type="text" name="time" placeholder="Time"/>
+        <select name="timeFormat">
             <option value="" disabled selected>
                 Time format
             </option>
-            <option value="am">
+            <option value="AM">
                 am
             </option>
-            <option value="pm">
+            <option value="PM">
                 pm
             </option>
             <option value="24-hour">
                 24-hour
             </option>
         </select>
-        <button onclick="stuff">
+        <button onclick="calculate()">
             Calculate
         </button>
         <br>
