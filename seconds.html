@@ -14,9 +14,13 @@
                 refresh();
             });
             function calculate() {
-                makeCountdown(document.text,
-                    document.month.value + " " + document.day.value + ", " + document.year + document.time + (document.timeFormat.value=="PM"?" PM":"")
-                );
+                var label = document.getElementById("label").value;
+                var month = document.getElementById("month").value;
+                var day = document.getElementById("day").value;
+                var year = document.getElementById("year").value;
+                var time = document.getElementById("time").value;
+                var timeFormat = document.getElementById("timeFormat").value=="PM"?"PM":"";
+                makeCountdown(document.text, month+" "+day+", "+year+time+timeFormat);
             }
             function makeCountdown(label, date) {
                 var paragraph = document.createElement("p");
@@ -44,10 +48,10 @@
     </head>
     <body>
         <p>
-            Trial number = 2
+            Trial number = 3
         </p>
-        <input type="text" name="text" placeholder="Label"/>
-        <select name="month">
+        <input type="text" id="label" placeholder="Label"/>
+        <select id="month">
             <option value="" disabled selected>
                 Month
             </option>
@@ -88,7 +92,7 @@
                 December
             </option>
         </select>
-        <select name="day">
+        <select id="day">
             <option value="" disabled selected>
                 Day
             </option>
@@ -186,9 +190,9 @@
                 31
             </option>
         </select>
-        <input type="text" name="year" placeholder="Year"/>
-        <input type="text" name="time" placeholder="Time"/>
-        <select name="timeFormat">
+        <input type="text" id="year" placeholder="Year"/>
+        <input type="text" id="time" placeholder="Time"/>
+        <select id="timeFormat">
             <option value="" disabled selected>
                 Time format
             </option>
