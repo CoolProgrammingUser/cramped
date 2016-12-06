@@ -12,7 +12,7 @@
                     if(rawFile.readyState === 4) {
                         if(rawFile.status === 200 || rawFile.status == 0) {
                             var allText = rawFile.responseText;  // sets allText to a single string of the whole file
-                            document.getElementById("navigation").innerHTML = allText;
+                            document.body.appendChild(allText);
                         }
                     }
                 }
@@ -26,7 +26,7 @@
     <head>
     <body>
         <p>
-            Trial number = 5
+            Trial number = 6
         </p>
         <!-- <iframe src="navigation.html"></iframe> -->
         <p>
