@@ -32,7 +32,7 @@
                 timeNumber++;
                 paragraph.label = label;
                 paragraph.date = date;
-                document.body.appendChild(paragraph);
+                document.insertBefore(paragraph, document.getElementById("loser"));
             }
             function refresh() {
                 for (var time=1; time<timeNumber; time++) {
@@ -52,7 +52,7 @@
     </head>
     <body>
         <p>
-            Trial number = 10
+            Trial number = 11
         </p>
         <input type="text" id="label" placeholder="Label"/>
         <select id="month">
