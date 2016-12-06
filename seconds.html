@@ -6,10 +6,25 @@
         </title>
         <script src="behavior.js"></script>
         <script>
+            var times = [];
             window.addEventListener("load", function() {
                 var date = new Date();
-                document.getElementById("abcd").innerHTML = date;
+                document.getElementById("text").innerHTML = date;
+                makeCountdown("tomorrow", "December 6, 2016 23:30:00");
+                refresh();
             });
+            function makeCountdown(label, date) {
+                var paragraph = document.createElement("p");
+                times.push({"element": String(paragraph), "label": String(label), "date": String(date)});
+                document.body.appendChild(paragraph);
+            }
+            function refresh() {
+                for (var time in times) {
+                    time = times[time];
+                    time.element.innerHTML = time.label + ": " + (Date.parse(time.date) - Date.parse(new Date())) + " seconds";
+                }
+                setTimeout(refresh, 1000);
+            }
         </script>
         <link rel="stylesheet" href="formatting.css">
         <style>
@@ -17,7 +32,7 @@
     </head>
     <body>
         <p>
-            Trial number = 9
+            Trial number = 10
         </p>
         <select name="month">
             <option value="January">
@@ -162,8 +177,7 @@
                 pm
             </option>
         </select>
-        <p id="abcd">
-            text
+        <p id="text">
         </p>
     </body>
 </html>
