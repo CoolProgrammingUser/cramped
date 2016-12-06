@@ -15,7 +15,7 @@
             });
             function calculate() {
                 makeCountdown(document.text,
-                    document.month + " " + document.day + ", " + document.year + document.time + (document.timeFormat=="PM"?" PM":"")
+                    document.month.value + " " + document.day.value + ", " + document.year + document.time + (document.timeFormat.value=="PM"?" PM":"")
                 );
             }
             function makeCountdown(label, date) {
@@ -44,7 +44,7 @@
     </head>
     <body>
         <p>
-            Trial number = 1
+            Trial number = 2
         </p>
         <input type="text" name="text" placeholder="Label"/>
         <select name="month">
