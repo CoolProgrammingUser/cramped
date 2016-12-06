@@ -8,9 +8,7 @@
         <script>
             var timeNumber = 1;
             window.addEventListener("load", function() {
-                var date = new Date();
-                document.getElementById("text").innerHTML = date;
-                makeCountdown("tomorrow", "December 6, 2016 23:30:00");
+                makeCountdown("Christmas", "December 25, 2016 00:00:00");
                 refresh();
             });
             function makeCountdown(label, date) {
@@ -35,7 +33,7 @@
     </head>
     <body>
         <p>
-            Trial number = 12
+            Trial number = 13
         </p>
         <select name="month">
             <option value="January">
@@ -180,7 +178,11 @@
                 pm
             </option>
         </select>
-        <p id="text">
-        </p>
+        <button onclick="stuff">
+            Calculate
+        </button>
+        <h2>
+            Time until...
+        </h2>
     </body>
 </html>
