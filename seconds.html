@@ -39,9 +39,12 @@
     </head>
     <body>
         <p>
-            Trial number = 18
+            Trial number = 19
         </p>
-        <select name="month" value="month">
+        <select name="month">
+            <option value="" disabled selected>
+                Month
+            </option>
             <option value="January">
                 January
             </option>
@@ -79,7 +82,10 @@
                 December
             </option>
         </select>
-        <select name="day" value="day">
+        <select name="day">
+            <option value="" disabled selected>
+                Day
+            </option>
             <option value="01">
                 1
             </option>
@@ -174,8 +180,8 @@
                 31
             </option>
         </select>
-        <input type="text" id="year" placeholder="year"/>
-        <input type="text" id="time" placeholder="time"/>
+        <input type="text" id="year" placeholder="Year"/>
+        <input type="text" id="time" placeholder="Time"/>
         <select name="am/pm">
             <option value="am">
                 am
