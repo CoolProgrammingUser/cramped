@@ -9,11 +9,12 @@
             var timeNumber = 1;
             window.addEventListener("load", function() {
                 makeCountdown("Christmas", "December 25, 2016 00:00:00");
+                makeCountdown("next year", "January 1, 2017 00:00:00");
                 makeCountdown("my birthday", "March 11, 2017 00:00:00");
                 refresh();
             });
             function makeCountdown(label, date) {
-                var paragraph = document.createElement("h4");
+                var paragraph = document.createElement("p");
                 paragraph.id = timeNumber;
                 timeNumber++;
                 paragraph.label = label;
@@ -38,7 +39,7 @@
     </head>
     <body>
         <p>
-            Trial number = 16
+            Trial number = 17
         </p>
         <select name="month">
             <option value="January">
@@ -186,6 +187,8 @@
         <button onclick="stuff">
             Calculate
         </button>
+        <br>
+        <input type="checkbox" id="loser"><label for="loser">I'm a loser and want the time displayed normally.</label>
         <h2>
             Time until...
         </h2>
