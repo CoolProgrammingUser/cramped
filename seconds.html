@@ -21,12 +21,10 @@
                 var time = document.getElementById("time").value;
                 var timeFormat = document.getElementById("timeFormat").value=="pm"?" PM":"";
                 makeCountdown(label, month+" "+day+", "+year+" "+time+timeFormat);
-                label = "";
-                month = "";
-                day = "";
-                year = "";
-                time = "";
-                timeFormat = "";
+                var IDs = ["label", "month", "day", "year", "time", "timeFormat"];
+                for (var index in IDs) {
+                    document.getElementById(IDs[index]).value = "";
+                }
             }
             function makeCountdown(label, date) {
                 var paragraph = document.createElement("p");
@@ -54,7 +52,7 @@
     </head>
     <body>
         <p>
-            Trial number = 9
+            Trial number = 10
         </p>
         <input type="text" id="label" placeholder="Label"/>
         <select id="month">
