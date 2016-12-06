@@ -6,9 +6,7 @@
         </title>
         <script>
             window.addEventListener("load", function() {
-                var nav = document.createElement("nav");
-                nav.id = "navigation";
-                document.body.appendChild(nav);
+                document.body.appendChild(document.createElement("nav"));
                 var rawFile = new XMLHttpRequest();
                 rawFile.open("GET", "navigation.html", false);
                 rawFile.onreadystatechange = function () {
@@ -29,7 +27,7 @@
     <head>
     <body>
         <p>
-            Trial number = 15
+            Trial number = 16
         </p>
         <p>
             This is me in a nutshell.
