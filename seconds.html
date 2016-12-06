@@ -4,21 +4,19 @@
         <title>
             Countdowns
         </title>
-        <script>
-            document.getElementById("text").innerHTML = new Date();
-        </script>
-        <style>
-            #rotator {
-                -webkit-transform: rotate(5deg);  /* needs -webkit- prefix for Chrome, Safari, and Opera */
+        <script src="behavior.js">
+            window.addEventListener("load", function() {
+                document.getElementById("text").innerHTML = new Date();
             }
+        </script>
+        <link rel="stylesheet" href="formatting.css">
+        <style>
         </style>
     </head>
     <body>
-        <div id="rotator">
         <p>
             Trial number = 0
         </p>
-        </div>
         <select name="month">
             <option value="January">
                 January
