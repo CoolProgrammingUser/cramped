@@ -4,21 +4,7 @@
         <title>
             Cramped
         </title>
-        <script>
-            window.addEventListener("load", function() {
-                document.body.appendChild(document.createElement("nav"));
-                var file = new XMLHttpRequest();
-                file.open("GET", "navigation.html", false);
-                file.onreadystatechange = function () {
-                    if(file.readyState === 4) {
-                        if(file.status === 200 || file.status == 0) {
-                            // var allText = file.responseText;  // sets allText to a single string of the whole file
-                            document.getElementsByTagName("nav")[0].innerHTML = file.responseText;
-                        }
-                    }
-                }
-                file.send();
-            });
+        <script src="behavior.js">
         </script>
         <link rel="stylesheet" href="formatting.css">
         <style>
@@ -27,7 +13,7 @@
     <head>
     <body>
         <p>
-            Trial number = 18
+            Trial number = 19
         </p>
         <p>
             This is me in a nutshell.
