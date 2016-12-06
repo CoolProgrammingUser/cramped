@@ -6,7 +6,8 @@
         </title>
         <script src="behavior.js">
             window.addEventListener("load", function() {
-                document.getElementById("abcd").innerHTML = new Date();
+                var date = new Date();
+                document.getElementById("abcd").innerHTML = date;
             }
         </script>
         <link rel="stylesheet" href="formatting.css">
@@ -15,7 +16,7 @@
     </head>
     <body>
         <p>
-            Trial number = 1
+            Trial number = 2
         </p>
         <select name="month">
             <option value="January">
