@@ -4,12 +4,10 @@
         <title>
             Countdowns
         </title>
-        <script src="behavior.js">
-        </script>
+        <script src="behavior.js"></script>
         <script>
-            document.addEventListener("click", function() {
+            window.addEventListener("load", function() {
                 var date = new Date();
-                alert(date);
                 document.getElementById("abcd").innerHTML = date;
             });
         </script>
@@ -19,7 +17,7 @@
     </head>
     <body>
         <p>
-            Trial number = 8
+            Trial number = 9
         </p>
         <select name="month">
             <option value="January">
