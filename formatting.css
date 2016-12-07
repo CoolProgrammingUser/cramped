@@ -18,8 +18,8 @@ body {
 }
 nav {
     float: left;
-    width: 15em;  /* could fill horizontally with 100vw */
-    height: 90vh;
+    width: 16em;  /* could fill horizontally with 100vw */
+    height: 95vh;
     background: white;
     border: .1em solid black;
     text-align: left;
