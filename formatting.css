@@ -18,7 +18,7 @@ body {
 }
 nav {
     float: left;
-    width: 18em;  /* could fill horizontally with 100vw */
+    width: 15em;  /* could fill horizontally with 100vw */
     height: 90vh;
     background: white;
     border: .1em solid black;
