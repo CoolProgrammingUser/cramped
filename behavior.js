@@ -1,5 +1,5 @@
 window.addEventListener("load", function() {
-    document.body.appendChild(document.createElement("nav"));
+    document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
     var file = new XMLHttpRequest();
     file.open("GET", "navigation.html", false);
     file.onreadystatechange = function () {
