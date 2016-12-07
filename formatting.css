@@ -1,3 +1,6 @@
+html {
+    height: 100%;
+}
 a {
     text-decoration: none;
 }
@@ -5,6 +8,7 @@ a:hover {
     text-decoration: underline;
 }
 body {
+    height: 100%;
     background: blue; /* For browsers that do not support gradients */
     background: -webkit-radial-gradient(white, blue, white); /* Safari */
     background: -o-radial-gradient(white, blue, white); /* Opera 11.6 to 12.0 */
@@ -15,6 +19,10 @@ body {
 nav {
     float: left;
     width: 20em;
+    background: white;
     border: .1em solid black;
     text-align: left;
+}
+input {
+    text-align: center;
 }
