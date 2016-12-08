@@ -11,7 +11,7 @@
                 makeCountdown("Christmas", "December 25, 2016 00:00");
                 makeCountdown("next year", "January 1, 2017 00:00");
                 makeCountdown("my birthday", "March 11, 2017 00:00");
-                refresh();
+                setInterval(refresh, 1000);
             });
             function calculate() {
                 var label = document.getElementById("label").value;
@@ -22,9 +22,10 @@
                 var timeFormat = document.getElementById("timeFormat").value=="pm"?" PM":"";
                 makeCountdown(label, month+" "+day+", "+year+" "+time+timeFormat);
                 var IDs = ["label", "month", "day", "year", "time", "timeFormat"];
-                for (var index in IDs) {
+                for (var index in IDs) {  // clears all of the inputs
                     document.getElementById(IDs[index]).value = "";
                 }
+                refresh();
             }
             function makeCountdown(label, date) {
                 var paragraph = document.createElement("p");
@@ -58,7 +59,6 @@
                     }
                     element.innerHTML = element.label + ": " + time;
                 }
-                setTimeout(refresh, 1000);
             }
         </script>
         <link rel="stylesheet" href="formatting.css">
@@ -67,7 +67,7 @@
     </head>
     <body>
         <p>
-            Trial number = 3
+            Trial number = 4
         </p>
         <h2>
             Time until...
