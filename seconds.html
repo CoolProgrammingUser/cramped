@@ -8,9 +8,9 @@
         <script>
             var timeNumber = 1;
             window.addEventListener("load", function() {
-                makeCountdown("Christmas", "December 25, 2016 00:00:00");
-                makeCountdown("next year", "January 1, 2017 00:00:00");
-                makeCountdown("my birthday", "March 11, 2017 00:00:00");
+                makeCountdown("Christmas", "December 25, 2016 00:00");
+                makeCountdown("next year", "January 1, 2017 00:00");
+                makeCountdown("my birthday", "March 11, 2017 00:00");
                 refresh();
             });
             function calculate() {
@@ -35,13 +35,28 @@
                 document.body.insertBefore(paragraph, document.getElementById("loser"));
             }
             function refresh() {
-                for (var time=1; time<timeNumber; time++) {
-                    var element = document.getElementById(time);
-                    var seconds = String(Math.ceil((Date.parse(element.date) - Date.parse(new Date()))/1000));
-                    for (var index=3; index<seconds.length; index+=4) {
-                        seconds = seconds.slice(0, -index) + "," + seconds.slice(-index);
+                for (var number=1; number<timeNumber; number++) {
+                    var element = document.getElementById(number);
+                    var now = new Date();
+                    var then = new Date(element.date);
+                    var time = "";
+                    if (document.getElementById("loser").checked) {
+                        var code = [
+                            "time += then.getFullYear - now.getFullYear + ' years ';",
+                            "time += then.getMonth - now.getMonth + ' months ';",
+                            "time += then.getTime - now.getTime + ' days ';",
+                            "time += then.getHours - now.getHours + ' hours ';",
+                            "time += then.getMinutes - now.getMinutes + ' minutes ';",
+                            "time += then.getSeconds - now.getSeconds + ' seconds ';"
+                        ]
+                    } else {
+                        var seconds = Math.ceil((then.getTime - now.getTime)/1000);
+                        for (var index=3; index<seconds.length; index+=4) {
+                            seconds = seconds.slice(0, -index) + "," + seconds.slice(-index);
+                        }
+                        time = seconds + " seconds";
                     }
-                    element.innerHTML = element.label + ": " + seconds + " seconds";
+                    element.innerHTML = element.label + ": " + time;
                 }
                 setTimeout(refresh, 1000);
             }
@@ -52,7 +67,7 @@
     </head>
     <body>
         <p>
-            Trial number = 17
+            Trial number = 1
         </p>
         <h2>
             Time until...
