@@ -43,17 +43,12 @@
                     var then = new Date(element.date);
                     var time = "";
                     if (document.getElementById("loser").checked) {
-                        var code = [
-                            "time += then.getFullYear() - now.getFullYear() + ' years ';",
-                            "time += then.getMonth() - now.getMonth() + ' months ';",
-                            "time += then.getDate() - now.getDate() + ' days ';",
-                            "time += then.getHours() - now.getHours() + ' hours ';",
-                            "time += then.getMinutes() - now.getMinutes() + ' minutes ';",
-                            "time += then.getSeconds() - now.getSeconds() + ' seconds ';"
-                        ]
-                        for (var index in code) {
-                            eval(code[index]);
-                        }
+                        time += then.getFullYear() - now.getFullYear() + ' years ';
+                        time += then.getMonth() - now.getMonth() + ' months ';
+                        time += then.getDate() - now.getDate() + ' days ';
+                        time += Math.floor((then.getTime()-now.getTime())%86400/3600) + ' hours ';
+                        time += Math.floor((then.getTime()-now.getTime())%3600/60) + ' minutes ';
+                        time += Math.ceil((then.getTime()-now.getTime())%60) + ' seconds ';
                     } else {
                         var seconds = String(Math.ceil((then.getTime() - now.getTime())/1000));
                         for (var index=3; index<seconds.length; index+=4) {
@@ -71,7 +66,7 @@
     </head>
     <body>
         <p>
-            Trial number = 7
+            Trial number = 8
         </p>
         <h2>
             Time until...
