@@ -43,6 +43,9 @@
                     var then = new Date(element.date);
                     var time = "";
                     if (document.getElementById("loser").checked) {
+                        var days = then.getDate() - now.getDate();  //-----------\
+                        var months = then.getMonth() - now.getMonth();  //--------->- use these to format the respective times correctly
+                        var years = then.getFullYear() - now.getFullYear();  //--/
                         time += then.getFullYear() - now.getFullYear() + ' years ';
                         time += then.getMonth() - now.getMonth() + ' months ';
                         time += then.getDate() - now.getDate() + ' days ';
@@ -66,12 +69,13 @@
     </head>
     <body>
         <p>
-            Trial number = 9
+            Trial number = 10
         </p>
         <h2>
             Time until...
         </h2>
-        <input type="checkbox" id="loser" onclick="refresh()"><label for="loser">I'm a loser and want the times displayed normally.</label>
+        <input type="checkbox" id="loser" onclick="refresh()">
+        <label for="loser">I'm a loser and want the times displayed normally.</label>
         <br>
         <br>
         <h3>
