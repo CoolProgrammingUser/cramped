@@ -20,7 +20,7 @@
                 var day = document.getElementById("day").value;
                 var year = document.getElementById("year").value;
                 var time = document.getElementById("time").value;
-                var timeFormat = document.getElementById("timeFormat").value=="pm"?" PM":"";
+                var timeFormat = document.getElementById("timeFormat").value!="24-hour" ? " "+document.getElementById("timeFormat").value : "";
                 makeCountdown(label, month+" "+day+", "+year+" "+time+timeFormat);
                 var IDs = ["label", "month", "day", "year", "time", "timeFormat"];
                 for (var index in IDs) {  // clears all of the inputs
@@ -43,9 +43,9 @@
                     var then = new Date(element.date);
                     var time = "";
                     if (document.getElementById("loser").checked) {
-                        var days = then.getDate() - now.getDate();  //-----------\
-                        var months = then.getMonth() - now.getMonth();  //--------->- use these to format the respective times correctly
-                        var years = then.getFullYear() - now.getFullYear();  //--/
+                        var days = then.getDate() - now.getDate();  //------------\
+                        var months = then.getMonth() - now.getMonth();  //---------->-- use these to format the respective times correctly
+                        var years = then.getFullYear() - now.getFullYear();  //---/
                         time += then.getFullYear() - now.getFullYear() + ' years ';
                         time += then.getMonth() - now.getMonth() + ' months ';
                         time += then.getDate() - now.getDate() + ' days ';
@@ -69,7 +69,7 @@
     </head>
     <body>
         <p>
-            Trial number = 10
+            Trial number = 11
         </p>
         <h2>
             Time until...
