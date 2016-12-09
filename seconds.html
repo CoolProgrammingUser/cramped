@@ -52,7 +52,7 @@
                             "time += then.getSeconds() - now.getSeconds() + ' seconds ';"
                         ]
                         for (var index in code) {
-                            exec(code[index]);
+                            eval(code[index]);
                         }
                     } else {
                         var seconds = String(Math.ceil((then.getTime() - now.getTime())/1000));
