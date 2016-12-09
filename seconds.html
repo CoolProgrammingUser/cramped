@@ -46,7 +46,7 @@
                         var code = [
                             "time += then.getFullYear() - now.getFullYear() + ' years ';",
                             "time += then.getMonth() - now.getMonth() + ' months ';",
-                            "time += then.getTime() - now.getTime() + ' days ';",
+                            "time += then.getDate() - now.getDate() + ' days ';",
                             "time += then.getHours() - now.getHours() + ' hours ';",
                             "time += then.getMinutes() - now.getMinutes() + ' minutes ';",
                             "time += then.getSeconds() - now.getSeconds() + ' seconds ';"
@@ -68,12 +68,12 @@
     </head>
     <body>
         <p>
-            Trial number = 5
+            Trial number = 6
         </p>
         <h2>
             Time until...
         </h2>
-        <input type="checkbox" id="loser"><label for="loser">I'm a loser and want the times displayed normally.</label>
+        <input type="checkbox" id="loser" onclick="refresh()"><label for="loser">I'm a loser and want the times displayed normally.</label>
         <br>
         <br>
         <h3>
