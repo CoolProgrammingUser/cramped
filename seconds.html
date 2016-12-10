@@ -54,16 +54,16 @@
                         if (days < 0) {
                             days = new Date(now.getFullYear()+" "+(now.getMonth+1)+" 0").getDate() + days + then.getDate() - 1;
                         }
-                        if (new Date(then.getFullYear()+" "+then.getMonth()+" "+days+" "+thenTime).getTime() - new Date(then.getFullYear()+" "+then.getMonth()+" "+days+" "+nowTime).getTime() < 0) {
+                        if (new Date(then.getFullYear()+" "+then.getMonth()+" "+then.getDate()+" "+thenTime).getTime() - new Date(then.getFullYear()+" "+then.getMonth()+" "+then.getDate()+" "+nowTime).getTime() < 0) {
                             days--;
                         }
                         if (months < 0) {
                             months = 12 + months + then.getMonth();
                         }
-                        if (new Date(then.getFullYear()+" "+months+" "+then.getDate()+" "+thenTime).getTime() - new Date(then.getFullYear()+" "+months+" "+now.getDate()+" "+nowTime).getTime() < 0) {
+                        if (new Date(then.getFullYear()+" "+then.getMonth()+" "+then.getDate()+" "+thenTime).getTime() - new Date(then.getFullYear()+" "+then.getMonth()+" "+now.getDate()+" "+nowTime).getTime() < 0) {
                             months--;
                         }
-                        if (new Date(years+" "+then.getMonth()+" "+then.getDate()+" "+thenTime).getTime() - new Date(years+" "+now.getMonth()+" "+now.getDate()+" "+nowTime).getTime() < 0) {
+                        if (then.getTime() - new Date(then.getFullYear()+" "+now.getMonth()+" "+now.getDate()+" "+nowTime).getTime() < 0) {
                             years--;
                         }
                         if (seconds > 0) {
@@ -82,7 +82,7 @@
                             time = months + (months!=1?" months ":" month ") + time;
                         }
                         if (years > 0) {
-                            time = years + (months!=1?" years ":" year ") + time;
+                            time = years + (years!=1?" years ":" year ") + time;
                         }
                     } else {
                         var seconds = String(Math.ceil((then.getTime() - now.getTime())/1000));
@@ -101,7 +101,7 @@
     </head>
     <body>
         <p>
-            Trial number = 1
+            Trial number = 2
         </p>
         <h2>
             Time until...
