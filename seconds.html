@@ -50,7 +50,16 @@
                         var months = then.getMonth() - now.getMonth();
                         var days = then.getDate() - now.getDate();
                         var years = then.getFullYear() - now.getFullYear();
+                        /********
+                        Important nonsense:
+                        .getMonth refers to months as 0-11; new Date("year monthNumber day") uses month numbers 1-12.
+                        Example:
+                        new Date(2017 March 11).getMonth() = 2
+                        new Date(2017 2 11).getMonth() = 1
+                        ********/
                         if (days < 0) {
+                            // This is exempt from month nonsense probably because the new date is created in a comma-separated format. (It's 0-11.)
+                            // The 1 is added to the month to get to the 0th day of the next month (the number of days in the month of interest).
                             days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate() - 1;
                         }
                         if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+then.getDate()+" "+nowTime).getTime() < 0) {
@@ -100,7 +109,7 @@
     </head>
     <body>
         <p>
-            Trial number = 8
+            Trial number = 0
         </p>
         <h2>
             Time until...
