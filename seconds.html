@@ -57,7 +57,7 @@
                             days--;
                         }
                         if (months < 0) {
-                            months = 12 - now.getMonth() + then.getMonth() - 1;
+                            months = 12 - now.getMonth() + then.getMonth();
                         }
                         if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+now.getDate()+" "+nowTime).getTime() < 0) {
                             months--;
@@ -100,7 +100,7 @@
     </head>
     <body>
         <p>
-            Trial number = 7
+            Trial number = 8
         </p>
         <h2>
             Time until...
