@@ -1,3 +1,4 @@
+/* dev.opera.com has a bunch of cross-browser stuff. */
 html {
     min-height: 100%;
 }
@@ -12,10 +13,10 @@ body {
     width: 80%;
     min-height: 100%;
     background: blue;  /* for browsers that don't support gradients */
-    background: -webkit-radial-gradient(circle, white, blue, white);  /* Safari */
-    background: -o-radial-gradient(circle, white, blue, white);  /* Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(circle, white, blue, white);  /* Firefox 3.6 to 15 */
-    background: radial-gradient(circle, white, blue, white);  /* standard syntax */
+    background: -webkit-radial-gradient(60% 50%, circle, white, blue, white);  /* Safari */
+    background: -o-radial-gradient(60% 50%, circle, white, blue, white);  /* Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(60% 50%, circle, white, blue, white);  /* Firefox 3.6 to 15 */
+    background: radial-gradient(circle at 60% 50%, white, blue, white);  /* standard syntax */
     text-align: center;
 }
 nav {
