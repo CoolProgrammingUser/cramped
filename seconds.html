@@ -43,15 +43,47 @@
                     var then = new Date(element.date);
                     var time = "";
                     if (document.getElementById("loser").checked) {
-                        var days = then.getDate() - now.getDate();  //------------\
-                        var months = then.getMonth() - now.getMonth();  //---------->-- use these to format the respective times correctly
-                        var years = then.getFullYear() - now.getFullYear();  //---/
-                        time += then.getFullYear() - now.getFullYear() + ' years ';
-                        time += then.getMonth() - now.getMonth() + ' months ';
-                        time += then.getDate() - now.getDate() + ' days ';
-                        time += Math.floor((then.getTime()-now.getTime())%86400000/3600000) + ' hours ';
-                        time += Math.floor((then.getTime()-now.getTime())%3600000/60000) + ' minutes ';
-                        time += Math.ceil((then.getTime()-now.getTime())%60000/1000) + ' seconds ';
+                        var seconds = Math.floor((then.getTime()-now.getTime())%60000/1000);
+                        var minutes = Math.floor((then.getTime()-now.getTime())%3600000/60000);
+                        var hours = Math.floor((then.getTime()-now.getTime())%86400000/3600000);
+                        var nowTime = now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+                        var thenTime = then.getHours()+":"+then.getMinutes()+":"+then.getSeconds();
+                        var months = then.getMonth() - now.getMonth();
+                        var days = then.getDate() - now.getDate();
+                        var years = then.getFullYear() - now.getFullYear();
+                        if (days < 0) {
+                            days = new Date(now.getFullYear()+" "+(now.getMonth+1)+" 0").getDate() + days + then.getDate() - 1;
+                        }
+                        if (new Date(then.getFullYear()+" "+then.getMonth()+" "+days+" "+thenTime).getTime() - new Date(then.getFullYear()+" "+then.getMonth()+" "+days+" "+nowTime).getTime() < 0) {
+                            days--;
+                        }
+                        if (months < 0) {
+                            months = 12 + months + then.getMonth();
+                        }
+                        if (new Date(then.getFullYear()+" "+months+" "+then.getDate()+" "+thenTime).getTime() - new Date(then.getFullYear()+" "+months+" "+now.getDate()+" "+nowTime).getTime() < 0) {
+                            months--;
+                        }
+                        if (new Date(years+" "+then.getMonth()+" "+then.getDate()+" "+thenTime).getTime() - new Date(years+" "+now.getMonth()+" "+now.getDate()+" "+nowTime).getTime() < 0) {
+                            years--;
+                        }
+                        if (seconds > 0) {
+                            time = seconds + (seconds!=1?" seconds":" second");
+                        }
+                        if (minutes > 0) {
+                            time = minutes + (minutes!=1?" minutes ":" minute ") + time;
+                        }
+                        if (hours > 0) {
+                            time = hours + (hours!=1?" hours ":" hour ") + time;
+                        }
+                        if (days > 0) {
+                            time = days + (days!=1?" days ":" day ") + time;
+                        }
+                        if (months > 0) {
+                            time = months + (months!=1?" months ":" month ") + time;
+                        }
+                        if (years > 0) {
+                            time = years + (months!=1?" years ":" year ") + time;
+                        }
                     } else {
                         var seconds = String(Math.ceil((then.getTime() - now.getTime())/1000));
                         for (var index=3; index<seconds.length; index+=4) {
@@ -69,7 +101,7 @@
     </head>
     <body>
         <p>
-            Trial number = 0
+            Trial number = 1
         </p>
         <h2>
             Time until...
