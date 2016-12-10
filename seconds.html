@@ -52,7 +52,7 @@
                         var days = then.getDate() - now.getDate();
                         var years = then.getFullYear() - now.getFullYear();
                         if (days < 0) {
-                            days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate() - 2;
+                            days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate() - 1;
                         }
                         if (then.getTime() - new Date(then.getFullYear()+" "+then.getMonth()+" "+then.getDate()+" "+nowTime).getTime() < 0) {
                             days--;
@@ -101,7 +101,7 @@
     </head>
     <body>
         <p>
-            Trial number = 5
+            Trial number = 6
         </p>
         <h2>
             Time until...
