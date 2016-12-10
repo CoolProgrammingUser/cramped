@@ -47,23 +47,22 @@
                         var minutes = Math.floor((then.getTime()-now.getTime())%3600000/60000);
                         var hours = Math.floor((then.getTime()-now.getTime())%86400000/3600000);
                         var nowTime = now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
-                        var thenTime = then.getHours()+":"+then.getMinutes()+":"+then.getSeconds();
                         var months = then.getMonth() - now.getMonth();
                         var days = then.getDate() - now.getDate();
                         var years = then.getFullYear() - now.getFullYear();
                         if (days < 0) {
                             days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate() - 1;
                         }
-                        if (then.getTime() - new Date(then.getFullYear()+" "+then.getMonth()+" "+then.getDate()+" "+nowTime).getTime() < 0) {
+                        if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+then.getDate()+" "+nowTime).getTime() < 0) {
                             days--;
                         }
                         if (months < 0) {
                             months = 12 - now.getMonth() + then.getMonth() - 1;
                         }
-                        if (then.getTime() - new Date(then.getFullYear()+" "+then.getMonth()+" "+now.getDate()+" "+nowTime).getTime() < 0) {
+                        if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+now.getDate()+" "+nowTime).getTime() < 0) {
                             months--;
                         }
-                        if (then.getTime() - new Date(then.getFullYear()+" "+now.getMonth()+" "+now.getDate()+" "+nowTime).getTime() < 0) {
+                        if (then.getTime() - new Date(then.getFullYear()+" "+(now.getMonth()+1)+" "+now.getDate()+" "+nowTime).getTime() < 0) {
                             years--;
                         }
                         if (seconds > 0) {
@@ -101,7 +100,7 @@
     </head>
     <body>
         <p>
-            Trial number = 6
+            Trial number = 7
         </p>
         <h2>
             Time until...
