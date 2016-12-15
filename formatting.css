@@ -1,4 +1,9 @@
 /* dev.opera.com has a bunch of cross-browser stuff. */
+* {  /* makes everything include padding and borders in its height and width */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 html {
     min-height: 100%;
 }
