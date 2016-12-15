@@ -23,10 +23,10 @@ nav {
     position: fixed;
     left: 0em;
     top: 0em;
+    padding-right: 1em;
     width: 20%;  /* could fill horizontally with 100vw */
     height: 100%;
     background: white;
-    padding-right: 1em;
     text-align: left;
 }
 ul {
