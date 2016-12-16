@@ -14,7 +14,7 @@ a:hover {
     text-decoration: underline;
 }
 body {
-    margin: 0% 0% 0% 20%;
+    margin-left: 15%;
     width: 85%;
     min-height: 100%;
     background: blue;  /* for browsers that don't support gradients */
