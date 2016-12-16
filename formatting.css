@@ -15,7 +15,7 @@ a:hover {
 }
 body {
     margin: 0% 0% 0% 20%;
-    width: 80%;
+    width: 85%;
     min-height: 100%;
     background: blue;  /* for browsers that don't support gradients */
     background: -webkit-radial-gradient(60% 50%, circle, white, blue, white);  /* Safari */
@@ -29,7 +29,7 @@ nav {
     left: 0em;
     top: 0em;
     padding-right: 1em;
-    width: 20%;  /* could fill horizontally with 100vw */
+    width: 15%;  /* could fill horizontally with 100vw */
     height: 100%;
     background: white;
     text-align: left;
