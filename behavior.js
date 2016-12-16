@@ -1,6 +1,6 @@
 window.addEventListener("load", function() {
     // makes the title of all the pages "Cramped"
-    document.body.insertBefore(document.createElement("title"), document.head.childNodes[0]);
+    document.head.insertBefore(document.createElement("title"), document.head.childNodes[0]);
     document.getElementsByTagName("title")[0].innerHTML = "Cramped";
     // adds the navigation section to all the pages
     document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
