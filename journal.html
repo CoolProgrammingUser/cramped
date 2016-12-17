@@ -3,13 +3,15 @@
     <head>
         <script src="behavior.js"></script>
         <script>
+            // makes a section to jump to certain parts of the page
             window.addEventListener("load", function() {
                 var contents = document.createElement("div");
                 contents.innerHTML = "<h2>Jump to:</h2>";
                 document.body.insertBefore(contents, document.getElementById("entries"));
                 var entries = document.getElementById("entries").getElementsByTagName("h2");
+                alert(entries.length);
                 for (var index in entries) {
-                    var inside = entries[index].innerHTML.trim();
+                    var inside = entries[index].innerHTML.trim();  // The inner HTML has a bunch of whitespace for no apparent reason.
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
                 }
@@ -24,7 +26,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 13
+            Trial number = 14
         </p>
         <div id="entries">
             <h2>
