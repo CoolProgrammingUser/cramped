@@ -8,9 +8,9 @@
                 contents.innerHTML = "<h2>Jump to:<h2>";
                 document.body.insertBefore(contents, document.getElementById("entries"));
                 var entries = document.getElementById("entries").getElementsByTagName("h2");
-                alert(entries.length);
                 for (var index in entries) {
                     var inside = entries[index].innerHTML;
+                    alert("<pre>"+inside+"<pre>");
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
                 }
@@ -25,7 +25,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 8
+            Trial number = 9
         </p>
         <div id="entries">
             <h2>
