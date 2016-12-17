@@ -7,7 +7,7 @@
             window.addEventListener("load", function() {
                 var contents = document.createElement("div");
                 contents.innerHTML = "<h2>Jump to:</h2>";
-                document.insertBefore(contents, document.getElementById("entries"));
+                document.body.insertBefore(contents, document.getElementById("entries"));
                 var entries = document.getElementById("entries").getElementsByTagName("h2");
                 var toTop = document.createElement("a");
                 toTop.href = "#top";
@@ -29,7 +29,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 18
+            Trial number = 19
         </p>
         <div id="entries">
             <h2>
