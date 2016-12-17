@@ -7,12 +7,14 @@
             window.addEventListener("load", function() {
                 var contents = document.createElement("div");
                 contents.innerHTML = "<h2>Jump to:</h2>";
-                document.body.insertBefore(contents, document.getElementById("entries"));
+                document.insertBefore(contents, document.getElementById("entries"));
                 var entries = document.getElementById("entries").getElementsByTagName("h2");
-                for (var index=0; index<entries.length; index++) {
+                var toTop = "<a href='top'>To top</a>";
+                for (var index=0; index<entries.length; index++) {  // I would use (var in array), but index exceeds entries.length
                     var inside = entries[index].innerHTML.trim();  // The inner HTML has a bunch of whitespace for no apparent reason.
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
+                    document.insertBefore(toTop, document.getElementById("entries").getElementsByTagName("p")[index]);
                 }
             });
         </script>
@@ -25,7 +27,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 16
+            Trial number = 17
         </p>
         <div id="entries">
             <h2>
