@@ -3,6 +3,17 @@
     <head>
         <script src="behavior.js"></script>
         <script>
+            window.addEventListener("load", function() {
+                var contents = document.createElement("div");
+                contents.innerHTML = "<h2>Jump to:<h2>";
+                document.body.insertBefore(contents, document.getElementById("entries"));
+                var entries = document.getElementById("entries").getElementsByTagName("h2");
+                for (var index in entries) {
+                    var inside = entries[index].innerHTML;
+                    entries[index].id = inside;
+                    contents.innerHTML += "<p><a href=#" + inside + ">" + inside + "</a></p>";
+                }
+            });
         </script>
         <link rel="stylesheet" href="formatting.css">
         <style>
@@ -13,7 +24,35 @@
             Journal
         </h1>
         <p>
-            Trial number = 0
+            Trial number = 1
         </p>
+        <div id="entries">
+            <h2>
+                This is an entry.
+            </h2>
+            <p>
+                Blah, blah, blah.
+            </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h2>
+                This is a second entry.
+            </h2>
+            <p>
+                More blah, blah, and blah.
+            </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h2>
+                This is a final entry.
+            </h2>
+            <p>
+                Blah.
+            </p>
+        </div>
     </body>
 <html>
