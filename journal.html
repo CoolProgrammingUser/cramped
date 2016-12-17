@@ -16,9 +16,11 @@
                     var inside = entries[index].innerHTML.trim();  // The inner HTML has a bunch of whitespace for no apparent reason.
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
+                    // You'll probably need referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); for inserting after the heading.
                     document.getElementById("entries").insertBefore(toTop.cloneNode(true), document.getElementById("entries").getElementsByTagName("p")[index]);
                     // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
                 }
+                contents.innerHTML += "<br><br>";
             });
         </script>
         <link rel="stylesheet" href="formatting.css">
@@ -30,7 +32,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 22
+            Trial number = 23
         </p>
         <div id="entries">
             <h2>
