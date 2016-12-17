@@ -51,8 +51,8 @@
                         Important nonsense:
                         .getMonth refers to months as 0-11; new Date("year monthNumber day") uses month numbers 1-12.
                         Example:
-                        new Date(2017 March 11).getMonth() = 2
-                        new Date(2017 2 11).getMonth() = 1
+                        new Date("2017 March 11").getMonth() = 2
+                        new Date("2017 2 11").getMonth() = 1
                         ********/
                         if (days < 0) {
                             // This is exempt from month nonsense probably because the new date is created in a comma-separated format. (It's 0-11.)
