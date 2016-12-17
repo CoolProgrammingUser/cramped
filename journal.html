@@ -9,7 +9,7 @@
                 document.body.insertBefore(contents, document.getElementById("entries"));
                 var entries = document.getElementById("entries").getElementsByTagName("h2");
                 for (var index in entries) {
-                    var inside = entries[index].innerHTML;
+                    var inside = entries[index].textContent || entries[index].innerText;
                     // alert(index + " " + entries[index] + " " + entries[index].innerHTML);
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
@@ -25,7 +25,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 11
+            Trial number = 12
         </p>
         <div id="entries">
             <h2>
