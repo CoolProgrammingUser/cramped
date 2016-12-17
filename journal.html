@@ -10,7 +10,7 @@
                 var entries = document.getElementById("entries").getElementsByTagName("h2");
                 for (var index in entries) {
                     var inside = entries[index].innerHTML;
-                    alert("<pre>"+inside+"<pre>");
+                    alert(index + " " + entries[index] + " " + entries[index].innerHTML);
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
                 }
@@ -25,7 +25,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 9
+            Trial number = 10
         </p>
         <div id="entries">
             <h2>
