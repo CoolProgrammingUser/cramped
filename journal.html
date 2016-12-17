@@ -16,7 +16,7 @@
                     var inside = entries[index].innerHTML.trim();  // The inner HTML has a bunch of whitespace for no apparent reason.
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
-                    document.body.insertBefore(toTop, document.getElementById("entries").getElementsByTagName("p")[index]);
+                    document.getElementById("entries").insertBefore(toTop, document.getElementById("entries").getElementsByTagName("p")[index]);
                 }
             });
         </script>
@@ -29,7 +29,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 20
+            Trial number = 21
         </p>
         <div id="entries">
             <h2>
