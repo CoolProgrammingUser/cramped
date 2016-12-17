@@ -5,12 +5,12 @@
         <script>
             window.addEventListener("load", function() {
                 var contents = document.createElement("div");
-                contents.innerHTML = "<h2>Jump to:<h2>";
+                contents.innerHTML = "<h2>Jump to:</h2>";
                 document.body.insertBefore(contents, document.getElementById("entries"));
                 var entries = document.getElementById("entries").getElementsByTagName("h2");
                 for (var index in entries) {
                     var inside = entries[index].innerHTML;
-                    alert(index + " " + entries[index] + " " + entries[index].innerHTML);
+                    // alert(index + " " + entries[index] + " " + entries[index].innerHTML);
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
                 }
@@ -25,7 +25,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 10
+            Trial number = 11
         </p>
         <div id="entries">
             <h2>
