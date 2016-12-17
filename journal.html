@@ -11,7 +11,7 @@
                 for (var index in entries) {
                     var inside = entries[index].innerHTML;
                     entries[index].id = inside;
-                    contents.innerHTML += "<p><a href=#" + inside + ">" + inside + "</a></p>";
+                    contents.innerHTML += "<p><a href=#'" + inside + "'>" + inside + "</a></p>";
                 }
             });
         </script>
@@ -24,7 +24,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 1
+            Trial number = 2
         </p>
         <div id="entries">
             <h2>
