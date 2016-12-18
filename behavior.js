@@ -5,7 +5,7 @@ window.addEventListener("load", function() {
     // adds the navigation section to all the pages
     document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
     var file = new XMLHttpRequest();
-    file.open("GET", "navigation.html", false);
+    file.open("GET", "navigation.html");
     file.onreadystatechange = function () {
         if(file.readyState === 4) {
             if(file.status === 200 || file.status == 0) {
