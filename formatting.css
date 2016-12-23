@@ -18,10 +18,10 @@ body {
     width: 85%;
     min-height: 100%;
     background: yellow;  /* for browsers that do not support gradients */
-    background: -webkit-repeating-linear-gradient(red, orange 33%, yellow 66%, red 100%);  /* Safari 5.1 to 6.0 */
-    background: -o-repeating-linear-gradient(red, orange 33%, yellow 66%, red 100%);  /* Opera 11.1 to 12.0 */
-    background: -moz-repeating-linear-gradient(red, orange 33%, yellow 66%, red 100%);  /* Firefox 3.6 to 15 */
-    background: repeating-linear-gradient(red, orange 33%, yellow 66%, red 100%);  /* standard syntax */
+    background: -webkit-repeating-linear-gradient(red, yellow 50vh, red 100vh);  /* Safari 5.1 to 6.0 */
+    background: -o-repeating-linear-gradient(red, yellow 50vh, red 100vh);  /* Opera 11.1 to 12.0 */
+    background: -moz-repeating-linear-gradient(red, yellow 50vh, red 100vh);  /* Firefox 3.6 to 15 */
+    background: repeating-linear-gradient(red, yellow 50vh, red 100vh);  /* standard syntax */
     text-align: center;
 }
 nav {
@@ -32,10 +32,10 @@ nav {
     width: 15%;  /* could fill horizontally with 100vw */
     height: 100%;
     background: #0e0;  /* for browsers that don't support gradients */
-    background: -webkit-radial-gradient(circle, #0e0, white, #0e0, white);  /* Safari */
-    background: -o-radial-gradient(circle, #0e0, white, #0e0, white);  /* Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(circle, #0e0, white, #0e0, white);  /* Firefox 3.6 to 15 */
-    background: radial-gradient(circle, #0e0, white, #0e0, white);  /* standard syntax */
+    background: -webkit-radial-gradient(circle, #0e0, #0ee, #0e0, #0ee);  /* Safari */
+    background: -o-radial-gradient(circle, #0e0, #0ee, #0e0, #0ee);  /* Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(circle, #0e0, #0ee, #0e0, #0ee);  /* Firefox 3.6 to 15 */
+    background: radial-gradient(circle, #0e0, #0ee, #0e0, #0ee);  /* standard syntax */
     text-align: left;
 }
 ul {
