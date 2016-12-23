@@ -17,7 +17,8 @@
                     entries[index].id = inside;
                     contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
                     // You'll probably need referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); for inserting after the heading.
-                    document.getElementById("entries").insertBefore(toTop.cloneNode(true), document.getElementById("entries").getElementsByTagName("p")[index]);
+                    document.getElementById("entries").insertBefore(toTop.cloneNode(true), document.getElementById("entries").getElementsByTagName("h2")[index].nextSibling);
+                    // document.getElementById("entries").insertBefore(toTop.cloneNode(true), document.getElementById("entries").getElementsByTagName("p")[index]);
                     // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
                 }
                 contents.innerHTML += "<br>";
@@ -32,7 +33,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 24
+            Trial number = 0
         </p>
         <div id="entries">
             <h2>
