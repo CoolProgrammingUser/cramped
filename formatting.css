@@ -15,7 +15,7 @@ a:hover {
 }
 body {
     margin: 0vw 0vh 0vh 15vw;
-    width: 85%;
+    width: 80%;
     min-height: 100%;
     background: yellow;  /* for browsers that do not support gradients */
     background: -webkit-repeating-linear-gradient(red, yellow 100vh, red 150vh);  /* Safari 5.1 to 6.0 */
