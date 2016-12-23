@@ -35,7 +35,7 @@ nav {
     background: -webkit-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Safari 5.1 to 6.0 */
     background: -o-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Opera 11.6 to 12.0 */
     background: -moz-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Firefox 3.6 to 15 */
-    background: repeating-radial-gradient(circle, #55e, white 2%, #55e 4%);  /* Standard syntax */
+    background: repeating-radial-gradient(circle, red, white 2%, red 4%);  /* Standard syntax */
     text-align: left;
 }
 ul {
