@@ -9,7 +9,6 @@
                 var division = document.getElementById(ID);
                 var contents = document.createElement("div");
                 contents.innerHTML = "<h2>Jump to:</h2>";
-                document.body.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
                 var sections = division.getElementsByTagName("h2");
                 var toTop = document.createElement("a");
                 toTop.href = "#top";
@@ -22,6 +21,7 @@
                     // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
                 }
                 contents.innerHTML += "<br>";
+                document.body.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
             }
             window.addEventListener("load", function() {pageJump("entries");});
         </script>
@@ -34,7 +34,7 @@
             Journal
         </h1>
         <p>
-            Trial number = 1
+            Trial number = 2
         </p>
         <div id="entries">
             <h2>
