@@ -25,6 +25,11 @@ window.addEventListener("load", function() {
     // makes the title of all the pages "Cramped"
     document.head.insertBefore(document.createElement("title"), document.head.childNodes[0]);
     document.getElementsByTagName("title")[0].innerHTML = "Cramped";
+    // links the favicon
+    var icon = document.createElement("link");
+    icon.rel = "icon";
+    icon.href = "images/favicon.ico";
+    document.head.insertBefore(icon, document.head.children[0]);
     // adds the navigation section to all the pages
     document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
     var file = new XMLHttpRequest();
