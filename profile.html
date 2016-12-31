@@ -3,6 +3,11 @@
     <head>
         <script src="behavior.js"></script>
         <script>
+            window.addEventListener("load", function() {
+                setInterval(1000, function() {
+                    document.getElementById("age").innerHTML = new Date().getTime() - new Date("March 11, 1998 4:00").getTime() + " seconds";
+                });
+            });
         </script>
         <link rel="stylesheet" href="formatting.css">
         <style>
@@ -15,5 +20,40 @@
         <p>
             Trial number = 0
         </p>
-    <body>
+        <ul style="text-align:left;">
+			<li>
+				Age: <a id="age" href="https://en.wikipedia.org/wiki/Second">seconds</a>
+			</li>
+			<li>
+				Height: <a href="https://en.wikipedia.org/wiki/Smoot">Smoots</a>
+			</li>
+			<li>
+				Mass: <a href="https://en.wikipedia.org/wiki/Unified_atomic_mass_unit">AMU</a>
+			</li>
+			<li>
+				Hair color: <a href="https://en.wikipedia.org/wiki/Web_colors">hexadecimal</a>
+			</li>
+			<li>
+				Eye color: <a href="https://en.wikipedia.org/wiki/Visible_spectrum">485 nanometers</a>
+			</li>
+			<li>
+				Number of limbs: <a href="https://en.wikipedia.org/wiki/Binary_number">100</a>
+			</li>
+			<li>
+				Favorite color: <a href="https://en.wikipedia.org/wiki/Undefined_behavior">undefined</a>
+			</li>
+			<li>
+				Favorite animal: <a href="https://en.wikipedia.org/wiki/Cuttlefish">cuttlefish</a>
+			</li>
+			<li>
+				Favorite drink: <a href="http://www.dhmo.org/">dihydrogen monoxide</a> <a href="https://en.wikipedia.org/wiki/Dihydrogen_monoxide_hoax">(I guess you can click here too)</a>
+			</li>
+			<li>
+				Favorite texture: <a href="https://en.wikipedia.org/wiki/Braille">Braille</a>
+			</li>
+			<li>
+				Favorite Wikipedia contributor: <a href="https://en.m.wikipedia.org/wiki/User:Frivolous_Consultant">Frivolous Consultant</a>
+			</li>
+		</ul>
+    </body>
 </html>
