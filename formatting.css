@@ -49,3 +49,7 @@ input {
     font-family: "Braille";
     src: url(fonts/Braille.ttf) format("truetype");
 }
+@font-face {
+    font-family: "Bad Duck";
+    src: url(fonts/Bad-Duck.ttf) format("truetype");
+}
