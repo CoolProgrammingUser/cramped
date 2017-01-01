@@ -45,3 +45,7 @@ ul {
 input {
     text-align: center;
 }
+@font-face {
+    font-family: "Braille";
+    src: url(fonts/Braille.ttf) format("truetype");
+}
