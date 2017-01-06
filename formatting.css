@@ -49,7 +49,6 @@ sup, sub {
     vertical-align: baseline;
     position: relative;
     top: -.4em;
-    font-size: .5em;
 }
 sub { 
     top: .4em; 
