@@ -22,6 +22,11 @@ function pageJump(ID) {
 }
 
 window.addEventListener("load", function() {
+    // adds the universal formatting
+    var style = document.createElement("link");
+    style.rel = "stylesheet";
+    style.href = "formatting.css";
+    document.head.insertBefore(style, document.head.children[0]);
     // makes the title of all the pages "Cramped"
     document.head.insertBefore(document.createElement("title"), document.head.childNodes[0]);
     document.getElementsByTagName("title")[0].innerHTML = "Cramped";
