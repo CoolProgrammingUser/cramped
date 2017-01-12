@@ -25,6 +25,9 @@ body {
     background: repeating-linear-gradient(#0e0, white 100vh, #0e0 200vh);  /* standard syntax */
     text-align: center;
 }
+div {
+    margin: auto;
+}
 nav {
     position: fixed;
     left: 0em;
