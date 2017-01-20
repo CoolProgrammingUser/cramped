@@ -10,11 +10,9 @@ function read(URL) {
         }
     }
     file.send();
-    do {
-        if (result != "") {
-            return result;
-        }
-    } while (result == "")
+    while (result == "") {
+    }
+    return result;
 }
 
 function pageJump(ID) {
