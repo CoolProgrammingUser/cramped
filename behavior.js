@@ -10,6 +10,7 @@ function read(URL, callback) {
     file.onreadystatechange = function () {
         if(file.readyState === 4) {  // Is it done?
             if(file.status === 200 || file.status == 0) {  // Was it successful?
+                // file.responseXML might have something
                 callback.call(file.responseText);  // .call(calling object / value of "this", function arguments (listed individually))  .apply has function arguments in an array
                 // You could also use callback(argument(s)) like a normal function, but it wouldn't change the value of "this".
             }
