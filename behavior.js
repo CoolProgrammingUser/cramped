@@ -1,14 +1,20 @@
 function read(URL) {
+    var result = "";
     var file = new XMLHttpRequest();
     file.open("GET", URL);  // Don't add false as an extra argument (browsers don't like it). (default: asynchronous=true)
-    file.onreadystatechange = return function () {
+    file.onreadystatechange = function () {
         if(file.readyState === 4) {
             if(file.status === 200 || file.status == 0) {
-                return file.responseText;
+                result = file.responseText;
             }
         }
     }
     file.send();
+    do {
+        if (result != "") {
+            return result;
+        }
+    } while (result == "")
 }
 
 function pageJump(ID) {
