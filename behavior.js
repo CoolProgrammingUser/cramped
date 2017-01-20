@@ -1,22 +1,25 @@
-function read(URL) {
-    var result = "";
+function read(URL, callback) {
+    /**
+    reads the contents of the file at the URL,
+    converts it into a string, and then
+    calls the callback function
+    with "this" equalling the responseText
+    */
     var file = new XMLHttpRequest();
     file.open("GET", URL);  // Don't add false as an extra argument (browsers don't like it). (default: asynchronous=true)
     file.onreadystatechange = function () {
-        if(file.readyState === 4) {
-            if(file.status === 200 || file.status == 0) {
-                result = file.responseText;
+        if(file.readyState === 4) {  // Is it done?
+            if(file.status === 200 || file.status == 0) {  // Was it successful?
+                callback.call(file.responseText);  // .call(calling object / value of "this", function arguments (listed individually))  .apply has function arguments in an array
+                // You could also use callback(argument(s)) like a normal function, but it wouldn't change the value of "this".
             }
         }
     }
     file.send();
-    while (result == "") {
-    }
-    return result;
 }
 
 function pageJump(ID) {
-    /*
+    /**
     makes a section to jump to certain parts of the page
     */
     document.getElementsByTagName("h1")[0].id = "top";
@@ -58,5 +61,9 @@ window.addEventListener("load", function() {
     
     // adds the navigation section to all the pages
     document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
-    document.getElementsByTagName("nav")[0].innerHTML = read("navigation.html");
+    read("navigation.html", function() {
+        document.getElementsByTagName("nav")[0].innerHTML = this;
+    });
 });
+
+// remember array.forEach(), new Function(), and new Event() / new CustomEvent()
