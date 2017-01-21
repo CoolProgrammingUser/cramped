@@ -2,7 +2,7 @@ function read(URL, callback) {
     /**
     reads the contents of the file at the URL,
     converts it into a string, and then
-    calls the callback function
+    calls the callback function (which has no arguments)
     with "this" equalling the responseText
     */
     var file = new XMLHttpRequest();
@@ -26,7 +26,8 @@ function pageJump(ID) {
     document.getElementsByTagName("h1")[0].id = "top";
     var division = document.getElementById(ID);
     var contents = document.createElement("div");
-    contents.innerHTML = "<br><h2>Jump to:</h2>";
+    contents.class = "list";
+    contents.innerHTML = "<br><h2>Jump to:</h2><ul>";
     var sections = division.getElementsByTagName("h2");
     var toTop = document.createElement("a");
     toTop.href = "#top";
@@ -34,11 +35,11 @@ function pageJump(ID) {
     for (var index=0; index<sections.length; index++) {  // I would use (var in array), but index exceeds entries.length for no apparent reason
         var inside = sections[index].innerHTML.trim();  // The inner HTML has a bunch of whitespace for no apparent reason.
         sections[index].id = inside;
-        contents.innerHTML += "<p><a href='#" + inside + "'>" + inside + "</a></p>";
+        contents.innerHTML += "<li><a href='#" + inside + "'>" + inside + "</a></li>";
         division.insertBefore(toTop.cloneNode(true), division.getElementsByTagName("h2")[index].nextSibling);  // inserts after <h2>
         // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
     }
-    contents.innerHTML += "<br>";
+    contents.innerHTML += "</ul><br>";
     document.body.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
 }
 
@@ -64,6 +65,14 @@ window.addEventListener("load", function() {
     document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
     read("navigation.html", function() {
         document.getElementsByTagName("nav")[0].innerHTML = this;
+    });
+    
+    // surrounds every list with <div class="list"></div>
+    document.getElementsByTagName("ul").forEach(function(list /* , index, array */ ) {
+        list.outerHTML = "<div class='list'>" + list + "</div>";
+    } /* , theValueOf"this" */ );
+    document.getElementsByTagName("ol").forEach(function(list) {
+        list.outerHTML = "<div class='list'>" + list + "</div>";
     });
 });
 
