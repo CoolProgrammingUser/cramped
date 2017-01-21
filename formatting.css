@@ -42,8 +42,12 @@ nav {
     background: repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* Standard syntax */
     text-align: left;
 }
+ol {
+    display: inline;
+}
 ul {
     padding-left: 2em;
+    display: inline;
 }
 input {
     text-align: center;
