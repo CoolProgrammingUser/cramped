@@ -56,7 +56,7 @@ sup, sub {
 sub { 
     top: .4em; 
 }
-.list {  /* for divisions that surround lists */
+div.list ol, div.list ul {  /* for lists within <div class="list"></div> */
     text-align: left;
 }
 @font-face {
