@@ -50,7 +50,7 @@ ul {
     display: inline;
 }
 li {
-    width: auto;
+    display: compact;
 }
 input {
     text-align: center;
