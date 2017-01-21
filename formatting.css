@@ -56,6 +56,9 @@ sup, sub {
 sub { 
     top: .4em; 
 }
+.list {  /* for divisions that surround lists */
+    text-align: left;
+}
 @font-face {
     font-family: "Braille";
     src: url(fonts/Braille.ttf) format("truetype");
