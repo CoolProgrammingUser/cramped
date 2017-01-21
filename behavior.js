@@ -71,7 +71,7 @@ window.addEventListener("load", function() {
     var orderedLists = document.getElementsByTagName("ol");
     var unorderedLists = document.getElementsByTagName("ul");
     for (var index=0; index<orderedLists.length; index++) {
-        orderedLists[index].outerHTML = "<div class='list'>" + orderedLists[index] + "</div>";
+        orderedLists[index].outerHTML = "<div class='list'>" + orderedLists[index].outerHTML + "</div>";
     }
     for (var index=0; index<unorderedLists.length; index++) {
         unorderedLists[index].outerHTML = "<div class='list'>" + unorderedLists[index].outerHTML + "</div>";
