@@ -49,6 +49,9 @@ ul {
     padding-left: 2em;
     display: inline;
 }
+li {
+    display: inline;
+}
 input {
     text-align: center;
 }
