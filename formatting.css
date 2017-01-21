@@ -27,6 +27,7 @@ body {
 }
 div {
     margin: auto;
+    display: inline-block;
 }
 nav {
     position: fixed;
@@ -42,12 +43,11 @@ nav {
     background: repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* Standard syntax */
     text-align: left;
 }
+ol, ul {
+    display: table;
+}
 ul {
     padding-left: 2em;
-}
-li {
-    float: left;
-    clear: left;
 }
 input {
     text-align: center;
