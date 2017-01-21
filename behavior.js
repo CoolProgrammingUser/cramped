@@ -68,12 +68,14 @@ window.addEventListener("load", function() {
     });
     
     // surrounds every list with <div class="list"></div>
-    document.getElementsByTagName("ul").forEach(function(list /* , index, array */ ) {
-        list.outerHTML = "<div class='list'>" + list + "</div>";
-    } /* , theValueOf"this" */ );
-    document.getElementsByTagName("ol").forEach(function(list) {
-        list.outerHTML = "<div class='list'>" + list + "</div>";
-    });
+    var orderedLists = document.getElementsByTagName("ol");
+    var unorderedLists = document.getElementsByTagName("ul");
+    for (var index=0; index<orderedLists.length; index++) {
+        orderedLists[index].outerHTML = "<div class='list'>" + orderedLists[index] + "</div>";
+    }
+    for (var index=0; index<unorderedLists.length; index++) {
+        unorderedLists[index].outerHTML = "<div class='list'>" + unorderedLists[index] + "</div>";
+    }
 });
 
 // remember array.forEach(), new Function(), and new Event() / new CustomEvent()
