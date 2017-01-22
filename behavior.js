@@ -26,7 +26,7 @@ function pageJump(ID) {
     document.getElementsByTagName("h1")[0].id = "top";
     var division = document.getElementById(ID);
     var contents = document.createElement("div");
-    contents.class = "list";
+    contents.className = "list";
     contents.innerHTML = "<br><h2>Jump to:</h2>";
     var sections = division.getElementsByTagName("h2");
     var toTop = document.createElement("a");
