@@ -44,29 +44,29 @@ function pageJump(ID) {
     document.body.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
 }
 
+// adds the universal formatting
+var style = document.createElement("link");
+style.rel = "stylesheet";
+style.href = "formatting.css";
+document.head.insertBefore(style, document.head.children[0]);
+
+// makes the title of all the pages "Cramped"
+document.head.insertBefore(document.createElement("title"), document.head.childNodes[0]);
+document.getElementsByTagName("title")[0].innerHTML = "Cramped";
+
+// links the favicon
+var icon = document.createElement("link");
+icon.rel = "icon";
+icon.href = "images/favicon.ico";
+document.head.insertBefore(icon, document.head.children[0]);
+
+// adds the navigation section to all the pages
+document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
+read("navigation.html", function() {
+    document.getElementsByTagName("nav")[0].innerHTML = this;
+});
+
 window.addEventListener("load", function() {
-    
-    // adds the universal formatting
-    var style = document.createElement("link");
-    style.rel = "stylesheet";
-    style.href = "formatting.css";
-    document.head.insertBefore(style, document.head.children[0]);
-    
-    // makes the title of all the pages "Cramped"
-    document.head.insertBefore(document.createElement("title"), document.head.childNodes[0]);
-    document.getElementsByTagName("title")[0].innerHTML = "Cramped";
-    
-    // links the favicon
-    var icon = document.createElement("link");
-    icon.rel = "icon";
-    icon.href = "images/favicon.ico";
-    document.head.insertBefore(icon, document.head.children[0]);
-    
-    // adds the navigation section to all the pages
-    document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
-    read("navigation.html", function() {
-        document.getElementsByTagName("nav")[0].innerHTML = this;
-    });
     
     // surrounds every list with <div class="list"></div>
     var orderedLists = document.getElementsByTagName("ol");
