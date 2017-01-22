@@ -44,6 +44,8 @@ function pageJump(ID) {
     document.body.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
 }
 
+//This is able to run without waiting for anything else to load.
+
 // adds the universal formatting
 var style = document.createElement("link");
 style.rel = "stylesheet";
@@ -60,13 +62,13 @@ icon.rel = "icon";
 icon.href = "images/favicon.ico";
 document.head.insertBefore(icon, document.head.children[0]);
 
-// adds the navigation section to all the pages
-document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
-read("navigation.html", function() {
-    document.getElementsByTagName("nav")[0].innerHTML = this;
-});
-
-window.addEventListener("load", function() {
+window.addEventListener("load", function() {  // This waits for everything past the script import to load before running.
+    
+    // adds the navigation section to all the pages
+    document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
+    read("navigation.html", function() {
+        document.getElementsByTagName("nav")[0].innerHTML = this;
+    });
     
     // surrounds every list with <div class="list"></div>
     var orderedLists = document.getElementsByTagName("ol");
