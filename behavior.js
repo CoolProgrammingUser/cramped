@@ -27,19 +27,20 @@ function pageJump(ID) {
     var division = document.getElementById(ID);
     var contents = document.createElement("div");
     contents.class = "list";
-    contents.innerHTML = "<br><h2>Jump to:</h2><ul>";
+    contents.innerHTML = "<br><h2>Jump to:</h2>";
     var sections = division.getElementsByTagName("h2");
     var toTop = document.createElement("a");
     toTop.href = "#top";
     toTop.innerHTML = "To top";
+    var listItems = "";  // I need this variable to hold the list items because trying to add <ul> at the beginning and </ul> at the end separately causes it to fill in the </ul> immediately after the <ul> and omit the real </ul>
     for (var index=0; index<sections.length; index++) {  // I would use (var in array), but index exceeds entries.length for no apparent reason
         var inside = sections[index].innerHTML.trim();  // The inner HTML has a bunch of whitespace for no apparent reason.
         sections[index].id = inside;
-        contents.innerHTML += "<li><a href='#" + inside + "'>" + inside + "</a></li>";
+        listItems += "<li><a href='#" + inside + "'>" + inside + "</a></li>";
         division.insertBefore(toTop.cloneNode(true), division.getElementsByTagName("h2")[index].nextSibling);  // inserts after <h2>
         // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
     }
-    contents.innerHTML += "</ul><br>";
+    contents.innerHTML += "<ul>" + listItems + "</ul><br>";
     document.body.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
 }
 
