@@ -60,6 +60,13 @@ sup, sub {
 sub { 
     top: .4em; 
 }
+over {  /* my custom tag (overlines things) */
+    display: inline;
+    margin: 0em;
+    border: 0em;
+    padding: 0em;
+    text-decoration: overline;
+}
 div.list ol, div.list ul {  /* for lists within <div class="list"></div> */
     text-align: left;
 }
