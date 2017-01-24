@@ -46,6 +46,9 @@ function pageJump(ID) {
 
 //This is able to run without waiting for anything else to load.
 
+// makes my custom tag which overlines things
+document.createElement("over");
+
 // adds the universal formatting
 var style = document.createElement("link");
 style.rel = "stylesheet";
