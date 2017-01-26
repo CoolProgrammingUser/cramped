@@ -49,6 +49,13 @@ ol, ul {
 ul {
     padding-left: 2em;
 }
+table, th, td {
+    border: .1em solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: .5em;
+}
 input {
     text-align: center;
 }
