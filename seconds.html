@@ -5,12 +5,12 @@
         <script>
             var timeNumber = 1;
             window.addEventListener("load", function() {
-                makeCountdown("Valentine's Day", "February 14, 2017");
-                makeCountdown("my birthday", "March 11, 2017");
-                makeCountdown("the Fourth of July", "July 4, 2017");
-                makeCountdown("Halloween", "October 31, 2017");
-                makeCountdown("Christmas", "December 25, 2017");
-                makeCountdown("next year", "January 1, 2018");
+                makeCountdown("Valentine's Day", "February 14");
+                makeCountdown("my birthday", "March 11");
+                makeCountdown("the Fourth of July", "July 4");
+                makeCountdown("Halloween", "October 31");
+                makeCountdown("Christmas", "December 25");
+                makeCountdown("next year", "January 1");
                 refresh();
                 setInterval(refresh, 1000);
             });
@@ -40,7 +40,17 @@
                 for (var number=1; number<timeNumber; number++) {
                     var element = document.getElementById(number);
                     var now = new Date();
-                    var then = new Date(element.date);
+                    if (element.date.split(" ").length >= 3) {
+                        var then = new Date(element.date);
+                    } else {
+                        // when dates are only given in a month and day (meant to be annual)
+                        // doesn't work if times are specified
+                        if (now.getTime() <= new Date(element.date+", "+now.getFullYear()).getTime()) {
+                            var then = new Date(element.date+", "+now.getFullYear());
+                        } else {
+                            var then = new Date(element.date+", "+(now.getFullYear()+1));
+                        }
+                    }
                     var time = "";
                     if (document.getElementById("loser").checked) {
                         var seconds = Math.floor((then.getTime()-now.getTime())%60000/1000);
