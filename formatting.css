@@ -78,6 +78,7 @@ over {  /* my custom tag (overlines things) */
     text-decoration: overline;
 }
 div.list {  /* for the division surrounding lists */
+    display: block;
     margin: 1em 0em;
 }
 div.list ol, div.list ul {  /* for lists within <div class="list"></div> */
