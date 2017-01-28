@@ -1,50 +1,35 @@
 <h2 style="text-align:center">
     Contents
 </h2>
-<ul>
-    <li>
-        <a href="index.html">
-            Home
-        </a>
-    </li>
-    <li>
-        <a href="profile.html">
-            Profile
-        </a>
-    </li>
-    <li>
-        <a href="seconds.html">
-            Countdowns
-        </a>
-    </li>
-    <li>
-        <a href="programs.html">
-            Websites and Programs
-        </a>
-    </li>
-    <li>
-        <a href="experiments.html">
-            Experiments
-        </a>
-    </li>
-    <li>
-        <a href="journal.html">
-            Journal
-        </a>
-    </li>
-    <li>
-        <a href="moments.html">
-            Important Moments
-        </a>
-    </li>
-    <li>
-        <a href="stories.html">
-            Fun Stories
-        </a>
-    </li>
-    <li>
-        <a href="excuses.html">
-            Excuses
-        </a>
-    </li>
-</ul>
+<ul id="contentsList"></ul>
+<script>
+    [  // page URLs
+        "index.html",
+        "profile.html",
+        "seconds.html",
+        "programs.html",
+        "experiments.html",
+        "journal.html",
+        "moments.html",
+        "stories.html",
+        "excuses.html"
+    ].forEach(function(location, index) {
+        document.getElementById("contentsList").innerHTML +=
+            "<li><a href='" +
+            location +
+            "'>" +
+            [  // page titles
+                "Home",
+                "Profile",
+                "Countdowns",
+                "Websites and Programs",
+                "Experiments",
+                "Journal",
+                "Important Moments",
+                "Fun Stories",
+                "Excuses"
+            ][index] +
+            "</a></li>"
+        ;
+    });
+</script>
