@@ -68,10 +68,11 @@ document.head.insertBefore(icon, document.head.children[0]);
 window.addEventListener("load", function() {  // This waits for everything past the script import to load before running.
     
     // adds the navigation section to all the pages
-    document.body.insertBefore(document.createElement("nav"), document.body.childNodes[0]);
+    var navHTML = document.createElement("nav");
     read("navigation.html", function() {
-        document.getElementsByTagName("nav")[0].innerHTML = this;
+        navHTML.innerHTML = this;
     });
+    document.body.insertBefore(navHTML, document.body.childNodes[0]);  // needs to be inserted after setting the inner HTML so the contained script will run
     
     // surrounds every list with <div class="list"></div>
     var orderedLists = document.getElementsByTagName("ol");
