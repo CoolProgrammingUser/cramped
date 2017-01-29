@@ -17,6 +17,7 @@ function read(URL, callback) {
                 var tags = container.children;
                 for (var index=0; index<tags.length; index++) {
                     var tag = document.createElement(tags[index].tagName);
+                    alert(tag.tagName);
                     tag.appendChild(document.createTextNode(tags[index].innerHTML));
                     container.insertBefore(tag, tags[index]);
                     tags[index+1].outerHTML = "";
