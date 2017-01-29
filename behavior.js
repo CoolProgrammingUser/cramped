@@ -1,9 +1,10 @@
 function read(URL, callback) {
     /**
     reads the contents of the file at the URL,
-    converts it into a string, and then
+    converts it into a string,
+    puts the string into a <div>, and then
     calls the callback function (which has no arguments)
-    with "this" equalling the responseText
+    with "this" equalling the <div>
     */
     var file = new XMLHttpRequest();
     file.open("GET", URL);  // Don't add false as an extra argument (browsers don't like it). (default: asynchronous=true)
@@ -11,7 +12,18 @@ function read(URL, callback) {
         if(file.readyState === 4) {  // Is it done?
             if(file.status === 200 || file.status == 0) {  // Was it successful?
                 // file.responseXML might have something
-                callback.call(file.responseText);  // .call(calling object / value of "this", function arguments (listed individually))  .apply has function arguments in an array
+                var container = document.createElement("div");
+                container.appendChild(document.createTextNode(file.responseText));
+                /*
+                var scripts = container.getElementsByTagName("script");
+                for (var index=0; index<scripts.length; index++) {
+                    var scriptTag = document.createElement("script");
+                    scriptTag.appendChild(document.createTextNode(scripts[index].innerHTML));
+                    container.insertBefore(scriptTag, scripts[index]);
+                    scripts[index+1].outerHTML = "";
+                }
+                */
+                callback.call(container);  // .call(calling object / value of "this", function arguments (listed individually))  .apply has function arguments in an array
                 // You could also use callback(argument(s)) like a normal function, but it wouldn't change the value of "this".
             }
         }
@@ -70,7 +82,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
     // adds the navigation section to all the pages
     var navHTML = document.createElement("nav");
     read("navigation.html", function() {
-        navHTML.innerHTML = this;
+        navHTML.appendChild(this);
         document.body.insertBefore(navHTML, document.body.childNodes[0]);  // needs to be inserted after setting the inner HTML so the contained script will run
     });
      
