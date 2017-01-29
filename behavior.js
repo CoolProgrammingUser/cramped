@@ -31,7 +31,7 @@ function read(URL, callback) {
                     scripts.forEach(function(script, index) {
                         if (index > 0) {
                             var scriptTag = document.createElement("script");
-                            scriptTag.appendChild(document.createTextNode(script.slice(script.indexOf(">"), script.indexOf("</script>"))));
+                            scriptTag.appendChild(document.createTextNode(script.slice(script.indexOf(">")+1, script.indexOf("</script>"))));
                             container.insertBefore(scriptTag, container.getElementsByTagName("script")[index-1]);
                             var oldTag = container.getElementsByTagName("script")[index];
                             oldTag.parentNode.removeChild(oldTag);
