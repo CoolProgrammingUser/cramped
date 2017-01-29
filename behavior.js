@@ -32,7 +32,7 @@ function read(URL, callback) {
                         var scriptTag = document.createElement("script");
                         scriptTag.appendChild(document.createTextNode(script.slice(script.indexOf(">"), script.indexOf("</script>"))));
                         container.insertBefore(scriptTag, container.getElementsByTagName("script")[index]);
-                        container.getElementsByTagName("script")[index+1].outerHTML = "";
+                        // container.getElementsByTagName("script")[index+1].outerHTML = "";
                     });
                 }
                 callback.call(container);  // .call(calling object / value of "this", function arguments (listed individually))  .apply has function arguments in an array
