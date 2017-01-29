@@ -13,16 +13,14 @@ function read(URL, callback) {
             if(file.status === 200 || file.status == 0) {  // Was it successful?
                 // file.responseXML might have something
                 var container = document.createElement("div");
-                container.appendChild(document.createTextNode(file.responseText));
-                /*
-                var scripts = container.getElementsByTagName("script");
-                for (var index=0; index<scripts.length; index++) {
-                    var scriptTag = document.createElement("script");
-                    scriptTag.appendChild(document.createTextNode(scripts[index].innerHTML));
-                    container.insertBefore(scriptTag, scripts[index]);
-                    scripts[index+1].outerHTML = "";
+                container.innerHTML = file.responseText;
+                var tags = container.children;
+                for (var index=0; index<tags.length; index++) {
+                    var tag = document.createElement(tags[index].tagName);
+                    tag.appendChild(document.createTextNode(tags[index].innerHTML));
+                    container.insertBefore(tag, tags[index]);
+                    tags[index+1].outerHTML = "";
                 }
-                */
                 callback.call(container);  // .call(calling object / value of "this", function arguments (listed individually))  .apply has function arguments in an array
                 // You could also use callback(argument(s)) like a normal function, but it wouldn't change the value of "this".
             }
