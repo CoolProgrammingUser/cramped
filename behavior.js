@@ -32,7 +32,7 @@ function read(URL, callback) {
                         if (index > 0) {
                             var scriptTag = document.createElement("script");
                             scriptTag.appendChild(document.createTextNode(script.slice(script.indexOf(">"), script.indexOf("</script>"))));
-                            container.insertBefore(container.getElementsByTagName("script")[index], container.getElementsByTagName("script")[index]);
+                            container.insertBefore(scriptTag, container.getElementsByTagName("script")[index]);
                             var oldTag = container.getElementsByTagName("script")[index+1];
                             oldTag.parentNode.removeChild(oldTag);
                         }
