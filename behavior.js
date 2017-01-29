@@ -14,13 +14,26 @@ function read(URL, callback) {
                 // file.responseXML might have something
                 var container = document.createElement("div");
                 container.innerHTML = file.responseText;
+                /*
                 var tags = container.children;
                 for (var index=0; index<tags.length; index++) {
                     var tag = document.createElement(tags[index].tagName);
-                    alert(tag.tagName);
-                    tag.appendChild(document.createTextNode(tags[index].innerHTML));
-                    container.insertBefore(tag, tags[index]);
-                    tags[index+1].outerHTML = "";
+                    if (tag.tagName != "script") {
+                        tag.appendChild(document.createTextNode(tags[index].innerHTML));
+                        container.insertBefore(tag, tags[index]);
+                        tags[index+1].outerHTML = "";
+                    }
+                }
+                */
+                // This is necessary because HTML5 doesn't think script tags and innerHTML should go together (for security reasons).
+                var scripts = file.responseText.split("<script");
+                if (scripts.length > 1) {
+                    scripts.forEach(function(script, index) {
+                        var scriptTag = document.createElement("script");
+                        scriptTag.appendChild(document.createTextNode(script.slice(script.indexOf(">"), script.indexOf("</script>"))));
+                        container.insertBefore(scriptTag, container.getElementsByTagName("script")[index]);
+                        container.getElementsByTagName("script")[index+1].outerHTML = "";
+                    });
                 }
                 callback.call(container);  // .call(calling object / value of "this", function arguments (listed individually))  .apply has function arguments in an array
                 // You could also use callback(argument(s)) like a normal function, but it wouldn't change the value of "this".
