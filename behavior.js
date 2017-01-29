@@ -71,8 +71,8 @@ window.addEventListener("load", function() {  // This waits for everything past 
     var navHTML = document.createElement("nav");
     read("navigation.html", function() {
         navHTML.innerHTML = this;
+        document.body.insertBefore(navHTML, document.body.childNodes[0]);  // needs to be inserted after setting the inner HTML so the contained script will run
     });
-    document.body.appendChild(navHTML);  // needs to be inserted after setting the inner HTML so the contained script will run (maybe)
      
     // surrounds every list with <div class="list"></div>
     var orderedLists = document.getElementsByTagName("ol");
