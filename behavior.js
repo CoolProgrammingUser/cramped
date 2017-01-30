@@ -97,7 +97,7 @@ document.head.insertBefore(icon, document.head.children[0]);
 window.addEventListener("load", function() {  // This waits for everything past the script import to load before running.
     
     // surrounds the <body> content with a <section> tag
-    document.body.innerHTML = document.getElementsByTagName("h1")[0] + "<section>" + document.body.innerHTML.slice(document.body.innerHTML.indexOf("</h1>")+5) + "</section>";
+    document.body.innerHTML = "<h1>" + document.getElementsByTagName("h1")[0].innerHTML + "</h1>" + "<section>" + document.body.innerHTML.slice(document.body.innerHTML.indexOf("</h1>")+5) + "</section>";
     
     // adds the navigation section to all the pages
     read("navigation.html", function() {
