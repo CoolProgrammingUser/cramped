@@ -73,6 +73,8 @@ function pageJump(ID) {
 
 //This is able to run without waiting for anything else to load.
 
+// makes my custom tag which underlines things
+document.createElement("under");
 // makes my custom tag which overlines things
 document.createElement("over");
 
@@ -94,11 +96,13 @@ document.head.insertBefore(icon, document.head.children[0]);
 
 window.addEventListener("load", function() {  // This waits for everything past the script import to load before running.
     
+    // surrounds the <body> content with a <section> tag
+    document.body.innerHTML = document.getElementByTagName("h1")[0] + "<section>" + document.body.innerHTML.slice(document.body.innerHTML.indexOf("</h1>")+5) + "</section>";
+    
     // adds the navigation section to all the pages
-    var navHTML = document.createElement("nav");
     read("navigation.html", function() {
-        navHTML.appendChild(this);
-        document.body.insertBefore(navHTML, document.body.childNodes[0]);  // needs to be inserted after setting the inner HTML so the contained script will run
+        this.className = "nav";
+        document.body.insertBefore(this, document.body.childNodes[0]);
     });
      
     // surrounds every list with <div class="list"></div>
