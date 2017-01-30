@@ -25,23 +25,18 @@ body {
     background: repeating-linear-gradient(#0e0, white 100vh, #0e0 200vh);  /* standard syntax */
     text-align: center;
 }
+section {
+    margin: auto;
+    margin-top: 4%;
+    min-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    padding: 1% 5% 5% 5%;
+    background: rgba(255, 255, 255, .5);
+}
 div {
     margin: auto;
     display: inline-block;
-}
-nav {
-    position: fixed;
-    left: 0em;
-    top: 0em;
-    padding-right: 1em;
-    width: 15vw;  /* could fill horizontally with 100vw */
-    height: 100%;
-    background: #0e0; /* For browsers that do not support gradients */
-    background: -webkit-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Safari 5.1 to 6.0 */
-    background: -o-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Opera 11.6 to 12.0 */
-    background: -moz-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Firefox 3.6 to 15 */
-    background: repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* Standard syntax */
-    text-align: left;
 }
 ol, ul {
     display: table;
@@ -70,12 +65,33 @@ sup, sub {
 sub { 
     top: .4em; 
 }
+under {  /* my custom tag (underlines things) */
+    display: inline;
+    margin: 0em;
+    border: 0em;
+    padding: 0em;
+    text-decoration: underline;
+}
 over {  /* my custom tag (overlines things) */
     display: inline;
     margin: 0em;
     border: 0em;
     padding: 0em;
     text-decoration: overline;
+}
+div.nav {
+    position: fixed;
+    left: 0em;
+    top: 0em;
+    padding-right: 1em;
+    width: 15vw;  /* could fill horizontally with 100vw */
+    height: 100%;
+    background: #0e0; /* For browsers that do not support gradients */
+    background: -webkit-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Safari 5.1 to 6.0 */
+    background: -o-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Opera 11.6 to 12.0 */
+    background: -moz-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Firefox 3.6 to 15 */
+    background: repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* Standard syntax */
+    text-align: left;
 }
 div.list ol, div.list ul {  /* for lists within <div class="list"></div> */
     margin: 0em;
