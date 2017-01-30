@@ -34,7 +34,7 @@
                 timeNumber++;
                 paragraph.label = label;
                 paragraph.date = date;
-                document.body.insertBefore(paragraph, document.getElementById("loser"));
+                document.getElementById("loser").parentNode.insertBefore(paragraph, document.getElementById("loser"));
             }
             function refresh() {
                 for (var number=1; number<timeNumber; number++) {
