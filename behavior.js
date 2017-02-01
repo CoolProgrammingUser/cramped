@@ -116,7 +116,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
     }
     
     // interprets condensed tables
-    var tables = document.getElementsByClassName("condensed");
+    var tables = document.getElementsByClassName("compact");
     for (var counter=0; counter<tables.length; counter++) {
         var table = tables[counter];
         var headings = table.getElementsByTagName("th");
