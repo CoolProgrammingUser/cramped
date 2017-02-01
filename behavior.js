@@ -110,9 +110,11 @@ window.addEventListener("load", function() {  // This waits for everything past 
     var unorderedLists = document.getElementsByTagName("ul");
     for (var index=0; index<orderedLists.length; index++) {
         orderedLists[index].outerHTML = "<div class='list'>" + orderedLists[index].outerHTML + "</div>";
+        orderedLists[index].style.visibility = "visible";
     }
     for (var index=0; index<unorderedLists.length; index++) {
         unorderedLists[index].outerHTML = "<div class='list'>" + unorderedLists[index].outerHTML + "</div>";
+        unorderedLists[index].style.visibility = "visible";
     }
     
     // interprets condensed tables
@@ -137,6 +139,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
                 parent.innerHTML += "<td>" + item.trim() + "</td>";
             });
         }
+        table.style.visibility = "visible";
     }
 });
 
