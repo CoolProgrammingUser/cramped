@@ -81,7 +81,6 @@ over {  /* my custom tag (overlines things) */
     text-decoration: overline;
 }
 div.nav {
-    visibility: visible;
     position: fixed;
     left: 0em;
     top: 0em;
@@ -94,6 +93,9 @@ div.nav {
     background: -moz-repeating-radial-gradient(circle, #0e0, #0e0 10%, white 11%, white 21%, #0e0 22%);  /* For Firefox 3.6 to 15 */
     background: repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* Standard syntax */
     text-align: left;
+}
+div.nav ol, div.nav ul {
+    visibility: visible;
 }
 div.list ol, div.list ul {  /* for lists within <div class="list"></div> */
     margin: 0em;
