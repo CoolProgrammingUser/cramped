@@ -119,7 +119,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
     var headings = document.getElementsByTagName("th");
     for (var index=0; index<headings.length; index++) {
         var parent = headings[index].parentNode;
-        var newHeadings = headings[index].split("|");
+        var newHeadings = headings[index].innerHTML.split("|");
         parent.removeChild(headings[index]);
         newHeadings.forEach(function(heading) {
             parent.innerHTML += "<th>" + heading.trim() + "</th>";
@@ -128,7 +128,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
     var data = document.getElementsByTagName("td");
     for (var index=0; index<data.length; index++) {
         var parent = data[index].parentNode;
-        var newData = data[index].split("|");
+        var newData = data[index].innerHTML.split("|");
         parent.removeChild(data[index]);
         newData.forEach(function(item) {
             parent.innerHTML += "<th>" + item.trim() + "</th>";
