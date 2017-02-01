@@ -116,23 +116,27 @@ window.addEventListener("load", function() {  // This waits for everything past 
     }
     
     // interprets condensed tables
-    var headings = document.getElementsByTagName("th");
-    for (var index=0; index<headings.length; index++) {
-        var parent = headings[index].parentNode;
-        var newHeadings = headings[index].innerHTML.split("|");
-        parent.removeChild(headings[index]);
-        newHeadings.forEach(function(heading) {
-            parent.innerHTML += "<th>" + heading.trim() + "</th>";
-        });
-    }
-    var data = document.getElementsByTagName("td");
-    for (var index=0; index<data.length; index++) {
-        var parent = data[index].parentNode;
-        var newData = data[index].innerHTML.split("|");
-        parent.removeChild(data[index]);
-        newData.forEach(function(item) {
-            parent.innerHTML += "<td>" + item.trim() + "</td>";
-        });
+    var tables = document.getElementsByClassName("condensed");
+    for (var counter=0; counter<tables.length; counter++) {
+        var table = tables[counter];
+        var headings = table.getElementsByTagName("th");
+        for (var index=0; index<headings.length; index++) {
+            var parent = headings[index].parentNode;
+            var newHeadings = headings[index].innerHTML.split("|");
+            parent.removeChild(headings[index]);
+            newHeadings.forEach(function(heading) {
+                parent.innerHTML += "<th>" + heading.trim() + "</th>";
+            });
+        }
+        var data = table.getElementsByTagName("td");
+        for (var index=0; index<data.length; index++) {
+            var parent = data[index].parentNode;
+            var newData = data[index].innerHTML.split("|");
+            parent.removeChild(data[index]);
+            newData.forEach(function(item) {
+                parent.innerHTML += "<td>" + item.trim() + "</td>";
+            });
+        }
     }
 });
 
