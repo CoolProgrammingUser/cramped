@@ -40,6 +40,7 @@ div {
 }
 ol, ul {
     display: table;
+    visibility: hidden;
 }
 ul {
     padding-left: 2em;
@@ -96,6 +97,9 @@ div.nav {
 div.list ol, div.list ul {  /* for lists within <div class="list"></div> */
     margin: 0em;
     text-align: left;
+}
+table.compact {
+    visibility: hidden;
 }
 @font-face {
     font-family: "Braille";
