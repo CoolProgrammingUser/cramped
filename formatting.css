@@ -81,6 +81,7 @@ over {  /* my custom tag (overlines things) */
     text-decoration: overline;
 }
 div.nav {
+    visibility: visible;
     position: fixed;
     left: 0em;
     top: 0em;
