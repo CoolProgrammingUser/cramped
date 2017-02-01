@@ -114,6 +114,26 @@ window.addEventListener("load", function() {  // This waits for everything past 
     for (var index=0; index<unorderedLists.length; index++) {
         unorderedLists[index].outerHTML = "<div class='list'>" + unorderedLists[index].outerHTML + "</div>";
     }
+    
+    // interprets condensed tables
+    var headings = document.getElementsByTagName("th");
+    for (var index=0; index<headings.length; index++) {
+        var parent = headings[index].parentNode;
+        var newHeadings = headings[index].split("|");
+        parent.removeChild(headings[index]);
+        newHeadings.forEach(function(heading) {
+            parent.innerHTML += "<th>" + heading.trim() + "</th>";
+        });
+    }
+    var data = document.getElementsByTagName("td");
+    for (var index=0; index<data.length; index++) {
+        var parent = data[index].parentNode;
+        var newData = data[index].split("|");
+        parent.removeChild(data[index]);
+        newData.forEach(function(item) {
+            parent.innerHTML += "<th>" + item.trim() + "</th>";
+        });
+    }
 });
 
-// remember array.forEach(), new Function(), and new Event() / new CustomEvent()
+// remember new Function() and new Event() / new CustomEvent()
