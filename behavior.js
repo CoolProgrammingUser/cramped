@@ -131,7 +131,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
         var newData = data[index].innerHTML.split("|");
         parent.removeChild(data[index]);
         newData.forEach(function(item) {
-            parent.innerHTML += "<th>" + item.trim() + "</th>";
+            parent.innerHTML += "<td>" + item.trim() + "</td>";
         });
     }
 });
