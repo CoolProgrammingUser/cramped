@@ -68,7 +68,7 @@ function pageJump(ID) {
         // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
     }
     contents.innerHTML += "<ul>" + listItems + "</ul><br>";
-    document.body.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
+    division.parentNode.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
 }
 
 //This is able to run without waiting for anything else to load.
