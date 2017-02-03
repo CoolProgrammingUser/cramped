@@ -67,7 +67,7 @@ function pageJump(ID) {
         division.insertBefore(toTop.cloneNode(true), division.getElementsByTagName("h2")[index].nextSibling);  // inserts after <h2>
         // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
     }
-    contents.innerHTML += "<ul>" + listItems + "</ul><br>";
+    contents.innerHTML += "<ul style='visibility:visible'>" + listItems + "</ul><br>";
     division.parentNode.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
 }
 
