@@ -2,11 +2,16 @@
 <html>
     <head>
         <script src="behavior.js"></script>
+        <script>
+            setTimeout(function() {
+                document.getElementById("picture").style.content = "url('images/Me in a Nutshell.png')";
+            }, 4000);
+        </script>
         <style>
             #picture {
                 width: 25%;
                 height: 25%;
-                content: url("images/Me in a Nutshell.png");
+                content: url("images/Closed Shell.png");
             }
             #picture:hover {
                 content: url("images/Closed Shell.png");
