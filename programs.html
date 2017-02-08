@@ -5,6 +5,14 @@
         <script>
             window.addEventListener("load", function() {
                 pageJump("sections");
+                var iframes = document.getElementsByTagName("iframe");
+                for (var index=0; index<iframes.length; index++) {
+                    iframes[index].src = [
+                        "//scratch.mit.edu/projects/embed/73733458/?autostart=false",
+                        "//scratch.mit.edu/projects/embed/103296981/?autostart=false",
+                        "//scratch.mit.edu/projects/embed/86870295/?autostart=false"
+                        ][index];
+                }
             });
         </script>
     </head>
@@ -61,19 +69,19 @@
                     Egg Catcher
                 </a>
             </h3>
-            <iframe allowtransparency="true" width="485" height="402" src="//scratch.mit.edu/projects/embed/73733458/?autostart=false" frameborder="0" allowfullscreen></iframe>
+            <iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
             <h3>
                 <a target="_blank" href="https://scratch.mit.edu/projects/103296981/">
                     ADD and ADHD
                 </a>
             </h3>
-            <iframe allowtransparency="true" width="485" height="402" src="//scratch.mit.edu/projects/embed/103296981/?autostart=false" frameborder="0" allowfullscreen></iframe>
+            <iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
             <h3>
                 <a target="_blank" href="https://scratch.mit.edu/projects/86870295/">
                     Surprise!
                 </a>
             </h3>
-            <iframe allowtransparency="true" width="485" height="402" src="//scratch.mit.edu/projects/embed/86870295/?autostart=false" frameborder="0" allowfullscreen></iframe>
+            <iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
             <br>
             <br>
             <h2>
