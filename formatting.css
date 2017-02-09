@@ -15,7 +15,7 @@ a:hover {
 }
 body {
     margin: 0vw 0vh 0vh 15vw;
-    padding-bottom: 5%;
+    padding-bottom: 4%;
     padding-left: 5%;
     width: 80%;  /* This isn't 85% because I'm leaving room for the scroll bar and making words not go to the edge of the page. */
     min-height: 100%;
