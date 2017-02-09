@@ -101,7 +101,7 @@ div.nav {
 div.nav ol, div.nav ul {
     visibility: visible;
 }
-div.list ol, div.list ul {  /* for lists within <div class="list"></div> */
+div.list {  /* for lists within <div class="list"></div> */
     margin: 0em;
     text-align: left;
 }
