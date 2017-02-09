@@ -53,6 +53,7 @@ table {
     margin: auto;
     border: .1em solid black;
     border-collapse: collapse;
+    background: rgba(255, 255, 255, .5);
 }
 th, td {
     border: .1em solid black;
