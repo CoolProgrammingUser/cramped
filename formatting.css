@@ -61,6 +61,9 @@ th, td {
     border-collapse: collapse;
     padding: .5em;
 }
+th {
+    background: rgba(200, 200, 200, .5);
+}
 input {
     text-align: center;
 }
