@@ -54,7 +54,7 @@ table {
     margin: auto;
     border: .1em solid black;
     border-collapse: collapse;
-    background: #eeeeee;
+    background: #fefefe;
 }
 th, td {
     border: .1em solid black;
@@ -62,7 +62,7 @@ th, td {
     padding: .5em;
 }
 th {
-    background: #cccccc;
+    background: #dddddd;
 }
 input {
     text-align: center;
