@@ -123,10 +123,10 @@ window.addEventListener("load", function() {  // This waits for everything past 
     for (var counter=0; counter<tables.length; counter++) {
         var table = tables[counter];
         var headings = table.getElementsByTagName("th");
-        for (var index=0; index<headings.length; index++) {
+        var initialLength = headings.length;
+        for (var index=0; index<initialLength; index++) {
             var parent = headings[index].parentNode;
             var newHeadings = headings[index].innerHTML.split("|");
-            alert(newHeadings);
             parent.removeChild(headings[index]);
             newHeadings.forEach(function(heading) {
                 parent.innerHTML += "<th>" + heading.trim() + "</th>";
