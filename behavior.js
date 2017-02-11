@@ -122,9 +122,13 @@ window.addEventListener("load", function() {  // This waits for everything past 
     var tables = document.getElementsByClassName("compact");
     for (var counter=0; counter<tables.length; counter++) {
         var table = tables[counter];
-        var headings = table.getElementsByTagName("th");
-        var initialLength = headings.length;  // The for loop needs this because headings.length would update with the current length every time the for loop ran again.
-        for (var index=0; index<initialLength; index++) {
+        var elements = table.getElementsByTagName("th");
+        var headings = [];
+        for (var index=0; index<elements.length; index++) {
+            headings.push(elements[index]);
+        }
+        // var initialLength = headings.length;  // The for loop needs this because headings.length would update with the current length every time the for loop ran again.
+        for (var index=0; index<headings.length; index++) {
             var parent = headings[index].parentNode;
             var newHeadings = headings[index].innerHTML.split("|");
             parent.removeChild(headings[index]);
@@ -132,9 +136,13 @@ window.addEventListener("load", function() {  // This waits for everything past 
                 parent.innerHTML += "<th>" + heading.trim() + "</th>";
             });
         }
-        var data = table.getElementsByTagName("td");
-        initialLength = data.length;  // same as for headings.length
-        for (var index=0; index<initialLength; index++) {
+        elements = table.getElementsByTagName("td");
+        var data = [];
+        for (var index=0; index<elements.length; index++) {
+            data.push(elements[index]);
+        }
+        // initialLength = data.length;  // same as for headings.length
+        for (var index=0; index<data.length; index++) {
             var parent = data[index].parentNode;
             var newData = data[index].innerHTML.split("|");
             parent.removeChild(data[index]);
