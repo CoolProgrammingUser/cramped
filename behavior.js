@@ -1,4 +1,10 @@
-NodeList.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.forEach = function(doStuff) {
+    var elements = [];
+    for (var index=0; index<this.length; index++) {
+        elements.push(this[index]);
+    }
+    elements.forEach(doStuff);
+}
 
 function read(URL, callback) {
     /**
