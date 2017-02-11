@@ -53,6 +53,9 @@ li {
 table {
     margin: auto;
     border: .1em solid black;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
     border-collapse: collapse;
     background: #fefefe;
 }
