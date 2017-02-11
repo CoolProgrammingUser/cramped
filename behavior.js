@@ -1,4 +1,12 @@
-HTMLCollection.prototype.forEach = Array.prototype.forEach;
+HTMLCollection.prototype.forEach = function(doStuff) {
+    var elements = [];
+    for (var index=0; index<this.length; index++) {
+        elements.push(this[index]);
+    }
+    for (index=0; index<elements.length; index++) {
+        doStuff(elements[index], index, elements);
+    }
+}
 NodeList.prototype.forEach = Array.prototype.forEach;
 
 function read(URL, callback) {
