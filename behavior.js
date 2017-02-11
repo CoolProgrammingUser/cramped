@@ -126,6 +126,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
         for (var index=0; index<headings.length; index++) {
             var parent = headings[index].parentNode;
             var newHeadings = headings[index].innerHTML.split("|");
+            alert(newHeadings);
             parent.removeChild(headings[index]);
             newHeadings.forEach(function(heading) {
                 parent.innerHTML += "<th>" + heading.trim() + "</th>";
