@@ -141,7 +141,14 @@ window.addEventListener("load", function() {  // This waits for everything past 
             });
         }
         */
-        table.getElementsByTagName("th").forEach(function(heading) {});
+        table.getElementsByTagName("th").forEach(function(thList) {
+            var parent = thList.parentNode;
+            var newHeadings = thList.innerHTML.split("|");
+            parent.removeChild(thList);
+            newHeadings.forEach(function(heading) {
+                parent.innerHTML += "<th>" + heading.trim() + "</th>";
+            });
+        });
         /*
         elements = table.getElementsByTagName("td");
         var data = [];
