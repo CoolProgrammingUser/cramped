@@ -1,3 +1,5 @@
+NodeList.prototype.forEach = Array.prototype.forEach;
+
 function read(URL, callback) {
     /**
     reads the contents of the file at the URL,
@@ -122,6 +124,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
     var tables = document.getElementsByClassName("compact");
     for (var counter=0; counter<tables.length; counter++) {
         var table = tables[counter];
+        /*
         var elements = table.getElementsByTagName("th");
         var headings = [];
         for (var index=0; index<elements.length; index++) {
@@ -136,6 +139,9 @@ window.addEventListener("load", function() {  // This waits for everything past 
                 parent.innerHTML += "<th>" + heading.trim() + "</th>";
             });
         }
+        */
+        table.getElementsByTagName("th").forEach(function(heading) {});
+        /*
         elements = table.getElementsByTagName("td");
         var data = [];
         for (var index=0; index<elements.length; index++) {
@@ -150,6 +156,7 @@ window.addEventListener("load", function() {  // This waits for everything past 
                 parent.innerHTML += "<td>" + item.trim() + "</td>";
             });
         }
+        */
         table.style.visibility = "visible";
     }
 });
