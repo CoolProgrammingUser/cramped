@@ -1,4 +1,11 @@
 HTMLCollection.prototype.forEach = function(doStuff) {
+    /**
+    HTMLCollection elements = stuff like the list in document.getElementsByClassName() or document.getElementsByTagName()
+    creates a static list of HTMLCollection elements
+    and does stuff for each one like Array.forEach()
+    (.forEach() doesn't work for these lists without this code)
+    implication of static list = you can remove the elements in doStuff without messing everything up
+    */
     var elements = [];
     for (var index=0; index<this.length; index++) {
         elements.push(this[index]);
@@ -7,7 +14,19 @@ HTMLCollection.prototype.forEach = function(doStuff) {
         doStuff(elements[index], index, elements);
     }
 }
-NodeList.prototype.forEach = Array.prototype.forEach;
+
+NodeList.prototype.forEach = function(doStuff) {
+    /**
+    similar to HTMLCollection.forEach()
+    */
+    var elements = [];
+    for (var index=0; index<this.length; index++) {
+        elements.push(this[index]);
+    }
+    for (index=0; index<elements.length; index++) {
+        doStuff(elements[index], index, elements);
+    }
+}
 
 function read(URL, callback) {
     /**
@@ -25,17 +44,6 @@ function read(URL, callback) {
                 // file.responseXML might have something
                 var container = document.createElement("div");
                 container.innerHTML = file.responseText;
-                /*
-                var tags = container.children;
-                for (var index=0; index<tags.length; index++) {
-                    var tag = document.createElement(tags[index].tagName);
-                    if (tag.tagName != "script") {
-                        tag.appendChild(document.createTextNode(tags[index].innerHTML));
-                        container.insertBefore(tag, tags[index]);
-                        tags[index+1].outerHTML = "";
-                    }
-                }
-                */
                 // This is necessary because HTML5 doesn't think script tags and innerHTML should go together (for security reasons).
                 var scripts = file.responseText.split("<script");
                 if (scripts.length > 1) {
@@ -133,22 +141,6 @@ window.addEventListener("load", function() {  // This waits for everything past 
     var tables = document.getElementsByClassName("compact");
     for (var counter=0; counter<tables.length; counter++) {
         var table = tables[counter];
-        /*
-        var elements = table.getElementsByTagName("th");
-        var headings = [];
-        for (var index=0; index<elements.length; index++) {
-            headings.push(elements[index]);
-        }
-        // var initialLength = headings.length;  // The for loop needs this because headings.length would update with the current length every time the for loop ran again.
-        for (var index=0; index<headings.length; index++) {
-            var parent = headings[index].parentNode;
-            var newHeadings = headings[index].innerHTML.split("|");
-            parent.removeChild(headings[index]);
-            newHeadings.forEach(function(heading) {
-                parent.innerHTML += "<th>" + heading.trim() + "</th>";
-            });
-        }
-        */
         table.getElementsByTagName("th").forEach(function(thList) {
             var parent = thList.parentNode;
             var newHeadings = thList.innerHTML.split("|");
@@ -157,22 +149,6 @@ window.addEventListener("load", function() {  // This waits for everything past 
                 parent.innerHTML += "<th>" + heading.trim() + "</th>";
             });
         });
-        /*
-        elements = table.getElementsByTagName("td");
-        var data = [];
-        for (var index=0; index<elements.length; index++) {
-            data.push(elements[index]);
-        }
-        // initialLength = data.length;  // same as for headings.length
-        for (var index=0; index<data.length; index++) {
-            var parent = data[index].parentNode;
-            var newData = data[index].innerHTML.split("|");
-            parent.removeChild(data[index]);
-            newData.forEach(function(item) {
-                parent.innerHTML += "<td>" + item.trim() + "</td>";
-            });
-        }
-        */
         table.getElementsByTagName("td").forEach(function(tdList) {
             var parent = tdList.parentNode;
             var newData = tdList.innerHTML.split("|");
