@@ -72,6 +72,7 @@ function pageJump(ID) {
     document.getElementsByTagName("h1")[0].id = "top";
     var division = document.getElementById(ID);
     var contents = document.createElement("div");
+    contents.id = "pageJump";
     contents.className = "list";
     contents.style = "margin: 2em; padding: 0em 1em 1em 0em; background: rgba(255,255,255,.5);";
     contents.innerHTML = "<h2 style='text-align:center;'>Jump to:</h2>";
