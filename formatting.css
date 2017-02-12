@@ -42,6 +42,7 @@ div {
 ol, ul {
     display: table;
     visibility: hidden;
+    margin: 0em;
 }
 ul {
     padding-left: 2em;
