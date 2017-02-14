@@ -3,8 +3,9 @@
     <head>
         <script src="behavior.js"></script>
         <script>
+            var cracking = new Audio("audio/Cracking.mp3");
             setTimeout(function() {
-                new Audio("audio/Cracking.mp3").play();
+                cracking.play();
             }, 4000);
             setTimeout(function() {
                 document.getElementById("picture1").style.display = "none";
