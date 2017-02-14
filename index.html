@@ -5,8 +5,10 @@
         <script>
             setTimeout(function() {
                 new Audio("audio/Cracking.mp3").play();
-                document.getElementById("picture1").style.display = "none";
-                document.getElementById("picture2").style.display = "inline-block";
+                setTimeout(function() {
+                    document.getElementById("picture1").style.display = "none";
+                    document.getElementById("picture2").style.display = "inline-block";
+                }, 60);
             }, 4000);
         </script>
         <style>
