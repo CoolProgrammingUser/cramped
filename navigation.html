@@ -3,38 +3,25 @@
 </h2>
 <ul id="contentsList"></ul>
 <script>
-    [  // page URLs
-        "/Cramped/",
-        "profile",
-        "projects",
-        "seconds",
-        "learning",
-        "creations",
-        "programs",
-        "experiments",
-        "journal",
-        "moments",
-        "stories",
-        "excuses"
-    ].forEach(function(location, index) {
+    [  // [page URL, title]
+        ["/Cramped/", "Home"],
+        ["profile", "Profile"],
+        ["projects", "Projects"],
+        ["seconds", "Countdowns"],
+        ["learning", "Learning"],
+        ["creations", "Creations"],
+        ["programs", "Websites and Programs"],
+        ["experiments", "Experiments"],
+        ["journal", "Journal"],
+        ["moments", "Important Moments"],
+        ["stories", "Fun Stories"],
+        ["excuses", "Excuses"]
+    ].forEach(function(pair) {
         document.getElementById("contentsList").innerHTML +=
             "<li><a href='" +
-            location +
+            pair[0] +
             "'>" +
-            [  // page titles
-                "Home",
-                "Profile",
-                "Projects",
-                "Countdowns",
-                "Learning",
-                "Creations",
-                "Websites and Programs",
-                "Experiments",
-                "Journal",
-                "Important Moments",
-                "Fun Stories",
-                "Excuses"
-            ][index] +
+            pair[1] +
             "</a></li>"
         ;
     });
