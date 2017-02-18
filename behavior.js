@@ -77,10 +77,9 @@ function pageJump(ID) {
     contents.style = "margin: 2em; padding: 0em 1em 1em 0em; background: rgba(255,255,255,.5);";
     contents.innerHTML = "<h2 style='text-align:center;'>Jump to:</h2>";
     var sections = division.getElementsByTagName("h2");
-    var toTop = document.createElement("a");
-    toTop.href = "#top";
-    toTop.innerHTML = "To top";
-    var listItems = "";  // I need this variable to hold the list items because trying to add <ul> at the beginning and </ul> at the end separately causes it to fill in the </ul> immediately after the <ul> and omit the real </ul>
+    var toTop = document.createElement("p");
+    toTop.innerHTML = "<a href='#top'>To top</a>";
+    var listItems = "";  // I need this variable to hold the list items because trying to add <ol> at the beginning and </ol> at the end separately causes it to fill in the </ol> immediately after the <ol> and omit the real </ol>
     for (var index=0; index<sections.length; index++) {  // I would use (var in array), but index exceeds entries.length for no apparent reason
         var inside = sections[index].innerHTML.trim();  // The inner HTML has a bunch of whitespace for no apparent reason.
         sections[index].id = inside;
@@ -89,6 +88,7 @@ function pageJump(ID) {
         // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
     }
     contents.innerHTML += "<ol style='visibility:visible'>" + listItems + "</ol>";
+    contents.outerHTML += "<br>";
     division.parentNode.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
 }
 
