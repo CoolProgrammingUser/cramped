@@ -77,7 +77,7 @@ function pageJump(ID) {
     contents.style = "margin: 2em; padding: 0em 1em 1em 0em; background: rgba(255,255,255,.5);";
     contents.innerHTML = "<h2 style='text-align:center;'>Jump to:</h2>";
     var sections = division.getElementsByTagName("h2");
-    var toTop = document.createElement("p");
+    var toTop = document.createElement("p");  // This has to be a <p><a></a></p> rather than just a <a></a> because, otherwise, "To top" has the possibility of appearing in-line.
     toTop.innerHTML = "<a href='#top'>To top</a>";
     var listItems = "";  // I need this variable to hold the list items because trying to add <ol> at the beginning and </ol> at the end separately causes it to fill in the </ol> immediately after the <ol> and omit the real </ol>
     for (var index=0; index<sections.length; index++) {  // I would use (var in array), but index exceeds entries.length for no apparent reason
@@ -89,7 +89,21 @@ function pageJump(ID) {
     }
     contents.innerHTML += "<ol style='visibility:visible'>" + listItems + "</ol>";
     division.parentNode.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
-    contents.outerHTML += "<br>";  // Elements need to have a parent node before the outer HTML can be modified.
+    contents.outerHTML += "<br>";  // Elements need to have a parent node before the outer HTML can be modified. (This makes sure the "Jump to:" section appears on its own line.)
+    // This takes you to a certain part of the page after the IDs and links load (if you were trying to go to a certain part of the page.
+    if (window.location.href.indexOf("#") > -1) {
+        var found = false;
+        document.getElementById("pageJump").getElementsByTagName("a").forEach(function(link) {
+            if (link.innerHTML.trim() == window.location.href.split("#")[1].trim()) {
+                found = true;
+                link.click();
+                break;
+            }
+        });
+        if (!found) {  // Was the section found?
+            throw 'The section "' + window.location.href.split("#")[1].trim() + '" doesn\'t exist on this page.';
+        }
+    }
 }
 
 //This is able to run without waiting for anything else to load.
