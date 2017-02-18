@@ -4,6 +4,7 @@ HTMLCollection.prototype.forEach = function(doStuff) {
     creates a static list of HTMLCollection elements
     and does stuff for each one like Array.forEach()
     (.forEach() doesn't work for these lists without this code)
+    The callback function can return "break" to make the loop break early.
     implication of static list = you can remove the elements in doStuff without messing everything up
     */
     var elements = [];
@@ -11,7 +12,10 @@ HTMLCollection.prototype.forEach = function(doStuff) {
         elements.push(this[index]);
     }
     for (index=0; index<elements.length; index++) {
-        doStuff(elements[index], index, elements);
+        var returnValue = doStuff(elements[index], index, elements);
+        if (returnValue == "break") {
+            break;
+        }
     }
 }
 
@@ -97,7 +101,7 @@ function pageJump(ID) {
             if (link.innerHTML.trim() == window.location.href.split("#")[1].trim()) {
                 found = true;
                 link.click();
-                break;
+                return "break";
             }
         });
         if (!found) {  // Was the section found?
@@ -108,8 +112,6 @@ function pageJump(ID) {
 
 //This is able to run without waiting for anything else to load.
 
-// makes my custom tag which underlines things
-document.createElement("under");
 // makes my custom tag which overlines things
 document.createElement("over");
 
@@ -176,4 +178,4 @@ window.addEventListener("load", function() {  // This waits for everything past 
     }
 });
 
-// remember new Function() and new Event() / new CustomEvent()
+// remember new Function(), function*, and new Event() / new CustomEvent()
