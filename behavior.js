@@ -28,7 +28,10 @@ NodeList.prototype.forEach = function(doStuff) {
         elements.push(this[index]);
     }
     for (index=0; index<elements.length; index++) {
-        doStuff(elements[index], index, elements);
+        var returnValue = doStuff(elements[index], index, elements);
+        if (returnValue == "break") {
+            break;
+        }
     }
 }
 
@@ -105,7 +108,7 @@ function pageJump(ID) {
             }
         });
         if (!found) {  // Was the section found?
-            throw 'The section "' + window.location.href.split("#")[1].trim() + '" doesn\'t exist on this page.';
+            console.warn('The section "' + window.location.href.split("#")[1].trim() + '" doesn\'t exist on this page.');
         }
     }
 }
