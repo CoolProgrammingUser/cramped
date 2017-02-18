@@ -88,8 +88,8 @@ function pageJump(ID) {
         // toTop needs to be cloned so it doesn't keep getting reasigned to the next place (it also needs to have true to clone all children of the node, although it doesn't apply here)
     }
     contents.innerHTML += "<ol style='visibility:visible'>" + listItems + "</ol>";
-    contents.outerHTML += "<br>";
     division.parentNode.insertBefore(contents, division);  // .insertBefore() only works for the immediate descendants of the parent
+    contents.outerHTML += "<br>";  // Elements need to have a parent node before the outer HTML can be modified.
 }
 
 //This is able to run without waiting for anything else to load.
