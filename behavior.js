@@ -35,6 +35,38 @@ NodeList.prototype.forEach = function(doStuff) {
     }
 }
 
+function compareAll(item, comparator, comparisons, type) {
+    /**
+    compares a given item to all items in an array
+    comparator = how the items are being compared e.g. "==", ">", etc.
+    type = whether you need all of the comparisons to be true or just one ("&&" or "||")
+    comparator and type must be strings
+    */
+    // >== and <== might not be comparators
+    if (["==", "===", "!=", "!==", ">", "<", ">=", "<=", ">==", "<=="].indexOf(comparator) == -1) {
+        throw "Invalid type of comparator.";
+    }
+    var trueFalse;
+    if (type == "||" || type.toLowerCase() == "or") {
+        trueFalse = false;
+        comparisons.forEach(function(comparison) {
+            if (eval(item + comparator + comparison)) {
+                trueFalse = true;
+            }
+        });
+    } else if (type == "&&" || type.toLowerCase() == "and") {
+        trueFalse = true;
+        comparisons.forEach(function(comparison) {
+            if (eval("!(" + item + comparator + comparison + ")")) {
+                trueFalse = false;
+            }
+        });
+    } else {
+        throw "Invalid type of comparison.";
+    }
+    return trueFalse;
+}
+
 function read(URL, callback) {
     /**
     reads the contents of the file at the URL,
