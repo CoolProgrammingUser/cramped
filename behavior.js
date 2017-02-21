@@ -113,26 +113,34 @@ function pageJump(ID) {
     }
 }
 
-function colorCode(element, end1, end2) {
+function colorCode(element, end1, end2, color1, color2) {
     /**
     color codes an element (likely a table)
     end1 and end2 specify the ends of a range
+    color1 and color2 are optional color specifications
+    default colors = red and green
     */
-    var red = 255,
-        green = 255,
-        blue = 0;
+    var color1 = color1 || [255, 0, 0],
+        color2 = color2 || [0, 255, 0];
     if (element.tagName == "TABLE") {
         element.getElementsByTagName("td").forEach(function(data) {
             if (!isNaN(data.innerHTML.trim()) && data.innerHTML.trim()!="") {
                 var number = Number(data.innerHTML.trim());
-                data.style.backgroundColor = "rgb(" +
-                    Math.round(Math.abs(number-end2)/(end2-end1)*red) +
-                    ", " +
-                    Math.round(Math.abs(number-end1)/(end2-end1)*green) +
-                    ", " +
-                    blue +
-                    ")"
-                ;
+                var intermediate1 = [],
+                    intermediate2 = [],
+                    colorValue;
+                color1.forEach(function(color) {
+                    colorValue = Math.round(Math.abs(number-end2)/(end2-end1)*color*2);
+                    intermediate1.push(colorValue<=color ? colorValue : color);
+                });
+                color2.forEach(function(color) {
+                    colorValue = Math.round(Math.abs(number-end1)/(end2-end1)*color*2);
+                    intermediate2.push(colorValue<=color ? colorValue : color);
+                });
+                var red = intermediate1[0]+intermediate2[0]<=255 ? intermediate1[0]+intermediate2[0] : 255,
+                    green = intermediate1[1]+intermediate2[1]<=255 ? intermediate1[1]+intermediate2[1] : 255,
+                    blue = intermediate1[2]+intermediate2[2]<=255 ? intermediate1[2]+intermediate2[2] : 255;
+                data.style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
             }
         });
     }
