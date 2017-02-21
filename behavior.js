@@ -113,6 +113,31 @@ function pageJump(ID) {
     }
 }
 
+function colorCode(element, end1, end2) {
+    /**
+    color codes an element (likely a table)
+    end1 and end2 specify the ends of a range
+    */
+    var red = 255,
+        green = 255,
+        blue = 0;
+    if (element.tagName == "TABLE") {
+        element.getElementsByTagName("td").forEach(function(data) {
+            if (!isNaN(data.innerHTML.trim())) {
+                var number = Number(data.innerHTML.trim());
+                data.style.background = "rgb(" +
+                    Math.abs(number-end2)/(end2-end1)*red +
+                    ", " +
+                    Math.abs(number-end1)/(end2-end1)*green +
+                    ", " +
+                    blue +
+                    ");"
+                ;
+            }
+        });
+    }
+}
+
 //This is able to run without waiting for anything else to load.
 
 // makes my custom tag which overlines things
