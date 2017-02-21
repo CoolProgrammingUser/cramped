@@ -16,9 +16,9 @@
             if (!isNaN(data.innerHTML.trim())) {
                 var number = Number(data.innerHTML.trim());
                 data.style.backgroundColor = "rgb(" +
-                    Math.abs(number-end2)/(end2-end1)*red +
+                    Math.round(Math.abs(number-end2)/(end2-end1)*red) +
                     ", " +
-                    Math.abs(number-end1)/(end2-end1)*green +
+                    Math.round(Math.abs(number-end1)/(end2-end1)*green) +
                     ", " +
                     blue +
                     ")"
