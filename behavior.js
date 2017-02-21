@@ -123,15 +123,15 @@ function colorCode(element, end1, end2) {
         blue = 0;
     if (element.tagName == "TABLE") {
         element.getElementsByTagName("td").forEach(function(data) {
-            if (!isNaN(data.innerHTML.trim())) {
+            if (!isNaN(data.innerHTML.trim()) && data.innerHTML.trim()!="") {
                 var number = Number(data.innerHTML.trim());
-                data.style.background = "rgb(" +
-                    Math.abs(number-end2)/(end2-end1)*red +
+                data.style.backgroundColor = "rgb(" +
+                    Math.round(Math.abs(number-end2)/(end2-end1)*red) +
                     ", " +
-                    Math.abs(number-end1)/(end2-end1)*green +
+                    Math.round(Math.abs(number-end1)/(end2-end1)*green) +
                     ", " +
                     blue +
-                    ");"
+                    ")"
                 ;
             }
         });
