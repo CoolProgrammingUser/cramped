@@ -13,7 +13,7 @@ HTMLCollection.prototype.forEach = function(doStuff) {
     }
     for (index=0; index<elements.length; index++) {
         var returnValue = doStuff(elements[index], index, elements);
-        if (returnValue == "break") {
+        if (returnValue.toLowerCase() == "break") {
             break;
         }
     }
@@ -29,7 +29,23 @@ NodeList.prototype.forEach = function(doStuff) {
     }
     for (index=0; index<elements.length; index++) {
         var returnValue = doStuff(elements[index], index, elements);
-        if (returnValue == "break") {
+        if (returnValue.toLowerCase() == "break") {
+            break;
+        }
+    }
+}
+
+String.prototype.forEach = function(doStuff) {
+    /**
+    .forEach() for strings
+    */
+    var string = "";
+    for (var index=0; index<this.length; index++) {
+        string += this[index];
+    }
+    for (index=0; index<string.length; index++) {
+        var returnValue = doStuff(string[index], index, string);
+        if (returnValue.toLowerCase() == "break") {
             break;
         }
     }
@@ -176,7 +192,9 @@ function colorCode(element, end1, end2, color1, color2) {
             }
         });
     } else if (compareAll(element.tagName, "==", ["P", "H1", "H2", "H3", "H4", "H5", "H6", "SPAN"], "||")) {
-        
+        if (element.innerHTML != "") {
+            
+        }
     }
 }
 
