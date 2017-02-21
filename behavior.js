@@ -50,14 +50,14 @@ function compareAll(item, comparator, comparisons, type) {
     if (type == "||" || type.toLowerCase() == "or") {
         trueFalse = false;
         comparisons.forEach(function(comparison) {
-            if (eval(item + comparator + comparison)) {
+            if (eval(item + comparator + (typeof comparison == "string" ? '"' + comparison + '"' : comparison))) {
                 trueFalse = true;
             }
         });
     } else if (type == "&&" || type.toLowerCase() == "and") {
         trueFalse = true;
         comparisons.forEach(function(comparison) {
-            if (eval("!(" + item + comparator + comparison + ")")) {
+            if (eval("!(" + item + comparator + (typeof comparison == "string" ? '"' + comparison + '"' : comparison) + ")")) {
                 trueFalse = false;
             }
         });
@@ -175,6 +175,8 @@ function colorCode(element, end1, end2, color1, color2) {
                 data.style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
             }
         });
+    } else if (compareAll(element.tagName, "==", ["P", "H1", "H2", "H3", "H4", "H5", "H6", "SPAN"], "||")) {
+        
     }
 }
 
