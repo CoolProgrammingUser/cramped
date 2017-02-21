@@ -15,13 +15,13 @@
         element.getElementsByTagName("td").forEach(function(data) {
             if (!isNaN(data.innerHTML.trim())) {
                 var number = Number(data.innerHTML.trim());
-                data.style.backgroundColor = "rgb(255, 255, 0)"  /*"rgb(" +
-                    red +  //Math.abs(number-end2)/(end2-end1)*red +
+                data.style.backgroundColor = "rgb(" +
+                    Math.abs(number-end2)/(end2-end1)*red +
                     ", " +
-                    green +  //Math.abs(number-end1)/(end2-end1)*green +
+                    Math.abs(number-end1)/(end2-end1)*green +
                     ", " +
                     blue +
-                    ");"*/
+                    ")"
                 ;
             }
         });
