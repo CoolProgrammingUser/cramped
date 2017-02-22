@@ -12,7 +12,7 @@ HTMLCollection.prototype.forEach = function(doStuff) {
         elements.push(this[index]);
     }
     for (index=0; index<elements.length; index++) {
-        var returnValue = doStuff(elements[index], index, elements);
+        var returnValue = doStuff(elements[index], index, elements) || "";
         if (returnValue.toLowerCase() == "break") {
             break;
         }
@@ -28,7 +28,7 @@ NodeList.prototype.forEach = function(doStuff) {
         elements.push(this[index]);
     }
     for (index=0; index<elements.length; index++) {
-        var returnValue = doStuff(elements[index], index, elements);
+        var returnValue = doStuff(elements[index], index, elements) || "";
         if (returnValue.toLowerCase() == "break") {
             break;
         }
@@ -44,7 +44,7 @@ String.prototype.forEach = function(doStuff) {
         string += this[index];
     }
     for (index=0; index<string.length; index++) {
-        var returnValue = doStuff(string[index], index, string);
+        var returnValue = doStuff(string[index], index, string) || "";
         if (returnValue.toLowerCase() == "break") {
             break;
         }
