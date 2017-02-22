@@ -66,14 +66,15 @@ function compareAll(item, comparator, comparisons, type) {
     if (type == "||" || type.toLowerCase() == "or") {
         trueFalse = false;
         comparisons.forEach(function(comparison) {
-            if (eval(item + comparator + (typeof comparison == "string" ? '\"' + comparison + '\"' : comparison))) {
+            alert(comparison + "\n\n" + typeof comparison);
+            if (eval(item + comparator + (typeof comparison == "string" ? '"' + comparison + '"' : comparison))) {
                 trueFalse = true;
             }
         });
     } else if (type == "&&" || type.toLowerCase() == "and") {
         trueFalse = true;
         comparisons.forEach(function(comparison) {
-            if (eval("!(" + item + comparator + (typeof comparison == "string" ? '\"' + comparison + '\"' : comparison) + ")")) {
+            if (eval("!(" + item + comparator + (typeof comparison == "string" ? '"' + comparison + '"' : comparison) + ")")) {
                 trueFalse = false;
             }
         });
