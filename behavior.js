@@ -164,7 +164,7 @@ function pageJump(ID) {
 function colorCode(element, end1, end2, color1, color2) {
     /**
     color codes an element (likely a table)
-    end1 and end2 specify the ends of a range
+    end1 and end2 specify the ends of a range (not used for strings)
     color1 and color2 are optional color specifications
     default colors = red and green
     */
@@ -192,7 +192,9 @@ function colorCode(element, end1, end2, color1, color2) {
             }
         });
     } else if (compareAll(element.tagName, "==", ["P", "H1", "H2", "H3", "H4", "H5", "H6", "SPAN"], "||")) {
-        if (element.innerHTML != "") {
+        if (element.innerHTML.trim() != "") {
+            end1 = 0;
+            end2 = element.innerHTML.trim().length;
             var characters = [];
             element.innerHTML.trim().split("").forEach(function(character, index) {
                 var tag = document.createElement(element.tagName)
