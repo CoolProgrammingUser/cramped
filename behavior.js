@@ -197,6 +197,7 @@ function colorCode(element, end1, end2, color1, color2) {
             element.innerHTML.trim().split("").forEach(function(character, index) {
                 var tag = document.createElement(element.tagName)
                 tag.innerHTML = character;
+                tag.style.display = "inline";
                 var number = index;
                 var intermediate1 = [],
                     intermediate2 = [],
