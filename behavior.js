@@ -193,7 +193,9 @@ function colorCode(element, end1, end2, color1, color2) {
         });
     } else if (compareAll(element.tagName, "==", ["P", "H1", "H2", "H3", "H4", "H5", "H6", "SPAN"], "||")) {
         if (element.innerHTML != "") {
-            element.innerHTML.trim().forEach(function(character, index) {
+            var characters = [];
+            element.innerHTML.trim().split("").forEach(function(character, index) {
+                var tag = document.createElement(element.tagName)
                 var number = index;
                 var intermediate1 = [],
                     intermediate2 = [],
@@ -209,8 +211,13 @@ function colorCode(element, end1, end2, color1, color2) {
                 var red = intermediate1[0]+intermediate2[0]<=255 ? intermediate1[0]+intermediate2[0] : 255,
                     green = intermediate1[1]+intermediate2[1]<=255 ? intermediate1[1]+intermediate2[1] : 255,
                     blue = intermediate1[2]+intermediate2[2]<=255 ? intermediate1[2]+intermediate2[2] : 255;
-                character.style.color = "rgb(" + red + ", " + green + ", " + blue + ")";
+                tag.style.color = "rgb(" + red + ", " + green + ", " + blue + ")";
+                characters.push(tag);
             });
+            characters.forEach(function(tag) {
+                element.parentNode.insertBefore(tag, element);
+            });
+            element.parentNode.removeChild(element);
         }
     }
 }
