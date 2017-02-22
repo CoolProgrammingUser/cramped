@@ -6,7 +6,7 @@
             window.addEventListener("load", function() {
                 pageJump("experiments");
                 colorCode(document.getElementById("table1"), 0, 27);
-                colorCode(document.getElementById("title2"), 0, document.getElementById("title2").innerHTML.trim().length);
+                colorCode(document.getElementById("title2"), 0, document.getElementById("title2").innerHTML.trim().length, [255,0,0], [0,0,255]);
             });
         </script>
     </head>
@@ -78,9 +78,11 @@
                 </li>
             </ul>
             <br>
+            <br>
             <h3 id="title2">
                 Unique People who Talked to Me per Day
             </h3>
+            <br>
             <table id="table1">
                 <tr>
                     <th rowspan="2">
