@@ -6,7 +6,7 @@
             window.addEventListener("load", function() {
                 pageJump("experiments");
                 colorCode(document.getElementById("table1"), 0, 27);
-                colorCode(document.getElementById("title2"), 0, document.getElementById("title2").length);
+                colorCode(document.getElementById("title2"), 0, document.getElementById("title2").innerHTML.length);
             });
         </script>
     </head>
@@ -77,6 +77,7 @@
                     Bus and lunch = 17.75:13.458<over>3</over> &rarr; 4.375:3.36458<over>3</over>
                 </li>
             </ul>
+            <br>
             <h3 id="title2">
                 Unique People who Talked to Me per Day
             </h3>
