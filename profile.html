@@ -13,6 +13,10 @@
             window.addEventListener("load", function() {
                 update();
                 setInterval(update, 1000);
+                colorCode(document.getElementById("hairColor"), null, null, [250, 0, 0], [250, 230, 0]);
+                colorCode(document.getElementById("eyeColor"), null, null, [0, 200, 100], [0, 0, 250]);
+                colorCode(document.getElementById("favorite"), null, null, [250, 0, 0], [0, 250, 0]);
+                colorCode(document.getElementById("color"), null, null, [0, 250, 0], [0, 0, 250]);
             });
         </script>
         <style>
@@ -41,16 +45,16 @@
                 Mass: <a href="https://en.wikipedia.org/wiki/Unified_atomic_mass_unit" target="_blank">3.8521*10<sup>28</sup> Da</a>
             </li>
             <li>
-                Hair color: <a href="https://en.wikipedia.org/wiki/Web_colors" target="_blank">#553214</a>
+                <span id="hairColor">Hair color</span>: <a href="https://en.wikipedia.org/wiki/Web_colors" target="_blank">#553214</a>
             </li>
             <li>
-                Eye color: <a href="https://en.wikipedia.org/wiki/Visible_spectrum" target="_blank">485 nm</a>
+                <span id="eyeColor">Eye color</span>: <a href="https://en.wikipedia.org/wiki/Visible_spectrum" target="_blank">485 nm</a>
             </li>
             <li>
                 Number of limbs: <a href="https://en.wikipedia.org/wiki/Binary_number" target="_blank">100</a>
             </li>
             <li>
-                Favorite color: <a href="https://en.wikipedia.org/wiki/Undefined_behavior" target="_blank">undefined</a>
+                <span id="favorite">Favorite</span> <span id="color">color</span>: <a href="https://en.wikipedia.org/wiki/Undefined_behavior" target="_blank">undefined</a>
             </li>
             <li>
                 Favorite animal: <a href="https://en.wikipedia.org/wiki/Cuttlefish" target="_blank">cuttlefish</a>
