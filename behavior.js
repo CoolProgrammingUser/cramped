@@ -161,12 +161,12 @@ function pageJump(ID) {
     }
 }
 
-function colorCode(element, end1, end2, colors) {
+function colorCode(element, end1, end2) {
     /**
     color codes an element (likely a table)
     end1 and end2 specify the ends of a range (not used for strings)
-    colors is an optional color specification
-    colors is an indefinite number of 3-item arrays listed as arguments
+    colors specifications can be added after all of the arguments
+    colors are an indefinite number of 3-item arrays listed as arguments
     (items are integers from 0 to 255)
     e.g. colorCode(element, end1, end2, [12,23,34], [45,56,67], [78,89,90]);
     default colors = red and green
@@ -181,14 +181,18 @@ function colorCode(element, end1, end2, colors) {
         element.getElementsByTagName("td").forEach(function(data) {
             if (!isNaN(data.innerHTML.trim()) && data.innerHTML.trim()!="") {
                 var number = Number(data.innerHTML.trim());
-                var intermediate1 = [],
+                var endIndex = 1,
+                    intermediate1 = [],
                     intermediate2 = [],
                     colorValue;
-                colors[0].forEach(function(color) {
+                while (number > ends[endIndex]) {
+                    endIndex++;
+                }
+                colors[endIndex-1].forEach(function(color) {
                     colorValue = Math.round(Math.abs(number-end2)/(end2-end1)*color*2);
                     intermediate1.push(colorValue<=color ? colorValue : color);
                 });
-                colors[1].forEach(function(color) {
+                colors[endIndex].forEach(function(color) {
                     colorValue = Math.round(Math.abs(number-end1)/(end2-end1)*color*2);
                     intermediate2.push(colorValue<=color ? colorValue : color);
                 });
