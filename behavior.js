@@ -161,15 +161,21 @@ function pageJump(ID) {
     }
 }
 
-function colorCode(element, end1, end2, color1, color2) {
+function colorCode(element, end1, end2, colors) {
     /**
     color codes an element (likely a table)
     end1 and end2 specify the ends of a range (not used for strings)
-    color1 and color2 are optional color specifications
+    colors is an optional color specification
+    colors is an indefinite number of 3-item arrays listed as arguments
+    (items are integers from 0 to 255)
+    e.g. colorCode(element, end1, end2, [12,23,34], [45,56,67], [78,89,90]);
     default colors = red and green
     */
-    var color1 = color1 || [255, 0, 0],
-        color2 = color2 || [0, 255, 0];
+    var colors = arguments.slice(3).length>0 ? arguments.slice(3) : [[255, 0, 0],[0, 255, 0]];  // Are there colors specified?
+    var ends = [end1];
+    colors.forEach(function(color, index, colors) {
+        ends.push(end1+(end2-end1)*(index+1)/colors.length);
+    });
     if (element.tagName == "TABLE") {
         element.getElementsByTagName("td").forEach(function(data) {
             if (!isNaN(data.innerHTML.trim()) && data.innerHTML.trim()!="") {
@@ -177,11 +183,11 @@ function colorCode(element, end1, end2, color1, color2) {
                 var intermediate1 = [],
                     intermediate2 = [],
                     colorValue;
-                color1.forEach(function(color) {
+                colors[0].forEach(function(color) {
                     colorValue = Math.round(Math.abs(number-end2)/(end2-end1)*color*2);
                     intermediate1.push(colorValue<=color ? colorValue : color);
                 });
-                color2.forEach(function(color) {
+                colors[1].forEach(function(color) {
                     colorValue = Math.round(Math.abs(number-end1)/(end2-end1)*color*2);
                     intermediate2.push(colorValue<=color ? colorValue : color);
                 });
@@ -195,32 +201,30 @@ function colorCode(element, end1, end2, color1, color2) {
         if (element.innerHTML.trim() != "") {
             end1 = 0;
             end2 = element.innerHTML.trim().length;
-            var characters = [];
+            var replacement = document.createElement(element.tagName);
             element.innerHTML.trim().split("").forEach(function(character, index) {
-                var tag = document.createElement(element.tagName)
-                tag.innerHTML = character;
-                tag.style.display = "inline";
+                var span = document.createElement("span");
+                span.innerHTML = character;
+                span.style.display = "inline";
                 var number = index;
                 var intermediate1 = [],
                     intermediate2 = [],
                     colorValue;
-                color1.forEach(function(color) {
+                colors[0].forEach(function(color) {
                     colorValue = Math.round(Math.abs(number-end2)/(end2-end1)*color*2);
                     intermediate1.push(colorValue<=color ? colorValue : color);
                 });
-                color2.forEach(function(color) {
+                colors[1].forEach(function(color) {
                     colorValue = Math.round(Math.abs(number-end1)/(end2-end1)*color*2);
                     intermediate2.push(colorValue<=color ? colorValue : color);
                 });
                 var red = intermediate1[0]+intermediate2[0]<=255 ? intermediate1[0]+intermediate2[0] : 255,
                     green = intermediate1[1]+intermediate2[1]<=255 ? intermediate1[1]+intermediate2[1] : 255,
                     blue = intermediate1[2]+intermediate2[2]<=255 ? intermediate1[2]+intermediate2[2] : 255;
-                tag.style.color = "rgb(" + red + ", " + green + ", " + blue + ")";
-                characters.push(tag);
+                span.style.color = "rgb(" + red + ", " + green + ", " + blue + ")";
+                replacement.appendChild(span);
             });
-            characters.forEach(function(tag) {
-                element.parentNode.insertBefore(tag, element);
-            });
+            element.parentNode.insertBefore(replacement, element);
             element.parentNode.removeChild(element);
         }
     }
