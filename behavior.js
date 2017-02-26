@@ -70,6 +70,7 @@ var Sound = function(specs) {
         }, time*1000);
     };
 };
+
 HTMLCollection.prototype.forEach = function(doStuff) {
     /**
     HTMLCollection elements = stuff like the list in document.getElementsByClassName() or document.getElementsByTagName()
