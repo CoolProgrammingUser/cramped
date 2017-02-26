@@ -212,15 +212,19 @@ function colorCode(element, end1, end2) {
                 span.innerHTML = character;
                 span.style.display = "inline";
                 var number = index;
-                var intermediate1 = [],
+                var endIndex = 1,
+                    intermediate1 = [],
                     intermediate2 = [],
                     colorValue;
-                colors[0].forEach(function(color) {
-                    colorValue = Math.round(Math.abs(number-end2)/(end2-end1)*color*2);
+                while (number > ends[endIndex]) {
+                    endIndex++;
+                }
+                colors[endIndex-1].forEach(function(color) {
+                    colorValue = Math.round(Math.abs(number-ends[endIndex])/(ends[endIndex]-ends[endIndex-1])*color*2);
                     intermediate1.push(colorValue<=color ? colorValue : color);
                 });
-                colors[1].forEach(function(color) {
-                    colorValue = Math.round(Math.abs(number-end1)/(end2-end1)*color*2);
+                colors[endIndex].forEach(function(color) {
+                    colorValue = Math.round(Math.abs(number-ends[endIndex-1])/(ends[endIndex]-ends[endIndex-1])*color*2);
                     intermediate2.push(colorValue<=color ? colorValue : color);
                 });
                 var red = intermediate1[0]+intermediate2[0]<=255 ? intermediate1[0]+intermediate2[0] : 255,
