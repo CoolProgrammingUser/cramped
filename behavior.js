@@ -175,9 +175,8 @@ function colorCode(element, end1, end2) {
     var colors = args.length>0 ? args : [[255, 0, 0],[0, 255, 0]];  // Are there colors specified?
     var ends = [end1];
     colors.forEach(function(color, index, colors) {
-        ends.push(end1+(end2-end1)*(index+1)/colors.length);
+        ends.push(end1+(end2-end1)*(index+2)/colors.length);
     });
-    alert(ends);
     if (element.tagName == "TABLE") {
         element.getElementsByTagName("td").forEach(function(data) {
             if (!isNaN(data.innerHTML.trim()) && data.innerHTML.trim()!="") {
