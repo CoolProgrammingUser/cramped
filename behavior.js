@@ -189,11 +189,11 @@ function colorCode(element, end1, end2) {
                     endIndex++;
                 }
                 colors[endIndex-1].forEach(function(color) {
-                    colorValue = Math.round(Math.abs(number-end2)/(end2-end1)*color*2);
+                    colorValue = Math.round(Math.abs(number-ends[endIndex])/(ends[endIndex]-ends[endIndex-1])*color*2);
                     intermediate1.push(colorValue<=color ? colorValue : color);
                 });
                 colors[endIndex].forEach(function(color) {
-                    colorValue = Math.round(Math.abs(number-end1)/(end2-end1)*color*2);
+                    colorValue = Math.round(Math.abs(number-ends[endIndex-1])/(ends[endIndex]-ends[endIndex-1])*color*2);
                     intermediate2.push(colorValue<=color ? colorValue : color);
                 });
                 var red = intermediate1[0]+intermediate2[0]<=255 ? intermediate1[0]+intermediate2[0] : 255,
