@@ -171,12 +171,16 @@ function colorCode(element, end1, end2) {
     e.g. colorCode(element, end1, end2, [12,23,34], [45,56,67], [78,89,90]);
     default colors = red and green
     */
+    alert(arguments);
     var args = Array.prototype.slice.call(arguments, 3);
+    alert(args);
     var colors = args.length>0 ? args : [[255, 0, 0],[0, 255, 0]];  // Are there colors specified?
+    alert(colors);
     var ends = [end1];
     colors.forEach(function(color, index, colors) {
         ends.push(end1+(end2-end1)*(index+1)/colors.length);
     });
+    alert(colors);
     if (element.tagName == "TABLE") {
         element.getElementsByTagName("td").forEach(function(data) {
             if (!isNaN(data.innerHTML.trim()) && data.innerHTML.trim()!="") {
@@ -188,7 +192,6 @@ function colorCode(element, end1, end2) {
                 while (number > ends[endIndex]) {
                     endIndex++;
                 }
-                alert(colors + "\n\n" + endIndex);
                 colors[endIndex-1].forEach(function(color) {
                     colorValue = Math.round(Math.abs(number-end2)/(end2-end1)*color*2);
                     intermediate1.push(colorValue<=color ? colorValue : color);
