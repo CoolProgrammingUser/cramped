@@ -173,13 +173,13 @@ function colorCode(element, end1, end2) {
     */
     var args = Array.prototype.slice.call(arguments, 3);
     var colors = args.length>0 ? args : [[255, 0, 0],[0, 255, 0]];  // Are there colors specified?
-    var ends = [end1];
-    colors.forEach(function(color, index, colors) {
-        ends.push(end1+(end2-end1)*(index+2)/colors.length);
-    });
     if (element.tagName == "TABLE") {
         element.getElementsByTagName("td").forEach(function(data) {
             if (!isNaN(data.innerHTML.trim()) && data.innerHTML.trim()!="") {
+                var ends = [end1];
+                colors.forEach(function(color, index, colors) {
+                    ends.push(end1+(end2-end1)*(index+2)/colors.length);
+                });
                 var number = Number(data.innerHTML.trim());
                 var endIndex = 1,
                     intermediate1 = [],
@@ -206,6 +206,10 @@ function colorCode(element, end1, end2) {
         if (element.innerHTML.trim() != "") {
             end1 = 0;
             end2 = element.innerHTML.trim().length;
+            var ends = [end1];
+            colors.forEach(function(color, index, colors) {
+                ends.push(end1+(end2-end1)*(index+2)/colors.length);
+            });
             var replacement = document.createElement(element.tagName);
             element.innerHTML.trim().split("").forEach(function(character, index) {
                 var span = document.createElement("span");
