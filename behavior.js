@@ -188,6 +188,7 @@ function colorCode(element, end1, end2) {
                 while (number > ends[endIndex]) {
                     endIndex++;
                 }
+                alert(colors + "\n\n" + endIndex);
                 colors[endIndex-1].forEach(function(color) {
                     colorValue = Math.round(Math.abs(number-end2)/(end2-end1)*color*2);
                     intermediate1.push(colorValue<=color ? colorValue : color);
