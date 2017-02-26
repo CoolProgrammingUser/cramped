@@ -171,16 +171,13 @@ function colorCode(element, end1, end2) {
     e.g. colorCode(element, end1, end2, [12,23,34], [45,56,67], [78,89,90]);
     default colors = red and green
     */
-    alert(arguments);
     var args = Array.prototype.slice.call(arguments, 3);
-    alert(args);
     var colors = args.length>0 ? args : [[255, 0, 0],[0, 255, 0]];  // Are there colors specified?
-    alert(colors);
     var ends = [end1];
     colors.forEach(function(color, index, colors) {
         ends.push(end1+(end2-end1)*(index+1)/colors.length);
     });
-    alert(colors);
+    alert(ends);
     if (element.tagName == "TABLE") {
         element.getElementsByTagName("td").forEach(function(data) {
             if (!isNaN(data.innerHTML.trim()) && data.innerHTML.trim()!="") {
