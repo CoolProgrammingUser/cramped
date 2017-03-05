@@ -55,10 +55,9 @@ var Sound = function(specs) {
         sound[property] = value;
         setValues(time);
     };
-    this.song = function(noteString, noteLength) { // plays a song based on notes you put in a string
+    this.play = function(noteString, noteLength) { // plays a song based on notes you put in a string
         noteLength = noteLength || 200;
-        play();
-        function play(index, note) {
+        function play(index) {
             index = index || 0;
             if (index < noteString.length) {
                 if (noteString[index].match(/[a-z]/i)) {
@@ -98,6 +97,7 @@ var Sound = function(specs) {
                 }
             }
         }
+        play();
     };
     this.stop = function(time) {  // stops/mutes the tone
         time = time || 0;
@@ -174,7 +174,7 @@ String.prototype.forEach = function(doStuff) {
     }
 }
 
-function compareAll(item, comparator, comparisons, type) {
+function checkAll(item, comparator, comparisons, type) {
     /**
     compares a given item to all items in an array
     comparator = how the items are being compared e.g. "==", ">", etc.
@@ -325,7 +325,7 @@ function colorCode(element, end1, end2) {
                 data.style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
             }
         });
-    } else if (compareAll(element.tagName, "==", ["P", "H1", "H2", "H3", "H4", "H5", "H6", "SPAN"], "||")) {
+    } else if (checkAll(element.tagName, "==", ["P", "H1", "H2", "H3", "H4", "H5", "H6", "SPAN"], "||")) {
         if (element.innerHTML.trim() != "") {
             end1 = 0;
             end2 = element.innerHTML.trim().length;
