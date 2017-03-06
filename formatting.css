@@ -83,6 +83,12 @@ over {  /* my custom tag (overlines things) */
     padding: 0em;
     text-decoration: overline;
 }
+h1 {
+    display: none;
+}
+h1.mainTitle {
+    display: block;
+}
 div.nav {
     position: fixed;
     left: 0em;
