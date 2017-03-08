@@ -33,24 +33,24 @@
                 var paragraph = document.createElement("p");
                 paragraph.id = timeNumber;
                 timeNumber++;
-                paragraph["data-label"] = label;
-                paragraph["data-date"] = date;
+                paragraph.setAttribute("label", label);
+                paragraph.setAttribute("date", date);
                 document.getElementById("loser").parentNode.insertBefore(paragraph, document.getElementById("loser"));
             }
             function refresh() {
                 for (var number=1; number<timeNumber; number++) {
                     var element = document.getElementById(number);
                     var now = new Date();
-                    console.log(timeNumber + " -- " + number + "\n" + element + "\n" + element.dataLabel + "\n" + element.dataDate);
-                    if (element.dataDate.split(" ").length >= 3) {
-                        var then = new Date(element.dataDate);
+                    console.log(timeNumber + " -- " + number + "\n" + element + "\n" + element.label + "\n" + element.date);
+                    if (element.date.split(" ").length >= 3) {
+                        var then = new Date(element.date);
                     } else {
                         // when dates are only given in a month and day (meant to be annual)
                         // doesn't work if times are specified
-                        if (now.getTime() <= new Date(element.dataDate+", "+now.getFullYear()).getTime()) {
-                            var then = new Date(element.dataDate+", "+now.getFullYear());
+                        if (now.getTime() <= new Date(element.date+", "+now.getFullYear()).getTime()) {
+                            var then = new Date(element.date+", "+now.getFullYear());
                         } else {
-                            var then = new Date(element.dataDate+", "+(now.getFullYear()+1));
+                            var then = new Date(element.date+", "+(now.getFullYear()+1));
                         }
                     }
                     var time = "";
@@ -111,7 +111,7 @@
                         }
                         time = seconds + " seconds";
                     }
-                    element.innerHTML = element.dataLabel + ": " + time;
+                    element.innerHTML = element.label + ": " + time;
                 }
             }
         </script>
