@@ -19,6 +19,7 @@
                 colorCode(document.getElementById("favoriteColor"), null, null, [250, 0, 0], [0, 240, 0], [0, 0, 250]);
                 getID("morseCode").addEventListener("mouseover", function() {
                     if (!playing) {
+                        console.log("working");
                         playing = true;
                         sound.play("a4-- a4--   a4-- a4-- a4--   a4 a4-- a4   a4 a4 a4   a4       a4-- a4 a4-- a4   a4-- a4-- a4--   a4-- a4 a4   a4", {"volume":.2, "attack":1, "noteLength":50, "decay":1}, function() {
                             playing = false;
