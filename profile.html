@@ -17,7 +17,7 @@
                 setInterval(update, 1000);
                 colorCode(document.getElementById("eyeColor"), null, null, [0, 200, 50], [0, 50, 250]);
                 colorCode(document.getElementById("favoriteColor"), null, null, [250, 0, 0], [0, 240, 0], [0, 0, 250]);
-                document.getElementById("morseCode").addEventListener("mouseenter", function() {
+                document.getElementById("information").addEventListener("mouseenter", function() {
                     console.log(playing);
                     if (!playing) {
                         playing = true;
@@ -74,7 +74,7 @@
             <li>
                 Favorite drink: <a href="http://www.dhmo.org/" target="_blank">dihydrogen monoxide</a> <a href="https://en.wikipedia.org/wiki/Dihydrogen_monoxide_hoax" target="_blank">(I guess you can click here too)</a>
             </li>
-            <li id="morseCode">
+            <li>
                 Favorite sound: <a href="https://en.wikipedia.org/wiki/Morse_code" target="_blank">&ndash; &ndash;&ensp; &ndash; &ndash; &ndash;&ensp; &bull; &ndash; &bull;&ensp; &bull; &bull; &bull;&ensp; &bull; &emsp; &ndash; &bull; &ndash; &bull;&ensp; &ndash; &ndash; &ndash;&ensp; &ndash; &bull; &bull;&ensp; &bull;</a>
             </li>  <!-- &nbsp; = 1 space, &ensp; = 2 spaces, and &emsp; = 4 spaces -->
             <li>
