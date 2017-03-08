@@ -33,15 +33,14 @@
                 var paragraph = document.createElement("p");
                 paragraph.id = timeNumber;
                 timeNumber++;
-                paragraph.setAttribute("label", label);
-                paragraph.setAttribute("date", date);
+                paragraph.label = label;
+                paragraph.date = date;
                 document.getElementById("loser").parentNode.insertBefore(paragraph, document.getElementById("loser"));
             }
             function refresh() {
                 for (var number=1; number<timeNumber; number++) {
                     var element = document.getElementById(number);
                     var now = new Date();
-                    console.log(timeNumber + " -- " + number + "\n" + element + "\n" + element.label + "\n" + element.date);
                     if (element.date.split(" ").length >= 3) {
                         var then = new Date(element.date);
                     } else {
@@ -121,7 +120,7 @@
             Countdowns
         </h1>
         <p>
-            Note: The loser time is largely incorrect for now.
+            Note: The loser time is largely incorrect for now. Also, the seconds don't seem to want to update automatically anymore even though I didn't do anything to them.
         </p>
         <h2>
             Time until...
