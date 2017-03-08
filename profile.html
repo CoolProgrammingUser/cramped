@@ -18,8 +18,8 @@
                 colorCode(document.getElementById("eyeColor"), null, null, [0, 200, 50], [0, 50, 250]);
                 colorCode(document.getElementById("favoriteColor"), null, null, [250, 0, 0], [0, 240, 0], [0, 0, 250]);
                 getID("morseCode").addEventListener("mouseover", function() {
+                    console.log(playing);
                     if (!playing) {
-                        console.log("working");
                         playing = true;
                         sound.play("a4-- a4--   a4-- a4-- a4--   a4 a4-- a4   a4 a4 a4   a4       a4-- a4 a4-- a4   a4-- a4-- a4--   a4-- a4 a4   a4", {"volume":.2, "attack":1, "noteLength":50, "decay":1}, function() {
                             playing = false;
