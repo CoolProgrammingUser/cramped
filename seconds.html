@@ -38,7 +38,10 @@
                 document.getElementById("loser").parentNode.insertBefore(paragraph, document.getElementById("loser"));
             }
             function refresh() {
+                console.log(getID(1).date + "\n----");
                 for (var number=1; number<timeNumber; number++) {
+                    console.log(getID(1).date);
+                    console.log(getID(number).date);
                     var element = document.getElementById(number);
                     var now = new Date();
                     console.log(timeNumber + " -- " + number + "\n" + element + "\n" + element.date);
@@ -113,7 +116,7 @@
                     }
                     element.innerHTML = element.label + ": " + time;
                 }
-                console.log(getID(1).date);
+                console.log("----\n" + getID(1).date);
             }
         </script>
     </head>
