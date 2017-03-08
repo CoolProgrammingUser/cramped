@@ -33,28 +33,24 @@
                 var paragraph = document.createElement("p");
                 paragraph.id = timeNumber;
                 timeNumber++;
-                paragraph.label = label;
-                paragraph.date = date;
+                paragraph.dataLabel = label;
+                paragraph.dataDate = date;
                 document.getElementById("loser").parentNode.insertBefore(paragraph, document.getElementById("loser"));
             }
             function refresh() {
-                console.log(getID(1).date + "\n--------");
                 for (var number=1; number<timeNumber; number++) {
-                    console.log(getID(1).date);
-                    console.log(getID(number).date);
                     var element = document.getElementById(number);
-                    element.style.color = (element.style.color=="red") ? "black" : "red";
                     var now = new Date();
-                    console.log(timeNumber + " -- " + number + "\n" + element + "\n" + element.label + "\n" + element.date);
-                    if (element.date.split(" ").length >= 3) {
-                        var then = new Date(element.date);
+                    console.log(timeNumber + " -- " + number + "\n" + element + "\n" + element.dataLabel + "\n" + element.dataDate);
+                    if (element.dataDate.split(" ").length >= 3) {
+                        var then = new Date(element.dataDate);
                     } else {
                         // when dates are only given in a month and day (meant to be annual)
                         // doesn't work if times are specified
-                        if (now.getTime() <= new Date(element.date+", "+now.getFullYear()).getTime()) {
-                            var then = new Date(element.date+", "+now.getFullYear());
+                        if (now.getTime() <= new Date(element.dataDate+", "+now.getFullYear()).getTime()) {
+                            var then = new Date(element.dataDate+", "+now.getFullYear());
                         } else {
-                            var then = new Date(element.date+", "+(now.getFullYear()+1));
+                            var then = new Date(element.dataDate+", "+(now.getFullYear()+1));
                         }
                     }
                     var time = "";
@@ -115,10 +111,8 @@
                         }
                         time = seconds + " seconds";
                     }
-                    element.innerHTML = element.label + ": " + time;
-                    console.log("////////");
+                    element.innerHTML = element.dataLabel + ": " + time;
                 }
-                console.log("********\n" + getID(1).date);
             }
         </script>
     </head>
