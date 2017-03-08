@@ -43,6 +43,7 @@
                     console.log(getID(1).date);
                     console.log(getID(number).date);
                     var element = document.getElementById(number);
+                    element.style.color = (element.style.color=="red") ? "black" : "red";
                     var now = new Date();
                     console.log(timeNumber + " -- " + number + "\n" + element + "\n" + element.date);
                     if (element.date.split(" ").length >= 3) {
