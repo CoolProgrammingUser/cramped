@@ -2,7 +2,7 @@
 var options = {
     "formatting" : "formatting.css",
     "icon" : "images/favicon.ico",
-    "title" : "~document.getElementsByTagName('h1')[0].innerHTML",
+    "title" : "none",  // "~document.getElementsByTagName('h1')[0].innerHTML",
     "navigation" : "navigation.html"
 };
 
