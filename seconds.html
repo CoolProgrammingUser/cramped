@@ -3,6 +3,7 @@
     <head>
         <script src="behavior.js"></script>
         <script>
+            options.section = "none";
             var timeNumber = 1;
             window.addEventListener("load", function() {
                 makeCountdown("I'm accepted to MIT", "May 10, 2017");
@@ -14,7 +15,6 @@
                 makeCountdown("next year", "January 1");
                 refresh();
                 setInterval(refresh, 1000);
-                alert("This is the stage of loading.");
             });
             function calculate() {
                 var label = document.getElementById("label").value;
