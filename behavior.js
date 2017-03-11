@@ -45,8 +45,8 @@ window.addEventListener("finished", function() {
     });
     setInterval(function() {
         faceArray.forEach(function(face, index) {
-            face.style.left = (cursor.x-face.style.left)/(index*10);
-            face.style.top = (cursor.y-face.style.top)/(index*10);
+            face.style.left = (cursor.x-face.style.left)/(index*10) + "px";
+            face.style.top = (cursor.y-face.style.top)/(index*10) + "px";
         });
     }, 20);
 });
