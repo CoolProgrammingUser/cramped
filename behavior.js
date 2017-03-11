@@ -32,7 +32,7 @@ window.addEventListener("finished", function() {
     faceArray.forEach(function(face) {
         face.style.width = "2em";
         face.style.height = "2em";
-        face.style.backgroundImage = "url(images/Me in a Nutshell.png)";
+        face.style.backgroundImage = "url('images/Me in a Nutshell.png')";
         face.style.backgroundSize = "cover";
         face.style.position = "absolute";
         face.style.left = "-20";
