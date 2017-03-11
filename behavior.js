@@ -10,7 +10,7 @@ var options = {
     // adds my standard script
     var script = document.createElement("script");
     script.src = "https://coolprogramminguser.github.io/Standards/behavior.js";
-    document.head.insertBefore(script, document.head.childNodes[0]);
+    document.head.insertBefore(script, document.head.getElementsByTagName("script")[0].nextSibling);
 })();  // This is in a function, so I can use the variable "script" later if I want.
 
 // makes the title of all the pages "Cramped"
