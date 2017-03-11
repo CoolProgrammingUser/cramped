@@ -4,18 +4,16 @@
         <script src="behavior.js"></script>
         <script>
             var timeNumber = 1;
-            window.addEventListener("load", function() {
-                setTimeout(function() {
-                    makeCountdown("I'm accepted to MIT", "May 10, 2017");
-                    makeCountdown("Valentine's Day", "February 14");
-                    makeCountdown("my birthday", "March 11");
-                    makeCountdown("the Fourth of July", "July 4");
-                    makeCountdown("Halloween", "October 31");
-                    makeCountdown("Christmas", "December 25");
-                    makeCountdown("next year", "January 1");
-                    refresh();
-                    setInterval(refresh, 1000);
-                }, 100);
+            window.addEventListener("finished", function() {
+                makeCountdown("I'm accepted to MIT", "May 10, 2017");
+                makeCountdown("Valentine's Day", "February 14");
+                makeCountdown("my birthday", "March 11");
+                makeCountdown("the Fourth of July", "July 4");
+                makeCountdown("Halloween", "October 31");
+                makeCountdown("Christmas", "December 25");
+                makeCountdown("next year", "January 1");
+                refresh();
+                setInterval(refresh, 1000);
             });
             function calculate() {
                 var label = document.getElementById("label").value;
