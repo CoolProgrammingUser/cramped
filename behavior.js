@@ -30,13 +30,13 @@ window.addEventListener("finished", function() {
         document.createElement("div")
         ];
     faceArray.forEach(function(face) {
-        face.style.width = "2em";
-        face.style.height = "2em";
+        face.style.width = "25px";
+        face.style.height = "25px";
         face.style.backgroundImage = "url('images/Me in a Nutshell.png')";
         face.style.backgroundSize = "cover";
         face.style.position = "absolute";
-        face.style.left = "-20";
-        face.style.top = "-20";
+        face.style.left = "-20px";
+        face.style.top = "-20px";
         document.body.appendChild(face);
     });
     document.addEventListener("mousemove", function(event) {
@@ -45,8 +45,8 @@ window.addEventListener("finished", function() {
     });
     setInterval(function() {
         faceArray.forEach(function(face, index) {
-            face.style.left = cursor.x + 40 + "px";  // (Number(cursor.x)-10-Number(face.style.left))/(index*10) + "px";
-            face.style.top = cursor.y + 40 + "px";  // (Number(cursor.y)-10-Number(face.style.top))/(index*10) + "px";
+            face.style.left = cursor.x + 20 + "px";  // (Number(cursor.x)-10-Number(face.style.left))/(index*10) + "px";
+            face.style.top = cursor.y + 20 + "px";  // (Number(cursor.y)-10-Number(face.style.top))/(index*10) + "px";
         });
     }, 20);
 });
