@@ -11,6 +11,7 @@
                 document.getElementById("age").innerHTML = seconds + " seconds";
             }
             window.addEventListener("load", function() {
+                alert("This is what has loaded.");
                 setTimeout(function() {
                     var sound = new Sound({"waveform":"square"});
                     var playing = false;
