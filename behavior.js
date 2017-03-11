@@ -20,7 +20,7 @@ document.getElementsByTagName("title")[0].innerHTML = "Cramped";
 //holds the cursor position
 var cursor = {"x":"-20", "y":"-20"};
 
-window.addEventListener("load", function() {
+window.addEventListener("finished", function() {
     // makes a bunch of my faces follow the cursor
     var faceArray = [
         document.createElement("div"),
