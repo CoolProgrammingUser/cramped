@@ -3,6 +3,8 @@
     <head>
         <script src="behavior.js"></script>
         <script>
+            var sound = new Sound({"waveform":"square"});
+            var playing = false;
             function update() {
                 var seconds = String(Math.round((new Date().getTime() - new Date("March 11, 1998 4:00").getTime())/1000));
                 for (var index=3; index<seconds.length; index+=4) {
@@ -11,23 +13,18 @@
                 document.getElementById("age").innerHTML = seconds + " seconds";
             }
             window.addEventListener("load", function() {
-                alert("This is what has loaded.");
-                setTimeout(function() {
-                    var sound = new Sound({"waveform":"square"});
-                    var playing = false;
-                    update();
-                    setInterval(update, 1000);
-                    colorCode(document.getElementById("eyeColor"), null, null, [0, 200, 50], [0, 50, 250]);
-                    colorCode(document.getElementById("favoriteColor"), null, null, [250, 0, 0], [0, 240, 0], [0, 0, 250]);
-                    document.getElementById("morseCode").addEventListener("mouseenter", function() {
-                        if (!playing) {
-                            playing = true;
-                            sound.play("a4-- a4--   a4-- a4-- a4--   a4 a4-- a4   a4 a4 a4   a4       a4-- a4 a4-- a4   a4-- a4-- a4--   a4-- a4 a4   a4", {"volume":.2, "attack":1, "noteLength":50, "decay":1}, function() {
-                                playing = false;
-                            });
-                        }
-                    });
-                }, 100);
+                update();
+                setInterval(update, 1000);
+                colorCode(document.getElementById("eyeColor"), null, null, [0, 200, 50], [0, 50, 250]);
+                colorCode(document.getElementById("favoriteColor"), null, null, [250, 0, 0], [0, 240, 0], [0, 0, 250]);
+                document.getElementById("morseCode").addEventListener("mouseenter", function() {
+                    if (!playing) {
+                        playing = true;
+                        sound.play("a4-- a4--   a4-- a4-- a4--   a4 a4-- a4   a4 a4 a4   a4       a4-- a4 a4-- a4   a4-- a4-- a4--   a4-- a4 a4   a4", {"volume":.2, "attack":1, "noteLength":50, "decay":1}, function() {
+                            playing = false;
+                        });
+                    }
+                });
             });
         </script>
         <style>
