@@ -37,7 +37,7 @@ window.addEventListener("load", function() {
         face.style.position = "absolute";
         face.style.left = "-20";
         face.style.top = "-20";
-        document.appendChild(face);
+        document.body.appendChild(face);
     });
     document.addEventListener("mousemove", function(event) {
         cursor.x = event.pageX;
