@@ -4,7 +4,7 @@
         <script src="behavior.js"></script>
         <script>
             function update() {
-                var seconds = String(Math.round((new Date().getTime() - new Date("March 11, 1998 4:00 GMT-0600").getTime())/1000));
+                var seconds = String(Math.round((new Date().getTime() - new Date("March 11, 1998 4:00 GMT-0600").getTime())/1000));  // timezones and daylight saving time can mess you up; use GMT offsets and .getTimezoneOffset() (for DST checking) to fix it (.getTimezoneOffset() not needed here)
                 for (var index=3; index<seconds.length; index+=4) {
                     seconds = seconds.slice(0, -index) + "," + seconds.slice(-index);
                 }
