@@ -72,15 +72,15 @@ window.addEventListener("finished", function() {
                         }
                     }
                 } else {
-                    if (Math.abs(Number(face.style.left.slice(0,-2))-(Number(cursor.x.slice(0,-2))+15)) > 30) {
-                        if (Number(face.style.left.slice(0,-2))-(Number(cursor.x.slice(0,-2))+15) < 0) {
+                    if (Math.abs(Number(face.style.left.slice(0,-2))-(cursor.x+15) > 30) {
+                        if (Number(face.style.left.slice(0,-2))-(cursor.x+15) < 0) {
                             face.style.left = Number(face.style.left.slice(0,-2))+1 + "px";
                         } else {
                             face.style.left = Number(face.style.left.slice(0,-2))-1 + "px";
                         }
                     }
-                    if (Math.abs(Number(face.style.top.slice(0,-2))-(Number(cursor.y.slice(0,-2))+15)) > 30) {
-                        if (Number(face.style.top.slice(0,-2))-(Number(cursor.y.slice(0,-2))+15) < 0) {
+                    if (Math.abs(Number(face.style.top.slice(0,-2))-(cursor.y+15) > 30) {
+                        if (Number(face.style.top.slice(0,-2))-(cursor.y+15) < 0) {
                             face.style.top = Number(face.style.top.slice(0,-2))+1 + "px";
                         } else {
                             face.style.top = Number(face.style.top.slice(0,-2))-1 + "px";
