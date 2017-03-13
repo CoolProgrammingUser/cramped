@@ -18,7 +18,7 @@ document.head.insertBefore(document.createElement("title"), document.head.childN
 document.getElementsByTagName("title")[0].innerHTML = "Cramped";
 
 //holds the cursor position
-var cursor = {"x":"-20", "y":"-20"};
+var cursor = {"moving":false, "x":"-20", "y":"-20"};
 
 window.addEventListener("finished", function() {
     // makes a bunch of my faces follow the cursor
@@ -35,18 +35,59 @@ window.addEventListener("finished", function() {
         face.style.backgroundImage = "url('images/Me in a Nutshell.png')";
         face.style.backgroundSize = "cover";
         face.style.position = "absolute";
-        face.style.left = "-20px";
-        face.style.top = "-20px";
+        face.style.left = "-"+face.style.width;
+        face.style.top = "-"+face.style.height;
         document.body.appendChild(face);
     });
     document.addEventListener("mousemove", function(event) {
-        cursor.x = event.pageX;
-        cursor.y = event.pageY;
+        var coords = [event.pageX, event.pageY];
+        cursor.moving = true;
+        cursor.x = coords[0];
+        cursor.y = coords[1];
+        setTimeout(function() {
+            if (coords[0]==cursor.x && coords[1]==cursor.y) {  // if the cursor is in the same place as it was 100 milliseconds ago
+                cursor.moving = false;
+            }
+        }, 100);
     });
     setInterval(function() {
-        faceArray.forEach(function(face, index) {
-            face.style.left = cursor.x + 15 + "px";  // (Number(cursor.x)-10-Number(face.style.left))/(index*10) + "px";
-            face.style.top = cursor.y + 15 + "px";  // (Number(cursor.y)-10-Number(face.style.top))/(index*10) + "px";
+        faceArray.forEach(function(face, index, faces) {
+            if (index == 0) {
+                face.style.left = cursor.x + 15 + "px";  // (Number(cursor.x)-10-Number(face.style.left))/(index*10) + "px";
+                face.style.top = cursor.y + 15 + "px";  // (Number(cursor.y)-10-Number(face.style.top))/(index*10) + "px";
+            } else {
+                if (cursor.moving) {
+                    if (Math.abs(Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2))) > 30) {
+                        if (Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2)) < 0) {
+                            face.style.left = Number(face.style.left.slice(0,-2))+1 + "px";
+                        } else {
+                            face.style.left = Number(face.style.left.slice(0,-2))-1 + "px";
+                        }
+                    }
+                    if (Math.abs(Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2))) > 30) {
+                        if (Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2)) < 0) {
+                            face.style.top = Number(face.style.top.slice(0,-2))+1 + "px";
+                        } else {
+                            face.style.top = Number(face.style.top.slice(0,-2))-1 + "px";
+                        }
+                    }
+                } else {
+                    if (Math.abs(Number(face.style.left.slice(0,-2))-(Number(cursor.x.slice(0,-2))+15)) > 30) {
+                        if (Number(face.style.left.slice(0,-2))-(Number(cursor.x.slice(0,-2))+15) < 0) {
+                            face.style.left = Number(face.style.left.slice(0,-2))+1 + "px";
+                        } else {
+                            face.style.left = Number(face.style.left.slice(0,-2))-1 + "px";
+                        }
+                    }
+                    if (Math.abs(Number(face.style.top.slice(0,-2))-(Number(cursor.y.slice(0,-2))+15)) > 30) {
+                        if (Number(face.style.top.slice(0,-2))-(Number(cursor.y.slice(0,-2))+15) < 0) {
+                            face.style.top = Number(face.style.top.slice(0,-2))+1 + "px";
+                        } else {
+                            face.style.top = Number(face.style.top.slice(0,-2))-1 + "px";
+                        }
+                    }
+                }
+            }
         });
     }, 20);
 });
