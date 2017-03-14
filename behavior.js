@@ -56,7 +56,7 @@ window.addEventListener("finished", function() {
                 face.style.left = cursor.x + 15 + "px";  // (Number(cursor.x)-10-Number(face.style.left))/(index*10) + "px";
                 face.style.top = cursor.y + 15 + "px";  // (Number(cursor.y)-10-Number(face.style.top))/(index*10) + "px";
             } else {
-                var speed = 5  // pixels per 20 milliseconds (only pixels part is used)
+                var speed = 4  // pixels per 20 milliseconds (only pixels part is used)
                 if (cursor.moving) {
                     if (Math.abs(Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2))) > 30) {
                         if (Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2)) > 0) {
@@ -65,10 +65,18 @@ window.addEventListener("finished", function() {
                             face.style.left = Number(faces[index-1].style.left.slice(0,-2)) - 30 + "px";
                         }
                     } else {
-                        if (Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2)) < 0) {
-                            face.style.left = Number(face.style.left.slice(0,-2))+1 + "px";
-                        } else if (Math.round(Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2))) != 0) {
-                            face.style.left = Number(face.style.left.slice(0,-2))-1 + "px";
+                        if (Math.abs(Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2))) > 2*speed) {
+                            if (Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2)) < 0) {
+                                face.style.left = Number(face.style.left.slice(0,-2))+speed + "px";
+                            } else if (Math.round(Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2))) != 0) {
+                                face.style.left = Number(face.style.left.slice(0,-2))-speed + "px";
+                            }
+                        } else {
+                            if (Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2)) < 0) {
+                                face.style.left = Number(face.style.left.slice(0,-2))+1 + "px";
+                            } else if (Math.round(Number(face.style.left.slice(0,-2))-Number(faces[index-1].style.left.slice(0,-2))) != 0) {
+                                face.style.left = Number(face.style.left.slice(0,-2))-1 + "px";
+                            }
                         }
                     }
                     if (Math.abs(Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2))) > 30) {
@@ -78,10 +86,18 @@ window.addEventListener("finished", function() {
                             face.style.top = Number(faces[index-1].style.top.slice(0,-2)) - 30 + "px";
                         }
                     } else {
-                        if (Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2)) < 0) {
-                            face.style.top = Number(face.style.top.slice(0,-2))+1 + "px";
-                        } else if (Math.round(Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2))) != 0) {
-                            face.style.top = Number(face.style.top.slice(0,-2))-1 + "px";
+                        if (Math.abs(Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2))) > 2*speed) {
+                            if (Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2)) < 0) {
+                                face.style.top = Number(face.style.top.slice(0,-2))+speed + "px";
+                            } else if (Math.round(Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2))) != 0) {
+                                face.style.top = Number(face.style.top.slice(0,-2))-speed + "px";
+                            }
+                        } else {
+                            if (Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2)) < 0) {
+                                face.style.top = Number(face.style.top.slice(0,-2))+1 + "px";
+                            } else if (Math.round(Number(face.style.top.slice(0,-2))-Number(faces[index-1].style.top.slice(0,-2))) != 0) {
+                                face.style.top = Number(face.style.top.slice(0,-2))-1 + "px";
+                            }
                         }
                     }
                 } else {
