@@ -50,6 +50,23 @@ window.addEventListener("finished", function() {
             }
         }, 100);
     });
+    var pastPosition = [];
+    faceArray.forEach(function(face) {
+        pastPosition.push([cursor.x+15, cursor.y+15]);
+    });
+    function position (index, timeout) {
+        faceArray[index].style.left = pastPosition[index][0];
+        faceArray[index].style.top = pastPosition[index][1];
+        pastPosition[index][0] = cursor.x + 15;
+        pastPosition[index][1] = cursor.y + 15;
+        setTimeout(function() {
+            position(index, timeout);
+        }, timeout);
+    }
+    pastPosition.forEach(function(face, index) {
+        position(index, (index+.2)*10);
+    });
+    /*
     setInterval(function() {
         faceArray.forEach(function(face, index, faces) {
             if (index == 0) {
@@ -131,4 +148,5 @@ window.addEventListener("finished", function() {
             }
         });
     }, 20);
+    */
 });
