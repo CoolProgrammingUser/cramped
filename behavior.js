@@ -50,6 +50,7 @@ window.addEventListener("finished", function() {
             }
         }, 100);
     });
+    /*
     var pastPosition = [];
     faceArray.forEach(function(face) {
         pastPosition.push([cursor.x+15, cursor.y+15]);
@@ -66,7 +67,7 @@ window.addEventListener("finished", function() {
     faceArray.forEach(function(face, index) {
         position(index, (index+.2)*10);
     });
-    /*
+    */
     setInterval(function() {
         faceArray.forEach(function(face, index, faces) {
             if (index == 0) {
@@ -148,5 +149,4 @@ window.addEventListener("finished", function() {
             }
         });
     }, 20);
-    */
 });
