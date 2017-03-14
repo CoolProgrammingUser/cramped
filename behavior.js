@@ -63,7 +63,7 @@ window.addEventListener("finished", function() {
             position(index, timeout);
         }, timeout);
     }
-    pastPosition.forEach(function(face, index) {
+    faceArray.forEach(function(face, index) {
         position(index, (index+.2)*10);
     });
     /*
