@@ -27,6 +27,7 @@ window.addEventListener("finished", function() {
         document.createElement("div"),
         document.createElement("div"),
         document.createElement("div"),
+        document.createElement("div"),
         document.createElement("div")
         ];
     faceArray.forEach(function(face) {
