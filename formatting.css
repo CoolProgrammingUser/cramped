@@ -88,6 +88,7 @@ h1 {
 }
 h1.mainTitle {
     display: block;
+    color: black;
 }
 div.nav {
     position: fixed;
