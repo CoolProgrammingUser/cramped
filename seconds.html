@@ -47,9 +47,9 @@
                         element.date.split(" ").forEach(function(component) {
                             if (component.length==4 && !isNaN(component)) {
                                 trueFalse = true;
-                                console.log("Got here.");
                             }
                         });
+                        console.log(trueFalse)
                         return trueFalse;
                     })()) {  // if there's a year
                         var then = new Date(element.date);
