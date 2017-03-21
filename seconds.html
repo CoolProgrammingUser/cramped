@@ -42,11 +42,18 @@
                 for (var number=1; number<timeNumber; number++) {
                     var element = document.getElementById(number);
                     var now = new Date();
-                    if (element.date.split(" ").length >= 3) {
+                    if ((function() {
+                        var trueFalse = false;
+                        element.date.split(" ").forEach(function(component) {
+                            if (component.length==4 && !isNaN(component)) {
+                                trueFalse = true;
+                            }
+                        });
+                        return trueFalse;
+                    })()) {  // if there's a year
                         var then = new Date(element.date);
-                    } else {
+                    } else {  // if there's not a year
                         // when dates are only given in a month and day (meant to be annual)
-                        // doesn't work if times are specified
                         if (now.getTime() <= new Date(element.date+", "+now.getFullYear()).getTime()) {
                             var then = new Date(element.date+", "+now.getFullYear());
                         } else {
