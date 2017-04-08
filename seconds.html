@@ -13,8 +13,6 @@
                 makeCountdown("Halloween", "October 31");
                 makeCountdown("Christmas", "December 25");
                 makeCountdown("next year", "January 1");
-                makeCountdown("April 2", "April 2");
-                makeCountdown("April 8", "April 8");
                 refresh();
                 setInterval(refresh, 1000);
             });
@@ -81,7 +79,7 @@
                         if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+then.getDate()+" "+nowTime).getTime() < 0) {
                             days--;
                             if (days < 0) {
-                                // This is exempt from month nonsense probably because the new date is created in a comma-separated format. (It's 0-11.)
+                                // This is exempt from month nonsense because the new date is created in a comma-separated format. (It's 0-11.)
                                 // The 1 is added to the month to get to the 0th day of the next month (the number of days in the month of interest).
                                 days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate() - 1;
                             }
