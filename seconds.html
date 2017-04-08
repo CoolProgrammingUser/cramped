@@ -80,17 +80,25 @@
                         ********/
                         if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+then.getDate()+" "+nowTime).getTime() < 0) {
                             days--;
-                        }
-                        if (days < 0) {
-                            // This is exempt from month nonsense probably because the new date is created in a comma-separated format. (It's 0-11.)
-                            // The 1 is added to the month to get to the 0th day of the next month (the number of days in the month of interest).
-                            days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate() - 1;
+                            if (days < 0) {
+                                // This is exempt from month nonsense probably because the new date is created in a comma-separated format. (It's 0-11.)
+                                // The 1 is added to the month to get to the 0th day of the next month (the number of days in the month of interest).
+                                days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate() - 1;
+                            }
+                        } else {
+                            if (days < 0) {
+                                days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate();
+                            }
                         }
                         if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+now.getDate()+" "+nowTime).getTime() < 0) {
                             months--;
-                        }
-                        if (months < 0) {
-                            months = 12 - now.getMonth() + then.getMonth();
+                            if (months < 0) {
+                                months = 12 - now.getMonth() + then.getMonth();
+                            }
+                        } else {
+                            if (months < 0) {
+                                months = 13 - now.getMonth() + then.getMonth();
+                            }
                         }
                         if (then.getTime() - new Date(then.getFullYear()+" "+(now.getMonth()+1)+" "+now.getDate()+" "+nowTime).getTime() < 0) {
                             years--;
