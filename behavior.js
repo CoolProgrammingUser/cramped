@@ -1,5 +1,6 @@
 // sets the options for the script import
-var options = {
+var Standards = {};
+Standards.options = {
     "formatting" : "formatting.css",
     "icon" : "images/favicon.ico",
     "title" : "~document.getElementsByTagName('h1')[0].innerHTML",
