@@ -14,18 +14,19 @@
         </script>
         <style>
             #picture1 {
-                width: 25%;
-                height: 25%;
-                content: url("images/Closed Shell.png");
+                width: 15em;
+                height: 15em;
             }
             #picture2 {
-                width: 25%;
-                height: 25%;
-                content: url("images/Me in a Nutshell.png");
+                width: 15em;
+                height: 15em;
                 display: none;
             }
-            #picture2:hover {
-                content: url("images/Closed Shell.png");
+            #pictures:hover #picture1{
+                display: none;
+            }
+            #pictures:hover #picture2{
+                display: none;
             }
         </style>
         <!-- <link rel="import" href="/path/to/template.html"> could be used as a part of importing HTML in the future. -->
@@ -34,8 +35,10 @@
         <h1>
             Home
         </h1>
-        <img id="picture1">
-        <img id="picture2">
+        <div id="pictures">
+            <img id="picture1" src="images/Closed Shell.png">
+            <img id="picture2" src="images/Me in a Nutshell.png">
+        </div>
         <p>
             Welcome to the repository of my essence. I created this website in an effort to provide a clearer picture of what type of person I am for my application to MIT. Here, you will find things I've done, circumstances I've experienced, and nerdiness I've acquired. Although I think any influence this website may have had on my admission decision has passed by now, I plan on continuing to expand this website indefinitely because I like how it concentrates everything cool about me into one place. You might even describe this as me in a nutshell.
         </p>
