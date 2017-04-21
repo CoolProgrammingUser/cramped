@@ -8,22 +8,28 @@
                 cracking.play();
             }, 4000);
             setTimeout(function() {
-                document.getElementById("picture1").style.display = "none";
-                document.getElementById("picture2").style.display = "inline-block";
+                document.getElementById("picture1").className = "invisible";
+                document.getElementById("picture2").className = "visible";
+                /*
+                These have to be modified with classes
+                because changing the actual display
+                would override the :hover CSS
+                and make the change permanent.
+                (JavaScript modifications are more specific than styling,
+                but IDs are more specific than classes.)
+                */
             }, 4055);
         </script>
         <style>
-            #picture1 {
-                width: 15em;
-                height: 15em;
+            .visible {
+                display: inline-block;
             }
-            #picture2 {
-                width: 15em;
-                height: 15em;
+            .invisible {
                 display: none;
             }
-            #pictures:hover {
-                background: blue;
+            #picture1, #picture2 {
+                width: 15em;
+                height: 15em;
             }
             #pictures:hover #picture1 {
                 display: inline-block;
@@ -39,8 +45,8 @@
             Home
         </h1>
         <div id="pictures">
-            <img id="picture1" src="images/Closed Shell.png">
-            <img id="picture2" src="images/Me in a Nutshell.png">
+            <img src="images/Closed Shell.png" class="visible" id="picture1">
+            <img src="images/Me in a Nutshell.png" class="invisible" id="picture2">
         </div>
         <p>
             Welcome to the repository of my essence. I created this website in an effort to provide a clearer picture of what type of person I am for my application to MIT. Here, you will find things I've done, circumstances I've experienced, and nerdiness I've acquired. Although I think any influence this website may have had on my admission decision has passed by now, I plan on continuing to expand this website indefinitely because I like how it concentrates everything cool about me into one place. You might even describe this as me in a nutshell.
