@@ -10,7 +10,7 @@ Standards.options = {
 (function() {
     // adds my standard script
     var script = document.createElement("script");
-    script.src = "https://coolprogramminguser.github.io/Standards/behavior.js";
+    script.src = "https://coolprogramminguser.github.io/Standards/oldbehavior.js";
     document.head.insertBefore(script, document.head.getElementsByTagName("script")[0].nextSibling);
 })();  // This is in a function, so I can use the variable "script" later if I want.
 
