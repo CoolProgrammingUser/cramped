@@ -11,12 +11,12 @@
                 document.getElementById("age").innerHTML = seconds + " seconds";
             }
             window.addEventListener("finished", function() {
-                var sound = new Sound({"waveform":"square"});
-                var playing = false;
                 update();
                 setInterval(update, 1000);
                 colorCode(document.getElementById("eyeColor"), null, [0, 200, 50], [0, 50, 250]);
                 colorCode(document.getElementById("favoriteColor"), null, [250, 0, 0], [0, 240, 0], [0, 0, 250]);
+                var sound = new Sound({"waveform":"square"});  // Standards.audio doesn't exist in some browsers, so trying to access it at the end allows the rest of the script to end
+                var playing = false;
                 document.getElementById("morseCode").addEventListener("mouseenter", function() {
                     if (!playing) {
                         playing = true;
