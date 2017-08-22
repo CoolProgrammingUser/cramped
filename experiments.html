@@ -514,23 +514,101 @@
             <p>
                 I transferred in, so this starts from the very beginning of my relationships. This starts on Monday, August 21, 2017.
             </p>
-            <details>
-                <summary>
-                    Raw conversation data (each table is a new day)
-                </summary>
-                <table class="compact">
-                    <tr>
-                        <th>
-                            Name | Gender | Type | Initiator | Special | Length | Talk time | Enjoyability
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                </table>
-            </details>
+            <script>
+                // Name | Gender | Type | Initiator | Special | Length | Talk time | Enjoyability
+                var a = "a",
+                    b = "b",
+                    c = "c",
+                    d = "d",
+                    e = "e",
+                    f = "f",
+                    g = "g",
+                    h = "h",
+                    i = "i",
+                    j = "j",
+                    k = "k",
+                    l = "l",
+                    m = "m",
+                    n = "n",
+                    o = "o",
+                    p = "p",
+                    q = "q",
+                    r = "r",
+                    s = "s",
+                    t = "t",
+                    u = "u",
+                    v = "v",
+                    w = "w",
+                    x = "x",
+                    y = "y",
+                    z = "z";
+                var conversations = [  // This is the raw data.
+                    {
+                        "date": "8/21/2017",
+                        "notes": [],
+                        "data": [
+                            ["a1", "m", "s", "t", "n", 0, 5, 3],
+                            ["a2", "m", "s", "t", "n", 0, 5, 3],
+                            ["p1", "f", "a", "t", "n", 1, 2, 3],
+                            ["p1", "f", "a", "m", "n", 1, 4, 3],
+                            ["a3", "m", "a", "t", "n", 0, 5, 3],
+                            ["Kerol Horst", "f", "a", "t", "n", 2, 3, 3],
+                            ["Kerol Horst", "f", "a", "t", "n", 4, 4, 4],
+                            ["a4", "m", "s", "t", "j", 3, 2, 3],
+                            ["Tahm (bus)", "m", "a", "m", "n", 2, 3, 3],
+                            ["a5", "f", "s", "t", "n", 0, 5, 3],
+                            ["Trent Spaekrr", "m", "b", "t", "n", 1, 3, 3],
+                            ["Trent Spaekrr", "m", "b", "t", "n", 0, 5, 3],
+                            ["Dad", "m", "a", "t", "d", 5, 5, 3],
+                            ["Mom", "f", "a", "t", "j", 4, 3, 3],
+                            ["Jeen Milrr", "f", "a", "m", "e", 2, "-", 3],
+                            ["group", "1m3f", "b", "m", "c", 1, 4, 3],
+                            ["p1", "f", "a", "t", "n", 0, 5, 3],
+                            ["a6", "f", "f", "m", "i", 1, 4, 3],
+                            ["a7", "f", "s", "t", "n", 1, 3, 3],
+                            ["a8", "m", "s", "m", "n", 3, 3, 4],
+                            ["a9", "m", "s", "t", "n", 0, 5, 4],
+                            ["Madee Basteen", "f", "ps", "t", "n", 1, 5, 3],
+                            ["Andee Choo", "m", "pr", "m", "t", 0, 0, 2],
+                            ["a10", "f", "a", "t", "n", 1, 4, 3],
+                            ["a11", "f", "a", "t", "n", 1, 5, 2],
+                            ["a12", "f", "a", "t", "n", 2, 5, 2],
+                            ["a14", "f", "a", "t", "n", 4, 4, 4],
+                            ["a12", "m", "s", "t", "n", 1, 4, 3],
+                            ["Jayk Braet", "m", "r", "m", "n", 1, 3, 3],
+                            ["Mom", "f", "a", "t", "t", 2, 3, 3],
+                            ["p2", "m", "c", "b", "d", 3, 2, 3],
+                            ["group", "5m1f", "c", "b", "gj", 4, "33211_1", 3],
+                            ["Kristuel", "f", "c", "m", "d", 3, 3, 3],
+                            ["Seruh", "f", "c", "m", "j", 2, 3, 3],
+                            ["Kristuel", "f", "c", "t", "n", 0, 5, 3],
+                            ["a14", "f", "c", "m", "j", 3, 4, 3],
+                            ["ViktOreeuh MikAluhstrr", "f", "a", "m", "dig", 3, 2, 3],
+                            ["Jeen Milrr", "f", "a", "t", "e", 2, "-", 3],
+                            ["Yuevahn", "f", "b", "t", "n", 0, 5, 3],
+                            ["a15", "m", "f", "m", "d", 4, 3, 3],
+                            ["YuevAhn", "f", "bf", "t", "j", 4, 3, 3],
+                            ["Dad", "m", "a", "t", "d", 4, 4, 3],
+                            ["Mom", "f", "a", "t", "j", 3, 2, 3],
+                            ["Nolin Drayk", "m", "r", "t", "n", 0, 5, 3],
+                            ["group", "2m", "r", "m", "j", 0, 3, 3],
+                            ["Jeruemee Elrrmaer", "m", "a", "m", "e", 3, "-", 3]
+                        ]
+                    },
+                    {
+                        "date": "8/22/2017",
+                        "notes": [],
+                        "data": [
+                            ["p1", f, a, t, n, 2, 4, 3],
+                            ["a1", m, s, t, n, 0, 5, 3],
+                            ["Puetrishuh Ferish", f, a, t, g+c, 2, 3, 3],
+                            ["a2", f, s, t, n, 0, 5, 3],
+                            ["federal loans", u, a, t, e, 2, "-", 2],
+                            ["Jeruemee Elrrmaer", m, a, t, e, 1, "-", 2]
+                        ]
+                    }
+                ];
+            </script>
             <br>
             <h2>
                 Amount of sleep
@@ -715,7 +793,7 @@
                 </tr>
                 <tr>
                     <td>
-                        1234:5678pm-1234:5678pm
+                         2:37am-6:01am |12:12am-9:22am
                     </td>
                 </tr>
             </table>
