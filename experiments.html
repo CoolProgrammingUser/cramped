@@ -7,6 +7,7 @@
                 pageJump("experiments");
                 colorCode("table1");
                 colorCode(document.getElementById("title2"), null, [255,0,0], [0,0,255]);
+                colorCode("conversationLengths");
                 colorCode(["sleep1", "sleep2", "sleep3"]);
             });
         </script>
@@ -514,6 +515,32 @@
             <p>
                 I transferred in, so this starts from the very beginning of my relationships. This starts on Monday, August 21, 2017.
             </p>
+            <table id="conversationLengths">
+                <tr>
+                    <th rowspan="2"></th>
+                    <th colspan="2">Monday</th>
+                    <th colspan="2">Tuesday</th>
+                    <th colspan="2">Wednesday</th>
+                    <th colspan="2">Thursday</th>
+                    <th colspan="2">Friday</th>
+                    <th colspan="2">Saturday</th>
+                    <th colspan="2">Sunday</th>
+                </tr>
+                <tr>
+                    <th>Girls</th><th>Boys</th>
+                    <th>Girls</th><th>Boys</th>
+                    <th>Girls</th><th>Boys</th>
+                    <th>Girls</th><th>Boys</th>
+                    <th>Girls</th><th>Boys</th>
+                    <th>Girls</th><th>Boys</th>
+                    <th>Girls</th><th>Boys</th>
+                </tr>
+                <tr>
+                    <th rowspan="6">
+                        Amount of<br>conversation
+                    </th>
+                </tr>
+            </table>
             <script>
                 // Name | Gender | Type | Initiator | Special | Length | Talk time | Enjoyability
                 var a = "a",
@@ -707,6 +734,27 @@
                         ]
                     }
                 ];
+                var conversationTable1 = document.getElementById("conversationLengths");
+                conversations.forEach(function(day) {
+                    var row = conversationTable1.getElementsByTagName("tr")[conversationTable1.getElementsByTagName("tr").length-1];
+                    if (row.getElementsByTagName("td").length >= 14) {
+                        row = document.createElement("tr");
+                        conversationTable1.appendChild(row);
+                    }
+                    let female = document.createElement("td"),
+                        male = document.createElement("td");
+                    female.innerHTML = 0;
+                    male.innerHTML = 0;
+                    day.data.forEach(function(datum) {
+                        if (datum[1] == "f") {
+                            female.innerHTML = Number(female.innerHTML) + datum[5];
+                        } else {
+                            male.innerHTML = Number(male.innerHTML) + datum[5];
+                        }
+                    });
+                    row.appendChild(female);
+                    row.appendChild(male);
+                });
             </script>
             <br>
             <h2>
