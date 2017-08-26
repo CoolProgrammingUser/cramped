@@ -153,48 +153,20 @@
                     <td>0</td>
                 </tr>
                 <tr>
-                    <td>
-                        17
-                    </td>
-                    <td>
-                        13
-                    </td>
-                    <td>
-                        13
-                    </td>
-                    <td>
-                        12
-                    </td>
-                    <td>
-                        12
-                    </td>
-                    <td>
-                        7
-                    </td>
-                    <td>
-                        14
-                    </td>
-                    <td>
-                        12
-                    </td>
-                    <td>
-                        16
-                    </td>
-                    <td>
-                        6
-                    </td>
-                    <td>
-                        0
-                    </td>
-                    <td>
-                        0
-                    </td>
-                    <td>
-                        0
-                    </td>
-                    <td>
-                        1
-                    </td>
+                    <td>17</td>
+                    <td>13</td>
+                    <td>13</td>
+                    <td>12</td>
+                    <td>12</td>
+                    <td>7</td>
+                    <td>14</td>
+                    <td>12</td>
+                    <td>16</td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
                 </tr>
                 <tr>
                     <td>
@@ -481,7 +453,7 @@
             <table id="uniquePeople">
                 <tr>
                     <th colspan="15">
-                        Unique people who talked to me
+                        Unique people who interacted with me
                     </th>
                 </tr>
                 <tr>
@@ -507,6 +479,30 @@
                     <th>
                         Number<br>of<br>people
                     </th>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <table id="initializers">
+                <tr>
+                    <th colspan="4">
+                        Conversation starters
+                    </th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Me</th>
+                    <th>Them</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <th>Males</th>
+                </tr>
+                <tr>
+                    <th>Females</th>
+                </tr>
+                <tr>
+                    <th>Total</th>
                 </tr>
             </table>
             <script>
@@ -722,7 +718,9 @@
                     }
                 ];
                 var CT1 = document.getElementById("conversationLengths"),  // Conversation Table 1
-                    CT2 = document.getElementById("uniquePeople");
+                    CT2 = document.getElementById("uniquePeople"),  // Conversation Table 2
+                    CT3 = document.getElementById("initializers"),
+                    initializers = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
                 conversations.forEach(function(day) {
                     var row = CT1.getElementsByTagName("tr")[CT1.getElementsByTagName("tr").length-1];
                     if (row.getElementsByTagName("td").length >= 14) {
@@ -736,23 +734,97 @@
                     day.data.forEach(function(datum) {
                         if (datum[1] == "f") {
                             female.innerHTML = Number(female.innerHTML) + datum[5];
+                            
+                            if (datum[3] == "m") {
+                                initializers[1][0] += 1;
+                            } else if (datum[3] == "t") {
+                                initializers[1][1] += 1;
+                            } else if (datum[3] == "b") {
+                                initializers[1][0] += 1;
+                                initializers[1][1] += 1;
+                            } else {
+                                console.error("Invalid type of initializer.");
+                            }
                         } else if (datum[1] == "m") {
                             male.innerHTML = Number(male.innerHTML) + datum[5];
+                            
+                            if (datum[3] == "m") {
+                                initializers[0][0] += 1;
+                            } else if (datum[3] == "t") {
+                                initializers[0][1] += 1;
+                            } else if (datum[3] == "b") {
+                                initializers[0][0] += 1;
+                                initializers[0][1] += 1;
+                            } else {
+                                console.error("Invalid type of initializer.");
+                            }
                         } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
                             let group = datum[1].match(/\d+|[A-Za-z]/g);  // This can't use \w because it matches numbers too.
                             if (group.length == 2) {
                                 if (group[1] == "f") {
                                     female.innerHTML = Number(female.innerHTML) + Number(group[0]);
+                                    
+                                    if (datum[3] == "m") {
+                                        initializers[1][0] += Number(group[0]);
+                                    } else if (datum[3] == "t") {
+                                        initializers[1][1] += Number(group[0]);
+                                    } else if (datum[3] == "b") {
+                                        initializers[1][0] += Number(group[0]);
+                                        initializers[1][1] += Number(group[0]);
+                                    } else {
+                                        console.error("Invalid type of initializer.");
+                                    }
                                 } else if (group[1] == "m") {
                                     male.innerHTML = Number(male.innerHTML) + Number(group[0]);
+                                    
+                                    if (datum[3] == "m") {
+                                        initializers[0][0] += Number(group[0]);
+                                    } else if (datum[3] == "t") {
+                                        initializers[0][1] += Number(group[0]);
+                                    } else if (datum[3] == "b") {
+                                        initializers[0][0] += Number(group[0]);
+                                        initializers[0][1] += Number(group[0]);
+                                    } else {
+                                        console.error("Invalid type of initializer.");
+                                    }
                                 }
                             } else if (group.length == 4) {
                                 if (group[1] == "f") {
                                     female.innerHTML = Number(female.innerHTML) + Number(group[0]);
                                     male.innerHTML = Number(male.innerHTML) + Number(group[2]);
+                                    
+                                    if (datum[3] == "m") {
+                                        initializers[1][0] += Number(group[0]);
+                                        initializers[0][0] += Number(group[2]);
+                                    } else if (datum[3] == "t") {
+                                        initializers[1][1] += Number(group[0]);
+                                        initializers[0][1] += Number(group[2]);
+                                    } else if (datum[3] == "b") {
+                                        initializers[1][0] += Number(group[0]);
+                                        initializers[1][1] += Number(group[0]);
+                                        initializers[0][0] += Number(group[2]);
+                                        initializers[0][1] += Number(group[2]);
+                                    } else {
+                                        console.error("Invalid type of initializer.");
+                                    }
                                 } else if (group[1] == "m") {
                                     male.innerHTML = Number(male.innerHTML) + Number(group[0]);
                                     female.innerHTML = Number(female.innerHTML) + Number(group[2]);
+                                    
+                                    if (datum[3] == "m") {
+                                        initializers[1][0] += Number(group[2]);
+                                        initializers[0][0] += Number(group[0]);
+                                    } else if (datum[3] == "t") {
+                                        initializers[1][1] += Number(group[2]);
+                                        initializers[0][1] += Number(group[0]);
+                                    } else if (datum[3] == "b") {
+                                        initializers[1][0] += Number(group[2]);
+                                        initializers[1][1] += Number(group[2]);
+                                        initializers[0][0] += Number(group[0]);
+                                        initializers[0][1] += Number(group[0]);
+                                    } else {
+                                        console.error("Invalid type of initializer.");
+                                    }
                                 }
                             } else {
                                 console.error("There was a peculiarity in the number of males and females.");
@@ -792,6 +864,16 @@
                 });
                 CT1.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = CT1.getElementsByTagName("tr").length - 3;
                 CT2.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = CT2.getElementsByTagName("tr").length - 3;
+                initializers[0][2] = initializers[0][0] + initializers[0][1];
+                initializers[1][2] = initializers[1][0] + initializers[1][1];
+                initializers[2][0] = initializers[0][0] + initializers[1][0];
+                initializers[2][1] = initializers[0][1] + initializers[1][1];
+                initializers[2][2] = initializers[0][2] + initializers[1][2];
+                initializers.forEach(function(row, rowIndex) {
+                    row.forEach(function(column, columnIndex) {
+                        CT3.getElementsByTagName("tr")[rowIndex+2].getElementsByTagName[columnIndex+1].innerHTML = column;
+                    });
+                });
             </script>
             <br>
             <h2>
@@ -967,7 +1049,7 @@
                 First semester sophomore year
             </h3>
             <p>
-                This starts on the night between 8-20-2017 and 8-21-2017.
+                This starts on the night between August 20, 2017 and August 21, 2017.
             </p>
             <table class="compact" id="sleep3">
                 <tr>
