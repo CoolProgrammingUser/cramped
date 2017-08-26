@@ -8,6 +8,7 @@
                 colorCode("table1");
                 colorCode(document.getElementById("title2"), null, [255,0,0], [0,0,255]);
                 colorCode("conversationLengths");
+                colorCode("uniquePeople");
                 colorCode(["sleep1", "sleep2", "sleep3"]);
             });
         </script>
@@ -768,8 +769,8 @@
                         row = document.createElement("tr");
                         CT2.appendChild(row);
                     }
-                    let female = document.createElement("td"),
-                        male = document.createElement("td");
+                    female = document.createElement("td");
+                    male = document.createElement("td");
                     female.innerHTML = 0;
                     male.innerHTML = 0;
                     let genderNumber = {"female": [], "male": []};
