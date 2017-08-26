@@ -740,20 +740,19 @@
                             male.innerHTML = Number(male.innerHTML) + datum[5];
                         } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
                             let group = datum[1].match(/\d+|[A-Za-z]/g);  // This can't use \w because it matches numbers too.
-                            console.log(group);
                             if (group.length == 2) {
                                 if (group[1] == "f") {
-                                    female.innerHTML = Number(female.innerHTML) + group[0];
+                                    female.innerHTML = Number(female.innerHTML) + Number(group[0]);
                                 } else if (group[1] == "m") {
-                                    male.innerHTML = Number(male.innerHTML) + group[0];
+                                    male.innerHTML = Number(male.innerHTML) + Number(group[0]);
                                 }
                             } else if (group.length == 4) {
                                 if (group[1] == "f") {
-                                    female.innerHTML = Number(female.innerHTML) + group[0];
-                                    male.innerHTML = Number(male.innerHTML) + group[2];
+                                    female.innerHTML = Number(female.innerHTML) + Number(group[0]);
+                                    male.innerHTML = Number(male.innerHTML) + Number(group[2]);
                                 } else if (group[1] == "m") {
-                                    male.innerHTML = Number(male.innerHTML) + group[0];
-                                    female.innerHTML = Number(female.innerHTML) + group[2];
+                                    male.innerHTML = Number(male.innerHTML) + Number(group[0]);
+                                    female.innerHTML = Number(female.innerHTML) + Number(group[2]);
                                 }
                             } else {
                                 console.error("There was a peculiarity in the number of males and females.");
