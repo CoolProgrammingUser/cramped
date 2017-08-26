@@ -725,7 +725,7 @@
                             } else if (datum[3] == "b") {
                                 initializers[1][0] += 1;
                                 initializers[1][1] += 1;
-                            } else {
+                            } else if (datum[3] != "-") {
                                 console.error("Invalid type of initializer.");
                             }
                         } else if (datum[1] == "m") {
@@ -738,7 +738,7 @@
                             } else if (datum[3] == "b") {
                                 initializers[0][0] += 1;
                                 initializers[0][1] += 1;
-                            } else {
+                            } else if (datum[3] != "-") {
                                 console.error("Invalid type of initializer.");
                             }
                         } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
@@ -754,7 +754,7 @@
                                     } else if (datum[3] == "b") {
                                         initializers[1][0] += Number(group[0]);
                                         initializers[1][1] += Number(group[0]);
-                                    } else {
+                                    } else if (datum[3] != "-") {
                                         console.error("Invalid type of initializer.");
                                     }
                                 } else if (group[1] == "m") {
@@ -767,7 +767,7 @@
                                     } else if (datum[3] == "b") {
                                         initializers[0][0] += Number(group[0]);
                                         initializers[0][1] += Number(group[0]);
-                                    } else {
+                                    } else if (datum[3] != "-") {
                                         console.error("Invalid type of initializer.");
                                     }
                                 }
@@ -787,7 +787,7 @@
                                         initializers[1][1] += Number(group[0]);
                                         initializers[0][0] += Number(group[2]);
                                         initializers[0][1] += Number(group[2]);
-                                    } else {
+                                    } else if (datum[3] != "-") {
                                         console.error("Invalid type of initializer.");
                                     }
                                 } else if (group[1] == "m") {
@@ -805,7 +805,7 @@
                                         initializers[1][1] += Number(group[2]);
                                         initializers[0][0] += Number(group[0]);
                                         initializers[0][1] += Number(group[0]);
-                                    } else {
+                                    } else if (datum[3] != "-") {
                                         console.error("Invalid type of initializer.");
                                     }
                                 }
@@ -854,7 +854,7 @@
                 initializers[2][2] = initializers[0][2] + initializers[1][2];
                 initializers.forEach(function(row, rowIndex) {
                     row.forEach(function(column, columnIndex) {
-                        CT3.getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex+1].innerHTML = column;
+                        CT3.getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex].innerHTML = column;
                     });
                 });
             </script>
