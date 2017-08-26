@@ -740,6 +740,7 @@
                             male.innerHTML = Number(male.innerHTML) + datum[5];
                         } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
                             let group = datum[1].split(/\d[A-Za-z]/);  // This can't use \w because it matches numbers too.
+                            console.log(group);
                             if (group.length == 2) {
                                 if (group[1] == "f") {
                                     female.innerHTML = Number(female.innerHTML) + group[0];
@@ -776,11 +777,11 @@
                     let genderNumber = {"female": [], "male": []};
                     day.data.forEach(function(person) {
                         if (person[1] == "f") {
-                            if (genderNumber.female.indexOf(person[0]) > -1) {
+                            if (genderNumber.female.indexOf(person[0]) == -1) {
                                 genderNumber.female.push(person[0]);
                             }
                         } else if (person[1] == "m") {
-                            if (genderNumber.male.indexOf(person[0]) > -1) {
+                            if (genderNumber.male.indexOf(person[0]) == -1) {
                                 genderNumber.male.push(person[0]);
                             }
                         }
