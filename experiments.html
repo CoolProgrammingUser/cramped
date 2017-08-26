@@ -739,7 +739,7 @@
                         } else if (datum[1] == "m") {
                             male.innerHTML = Number(male.innerHTML) + datum[5];
                         } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
-                            let group = datum[1].split(/\d\w/);
+                            let group = datum[1].split(/\d[A-Za-z]/);  // This can't use \w because it matches numbers too.
                             if (group.length == 2) {
                                 if (group[1] == "f") {
                                     female.innerHTML = Number(female.innerHTML) + group[0];
