@@ -32,6 +32,10 @@
                 border: none;
                 background: transparent;
             }
+            #sleep3 {
+                border: none;
+                background: transparent;
+            }
         </style>
     </head>
     <body>
@@ -517,6 +521,11 @@
             </p>
             <table id="conversationLengths">
                 <tr>
+                    <th colspan="15">
+                        Sum of conversation lengths
+                    </th>
+                </tr>
+                <tr>
                     <th rowspan="2"></th>
                     <th colspan="2">Monday</th>
                     <th colspan="2">Tuesday</th>
@@ -536,7 +545,7 @@
                     <th>Girls</th><th>Boys</th>
                 </tr>
                 <tr>
-                    <th rowspan="6">
+                    <th>
                         Amount of<br>conversation
                     </th>
                 </tr>
@@ -759,13 +768,14 @@
                     day.data.forEach(function(datum) {
                         if (datum[1] == "f") {
                             female.innerHTML = Number(female.innerHTML) + datum[5];
-                        } else {
+                        } else if (datum[1] == "m") {
                             male.innerHTML = Number(male.innerHTML) + datum[5];
                         }
                     });
                     row.appendChild(female);
                     row.appendChild(male);
                 });
+                conversationTable1.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = conversationTable1.getElementsByTagName("tr").length;
             </script>
             <br>
             <h2>
