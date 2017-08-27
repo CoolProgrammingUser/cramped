@@ -22,6 +22,9 @@
                 border-radius: .25em;
                 background-color: #aee;
             }
+            .smaller th {
+                padding: .4em .2em;
+            }
             .slim td {
                 padding: .5em 0em;
             }
@@ -391,7 +394,7 @@
             <p>
                 I transferred in, so this starts from the very beginning of my relationships. This starts on Monday, August 21, 2017.
             </p>
-            <table id="conversationLengths">
+            <table class="smaller" id="conversationLengths">
                 <tr>
                     <th colspan="15">
                         Sum of conversation lengths
@@ -424,7 +427,7 @@
             </table>
             <br>
             <br>
-            <table id="uniquePeople">
+            <table class="smaller" id="uniquePeople">
                 <tr>
                     <th colspan="15">
                         Unique people who interacted with me
@@ -715,6 +718,18 @@
                         "date": "8/27/2017",
                         "notes": [],
                         "data": []
+                    }
+                ];
+                var presence = [
+                    {
+                        "tags": [],
+                        "date": "",
+                        "description": "",
+                        "time": "",
+                        "notes": [],
+                        "data": [
+                            []
+                        ]
                     }
                 ];
                 var CT1 = document.getElementById("conversationLengths"),  // Conversation Table 1
