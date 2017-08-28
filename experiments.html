@@ -833,79 +833,13 @@
                                 console.error("Invalid type of initializer.");
                             }
                         } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
-                            let group = datum[1].match(/\d+|[A-Za-z]/g)==null ? [] : datum[1].match(/\d+|[A-Za-z]/g);  // This can't use \w because it matches numbers too.
-                            if (group.length == 2) {
-                                if (group[1] == "f") {
-                                    female.innerHTML = Number(female.innerHTML) + Number(group[0]);
-                                    
-                                    if (datum[3] == "m") {
-                                        initializers[1][0] += Number(group[0]);
-                                    } else if (datum[3] == "t") {
-                                        initializers[1][1] += Number(group[0]);
-                                    } else if (datum[3] == "b") {
-                                        initializers[1][0] += Number(group[0]);
-                                        initializers[1][1] += Number(group[0]);
-                                    } else if (datum[3] != "-") {
-                                        console.error("Invalid type of initializer.");
-                                    }
-                                } else if (group[1] == "m") {
-                                    male.innerHTML = Number(male.innerHTML) + Number(group[0]);
-                                    
-                                    if (datum[3] == "m") {
-                                        initializers[0][0] += Number(group[0]);
-                                    } else if (datum[3] == "t") {
-                                        initializers[0][1] += Number(group[0]);
-                                    } else if (datum[3] == "b") {
-                                        initializers[0][0] += Number(group[0]);
-                                        initializers[0][1] += Number(group[0]);
-                                    } else if (datum[3] != "-") {
-                                        console.error("Invalid type of initializer.");
-                                    }
-                                }
-                            } else if (group.length == 4) {
-                                if (group[1] == "f") {
-                                    female.innerHTML = Number(female.innerHTML) + Number(group[0]);
-                                    male.innerHTML = Number(male.innerHTML) + Number(group[2]);
-                                    
-                                    if (datum[3] == "m") {
-                                        initializers[1][0] += Number(group[0]);
-                                        initializers[0][0] += Number(group[2]);
-                                    } else if (datum[3] == "t") {
-                                        initializers[1][1] += Number(group[0]);
-                                        initializers[0][1] += Number(group[2]);
-                                    } else if (datum[3] == "b") {
-                                        initializers[1][0] += Number(group[0]);
-                                        initializers[1][1] += Number(group[0]);
-                                        initializers[0][0] += Number(group[2]);
-                                        initializers[0][1] += Number(group[2]);
-                                    } else if (datum[3] != "-") {
-                                        console.error("Invalid type of initializer.");
-                                    }
-                                } else if (group[1] == "m") {
-                                    male.innerHTML = Number(male.innerHTML) + Number(group[0]);
-                                    female.innerHTML = Number(female.innerHTML) + Number(group[2]);
-                                    
-                                    if (datum[3] == "m") {
-                                        initializers[1][0] += Number(group[2]);
-                                        initializers[0][0] += Number(group[0]);
-                                    } else if (datum[3] == "t") {
-                                        initializers[1][1] += Number(group[2]);
-                                        initializers[0][1] += Number(group[0]);
-                                    } else if (datum[3] == "b") {
-                                        initializers[1][0] += Number(group[2]);
-                                        initializers[1][1] += Number(group[2]);
-                                        initializers[0][0] += Number(group[0]);
-                                        initializers[0][1] += Number(group[0]);
-                                    } else if (datum[3] != "-") {
-                                        console.error("Invalid type of initializer.");
-                                    }
-                                }
-                            } else if (datum[1].search(/\d/) == -1) {  // if there's no numbers
+                            let group = datum[1].match(/\d+|[A-Za-z]+/g);  // This can't use \w because it matches numbers too.
+                            if (group.length == 1) {  // if there aren't any numbers
                                 let maleCount = datum[1].match("m")==null ? 0 : datum[1].match("m").length,
                                     femaleCount = datum[1].match("f")==null ? 0 : datum[1].match("f").length;
                                 
-                                male.innerHTML = Number(male.innerHTML) + maleCount;
-                                female.innerHTML = Number(female.innerHTML) + femaleCount;
+                                male.innerHTML = Number(male.innerHTML) + maleCount * datum[5];
+                                female.innerHTML = Number(female.innerHTML) + femaleCount * datum[5];
                                 
                                 if (datum[3] == "m") {
                                     initializers[0][0] += maleCount;
@@ -920,6 +854,72 @@
                                     initializers[1][1] += femaleCount;
                                 } else if (datum[3] != "-") {
                                     console.error("Invalid type of initializer.");
+                                }
+                            } else if (group.length == 2) {
+                                if (group[1] == "f") {
+                                    female.innerHTML = Number(female.innerHTML) + Number(group[0]) * datum[5];
+                                    
+                                    if (datum[3] == "m") {
+                                        initializers[1][0] += Number(group[0]);
+                                    } else if (datum[3] == "t") {
+                                        initializers[1][1] += Number(group[0]);
+                                    } else if (datum[3] == "b") {
+                                        initializers[1][0] += Number(group[0]);
+                                        initializers[1][1] += Number(group[0]);
+                                    } else if (datum[3] != "-") {
+                                        console.error("Invalid type of initializer.");
+                                    }
+                                } else if (group[1] == "m") {
+                                    male.innerHTML = Number(male.innerHTML) + Number(group[0]) * datum[5];
+                                    
+                                    if (datum[3] == "m") {
+                                        initializers[0][0] += Number(group[0]);
+                                    } else if (datum[3] == "t") {
+                                        initializers[0][1] += Number(group[0]);
+                                    } else if (datum[3] == "b") {
+                                        initializers[0][0] += Number(group[0]);
+                                        initializers[0][1] += Number(group[0]);
+                                    } else if (datum[3] != "-") {
+                                        console.error("Invalid type of initializer.");
+                                    }
+                                }
+                            } else if (group.length == 4) {
+                                if (group[1] == "f") {
+                                    female.innerHTML = Number(female.innerHTML) + Number(group[0]) * datum[5];
+                                    male.innerHTML = Number(male.innerHTML) + Number(group[2]) * datum[5];
+                                    
+                                    if (datum[3] == "m") {
+                                        initializers[1][0] += Number(group[0]);
+                                        initializers[0][0] += Number(group[2]);
+                                    } else if (datum[3] == "t") {
+                                        initializers[1][1] += Number(group[0]);
+                                        initializers[0][1] += Number(group[2]);
+                                    } else if (datum[3] == "b") {
+                                        initializers[1][0] += Number(group[0]);
+                                        initializers[1][1] += Number(group[0]);
+                                        initializers[0][0] += Number(group[2]);
+                                        initializers[0][1] += Number(group[2]);
+                                    } else if (datum[3] != "-") {
+                                        console.error("Invalid type of initializer.");
+                                    }
+                                } else if (group[1] == "m") {
+                                    male.innerHTML = Number(male.innerHTML) + Number(group[0]) * datum[5];
+                                    female.innerHTML = Number(female.innerHTML) + Number(group[2]) * datum[5];
+                                    
+                                    if (datum[3] == "m") {
+                                        initializers[1][0] += Number(group[2]);
+                                        initializers[0][0] += Number(group[0]);
+                                    } else if (datum[3] == "t") {
+                                        initializers[1][1] += Number(group[2]);
+                                        initializers[0][1] += Number(group[0]);
+                                    } else if (datum[3] == "b") {
+                                        initializers[1][0] += Number(group[2]);
+                                        initializers[1][1] += Number(group[2]);
+                                        initializers[0][0] += Number(group[0]);
+                                        initializers[0][1] += Number(group[0]);
+                                    } else if (datum[3] != "-") {
+                                        console.error("Invalid type of initializer.");
+                                    }
                                 }
                             } else {
                                 console.error("There was a peculiarity in the number of males and females.");
@@ -952,6 +952,8 @@
                                 genderNumber.male.push(person[0]);
                                 male.innerHTML = Number(male.innerHTML) + 1;
                             }
+                        } else if (person[1].indexOf("f") > -1 || person[1].indexOf("m") > -1) {
+                            
                         }
                     });
                     row.appendChild(female);
