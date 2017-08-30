@@ -859,7 +859,7 @@
                             if (group.length == 1) {  // if there aren't any numbers
                                 let maleCount = datum[1].match("m")==null ? 0 : datum[1].match("m").length,
                                     femaleCount = datum[1].match("f")==null ? 0 : datum[1].match("f").length;
-                                console.log(female.innerHTML + "\n" + male.innerHTML);
+                                
                                 male.innerHTML = Number(male.innerHTML) + maleCount * datum[5];
                                 female.innerHTML = Number(female.innerHTML) + femaleCount * datum[5];
                                 
@@ -947,6 +947,7 @@
                                 console.error("There was a peculiarity in the number of males and females.");
                             }
                         }
+                        console.log(female.innerHTML + "\n" + male.innerHTML);
                     });
                     row.appendChild(female);
                     row.appendChild(male);
