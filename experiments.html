@@ -821,8 +821,7 @@
                 conversations.forEach(function(day) {
                     var row = CT1.getElementsByTagName("tr")[CT1.getElementsByTagName("tr").length-1];
                     if (row.getElementsByTagName("td").length >= 14) {
-                        row = document.createElement("tr");
-                        CT1.appendChild(row);
+                        row = CT1.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
                     }
                     let female = document.createElement("td"),
                         male = document.createElement("td");
@@ -860,7 +859,7 @@
                             if (group.length == 1) {  // if there aren't any numbers
                                 let maleCount = datum[1].match("m")==null ? 0 : datum[1].match("m").length,
                                     femaleCount = datum[1].match("f")==null ? 0 : datum[1].match("f").length;
-                                
+                                console.log(female.innerHTML + "\n" + male.innerHTML);
                                 male.innerHTML = Number(male.innerHTML) + maleCount * datum[5];
                                 female.innerHTML = Number(female.innerHTML) + femaleCount * datum[5];
                                 
@@ -956,8 +955,7 @@
                     
                     row = CT2.getElementsByTagName("tr")[CT2.getElementsByTagName("tr").length-1];
                     if (row.getElementsByTagName("td").length >= 14) {
-                        row = document.createElement("tr");
-                        CT2.appendChild(row);
+                        row = CT2.insertRow(-1);  // The -1 inserts at the end of the table.
                     }
                     female = document.createElement("td");
                     male = document.createElement("td");
