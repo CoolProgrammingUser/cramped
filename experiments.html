@@ -810,6 +810,32 @@
                             ["Kaylueb Hamueltin", m, r, t, n, 1, 3, 3],
                             ["Dahnoo", m, b, t, n, 0, 5, 3]
                         ]
+                    },
+                    {
+                        "date": "9/1/2017",
+                        "notes": [],
+                        "data": [
+                            ["Kaylueb Hamueltin", m, r, m, n, 0, 3, 3],
+                            ["p1", f, a, t, n, 0, 5, 3],
+                            ["a1", m, s, t, n, 0, 5, 3],
+                            ["Kaylueb Hamueltin", m, r, t, n, 3, 3, 4],
+                            ["Kaylueb Hamueltin", m, r, m, n, 1, 3, 3],
+                            ["RuhbEkuh Krrzawlz", f, a, t, g+c, 0, 3, 3],
+                            ["RuhbEkuh Krrzawlz", f, a, m, n, 3, 3, 3],
+                            ["a2", f, a, t, n, 2, 4, 3],
+                            ["a3", f, a, m, i, 3, 3, 3],
+                            ["a4", f, s, t, n, 0, 5, 3],
+                            ["g(a5&a6&a7&a8)", f, s, t, n, 1, "1111", 3],
+                            ["g(a5&a6&a7&a8)", f, s, m, c, 0, "0000", 3],
+                            ["a9", m, s, t, n, 0, 5, 3],
+                            ["g(p10&Jo)", m, s, t, n, 0, 5, 3],
+                            ["a10", m, s, t, n, 0, 5, 3],
+                            ["a11", m, s, m, n, 1, 3, 3],
+                            ["Dad", m, a, m, "dpi", 3, 4, 1],
+                            ["a12", m, a, t, n, 0, 5, 3],
+                            ["Jahn ZookuhrElo", m, p, m, p, 1, 2, 2],
+                            ["g(a13&a14)", m+f, s, t, n, 1, "32", 3]
+                        ]
                     }
                 ];
                 var presence = [
@@ -893,184 +919,187 @@
                         }
                     }
                 ];
-                var CT1 = document.getElementById("conversationLengths"),  // Conversation Table 1
-                    CT2 = document.getElementById("uniquePeople"),  // Conversation Table 2
-                    CT3 = document.getElementById("initializers"),
-                    initializers = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-                conversations.forEach(function(day) {
-                    var row = CT1.getElementsByTagName("tr")[CT1.getElementsByTagName("tr").length-1];
-                    if (row.getElementsByTagName("td").length >= 14) {
-                        row = CT1.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
-                    }
-                    let female = document.createElement("td"),
-                        male = document.createElement("td");
-                    female.innerHTML = 0;
-                    male.innerHTML = 0;
-                    day.data.forEach(function(datum) {
-                        if (datum[1] == "f") {
-                            female.innerHTML = Number(female.innerHTML) + datum[5];
-                            
-                            if (datum[3] == "m") {
-                                initializers[1][0] += 1;
-                            } else if (datum[3] == "t") {
-                                initializers[1][1] += 1;
-                            } else if (datum[3] == "b") {
-                                initializers[1][0] += 1;
-                                initializers[1][1] += 1;
-                            } else if (datum[3] != "-") {
-                                console.error("Invalid type of initializer.");
-                            }
-                        } else if (datum[1] == "m") {
-                            male.innerHTML = Number(male.innerHTML) + datum[5];
-                            
-                            if (datum[3] == "m") {
-                                initializers[0][0] += 1;
-                            } else if (datum[3] == "t") {
-                                initializers[0][1] += 1;
-                            } else if (datum[3] == "b") {
-                                initializers[0][0] += 1;
-                                initializers[0][1] += 1;
-                            } else if (datum[3] != "-") {
-                                console.error("Invalid type of initializer.");
-                            }
-                        } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
-                            let group = datum[1].match(/\d+|[A-Za-z]+/g);  // This can't use \w because it matches numbers too.
-                            if (group.length == 1) {  // if there aren't any numbers
-                                let maleCount = datum[1].match("m")==null ? 0 : datum[1].match("m").length,
-                                    femaleCount = datum[1].match("f")==null ? 0 : datum[1].match("f").length;
-                                
-                                male.innerHTML = Number(male.innerHTML) + maleCount * datum[5];
-                                female.innerHTML = Number(female.innerHTML) + femaleCount * datum[5];
+                function updateConversations() {
+                    var CT1 = document.getElementById("conversationLengths"),  // Conversation Table 1
+                        CT2 = document.getElementById("uniquePeople"),  // Conversation Table 2
+                        CT3 = document.getElementById("initializers"),
+                        initializers = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+                    conversations.forEach(function(day) {
+                        var row = CT1.getElementsByTagName("tr")[CT1.getElementsByTagName("tr").length-1];
+                        if (row.getElementsByTagName("td").length >= 14) {
+                            row = CT1.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
+                        }
+                        let female = document.createElement("td"),
+                            male = document.createElement("td");
+                        female.innerHTML = 0;
+                        male.innerHTML = 0;
+                        day.data.forEach(function(datum) {
+                            if (datum[1] == "f") {
+                                female.innerHTML = Number(female.innerHTML) + datum[5];
                                 
                                 if (datum[3] == "m") {
-                                    initializers[0][0] += maleCount;
-                                    initializers[1][0] += femaleCount;
+                                    initializers[1][0] += 1;
                                 } else if (datum[3] == "t") {
-                                    initializers[0][1] += maleCount;
-                                    initializers[1][1] += femaleCount;
+                                    initializers[1][1] += 1;
                                 } else if (datum[3] == "b") {
-                                    initializers[0][0] += maleCount;
-                                    initializers[0][1] += maleCount;
-                                    initializers[1][0] += femaleCount;
-                                    initializers[1][1] += femaleCount;
+                                    initializers[1][0] += 1;
+                                    initializers[1][1] += 1;
                                 } else if (datum[3] != "-") {
                                     console.error("Invalid type of initializer.");
                                 }
-                            } else if (group.length == 2) {
-                                if (group[1] == "f") {
-                                    female.innerHTML = Number(female.innerHTML) + Number(group[0]) * datum[5];
-                                    
-                                    if (datum[3] == "m") {
-                                        initializers[1][0] += Number(group[0]);
-                                    } else if (datum[3] == "t") {
-                                        initializers[1][1] += Number(group[0]);
-                                    } else if (datum[3] == "b") {
-                                        initializers[1][0] += Number(group[0]);
-                                        initializers[1][1] += Number(group[0]);
-                                    } else if (datum[3] != "-") {
-                                        console.error("Invalid type of initializer.");
-                                    }
-                                } else if (group[1] == "m") {
-                                    male.innerHTML = Number(male.innerHTML) + Number(group[0]) * datum[5];
-                                    
-                                    if (datum[3] == "m") {
-                                        initializers[0][0] += Number(group[0]);
-                                    } else if (datum[3] == "t") {
-                                        initializers[0][1] += Number(group[0]);
-                                    } else if (datum[3] == "b") {
-                                        initializers[0][0] += Number(group[0]);
-                                        initializers[0][1] += Number(group[0]);
-                                    } else if (datum[3] != "-") {
-                                        console.error("Invalid type of initializer.");
-                                    }
+                            } else if (datum[1] == "m") {
+                                male.innerHTML = Number(male.innerHTML) + datum[5];
+                                
+                                if (datum[3] == "m") {
+                                    initializers[0][0] += 1;
+                                } else if (datum[3] == "t") {
+                                    initializers[0][1] += 1;
+                                } else if (datum[3] == "b") {
+                                    initializers[0][0] += 1;
+                                    initializers[0][1] += 1;
+                                } else if (datum[3] != "-") {
+                                    console.error("Invalid type of initializer.");
                                 }
-                            } else if (group.length == 4) {
-                                if (group[1] == "f") {
-                                    female.innerHTML = Number(female.innerHTML) + Number(group[0]) * datum[5];
-                                    male.innerHTML = Number(male.innerHTML) + Number(group[2]) * datum[5];
+                            } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
+                                let group = datum[1].match(/\d+|[A-Za-z]+/g);  // This can't use \w because it matches numbers too.
+                                if (group.length == 1) {  // if there aren't any numbers
+                                    let maleCount = datum[1].match("m")==null ? 0 : datum[1].match("m").length,
+                                        femaleCount = datum[1].match("f")==null ? 0 : datum[1].match("f").length;
+                                    
+                                    male.innerHTML = Number(male.innerHTML) + maleCount * datum[5];
+                                    female.innerHTML = Number(female.innerHTML) + femaleCount * datum[5];
                                     
                                     if (datum[3] == "m") {
-                                        initializers[1][0] += Number(group[0]);
-                                        initializers[0][0] += Number(group[2]);
+                                        initializers[0][0] += maleCount;
+                                        initializers[1][0] += femaleCount;
                                     } else if (datum[3] == "t") {
-                                        initializers[1][1] += Number(group[0]);
-                                        initializers[0][1] += Number(group[2]);
+                                        initializers[0][1] += maleCount;
+                                        initializers[1][1] += femaleCount;
                                     } else if (datum[3] == "b") {
-                                        initializers[1][0] += Number(group[0]);
-                                        initializers[1][1] += Number(group[0]);
-                                        initializers[0][0] += Number(group[2]);
-                                        initializers[0][1] += Number(group[2]);
+                                        initializers[0][0] += maleCount;
+                                        initializers[0][1] += maleCount;
+                                        initializers[1][0] += femaleCount;
+                                        initializers[1][1] += femaleCount;
                                     } else if (datum[3] != "-") {
                                         console.error("Invalid type of initializer.");
                                     }
-                                } else if (group[1] == "m") {
-                                    male.innerHTML = Number(male.innerHTML) + Number(group[0]) * datum[5];
-                                    female.innerHTML = Number(female.innerHTML) + Number(group[2]) * datum[5];
-                                    
-                                    if (datum[3] == "m") {
-                                        initializers[1][0] += Number(group[2]);
-                                        initializers[0][0] += Number(group[0]);
-                                    } else if (datum[3] == "t") {
-                                        initializers[1][1] += Number(group[2]);
-                                        initializers[0][1] += Number(group[0]);
-                                    } else if (datum[3] == "b") {
-                                        initializers[1][0] += Number(group[2]);
-                                        initializers[1][1] += Number(group[2]);
-                                        initializers[0][0] += Number(group[0]);
-                                        initializers[0][1] += Number(group[0]);
-                                    } else if (datum[3] != "-") {
-                                        console.error("Invalid type of initializer.");
+                                } else if (group.length == 2) {
+                                    if (group[1] == "f") {
+                                        female.innerHTML = Number(female.innerHTML) + Number(group[0]) * datum[5];
+                                        
+                                        if (datum[3] == "m") {
+                                            initializers[1][0] += Number(group[0]);
+                                        } else if (datum[3] == "t") {
+                                            initializers[1][1] += Number(group[0]);
+                                        } else if (datum[3] == "b") {
+                                            initializers[1][0] += Number(group[0]);
+                                            initializers[1][1] += Number(group[0]);
+                                        } else if (datum[3] != "-") {
+                                            console.error("Invalid type of initializer.");
+                                        }
+                                    } else if (group[1] == "m") {
+                                        male.innerHTML = Number(male.innerHTML) + Number(group[0]) * datum[5];
+                                        
+                                        if (datum[3] == "m") {
+                                            initializers[0][0] += Number(group[0]);
+                                        } else if (datum[3] == "t") {
+                                            initializers[0][1] += Number(group[0]);
+                                        } else if (datum[3] == "b") {
+                                            initializers[0][0] += Number(group[0]);
+                                            initializers[0][1] += Number(group[0]);
+                                        } else if (datum[3] != "-") {
+                                            console.error("Invalid type of initializer.");
+                                        }
                                     }
+                                } else if (group.length == 4) {
+                                    if (group[1] == "f") {
+                                        female.innerHTML = Number(female.innerHTML) + Number(group[0]) * datum[5];
+                                        male.innerHTML = Number(male.innerHTML) + Number(group[2]) * datum[5];
+                                        
+                                        if (datum[3] == "m") {
+                                            initializers[1][0] += Number(group[0]);
+                                            initializers[0][0] += Number(group[2]);
+                                        } else if (datum[3] == "t") {
+                                            initializers[1][1] += Number(group[0]);
+                                            initializers[0][1] += Number(group[2]);
+                                        } else if (datum[3] == "b") {
+                                            initializers[1][0] += Number(group[0]);
+                                            initializers[1][1] += Number(group[0]);
+                                            initializers[0][0] += Number(group[2]);
+                                            initializers[0][1] += Number(group[2]);
+                                        } else if (datum[3] != "-") {
+                                            console.error("Invalid type of initializer.");
+                                        }
+                                    } else if (group[1] == "m") {
+                                        male.innerHTML = Number(male.innerHTML) + Number(group[0]) * datum[5];
+                                        female.innerHTML = Number(female.innerHTML) + Number(group[2]) * datum[5];
+                                        
+                                        if (datum[3] == "m") {
+                                            initializers[1][0] += Number(group[2]);
+                                            initializers[0][0] += Number(group[0]);
+                                        } else if (datum[3] == "t") {
+                                            initializers[1][1] += Number(group[2]);
+                                            initializers[0][1] += Number(group[0]);
+                                        } else if (datum[3] == "b") {
+                                            initializers[1][0] += Number(group[2]);
+                                            initializers[1][1] += Number(group[2]);
+                                            initializers[0][0] += Number(group[0]);
+                                            initializers[0][1] += Number(group[0]);
+                                        } else if (datum[3] != "-") {
+                                            console.error("Invalid type of initializer.");
+                                        }
+                                    }
+                                } else {
+                                    console.error("There was a peculiarity in the number of males and females.");
                                 }
-                            } else {
-                                console.error("There was a peculiarity in the number of males and females.");
                             }
+                        });
+                        row.appendChild(female);
+                        row.appendChild(male);
+                        
+                        ////////
+                        
+                        row = CT2.getElementsByTagName("tr")[CT2.getElementsByTagName("tr").length-1];
+                        if (row.getElementsByTagName("td").length >= 14) {
+                            row = CT2.insertRow(-1);  // The -1 inserts at the end of the table.
                         }
-                    });
-                    row.appendChild(female);
-                    row.appendChild(male);
-                    
-                    ////////
-                    
-                    row = CT2.getElementsByTagName("tr")[CT2.getElementsByTagName("tr").length-1];
-                    if (row.getElementsByTagName("td").length >= 14) {
-                        row = CT2.insertRow(-1);  // The -1 inserts at the end of the table.
-                    }
-                    female = document.createElement("td");
-                    male = document.createElement("td");
-                    female.innerHTML = 0;
-                    male.innerHTML = 0;
-                    let genderNumber = {"female": [], "male": []};
-                    day.data.forEach(function(person) {
-                        if (person[1] == "f") {
-                            if (genderNumber.female.indexOf(person[0]) == -1) {
-                                genderNumber.female.push(person[0]);
-                                female.innerHTML = Number(female.innerHTML) + 1;
+                        female = document.createElement("td");
+                        male = document.createElement("td");
+                        female.innerHTML = 0;
+                        male.innerHTML = 0;
+                        let genderNumber = {"female": [], "male": []};
+                        day.data.forEach(function(person) {
+                            if (person[1] == "f") {
+                                if (genderNumber.female.indexOf(person[0]) == -1) {
+                                    genderNumber.female.push(person[0]);
+                                    female.innerHTML = Number(female.innerHTML) + 1;
+                                }
+                            } else if (person[1] == "m") {
+                                if (genderNumber.male.indexOf(person[0]) == -1) {
+                                    genderNumber.male.push(person[0]);
+                                    male.innerHTML = Number(male.innerHTML) + 1;
+                                }
+                            } else if (person[1].indexOf("f") > -1 || person[1].indexOf("m") > -1) {
+                                
                             }
-                        } else if (person[1] == "m") {
-                            if (genderNumber.male.indexOf(person[0]) == -1) {
-                                genderNumber.male.push(person[0]);
-                                male.innerHTML = Number(male.innerHTML) + 1;
-                            }
-                        } else if (person[1].indexOf("f") > -1 || person[1].indexOf("m") > -1) {
-                            
-                        }
+                        });
+                        row.appendChild(female);
+                        row.appendChild(male);
                     });
-                    row.appendChild(female);
-                    row.appendChild(male);
-                });
-                CT1.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = CT1.getElementsByTagName("tr").length - 3;
-                CT2.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = CT2.getElementsByTagName("tr").length - 3;
-                initializers[0][2] = initializers[0][0] + initializers[0][1];
-                initializers[1][2] = initializers[1][0] + initializers[1][1];
-                initializers[2][0] = initializers[0][0] + initializers[1][0];
-                initializers[2][1] = initializers[0][1] + initializers[1][1];
-                initializers[2][2] = initializers[0][2] + initializers[1][2];
-                initializers.forEach(function(row, rowIndex) {
-                    row.forEach(function(column, columnIndex) {
-                        CT3.getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex].innerHTML = column;
+                    CT1.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = CT1.getElementsByTagName("tr").length - 3;
+                    CT2.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = CT2.getElementsByTagName("tr").length - 3;
+                    initializers[0][2] = initializers[0][0] + initializers[0][1];
+                    initializers[1][2] = initializers[1][0] + initializers[1][1];
+                    initializers[2][0] = initializers[0][0] + initializers[1][0];
+                    initializers[2][1] = initializers[0][1] + initializers[1][1];
+                    initializers[2][2] = initializers[0][2] + initializers[1][2];
+                    initializers.forEach(function(row, rowIndex) {
+                        row.forEach(function(column, columnIndex) {
+                            CT3.getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex].innerHTML = column;
+                        });
                     });
-                });
+                }
+                updateConversations();
             </script>
             <br>
             <h2>
@@ -1261,7 +1290,7 @@
                 </tr>
                 <tr>
                     <td>
-                         1:40am-6:03am | 5:15am-9:07am<note>I moved rooms.</note>| 3:24am-6:05am | 11:43pm-9:10am
+                         1:40am-6:03am | 5:15am-9:07am<note>I moved rooms.</note>| 3:24am-6:05am | 11:43pm-9:10am |12:08am-9:20pm
                     </td>
                 </tr>
             </table>
