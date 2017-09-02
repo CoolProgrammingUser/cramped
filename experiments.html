@@ -241,21 +241,11 @@
                     <th>Me:Them</th>
                 </tr>
                 <tr>
-                    <th>
-                        Girls
-                    </th>
-                    <td>
-                        212
-                    </td>
-                    <td>
-                        191
-                    </td>
-                    <td>
-                        403
-                    </td>
-                    <td>
-                        &asymp; 1.10995:1
-                    </td>
+                    <th>Girls</th>
+                    <td>212</td>
+                    <td>191</td>
+                    <td>403</td>
+                    <td>&asymp; 1.10995:1</td>
                 </tr>
                 <tr>
                     <th>
@@ -333,13 +323,13 @@
                     <th colspan="2">Sunday</th>
                 </tr>
                 <tr>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
                 </tr>
                 <tr>
                     <th>
@@ -366,13 +356,13 @@
                     <th colspan="2">Sunday</th>
                 </tr>
                 <tr>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
-                    <th>Females</th><th>Males</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
                 </tr>
                 <tr>
                     <th>
@@ -414,7 +404,6 @@
                 </tr>
             </table>
             <script>
-                // Name | Gender | Type | Initiator | Special | Length | Talk time | Enjoyability
                 var a = "a",
                     b = "b",
                     c = "c",
@@ -441,6 +430,7 @@
                     x = "x",
                     y = "y",
                     z = "z";
+                // Name | Gender | Type | Initiator | Special | Length | Talk time | Enjoyability
                 var conversations = [  // This is the raw data.
                     {
                         "date": "8/21/2017",
@@ -468,7 +458,7 @@
                             ["a8", "m", "s", "m", "n", 3, 3, 4],
                             ["a9", "m", "s", "t", "n", 0, 5, 4],
                             ["Madee Basteen", "f", "ps", "t", "n", 1, 5, 4],
-                            ["Andee Choo", "m", "pr", "m", "t", 0, 0, 2],
+                            ["Andee Choo", "m", "p", "m", "t", 0, 0, 2],
                             ["a10", "f", "a", "t", "n", 1, 4, 3],
                             ["a11", "f", "a", "t", "n", 1, 5, 2],
                             ["a12", "f", "a", "t", "n", 2, 5, 2],
@@ -836,6 +826,14 @@
                             ["Jahn ZookuhrElo", m, p, m, p, 1, 2, 2],
                             ["g(a13&a14)", m+f, s, t, n, 1, "32", 3]
                         ]
+                    },
+                    {
+                        "date": "9/2/2017",
+                        "notes": [],
+                        "data": [
+                            ["Andee Coo", m, p, t, t+i, 0, 3, 3],
+                            ["a1", m, s, t, n, 0, 5, 3]
+                        ]
                     }
                 ];
                 var presence = [
@@ -914,11 +912,102 @@
                                 [a, m, s],
                                 ["3a", "2m1f", s],
                                 ["2a", f, s],
-                                ["g(Trent Spaekrr&a)", "m_f", "b_s"]
+                                ["g(Trent Spaekrr&a)", "mf", "b_s"]
+                            ]
+                        }
+                    },
+                    {
+                        "tags": ["array", "dining hall"],
+                        "date": "8/30/2017",
+                        "description": "people entering the dining hall",
+                        "time": "7:24pm-8:04pm",
+                        "notes": [],
+                        "data": [
+                            ["3a", f, s],
+                            [a, f, s],
+                            [a, m, s],
+                            [a, f, s],
+                            [a, m, s],
+                            ["g(Nik KlaethRrmis&a)", m, "ps_s"],
+                            ["2a", m, s],
+                            [a, m, s],
+                            [a, m, s],
+                            [a, f, s],
+                            [a, m, s],
+                            ["2a", m, s],
+                            ["2a", m+f, s],
+                            ["2a", f, s],
+                            [a, m, s],
+                            [a, f, s],
+                            [a, m, s],
+                            ["4a", f, s],
+                            [a, f, s],
+                            [a, m, s],
+                            [a, m, s],
+                            [a, m, s],
+                            ["5a", "4f1m", s],
+                            [a, f, s],
+                            [a, f, s],
+                            [a, m, s],
+                            ["2a", f, s],
+                            ["2a", f, s],
+                            [a, m, s],
+                            [a, m, s]
+                        ]
+                    },
+                    {
+                        "tags": ["object", "dining hall"],
+                        "date": "8/30/2017",
+                        "description": "people already in the dining hall",
+                        "time": "8:05pm-8:10pm",
+                        "notes": [],
+                        "data": {
+                            "standing": [
+                                [a, m, s],
+                                [a, f, s]
+                            ],
+                            "sitting": [
+                                ["6a", "5m1f", s],
+                                ["3a", m, s],
+                                [a, f, s],
+                                ["3a", "2f1m", s],
+                                ["5a", "3f2m", s],
+                                ["4a", f, s],
+                                [a, f, s],
+                                ["4a", f, s],
+                                ["2a", f, s],
+                                ["5a", "4f1m", s],
+                                ["2a", f+m, s]
                             ]
                         }
                     }
                 ];
+                var peopleKey = {
+                    "p1": "morning meal lady",
+                    "p2": "Dwayn Jonz",
+                    "p3": "Mahlee Kuk",
+                    "p4": "chemistry professor",
+                    "p5": "bearded guy from history",
+                    "p6": "grill guy",
+                    "p7": "Towers West tenth floor 'Micaela'",
+                    "p8": "Towers West tenth floor corner girl",
+                    "p9": "girl from Pacific High School",
+                    "p10": "Jahn's out-going friend",
+                    "p11": "Kaytlin Ricrrdz",
+                    "p12": "AhndrAyuh (from art)",
+                    "p13": "Joee Taylrr",
+                    "p14": "Antuhnee (from art)",
+                    "p15": "Kamrin (from art)",
+                    "p16": "random guy from next art class",
+                    "p17": "Asian guy from floor",
+                    "p18": "Asian guy from floor",
+                    "p19": "elevator guy from floor",
+                    "p20": "elevator guy from floor",
+                    "p21": "blond guy who used to be lonely",
+                    "p22": "guy from Campus Outreach",
+                    "p23": "Tim Toney's sister",
+                    "p24": "girl assisting in lab"
+                };
                 function updateConversations() {
                     var CT1 = document.getElementById("conversationLengths"),  // Conversation Table 1
                         CT2 = document.getElementById("uniquePeople"),  // Conversation Table 2
@@ -962,7 +1051,7 @@
                                 }
                             } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
                                 let group = datum[1].match(/\d+|[A-Za-z]+/g);  // This can't use \w because it matches numbers too.
-                                if (group.length == 1) {  // if there aren't any numbers
+                                if (group.length == 1 && isNaN(group[0])) {  // if there aren't any numbers
                                     let maleCount = datum[1].match("m")==null ? 0 : datum[1].match("m").length,
                                         femaleCount = datum[1].match("f")==null ? 0 : datum[1].match("f").length;
                                     
@@ -1054,8 +1143,8 @@
                                 }
                             }
                         });
-                        row.appendChild(female);
                         row.appendChild(male);
+                        row.appendChild(female);
                         
                         ////////
                         
@@ -1079,12 +1168,30 @@
                                     genderNumber.male.push(person[0]);
                                     male.innerHTML = Number(male.innerHTML) + 1;
                                 }
-                            } else if (person[1].indexOf("f") > -1 || person[1].indexOf("m") > -1) {
-                                
+                            } else if (person[0].slice(0, 2) == "g(") {
+                                let group = person[1].match(/\d+|[A-Za-z]+/g);
+                                if (group.length == 1 && isNaN(group[0])) {
+                                    group = group[0].split();
+                                    person[0].slice(2, person[0].length-1).split("&").forEach(function(subperson, index) {
+                                        if (group[index] == "f") {
+                                            if (genderNumber.female.indexOf(subperson) == -1) {
+                                                genderNumber.female.push(subperson);
+                                                female.innerHTML = Number(female.innerHTML) + 1;
+                                            }
+                                        } else if (group[index] == "m") {
+                                            if (genderNumber.male.indexOf(subperson) == -1) {
+                                                genderNumber.male.push(subperson);
+                                                male.innerHTML = Number(male.innerHTML) + 1;
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    console.error("Invalid type of gender designation");
+                                }
                             }
                         });
-                        row.appendChild(female);
                         row.appendChild(male);
+                        row.appendChild(female);
                     });
                     CT1.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = CT1.getElementsByTagName("tr").length - 3;
                     CT2.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = CT2.getElementsByTagName("tr").length - 3;
@@ -1290,7 +1397,7 @@
                 </tr>
                 <tr>
                     <td>
-                         1:40am-6:03am | 5:15am-9:07am<note>I moved rooms.</note>| 3:24am-6:05am | 11:43pm-9:10am |12:08am-9:20pm
+                         1:40am-6:03am | 5:15am-9:07am<note>I moved rooms.</note>| 3:24am-6:05am | 11:43pm-9:10am |12:08am-9:20pm | 4:32am-1:03pm
                     </td>
                 </tr>
             </table>
