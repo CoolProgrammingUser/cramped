@@ -248,21 +248,11 @@
                     <td>&asymp; 1.10995:1</td>
                 </tr>
                 <tr>
-                    <th>
-                        Boys
-                    </th>
-                    <td>
-                        96
-                    </td>
-                    <td>
-                        144
-                    </td>
-                    <td>
-                        240
-                    </td>
-                    <td>
-                        0.<over>6</over>:1 = 2:3 = 1:1.5
-                    </td>
+                    <th>Boys</th>
+                    <td>96</td>
+                    <td>144</td>
+                    <td>240</td>
+                    <td>0.<over>6</over>:1 = 2:3 = 1:1.5</td>
                 </tr>
                 <tr>
                     <th>
@@ -859,7 +849,7 @@
                     },
                     {
                         "date": "9/4/2017",
-                        "notes": [],
+                        "notes": ["day off"],
                         "data": [
                             ["a1", f, a, t, n, 0, 5, 3],
                             ["Dahnoo", m, b, t, n, 3, 4, 3],
@@ -1304,6 +1294,54 @@
                             CT3.getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex].innerHTML = column;
                         });
                     });
+                    
+                    
+                    /*
+                    conversations.forEach(function(day) {
+                        var row,
+                            male,
+                            female;
+                        function prepareTable(table, rowLength) {
+                            rowLength = rowLength || 14;
+                            row = table.getElementsByTagName("tr")[table.getElementsByTagName("tr").length-1];
+                            if (row.getElementsByTagName("td").length >= rowLength) {
+                                row = table.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
+                            }
+                            male = document.createElement("td");
+                            female = document.createElement("td");
+                            male.innerHTML = 0;
+                            female.innerHTML = 0;
+                        }
+                        if (true) {  // if the day should be counted
+                            day.data.forEach(function(conversation) {
+                                let me = {},
+                                    them = [];
+                                if (conversation[0].slice(0, 2) == "g(") {
+                                    conversation[0].slice(2, conversation[0].length-1).split("&").forEach(function(person, index) {
+                                        let data = {};
+                                        data.name = person;
+                                        them.push(data);
+                                    });
+                                } else {
+                                    them.push({
+                                        name: conversation[0],
+                                        gender: conversation[1]
+                                    });
+                                }
+                                if (true) {  // if the interaction should be counted
+                                    //// do stuff with me
+                                }
+                                them.forEach(function(person) {
+                                    if (true) {  // if the interaction should be counted
+                                        //// do stuff with them
+                                    }
+                                });
+                            });
+                        } else {
+                            //// give the appropriate tables empty information
+                        }
+                    });
+                    */
                 }
                 updateConversations();
             </script>
