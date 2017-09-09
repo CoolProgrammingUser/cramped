@@ -13,6 +13,13 @@
             });
         </script>
         <style>
+            table {
+                border: none;
+                background: none;
+            }
+            td {
+                background: white;
+            }
             details {
                 border: .05em solid #58a;
                 border-radius: .25em;
@@ -27,18 +34,6 @@
             }
             .slim td {
                 padding: .5em 0em;
-            }
-            #sleep1 {
-                border: none;
-                background: transparent;
-            }
-            #sleep2 {
-                border: none;
-                background: transparent;
-            }
-            #sleep3 {
-                border: none;
-                background: transparent;
             }
         </style>
     </head>
@@ -255,38 +250,17 @@
                     <td>0.<over>6</over>:1 = 2:3 = 1:1.5</td>
                 </tr>
                 <tr>
-                    <th>
-                        Total
-                    </th>
-                    <td>
-                        308
-                    </td>
-                    <td>
-                        335
-                    </td>
-                    <td>
-                        643
-                    </td>
-                    <td>
-                    </td>
+                    <th>Total</th>
+                    <td>308</td>
+                    <td>335</td>
+                    <td>643</td>
+                    <td></td>
                 <tr>
-                    <th>
-                        Girls:Boys
-                    </th>
-                    <td>
-                        <mark style="background-color:red">
-                            2.208<over>3</over>:1
-                        </mark>
-                    </td>
-                    <td>
-                        <mark>
-                            1.3263<over>8</over>:1 &asymp; <div class="circle">4:3</div>
-                        </mark>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
+                    <th>Girls:Boys</th>
+                    <td><mark style="background-color:red">2.208<over>3</over>:1</mark></td>
+                    <td><mark>1.3263<over>8</over>:1 &asymp; <div class="circle">4:3</div></mark></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
             <br>
@@ -1173,7 +1147,7 @@
                                 } else if (datum[3] == "b") {
                                     initializers[1][0] += 1;
                                     initializers[1][1] += 1;
-                                } else if (datum[3] != "-") {
+                                } else if (datum[3] != "-" && datum[3] != "n") {
                                     console.error("Invalid type of initializer.");
                                 }
                             } else if (datum[1] == "m") {
@@ -1186,7 +1160,7 @@
                                 } else if (datum[3] == "b") {
                                     initializers[0][0] += 1;
                                     initializers[0][1] += 1;
-                                } else if (datum[3] != "-") {
+                                } else if (datum[3] != "-" && datum[3] != "n") {
                                     console.error("Invalid type of initializer.");
                                 }
                             } else if (datum[1].indexOf("f") > -1 || datum[1].indexOf("m") > -1) {  // for groups
@@ -1209,7 +1183,7 @@
                                         initializers[0][1] += maleCount;
                                         initializers[1][0] += femaleCount;
                                         initializers[1][1] += femaleCount;
-                                    } else if (datum[3] != "-") {
+                                    } else if (datum[3] != "-" && datum[3] != "n") {
                                         console.error("Invalid type of initializer.");
                                     }
                                 } else if (group.length == 2) {
@@ -1223,7 +1197,7 @@
                                         } else if (datum[3] == "b") {
                                             initializers[1][0] += Number(group[0]);
                                             initializers[1][1] += Number(group[0]);
-                                        } else if (datum[3] != "-") {
+                                        } else if (datum[3] != "-" && datum[3] != "n") {
                                             console.error("Invalid type of initializer.");
                                         }
                                     } else if (group[1] == "m") {
@@ -1236,7 +1210,7 @@
                                         } else if (datum[3] == "b") {
                                             initializers[0][0] += Number(group[0]);
                                             initializers[0][1] += Number(group[0]);
-                                        } else if (datum[3] != "-") {
+                                        } else if (datum[3] != "-" && datum[3] != "n") {
                                             console.error("Invalid type of initializer.");
                                         }
                                     }
@@ -1256,7 +1230,7 @@
                                             initializers[1][1] += Number(group[0]);
                                             initializers[0][0] += Number(group[2]);
                                             initializers[0][1] += Number(group[2]);
-                                        } else if (datum[3] != "-") {
+                                        } else if (datum[3] != "-" && datum[3] != "n") {
                                             console.error("Invalid type of initializer.");
                                         }
                                     } else if (group[1] == "m") {
@@ -1274,7 +1248,7 @@
                                             initializers[1][1] += Number(group[2]);
                                             initializers[0][0] += Number(group[0]);
                                             initializers[0][1] += Number(group[0]);
-                                        } else if (datum[3] != "-") {
+                                        } else if (datum[3] != "-" && datum[3] != "n") {
                                             console.error("Invalid type of initializer.");
                                         }
                                     }
