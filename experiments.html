@@ -997,7 +997,12 @@
                             ["DayvAhn", m, b, m, c+t, 1, 3, 3],
                             ["Dahnoo", m, b, t, t+j, 0, 5, 3],
                             ["Kaylueb Hamueltin", m, r, t, i, 3, 3, 4],
-                            ["Dahnoo", m, b, m, c, 2, 4, 3]
+                            ["Dahnoo", m, b, m, c, 2, 4, 3],
+                            ["SotAhro", m, b, t, c, 3, 2, 3],
+                            ["Kaylueb Hamueltin", m, r, m, c, 3, 1, 3],
+                            ["g(SotAhro&Kaylueb Hamueltin)", m, "b_r", t, n, 1, "33", 3],
+                            ["a4", m, a, m, n, 0, 3, 3],
+                            ["Kaylueb Hamueltin", m, r, t, n, 0, 5, 3]
                         ]
                     }
                 ];
@@ -1347,6 +1352,7 @@
                                 if (group.length == 1 && isNaN(group[0])) {
                                     group = group[0].split();
                                     person[0].slice(2, person[0].length-1).split("&").forEach(function(subperson, index) {
+                                        subperson = subperson.trim();
                                         if (group[index] == "f") {
                                             if (genderNumber.female.indexOf(subperson) == -1) {
                                                 genderNumber.female.push(subperson);
