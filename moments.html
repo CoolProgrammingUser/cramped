@@ -5,6 +5,7 @@
         <script>
             window.addEventListener("load", function() {
                 pageJump("moments");
+                getId("birthdayGreetingVideo").src = "videos/Birthday greeting.mp4";
             });
         </script>
     </head>
@@ -109,14 +110,13 @@
                 "Surprise" Birthday Party
             </h2>
             <video width="300" controls>
-                <source src="videos/Birthday greeting.mp4" type="video/mp4">
+                <source id="birthdayGreetingVideo" type="video/mp4">
                 Your browser doesn't support watching videos this way.
             </video>
             <br>
-            <img width="500" src="images/Candle rocket.jpg" style="transform:rotate(180deg)">
+            <img width="500" src="images/Candle rocket.jpg">
             <br>
-            <img width="400" src="images/Birthday booklet.jpg" style="margin: 50px 0px; transform: rotate(90deg);">
-            <!-- The 50px is one half of the difference between the "width" and the height. -->
+            <img width="400" src="images/Birthday booklet.jpg">
             <br>
             <h2>
                 Loss of Another Friend
