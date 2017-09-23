@@ -1877,10 +1877,14 @@
                                         // sets the density
                                         data.density = conversation[6];
                                         // sets the participation
-                                        if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
-                                            data.participation = Number(conversation[7].split("~")[index]);
+                                        if (conversation[7] instanceof String) {  // if there was a group of people
+                                            if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
+                                                data.participation = Number(conversation[7].split("~")[index]);
+                                            } else {
+                                                data.participation = Number(conversation[7].split()[index]);
+                                            }
                                         } else {
-                                            data.participation = Number(conversation[7].split()[index]);
+                                            console.error("Conversation number " + (number+1) + " on " + day.date + " has a group participation value that isn't a string.");
                                         }
                                         // sets the enjoyability
                                         data.enjoyability = conversation[8];
