@@ -1827,7 +1827,7 @@
                                     } else {
                                         conversation[5] = conversation[5] / 5 * 7;
                                     }
-                                    if (conversation[6] instanceof String) {
+                                    if (conversation[6].constuctor == String) {
                                         let participations = conversation[6].split();
                                         participations.forEach(function(participation, index) {
                                             participations[index] = Number(participation) / 5 * 7;
@@ -1877,7 +1877,7 @@
                                         // sets the density
                                         data.density = conversation[6];
                                         // sets the participation
-                                        if (conversation[7] instanceof String) {  // if there was a group of people
+                                        if (conversation[7].constructor == String) {  // if there was a group of people
                                             if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
                                                 data.participation = Number(conversation[7].split("~")[index]);
                                             } else {
@@ -1920,7 +1920,7 @@
                                 prepareTable(document.getElementById("uniquePeople"));
                                 let uniquePeople = {f: [], m: []};
                                 them.forEach(function(person) {
-                                    if (true && uniquePeople[person.gender].indexOf(person.name) == -1) {
+                                    if (true && uniquePeople[person.gender] && uniquePeople[person.gender].indexOf(person.name) == -1) {
                                         uniquePeople[person.gender].push(person.name);
                                         addInformation(person.gender, 1);
                                     }
