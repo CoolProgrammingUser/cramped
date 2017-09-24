@@ -1787,16 +1787,19 @@
                     
                     /*/
                     
-                    var tableRows = [],
+                    var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople")],
+                        rows = [null, null],
                         male,
                         female;
-                    function prepareTable(table, rowLength) {
-                        rowLength = rowLength || 14;
-                        let row = table.getElementsByTagName("tr")[table.getElementsByTagName("tr").length-1];
-                        if (row.getElementsByTagName("td").length >= rowLength) {
-                            row = table.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
-                        }
-                        tableRows.push(row);
+                    function prepareTables() {
+                        tables.forEach(function(table, index) {
+                            rows[index] = table.getElementsByTagName("tr")[table.getElementsByTagName("tr").length-1];
+                            if (rows[index].getElementsByTagName("td").length >= 14) {
+                                rows[index] = table.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
+                            }
+                        });
+                    }
+                    function freshData() {
                         male = document.createElement("td");
                         female = document.createElement("td");
                         male.innerHTML = 0;
@@ -1813,14 +1816,13 @@
                         index -= 1;
                         male.innerHTML = Math.round(male.innerHTML);
                         female.innerHTML = Math.round(female.innerHTML);
-                        tableRows[index].appendChild(male);
-                        tableRows[index].appendChild(female);
+                        rows[index].appendChild(male);
+                        rows[index].appendChild(female);
                     }
                     let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
                     conversations.forEach(function(day) {
                         if (true) {  // if the day should be counted
-                            prepareTable(document.getElementById("conversationLengths"));
-                            prepareTable(document.getElementById("uniquePeople"));
+                            prepareTables();
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
                                     them = [];
@@ -1915,6 +1917,7 @@
                                     //// do stuff with me
                                 }
                                 
+                                freshData();
                                 them.forEach(function(person) {
                                     if (true) {  // if the interaction should be counted
                                         addInformation(person.gender, person.length * person.density / 7);
@@ -1922,6 +1925,7 @@
                                 });
                                 extendTable(1);
                                 
+                                freshData();
                                 let uniquePeople = {f: [], m: []};
                                 them.forEach(function(person) {
                                     if (true && uniquePeople[person.gender] && uniquePeople[person.gender].indexOf(person.name) == -1) {
@@ -1960,8 +1964,8 @@
                                 });
                             });
                         } else {
-                            prepareTable(document.getElementById("conversationLengths"));
-                            prepareTable(document.getElementById("uniquePeople"));
+                            prepareTables();
+                            freshData();  // This doesn't need to be repeated because the data is the same.
                             extendTable(1);
                             extendTable(2);
                         }
