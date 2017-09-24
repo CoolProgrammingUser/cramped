@@ -1828,6 +1828,7 @@
                     conversations.forEach(function(day) {
                         if (true) {  // if the day should be counted
                             prepareTables();
+                            let uniquePeople = {f: [], m: []};
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
                                     them = [];
@@ -1928,7 +1929,6 @@
                                     }
                                 });
                                 
-                                let uniquePeople = {f: [], m: []};
                                 them.forEach(function(person) {
                                     if (true && uniquePeople[person.gender] && uniquePeople[person.gender].indexOf(person.name) == -1) {
                                         uniquePeople[person.gender].push(person.name);
