@@ -1928,7 +1928,7 @@
                                         addInformation(person.gender, 1);
                                     }
                                 });
-                                extendTable();
+                                extendTable(2);
                                 
                                 them.forEach(function(person) {
                                     if (true) {
@@ -1960,9 +1960,9 @@
                             });
                         } else {
                             prepareTable(document.getElementById("conversationLengths"));
-                            extendTable();
                             prepareTable(document.getElementById("uniquePeople"));
-                            extendTable();
+                            extendTable(1);
+                            extendTable(2);
                         }
                     });
                     initiators[0][2] = initiators[0][0] + initiators[0][1];
