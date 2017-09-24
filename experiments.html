@@ -1371,7 +1371,11 @@
                             ["a4", f, s, t, n, 1, 7, 7, 4],
                             ["p57", m, f, t, n, 1, 5, 7, 4],
                             ["a5", m, s, t, n, 1, 7, 7, 4],
-                            ["p55", m, s, t, n, 1, 7, 7, 5]
+                            ["p55", m, s, t, n, 1, 7, 7, 5],
+                            ["p27", f, a, t, n, 1, 5, 7, 4],
+                            ["a6", m, a, t, n, 1, 6, 5, 4],
+                            ["a7", f, s, t, n, 1, 7, 7, 4],
+                            ["a8", m, s, t, n, 1, 7, 7, 4]
                         ]
                     }
                 ];
@@ -1789,35 +1793,34 @@
                     
                     var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople")],
                         rows = [null, null],
-                        male,
-                        female;
+                        male = [],
+                        female = [];
                     function prepareTables() {
                         tables.forEach(function(table, index) {
                             rows[index] = table.getElementsByTagName("tr")[table.getElementsByTagName("tr").length-1];
                             if (rows[index].getElementsByTagName("td").length >= 14) {
                                 rows[index] = table.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
                             }
+                            male.push(document.createElement("td"));
+                            female.push(document.createElement("td"));
+                            male[male.length-1].innerHTML = 0;
+                            female[female.length-1].innerHTML = 0;
                         });
                     }
-                    function freshData() {
-                        male = document.createElement("td");
-                        female = document.createElement("td");
-                        male.innerHTML = 0;
-                        female.innerHTML = 0;
-                    }
-                    function addInformation(gender, information) {
+                    function addInformation(tableNumber, gender, information) {
                         if (gender == "m") {
-                            male.innerHTML = Number(male.innerHTML) + information;
+                            male[tableNumber-1].innerHTML = Number(male[tableNumber-1].innerHTML) + information;
                         } else if (gender == "f") {
-                            female.innerHTML = Number(female.innerHTML) + information;
+                            female[tableNumber-1].innerHTML = Number(female[tableNumber-1].innerHTML) + information;
                         }
                     }
-                    function extendTable(index) {
-                        index -= 1;
-                        male.innerHTML = Math.round(male.innerHTML);
-                        female.innerHTML = Math.round(female.innerHTML);
-                        rows[index].appendChild(male);
-                        rows[index].appendChild(female);
+                    function extendTables() {
+                        tables.forEach(function(table, index) {
+                            male[index].innerHTML = Math.round(male[index].innerHTML);
+                            female[index].innerHTML = Math.round(female[index].innerHTML);
+                            rows[index].appendChild(male[index]);
+                            rows[index].appendChild(female[index]);
+                        });
                     }
                     let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
                     conversations.forEach(function(day) {
@@ -1917,23 +1920,19 @@
                                     //// do stuff with me
                                 }
                                 
-                                freshData();
                                 them.forEach(function(person) {
                                     if (true) {  // if the interaction should be counted
-                                        addInformation(person.gender, person.length * person.density / 7);
+                                        addInformation(1, person.gender, person.length * person.density / 7);
                                     }
                                 });
-                                extendTable(1);
                                 
-                                freshData();
                                 let uniquePeople = {f: [], m: []};
                                 them.forEach(function(person) {
                                     if (true && uniquePeople[person.gender] && uniquePeople[person.gender].indexOf(person.name) == -1) {
                                         uniquePeople[person.gender].push(person.name);
-                                        addInformation(person.gender, 1);
+                                        addInformation(2, person.gender, 1);
                                     }
                                 });
-                                extendTable(2);
                                 
                                 them.forEach(function(person) {
                                     if (true) {
@@ -1963,11 +1962,10 @@
                                     }
                                 });
                             });
+                            extendTables();
                         } else {
                             prepareTables();
-                            freshData();  // This doesn't need to be repeated because the data is the same.
-                            extendTable(1);
-                            extendTable(2);
+                            extendTables();
                         }
                     });
                     initiators[0][2] = initiators[0][0] + initiators[0][1];
