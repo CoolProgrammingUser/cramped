@@ -1787,15 +1787,16 @@
                     
                     /*/
                     
-                    var row,
+                    var tableRows = [],
                         male,
                         female;
                     function prepareTable(table, rowLength) {
                         rowLength = rowLength || 14;
-                        row = table.getElementsByTagName("tr")[table.getElementsByTagName("tr").length-1];
+                        let row = table.getElementsByTagName("tr")[table.getElementsByTagName("tr").length-1];
                         if (row.getElementsByTagName("td").length >= rowLength) {
                             row = table.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
                         }
+                        tableRows.push(row);
                         male = document.createElement("td");
                         female = document.createElement("td");
                         male.innerHTML = 0;
@@ -1808,15 +1809,17 @@
                             female.innerHTML = Number(female.innerHTML) + information;
                         }
                     }
-                    function extendTable() {
+                    function extendTable(index) {
                         male.innerHTML = Math.round(male.innerHTML);
                         female.innerHTML = Math.round(female.innerHTML);
-                        row.appendChild(male);
-                        row.appendChild(female);
+                        tableRows[index].appendChild(male);
+                        tableRows[index].appendChild(female);
                     }
                     let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
                     conversations.forEach(function(day) {
                         if (true) {  // if the day should be counted
+                            prepareTable(document.getElementById("conversationLengths"));
+                            prepareTable(document.getElementById("uniquePeople"));
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
                                     them = [];
@@ -1911,15 +1914,13 @@
                                     //// do stuff with me
                                 }
                                 
-                                prepareTable(document.getElementById("conversationLengths"));
                                 them.forEach(function(person) {
                                     if (true) {  // if the interaction should be counted
                                         addInformation(person.gender, person.length * person.density / 7);
                                     }
                                 });
-                                extendTable();
+                                extendTable(1);
                                 
-                                prepareTable(document.getElementById("uniquePeople"));
                                 let uniquePeople = {f: [], m: []};
                                 them.forEach(function(person) {
                                     if (true && uniquePeople[person.gender] && uniquePeople[person.gender].indexOf(person.name) == -1) {
