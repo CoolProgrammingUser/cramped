@@ -1883,8 +1883,10 @@
                                             } else {
                                                 data.participation = Number(conversation[7].split()[index]);
                                             }
+                                        } else if (conversation[7].constructor == Number) {
+                                            data.participation = conversation[7];
                                         } else {
-                                            console.error("Conversation number " + (number+1) + " on " + day.date + " has a group participation value that isn't a string.");
+                                            console.error("Conversation number " + (number+1) + " on " + day.date + " has an invalid data type for participation.");
                                         }
                                         // sets the enjoyability
                                         data.enjoyability = conversation[8];
