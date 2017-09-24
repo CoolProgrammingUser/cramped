@@ -1796,6 +1796,8 @@
                         male = [],
                         female = [];
                     function prepareTables() {
+                        male = [];
+                        female = [];
                         tables.forEach(function(table, index) {
                             rows[index] = table.getElementsByTagName("tr")[table.getElementsByTagName("tr").length-1];
                             if (rows[index].getElementsByTagName("td").length >= 14) {
