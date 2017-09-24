@@ -1970,6 +1970,8 @@
                             extendTables();
                         }
                     });
+                    tables[0].getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = tables[0].getElementsByTagName("tr").length - 3;
+                    tables[1].getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = tables[1].getElementsByTagName("tr").length - 3;
                     initiators[0][2] = initiators[0][0] + initiators[0][1];
                     initiators[1][2] = initiators[1][0] + initiators[1][1];
                     initiators[2][0] = initiators[0][0] + initiators[1][0];
