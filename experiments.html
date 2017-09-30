@@ -1836,7 +1836,9 @@
                     function extendTables() {
                         tables.forEach(function(table, index) {
                             male[index].innerHTML = Math.round(male[index].innerHTML);
+                            male[index].title = day.date;
                             female[index].innerHTML = Math.round(female[index].innerHTML);
+                            female[index].title = day.date;
                             rows[index].appendChild(male[index]);
                             rows[index].appendChild(female[index]);
                         });
