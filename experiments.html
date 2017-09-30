@@ -1833,13 +1833,12 @@
                             female[tableNumber-1].innerHTML = Number(female[tableNumber-1].innerHTML) + information;
                         }
                     }
-                    var day;  // This is just so extendTables will parse.
-                    function extendTables() {
+                    function extendTables(date) {
                         tables.forEach(function(table, index) {
                             male[index].innerHTML = Math.round(male[index].innerHTML);
                             female[index].innerHTML = Math.round(female[index].innerHTML);
-                            male[index].title = day.date;
-                            female[index].title = day.date;
+                            male[index].title = date;
+                            female[index].title = date;
                             rows[index].appendChild(male[index]);
                             rows[index].appendChild(female[index]);
                         });
@@ -2028,10 +2027,10 @@
                                     }
                                 });
                             });
-                            extendTables();
+                            extendTables(day.date);
                         } else {
                             prepareTables();
-                            extendTables();
+                            extendTables(day.date);
                         }
                     });
                     tables[0].getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = tables[0].getElementsByTagName("tr").length - 3;
