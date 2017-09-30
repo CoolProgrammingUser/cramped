@@ -1833,11 +1833,12 @@
                             female[tableNumber-1].innerHTML = Number(female[tableNumber-1].innerHTML) + information;
                         }
                     }
+                    var day;  // This is just so extendTables will parse.
                     function extendTables() {
                         tables.forEach(function(table, index) {
                             male[index].innerHTML = Math.round(male[index].innerHTML);
-                            male[index].title = day.date;
                             female[index].innerHTML = Math.round(female[index].innerHTML);
+                            male[index].title = day.date;
                             female[index].title = day.date;
                             rows[index].appendChild(male[index]);
                             rows[index].appendChild(female[index]);
