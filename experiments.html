@@ -7,7 +7,7 @@
                 pageJump("experiments");
                 colorCode("table1");
                 colorCode(document.getElementById("title2"), null, [255,0,0], [255,0,255], [0,0,255]);
-                colorCode("conversationLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0]);
+                colorCode("conversationLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0], [0,255,0]);
                 colorCode("uniquePeople");
                 colorCode(["sleep1", "sleep2", "sleep3"]);
             });
@@ -1902,9 +1902,31 @@
                                         // sets the indicators
                                         data.indicators = conversation[4].split();
                                         // sets the length
-                                        data.length = conversation[5];
+                                        data.length = conversation[5]==1&&conversation[6]==7 ? .8 : conversation[5];
                                         // sets the density
-                                        data.density = conversation[6];
+                                        data.density = (function() {
+                                            switch (conversation[6]) {
+                                                case 0:
+                                                    return 0;
+                                                case 1:
+                                                    return .05;
+                                                case 2:
+                                                    return .1666666667;
+                                                case 3:
+                                                    return .3333333333;
+                                                case 4:
+                                                    return .5;
+                                                case 5:
+                                                    return .6666666667;
+                                                case 6:
+                                                    return .8333333333;
+                                                case 7:
+                                                    return 1;
+                                                default:
+                                                    console.error("Conversation number " + (number+1) + " on " + day.date + " has an invalid conversation density.");
+                                                    return 0;
+                                            }
+                                        })();
                                         // sets the participation
                                         if (conversation[7].constructor == String) {  // if there was a group of people
                                             if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
@@ -1929,8 +1951,30 @@
                                         classification: conversation[2],
                                         initiator: conversation[3],
                                         indicators: conversation[4].split(),
-                                        length: conversation[5],
-                                        density: conversation[6],
+                                        length: conversation[5]==1&&conversation[6]==7 ? .8 : conversation[5],
+                                        density: (function() {
+                                            switch (conversation[6]) {
+                                                case 0:
+                                                    return 0;
+                                                case 1:
+                                                    return .05;
+                                                case 2:
+                                                    return .1666666667;
+                                                case 3:
+                                                    return .3333333333;
+                                                case 4:
+                                                    return .5;
+                                                case 5:
+                                                    return .6666666667;
+                                                case 6:
+                                                    return .8333333333;
+                                                case 7:
+                                                    return 1;
+                                                default:
+                                                    console.error("Conversation number " + (number+1) + " on " + day.date + " has an invalid conversation density.");
+                                                    return 0;
+                                            }
+                                        })(),
                                         participation: conversation[7],
                                         enjoyability: conversation[8]
                                     });
@@ -1942,7 +1986,7 @@
                                 
                                 them.forEach(function(person) {
                                     if (true) {  // if the interaction should be counted
-                                        addInformation(1, person.gender, person.length * person.density / 7);
+                                        addInformation(1, person.gender, person.length * person.density);
                                     }
                                 });
                                 
