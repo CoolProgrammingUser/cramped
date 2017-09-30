@@ -1873,10 +1873,10 @@
                                         conversation.splice(6, 0, 6);
                                     }
                                 } else if (conversation.length < 9) {
+                                    console.error("Conversation number " + (number+1) + " on " + day.date + " has too few data points.");
                                     for (let i=0; i<9; i++) {  // This makes sure there isn't a range error later.
                                         conversation.push(null);
                                     }
-                                    console.error("Conversation number " + (number+1) + " on " + day.date + " has too few data points.");
                                 } else if (conversation.length > 9) {
                                     console.error("Conversation number " + (number+1) + " on " + day.date + " has too many data points.");
                                 }
