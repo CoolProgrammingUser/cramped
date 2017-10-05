@@ -1680,12 +1680,40 @@
                             ["p40",f,c,m,n,1,7,4,5],
                             ["group","ffm",c,b,n,1,4,7,4],
                             ["a3",f,s,t,n,1,7,7,4],
+                            ["p29",m,b,t,n,1,7,7,5],
                             ["SotAhro",m,b,t,n,1,6,6,4],
                             ["Kaylueb Hamueltin",m,r,t,n,1,7,7,5],
                             ["Kaylueb Hamueltin",m,r,m,n,1,7,4,5],
                             ["DayvAhn",m,b,t,n,1,7,7,5],
                             ["Kaylueb Hamueltin",m,r,m,n,1,7,0,5],
-                            ["SotAhro",m,b,t,n,1,4,5,4]
+                            ["SotAhro",m,b,t,n,1,4,5,4],
+                            ["SotAhro",m,b,b,d,5,6,4,5],
+                            ["a4",f,f,t,n,1,7,7,4],
+                            ["p46",m,f,t,n,1,7,7,4],
+                            ["a5",m,f,m,n,1,7,0,4],
+                            ["p73",m,s,n,j,3,4,4,5],
+                            ["p74",m,b,n,j,1,0,0,5],
+                            ["Alshrr",m,b,t,j+g,2,7,3,5],
+                            ["Kaylueb Hamueltin",m,r,t,n,1,7,7,5],
+                            ["SotAhro",m,b,t,n,1,7,5,5],
+                            ["SotAhro",m,b,t,n,1,7,7,4]
+                        ]
+                    },
+                    {
+                        date: "10/4/2017",
+                        notes: ["no data"],
+                        data: []
+                    },
+                    {
+                        date: "10/5/2017",
+                        notes: [],
+                        data: [
+                            ["Kaylueb Hamueltin",m,r,t,n,1,7,7,5],
+                            ["Dahleeuh",f,a,t,n,1,0,0,5],
+                            ["Jenee Apolgayt",f,p+s,t,n,1,7,7,5],
+                            ["PuetrIshuh Ferish",f,a,t,g+c,1,7,4,4],
+                            ["PuetrIshuh Ferish",f,a,m,c,1,7,5,4],
+                            ["Kaylueb Hamueltin",m,r,t,n,1,7,7,5]
                         ]
                     }
                 ];
@@ -1905,8 +1933,11 @@
                     p67: "unenthusiastic dining hall girl",
                     p68: "tall darker-skinned dining hall guy",
                     p69: "red-headed food server",
-                    p70: "African American food lady",
-                    p71: "girl with straight blonde hair and glasses"
+                    p70: "African American adult food lady",
+                    p71: "girl with straight blonde hair and glasses",
+                    p72: "my group's speaker in History",
+                    p73: "SotAhro's tall Japanese friend",
+                    p74: "SotAhro's Japanese friend from floor"
                 };
                 function updateConversations() {
                     /**
@@ -1939,8 +1970,12 @@
                     }
                     function extendTables(date) {
                         tables.forEach(function(table, index) {
-                            male[index].innerHTML = Math.round(male[index].innerHTML);
-                            female[index].innerHTML = Math.round(female[index].innerHTML);
+                            if (!isNaN(male[index].innerHTML)) {
+                                male[index].innerHTML = Math.round(male[index].innerHTML);
+                            }
+                            if (!isNaN(female[index].innerHTML)) {
+                                female[index].innerHTML = Math.round(female[index].innerHTML);
+                            }
                             male[index].title = date;
                             female[index].title = date;
                             rows[index].appendChild(male[index]);
@@ -1949,7 +1984,11 @@
                     }
                     let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
                     conversations.forEach(function(day) {
-                        if (true) {  // if the day should be counted
+                        let dayIsCountable = true;
+                        if (day.notes.indexOf("no data") > -1) {
+                            dayIsCountable = false;
+                        }
+                        if (dayIsCountable) {  // if the day should be counted
                             prepareTables();
                             let uniquePeople = {f: [], m: []};
                             day.data.forEach(function(conversation, number) {
@@ -2091,21 +2130,20 @@
                                 }
                                 
                                 them.forEach(function(person) {
-                                    if (true) {  // if the interaction should be counted
+                                    let desiredInteraction = true;
+                                    if (desiredInteraction) {  // if the interaction should be counted
+                                        
+                                        // sets the information for the first conversation table
                                         addInformation(1, person.gender, person.length * person.density);
-                                    }
-                                });
-                                
-                                them.forEach(function(person) {
-                                    if (true && uniquePeople[person.gender] && uniquePeople[person.gender].indexOf(person.name) == -1) {
-                                        uniquePeople[person.gender].push(person.name);
-                                        addInformation(2, person.gender, 1);
-                                    }
-                                });
-                                
-                                them.forEach(function(person) {
-                                    if (true) {
-                                         if (person.gender == "m") {
+                                        
+                                        // sets the information for the second conversation table
+                                        if (uniquePeople[person.gender] && uniquePeople[person.gender].indexOf(person.name) == -1) {
+                                            uniquePeople[person.gender].push(person.name);
+                                            addInformation(2, person.gender, 1);
+                                        }
+                                        
+                                        // sets the information for the third conversation table
+                                        if (person.gender == "m") {
                                             if (person.initiator == "m") {
                                                 initiators[0][0] += 1;
                                             } else if (person.initiator == "t") {
@@ -2128,8 +2166,16 @@
                                                 console.error("Conversation number " + (number+1) + " on " + day.date + " has an invalid type of initiator.");
                                             }
                                         }
+                                        
                                     }
                                 });
+                            });
+                            extendTables(day.date);
+                        } else if (day.notes.indexOf("no data") > -1) {
+                            prepareTables();
+                            tables.forEach(function(table, index) {
+                                male[index].innerHTML = "?";
+                                female[index].innerHTML = "?";
                             });
                             extendTables(day.date);
                         } else {
@@ -2366,7 +2412,7 @@
                 </tr>
                 <tr>
                     <td>
-                         4:57am-6:05am |12:17am-8:50am
+                         4:57am-6:05am |12:17am-8:50am | 9:56pm-6:10am | 1:30am-9:35am
                     </td>
                 </tr>
             </table>
