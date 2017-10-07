@@ -2142,7 +2142,7 @@
                         if (dayIsCountable) {  // if the day should be counted
                             prepareTables();
                             let uniquePeople = {m: [], f: []},
-                                interactionNumbers = {m: 1, f: 1, total: 0};  // m and f have the value of 1 so there's never division by 0
+                                interactionNumbers = {m: 0, f: 0, total: 0};
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
                                     them = [];
@@ -2333,8 +2333,8 @@
                             female[2].innerHTML = Number(female[0].innerHTML) / Number(female[1].innerHTML);
                             
                             // sets the rest of the information for the fourth conversation table
-                            male[3].innerHTML = Number(male[3].innerHTML) / interactionNumbers.m;
-                            female[3].innerHTML = Number(female[3].innerHTML) / interactionNumbers.f;
+                            male[3].innerHTML = Number(male[3].innerHTML) / (interactionNumbers.m==0 ? 1 : interactionNumbers.m);
+                            female[3].innerHTML = Number(female[3].innerHTML) / (interactionNumbers.f==0 ? 1 : interactionNumbers.f);
                             
                             // extends the tables
                             extendTables(day.date);
