@@ -9,6 +9,7 @@
                 colorCode(document.getElementById("title2"), null, [255,0,0], [255,0,255], [0,0,255]);
                 colorCode("conversationLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0], [0,255,0]);
                 colorCode("uniquePeople");
+                colorCode("averageLengths");
                 colorCode(["sleep1", "sleep2", "sleep3"]);
             });
         </script>
@@ -341,6 +342,39 @@
                 <tr>
                     <th>
                         Number<br>of<br>people
+                    </th>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <table class="smaller" id="averageLengths">
+                <tr>
+                    <th colspan="15">
+                        Average conversation lengths
+                    </th>
+                </tr>
+                <tr>
+                    <th rowspan="2"></th>
+                    <th colspan="2">Monday</th>
+                    <th colspan="2">Tuesday</th>
+                    <th colspan="2">Wednesday</th>
+                    <th colspan="2">Thursday</th>
+                    <th colspan="2">Friday</th>
+                    <th colspan="2">Saturday</th>
+                    <th colspan="2">Sunday</th>
+                </tr>
+                <tr>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                </tr>
+                <tr>
+                    <th>
+                        Average<br>conversation<br>length
                     </th>
                 </tr>
             </table>
@@ -2026,7 +2060,7 @@
                     /**
                     puts information into the conversation tables
                     */
-                    var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople")],
+                    var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople"), document.getElementById("averageLengths")],
                         rows = [null, null],
                         male = [],
                         female = [];
@@ -2208,7 +2242,7 @@
                                     });
                                 }
                                 
-                                them.forEach(function(person) {
+                                them.forEach(function(person) {  // adds information to the tables
                                     let desiredInteraction = true;
                                     if (desiredInteraction) {  // if the interaction should be counted
                                         
@@ -2221,7 +2255,7 @@
                                             addInformation(2, person.gender, 1);
                                         }
                                         
-                                        // sets the information for the third conversation table
+                                        // sets the information for the fourth conversation table
                                         if (person.gender == "m") {
                                             if (person.initiator == "m") {
                                                 initiators[0][0] += 1;
@@ -2249,6 +2283,12 @@
                                     }
                                 });
                             });
+                            
+                            // sets the information for the third conversation table
+                            male[2].innerHTML = Number(male[0].innerHTML) / Number(male[1].innerHTML);
+                            female[2].innerHTML = Number(female[0].innerHTML) / Number(female[1].innerHTML);
+                            
+                            // extends the tables
                             extendTables(day.date);
                         } else if (day.notes.indexOf("no data") > -1) {
                             prepareTables();
@@ -2262,8 +2302,9 @@
                             extendTables(day.date);
                         }
                     });
-                    tables[0].getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = tables[0].getElementsByTagName("tr").length - 3;
-                    tables[1].getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = tables[1].getElementsByTagName("tr").length - 3;
+                    tables.forEach(function(table) {
+                        table.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = table.getElementsByTagName("tr").length - 3;
+                    });
                     initiators[0][2] = initiators[0][0] + initiators[0][1];
                     initiators[1][2] = initiators[1][0] + initiators[1][1];
                     initiators[2][0] = initiators[0][0] + initiators[1][0];
