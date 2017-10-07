@@ -10,6 +10,7 @@
                 colorCode("conversationLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0], [0,255,0]);
                 colorCode("uniquePeople");
                 colorCode("averageLengths");
+                colorCode("enjoyability");
                 colorCode(["sleep1", "sleep2", "sleep3"]);
             });
         </script>
@@ -375,6 +376,39 @@
                 <tr>
                     <th>
                         Average<br>conversation<br>length
+                    </th>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <table class="smaller" id="enjoyability">
+                <tr>
+                    <th colspan="15">
+                        Conversation enjoyability
+                    </th>
+                </tr>
+                <tr>
+                    <th rowspan="2"></th>
+                    <th colspan="2">Monday</th>
+                    <th colspan="2">Tuesday</th>
+                    <th colspan="2">Wednesday</th>
+                    <th colspan="2">Thursday</th>
+                    <th colspan="2">Friday</th>
+                    <th colspan="2">Saturday</th>
+                    <th colspan="2">Sunday</th>
+                </tr>
+                <tr>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                    <th>Males</th><th>Females</th>
+                </tr>
+                <tr>
+                    <th>
+                        Enjoyability
                     </th>
                 </tr>
             </table>
@@ -2060,7 +2094,7 @@
                     /**
                     puts information into the conversation tables
                     */
-                    var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople"), document.getElementById("averageLengths")],
+                    var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople"), document.getElementById("averageLengths"), document.getElementById("enjoyability")],
                         rows = [null, null],
                         male = [],
                         female = [];
@@ -2256,6 +2290,9 @@
                                         }
                                         
                                         // sets the information for the fourth conversation table
+                                        addInformation(4, person.gender, person.enjoyability);
+                                        
+                                        // sets the information for the fifth conversation table
                                         if (person.gender == "m") {
                                             if (person.initiator == "m") {
                                                 initiators[0][0] += 1;
