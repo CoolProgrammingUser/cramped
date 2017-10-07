@@ -384,7 +384,7 @@
             <table class="smaller" id="enjoyability">
                 <tr>
                     <th colspan="15">
-                        Conversation enjoyability
+                        Average conversation enjoyability
                     </th>
                 </tr>
                 <tr>
@@ -2141,7 +2141,8 @@
                         }
                         if (dayIsCountable) {  // if the day should be counted
                             prepareTables();
-                            let uniquePeople = {f: [], m: []};
+                            let uniquePeople = {f: [], m: []},
+                                interactionNumber = 0;
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
                                     them = [];
@@ -2280,6 +2281,9 @@
                                     let desiredInteraction = true;
                                     if (desiredInteraction) {  // if the interaction should be counted
                                         
+                                        // increases the number of interactions
+                                        interactionNumber++;
+                                        
                                         // sets the information for the first conversation table
                                         addInformation(1, person.gender, person.length * person.density);
                                         
@@ -2289,7 +2293,7 @@
                                             addInformation(2, person.gender, 1);
                                         }
                                         
-                                        // sets the information for the fourth conversation table
+                                        // sets part of the information for the fourth conversation table
                                         addInformation(4, person.gender, person.enjoyability);
                                         
                                         // sets the information for the fifth conversation table
@@ -2324,6 +2328,10 @@
                             // sets the information for the third conversation table
                             male[2].innerHTML = Number(male[0].innerHTML) / Number(male[1].innerHTML);
                             female[2].innerHTML = Number(female[0].innerHTML) / Number(female[1].innerHTML);
+                            
+                            // sets the rest of the information for the fourth conversation table
+                            male[3].innerHTML = Number(male[3].innerHTML) / interactionNumber;
+                            female[3].innerHTML = Number(female[3].innerHTML) / interactionNumber;
                             
                             // extends the tables
                             extendTables(day.date);
