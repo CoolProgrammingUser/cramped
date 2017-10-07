@@ -2142,7 +2142,7 @@
                         if (dayIsCountable) {  // if the day should be counted
                             prepareTables();
                             let uniquePeople = {m: [], f: []},
-                                interactionNumbers = {m: 0, f: 0, total: 0};
+                                interactionNumbers = {m: 1, f: 1, total: 0};  // m and f have the value of 1 so there's never division by 0
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
                                     them = [];
@@ -2283,7 +2283,7 @@
                                         
                                         // increases the number of interactions
                                         interactionNumbers.total++;
-                                        if (interactionNumbers[person.gender]) {
+                                        if (interactionNumbers[person.gender] != undefined) {
                                             interactionNumbers[person.gender]++;
                                         }
                                         
@@ -2291,7 +2291,7 @@
                                         addInformation(1, person.gender, person.length * person.density);
                                         
                                         // sets the information for the second conversation table
-                                        if (uniquePeople[person.gender] && uniquePeople[person.gender].indexOf(person.name) == -1) {
+                                        if (uniquePeople[person.gender] != undefined && uniquePeople[person.gender].indexOf(person.name) == -1) {
                                             uniquePeople[person.gender].push(person.name);
                                             addInformation(2, person.gender, 1);
                                         }
