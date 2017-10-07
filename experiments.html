@@ -2141,8 +2141,8 @@
                         }
                         if (dayIsCountable) {  // if the day should be counted
                             prepareTables();
-                            let uniquePeople = {f: [], m: []},
-                                interactionNumber = 0;
+                            let uniquePeople = {m: [], f: []},
+                                interactionNumbers = {m: 0, f: 0, total: 0};
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
                                     them = [];
@@ -2282,7 +2282,10 @@
                                     if (desiredInteraction) {  // if the interaction should be counted
                                         
                                         // increases the number of interactions
-                                        interactionNumber++;
+                                        interactionNumbers.total++;
+                                        if (interactionNumbers[person.gender]) {
+                                            interactionNumbers[person.gender]++;
+                                        }
                                         
                                         // sets the information for the first conversation table
                                         addInformation(1, person.gender, person.length * person.density);
@@ -2330,8 +2333,8 @@
                             female[2].innerHTML = Number(female[0].innerHTML) / Number(female[1].innerHTML);
                             
                             // sets the rest of the information for the fourth conversation table
-                            male[3].innerHTML = Number(male[3].innerHTML) / interactionNumber;
-                            female[3].innerHTML = Number(female[3].innerHTML) / interactionNumber;
+                            male[3].innerHTML = Number(male[3].innerHTML) / interactionNumbers.m;
+                            female[3].innerHTML = Number(female[3].innerHTML) / interactionNumbers.f;
                             
                             // extends the tables
                             extendTables(day.date);
