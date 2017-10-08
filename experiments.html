@@ -2354,7 +2354,7 @@
                             female[3].innerHTML = Number(female[3].innerHTML) / (interactionNumbers.f==0 ? 1 : interactionNumbers.f);
                             
                             // extends the tables
-                            extendTables(day.date, "enjoyability");
+                            extendTables(day.date, "averageLengths", "enjoyability");
                         } else if (day.notes.indexOf("no data") > -1) {
                             prepareTables();
                             tables.forEach(function(table, index) {
