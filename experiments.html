@@ -2128,12 +2128,21 @@
                         }
                     }
                     function extendTables(date) {
+                        let morePreciseTables = Array.prototype.slice.call(arguments, 1);
                         tables.forEach(function(table, index) {
                             if (!isNaN(male[index].innerHTML)) {
-                                male[index].innerHTML = Math.round(male[index].innerHTML);
+                                if (morePreciseTables.indexOf(table.id) == -1) {
+                                    male[index].innerHTML = Math.round(male[index].innerHTML);
+                                } else {  // rounds to one decimal place
+                                    male[index].innerHTML = Math.round(Number(male[index].innerHTML)*10) / 10;
+                                }
                             }
                             if (!isNaN(female[index].innerHTML)) {
-                                female[index].innerHTML = Math.round(female[index].innerHTML);
+                                if (morePreciseTables.indexOf(table.id) == -1) {
+                                    female[index].innerHTML = Math.round(female[index].innerHTML);
+                                } else {
+                                    female[index].innerHTML = Math.round(Number(female[index].innerHTML)*10) / 10;
+                                }
                             }
                             male[index].title = date;
                             female[index].title = date;
@@ -2345,7 +2354,7 @@
                             female[3].innerHTML = Number(female[3].innerHTML) / (interactionNumbers.f==0 ? 1 : interactionNumbers.f);
                             
                             // extends the tables
-                            extendTables(day.date);
+                            extendTables(day.date, "enjoyability");
                         } else if (day.notes.indexOf("no data") > -1) {
                             prepareTables();
                             tables.forEach(function(table, index) {
