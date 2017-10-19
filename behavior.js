@@ -1,7 +1,9 @@
 if (document.head.getElementsByTagName("script").length > 0) {
     let index = document.head.getElementsByTagName("script").length;
     let standardsPresent = false;
+    console.log(index);
     while (index--) {
+        console.log(index);
         if (document.head.getElementsByTagName("script")[index-1].src == "https://epicenterprograms.github.io/standards/behavior.js") {
             standardsPresent = true;
         }
