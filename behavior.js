@@ -1,22 +1,46 @@
-// sets the options for the script import
-var Standards = {};
-Standards.options = {
-    "formatting" : "formatting.css",
-    "icon" : "images/favicon.ico",
-    "title" : "~document.getElementsByTagName('h1')[0].innerHTML",
-    "navigation" : "navigation.html"
-};
-
-(function() {
+if (document.head.getElementsByTagName("script").length > 0) {
+    let index = document.head.getElementsByTagName("script").length;
+    let standardsPresent = false;
+    while (index--) {
+        if (document.head.getElementsByTagName("script")[index-1].src == "https://epicenterprograms.github.io/standards/behavior.js") {
+            standardsPresent = true;
+        }
+    }
+    if (standardsPresent) {
+        var S = Standards;
+    } else {
+        // sets the options for the script import
+        var Standards = {};
+        Standards.options = {
+            "formatting" : "formatting.css",
+            "icon" : "images/favicon.ico",
+            "title" : "~document.getElementsByTagName('h1')[0].innerHTML",
+            "navigation" : "navigation.html"
+        };
+        // adds my standard script
+        let script = document.createElement("script");
+        script.src = "https://epicenterprograms.github.io/standards/oldbehavior.js";
+        document.head.insertBefore(script, document.head.getElementsByTagName("script")[0].nextSibling);
+    }
+} else {
+    // sets the options for the script import
+    var Standards = {};
+    Standards.options = {
+        "formatting" : "formatting.css",
+        "icon" : "images/favicon.ico",
+        "title" : "~document.getElementsByTagName('h1')[0].innerHTML",
+        "navigation" : "navigation.html"
+    };
     // adds my standard script
-    var script = document.createElement("script");
+    let script = document.createElement("script");
     script.src = "https://epicenterprograms.github.io/standards/oldbehavior.js";
     document.head.insertBefore(script, document.head.getElementsByTagName("script")[0].nextSibling);
-})();  // This is in a function, so I can use the variable "script" later if I want.
+}
 
 // makes the title of all the pages "Cramped"
 document.head.insertBefore(document.createElement("title"), document.head.childNodes[0]);
 document.getElementsByTagName("title")[0].innerHTML = "Cramped";
+//// document.title = "Cramped";
 
 //holds the cursor position
 var cursor = {"moving":false, "x":"-20", "y":"-20"};
