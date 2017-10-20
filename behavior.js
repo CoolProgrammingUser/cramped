@@ -1,6 +1,6 @@
 if (document.head.getElementsByTagName("script").length > 0) {
     let index = document.head.getElementsByTagName("script").length;
-    let standardsPresent = false;
+    var standardsPresent = false;
     while (index--) {
         if (document.head.getElementsByTagName("script")[index].src == "https://epicenterprograms.github.io/standards/behavior.js") {
             standardsPresent = true;
@@ -46,6 +46,21 @@ document.getElementsByTagName("title")[0].innerHTML = "Cramped";
 var cursor = {"moving":false, "x":"-20", "y":"-20"};
 
 window.addEventListener("finished", function() {
+    if (standardsPresent) {
+        // interprets <note> tags
+        let noteNumber = 1;
+        S.getTag("note").forEach(function(note, index, notes) {
+            if (note.innerHTML[0] == "[" && note.innerHTML[note.innerHTML.length-1] == "]") {
+                let reference = S.getId(note.innerHTML.slice(1,-1));
+                note.title = reference.title;
+                note.innerHTML = reference.innerHTML;
+            } else {
+                note.title = note.innerHTML;
+                note.innerHTML = "<sup>[" + noteNumber + "]</sup>";
+                noteNumber++;
+            }
+        });
+    }
     // makes a bunch of my faces follow the cursor
     var faceArray = [
         document.createElement("div"),
