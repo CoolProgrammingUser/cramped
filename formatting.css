@@ -18,6 +18,13 @@ h1.main-title {
     display: block;
     color: black;
 }
+nav {
+    background: #0e0; /* For browsers that do not support gradients */
+    background: -webkit-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Safari 5.1 to 6.0 */
+    background: -o-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Opera 11.6 to 12.0 */
+    background: -moz-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Firefox 3.6 to 15 */
+    background: repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* Standard syntax */
+}
 div.nav {
     background: #0e0; /* For browsers that do not support gradients */
     background: -webkit-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Safari 5.1 to 6.0 */
@@ -25,10 +32,10 @@ div.nav {
     background: -moz-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Firefox 3.6 to 15 */
     background: repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* Standard syntax */
 }
-nav {
-    background: #0e0; /* For browsers that do not support gradients */
-    background: -webkit-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Safari 5.1 to 6.0 */
-    background: -o-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Opera 11.6 to 12.0 */
-    background: -moz-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Firefox 3.6 to 15 */
-    background: repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* Standard syntax */
+note {
+    color: blue;
+    cursor: help;
+}
+note:hover {
+    text-decoration: underline;
 }
