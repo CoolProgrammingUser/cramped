@@ -2318,10 +2318,10 @@
                         female = [];
                     tables.forEach(function(table) {
                         // removes any previous data
-                        let rowNumber = table.rows.length - 3;
-                        while (rowNumber--) {
-                            table.deleteRow(rowNumber);
+                        while (table.rows.length > 4) {
+                            table.deleteRow(-1);
                         }
+                        table.getElementsByTagName("tr")[3].innerHTML = table.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].outerHTML;
                     });
                     function prepareTables() {
                         male = [];
