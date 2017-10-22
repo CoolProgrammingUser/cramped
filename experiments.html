@@ -268,6 +268,18 @@
             <p>
                 I transferred in, so this starts from the very beginning of my relationships. This starts on Monday, August 21, 2017.
             </p>
+            <h4>
+                Take into account...
+            </h4>
+            <div id="conversationCheckboxes">
+                <input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
+                <input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
+                <input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
+                <input type="checkbox" id="floorConversations" checked><label for="floorConversations">conversations with people from my floor</label><br>
+                <input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
+                <input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
+                <input type="checkbox" id="anonymousConversations" checked><label for="anonymousConversations">conversations with random people</label><br>
+            </div>
             <table class="smaller" id="conversationLengths">
                 <tr>
                     <th colspan="15">
@@ -458,6 +470,104 @@
                     x = "x",
                     y = "y",
                     z = "z";
+                var p1 = {name: "Dahleeuh", gender: f},
+                    p2 = {name: "Dwayn Jonz", gender: m},
+                    p3 = {name: "Mahlee Kuk", gender: f},
+                    p4 = {name: "chemistry professor", gender: m},
+                    p5 = {name: "bearded guy from history", gender: m},
+                    p6 = {name: "grill guy (Andrew?)", gender: m},
+                    p7 = {name: 'Towers West 10 "Micaela"', gender: f},
+                    p8 = {name: "Emee Jay", gender: f},
+                    p9 = {name: "girl from Pacific High School", gender: f},
+                    p10 = {name: "Jahn's out-going friend", gender: m},
+                    p11 = {name: "Kaytlin Richrrdz", gender: f},
+                    p12 = {name: "AhndrAyuh (from Art)", gender: f},
+                    p13 = {name: "Joee Taylrr", gender: m},
+                    p14 = {name: "Antuhnee (from Art)", gender: m},
+                    p15 = {name: "Kamrin (from Art)", gender: m},
+                    p16 = {name: "random guy from next art class", gender: m},
+                    p17 = {name: "SotAhro's roommate", gender: m},
+                    p18 = {name: "SotAhro's roommate's friend", gender: m},
+                    p19 = {name: "DayvAhntay (from floor)", gender: m},
+                    p20 = {name: "shorter elevator guy from floor", gender: m},
+                    p21 = {name: "blond guy who used to be lonely", gender: m},
+                    p22 = {name: "guy from Campus Outreach", gender: m},
+                    p23 = {name: "Tim Toney's sister", gender: f},
+                    p24 = {name: "girl assisting in lab", gender: f},
+                    p25 = {name: "DayvAhn (from floor)", gender: m},
+                    p26 = {name: "Emuelee Hamrr", gender: f},
+                    p27 = {name: "Rowdy cashier lady", gender: f},
+                    p28 = {name: "blond guy from floor", gender: m},
+                    p29 = {name: "other blond guy from floor", gender: m},
+                    p30 = {name: "Ahlshrr (from floor)", gender: m},
+                    p31 = {name: "Heruesin (Kaylueb's friend)", gender: m},
+                    p32 = {name: "Patrik (from floor)", gender: m},
+                    p33 = {name: "Brittish girl", gender: f},
+                    p34 = {name: "shuttle driver", gender: m},
+                    p35 = {name: "blonde River Campus meal lady", gender: f},
+                    p36 = {name: "other River Campus meal lady", gender: f},
+                    p37 = {name: "other guy who played pool", gender: m},
+                    p38 = {name: "girl who tried to play pool", gender: f},
+                    p39 = {name: "Kodee (from Art)", gender: m},
+                    p40 = {name: "dark-haired girl in Economics", gender: f},
+                    p41 = {name: "new blond guy on floor", gender: m},
+                    p42 = {name: "dark dining hall Indian girl", gender: f},
+                    p43 = {name: "talkative Indian girl food server", gender: f},
+                    p44 = {name: "Chinese food server girl who sings", gender: f},
+                    p45 = {name: "inquisitive guy in relationships class", gender: m},
+                    p46 = {name: "supplemental grill guy", gender: m},
+                    p47 = {name: "River Campus meal guy", gender: m},
+                    p48 = {name: "my knight who jousted", gender: m},
+                    p49 = {name: "older guy in History", gender: m},
+                    p50 = {name: "girl in front in Biology without glasses", gender: f},
+                    p51 = {name: "girl in front in Biology with glasses", gender: f},
+                    p52 = {name: "Robert! :) guy", gender: m},
+                    p53 = {name: "Robert! :) guy's friend", gender: m},
+                    p54 = {name: "guy who sits near me in Biology", gender: m},
+                    p55 = {name: "dark-haired videogame guy", gender: m},
+                    p56 = {name: "red-headed? videogame guy", gender: m},
+                    p57 = {name: "Indian guy in dining hall", gender: m},
+                    p58 = {name: "guy who joined pool", gender: m},
+                    p59 = {name: "tall dark-skinned dining hall guy", gender: m},
+                    p60 = {name: "Troodee (random girl who sits in corners)", gender: f},
+                    p61 = {name: "other new guy in Art", gender: m},
+                    p62 = {name: "River Campus guy in History", gender: m},
+                    p63 = {name: "out-going girl in History", gender: f},
+                    p64 = {name: "guy in History and Economics", gender: m},
+                    p65 = {name: "pizza girl", gender: f},
+                    p66 = {name: "Nepali guy in relationships class", gender: m},
+                    p67 = {name: "unenthusiastic dining hall girl", gender: f},
+                    p68 = {name: "darker-skinned dining hall guy", gender: m},
+                    p69 = {name: "red-headed? food server", gender: f},
+                    p70 = {name: "African American food lady", gender: f},
+                    p71 = {name: "girl with (sometimes) straight blonde hair", gender: f},
+                    p72 = {name: "my group's speaker in History", gender: m},
+                    p73 = {name: "SotAhro's tall Japanese friend", gender: m},
+                    p74 = {name: "Ryo (SotAhro's friend)", gender: m},
+                    p75 = {name: "older dining hall guy", gender: m},
+                    p76 = {name: "p20's more tame friend", gender: m},
+                    p77 = {name: "p20's less tame friend", gender: m},
+                    p78 = {name: "girl with vertical ponytail", gender: f},
+                    p79 = {name: "African American food girl", gender: f},
+                    p80 = {name: "blonde River Campus janitor", gender: f},
+                    p81 = {name: "other River Campus janitor", gender: f},
+                    p82 = {name: "large guy at River Campus", gender: m},
+                    p83 = {name: "Asian guy from floor with glasses", gender: m},
+                    p84 = {name: "Rowdy cook lady", gender: f},
+                    p85 = {name: "red-headed girl in History", gender: f},
+                    p86 = {name: "guy who asks questions in Economics", gender: m},
+                    p87 = {name: "SotAhro and p73's Chinese friend", gender: m},
+                    p88 = {name: "married dining hall girl", gender: f},
+                    p89 = {name: "willing-to-talk relationship class girl", gender: f},
+                    p90 = {name: "History guy with cyclical hair", gender: m},
+                    p91 = {name: "girl who draws in dining hall", gender: f},
+                    p92 = {name: "other Indian dining hall girl", gender: f},
+                    p93 = {name: "guy from school look-alike", gender: m},
+                    p94 = {name: "guy who gave me the ticket", gender: m},
+                    p95 = {name: "pool supply guy", gender: m},
+                    p96 = {name: "p20's blond friend", gender: m},
+                    p97 = {name: "p20's girlfriend", gender: f},
+                    p98 = {name: "SotAhro and Ryo's Chinese friend", gender: m};
                 // Name | Gender | Type | Initiator | Special | Length | Talk time | Enjoyability
                 var conversations = [  // This is the raw data.
                     {
@@ -2143,7 +2253,7 @@
                     p39: "Kodee (from art)",
                     p40: "dark-haired girl in Economics",
                     p41: "new blond guy on floor",
-                    p42: "dining hall entrance Indian girl",  //////////////////////////////////////////
+                    p42: "dark dining hall Indian girl",
                     p43: "talkative Indian girl food server",
                     p44: "Chinese food server girl who sings",
                     p45: "inquisitive guy in relationships class",
@@ -2168,7 +2278,7 @@
                     p64: "guy in History and Economics",
                     p65: "pizza girl",
                     p66: "Nepali guy in relationships class",
-                    p67: "unenthusiastic dining hall girl",  ///////////////////////////////////////////////////////
+                    p67: "unenthusiastic dining hall girl",
                     p68: "tall darker-skinned dining hall guy",
                     p69: "red-headed food server",
                     p70: "African American adult food lady",
@@ -2186,7 +2296,20 @@
                     p82: "large guy at River Campus",
                     p83: "Asian guy from floor with glasses",
                     p84: "Rowdy cook lady",
-                    p85: "red-headed girl in History"
+                    p85: "red-headed girl in History",
+                    p86: "guy who asks questions in Economics",
+                    p87: "SotAhro and p73's Chinese friend",
+                    p88: "married dining hall girl",
+                    p89: "willing-to-talk relationship girl",
+                    p90: "History guy with cyclical hair",
+                    p91: "girl who draws in dining hall",
+                    p92: "other Indian dining hall girl",
+                    p93: "guy from school look-alike",
+                    p94: "guy who gave me the ticket",
+                    p95: "pool supply guy",
+                    p96: "p20's blond friend",
+                    p97: "p20's girlfriend",
+                    p98: "SotAhro and Ryo's Chinese friend"
                 };
                 function updateConversations() {
                     /**
@@ -2249,7 +2372,16 @@
                         if (dayIsCountable) {  // if the day should be counted
                             prepareTables();
                             let uniquePeople = {m: [], f: []},
-                                interactionNumbers = {m: 0, f: 0, total: 0};
+                                interactionNumbers = {m: 0, f: 0, total: 0},
+                                checkboxes = {
+                                    adult: S.getId("adultConversations").checked,
+                                    kid: S.getId("kidConversations").checked,
+                                    formal: S.getId("formalConversations").checked,
+                                    floor: S.getId("floorConversations").checked,
+                                    class: S.getId("classConversations").checked,
+                                    familiar: S.getId("familiarConversations").checked,
+                                    anonymous: S.getId("anonymousConversations").checked
+                                };
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
                                     them = [];
@@ -2297,9 +2429,9 @@
                                         }
                                         // sets the classification
                                         if (conversation[2].indexOf("_") == -1) {
-                                            data.classification = conversation[2];
+                                            data.classification = conversation[2].match(/\w(?!-)|\w-\w/g);
                                         } else {
-                                            data.classification = conversation[2].split("_")[index];
+                                            data.classification = conversation[2].split("_")[index].match(/\w(?!-)|\w-\w/g);
                                         }
                                         // sets the initiator
                                         data.initiator = conversation[3];
@@ -2352,7 +2484,7 @@
                                     them.push({
                                         name: conversation[0].trim(),
                                         gender: conversation[1],
-                                        classification: conversation[2],
+                                        classification: conversation[2].match(/\w(?!-)|\w-\w/g),
                                         initiator: conversation[3],
                                         indicators: conversation[4].split(),
                                         length: conversation[5]==1&&conversation[6]==7 ? .8333333333 : conversation[5],
@@ -2385,7 +2517,25 @@
                                 }
                                 
                                 them.forEach(function(person) {  // adds information to the tables
+                                    
+                                    // determines whether the interaction should be counted
                                     let desiredInteraction = true;
+                                    if (!checkboxes.adult && person.classification.includes("a")) {
+                                        desiredInteraction = false;
+                                    } else if (!checkboxes.kid && person.classification.includes("k")) {
+                                        desiredInteraction = false;
+                                    } else if (!checkboxes.formal && person.classification.includes("f")) {
+                                        desiredInteraction = false;
+                                    } else if (!checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {
+                                        desiredInteraction = false;
+                                    } else if (!checkboxes.class && person.classification.includes("c")) {
+                                        desiredInteraction = false;
+                                    } else if (!checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {
+                                        desiredInteraction = false;
+                                    } else if (!checkboxes.anonymous && person.name[0] == "a") {
+                                        desiredInteraction = false;
+                                    }
+                                    
                                     if (desiredInteraction) {  // if the interaction should be counted
                                         
                                         // increases the number of interactions
@@ -2472,6 +2622,12 @@
                     });
                 }
                 updateConversations();
+                S.getId("conversationCheckboxes").getElementsByTagName("input").forEach(function(checkbox) {
+                    checkbox.addEventListener("click", updateConversations);
+                });
+                S.getId("conversationCheckboxes").getElementsByTagName("label").forEach(function(label) {
+                    label.addEventListener("click", updateConversations);
+                });
             </script>
             <br>
             <h2>
@@ -2697,7 +2853,7 @@
                 </tr>
                 <tr>
                     <td>
-                         2:00am-6:07am | 3:03am-9:56am |10:43pm-6:10am | 1:28am-9:52am
+                         2:00am-6:07am | 3:03am-9:56am |10:43pm-6:10am | 1:28am-9:52am | 3:30am-11:39am| 4:45am-12:48pm| 1:45am-10:51am
                     </td>
                 </tr>
             </table>
