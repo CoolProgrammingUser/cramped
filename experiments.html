@@ -274,6 +274,7 @@
                 <input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
                 <input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
                 <input type="checkbox" id="anonymousConversations" checked><label for="anonymousConversations">conversations with random people</label><br>
+                <input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label><br>
             </div>
             <br>
             <br>
@@ -2384,7 +2385,8 @@
                                     floor: S.getId("floorConversations").checked,
                                     class: S.getId("classConversations").checked,
                                     familiar: S.getId("familiarConversations").checked,
-                                    anonymous: S.getId("anonymousConversations").checked
+                                    anonymous: S.getId("anonymousConversations").checked,
+                                    other: S.getId("otherConversations").checked
                                 };
                             day.data.forEach(function(conversation, number) {
                                 let me = {},
@@ -2537,6 +2539,8 @@
                                     } else if (!checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {
                                         desiredInteraction = false;
                                     } else if (!checkboxes.anonymous && person.name[0] == "a") {
+                                        desiredInteraction = false;
+                                    } else if (!checkboxes.other && !(S.checkAll(JSON.stringify(person.classification)+".includes('{0}')", null, ["a","k","f","b","r","p-b","p-r","c","p"], "||") || person.name[0] == "a")) {
                                         desiredInteraction = false;
                                     }
                                     
