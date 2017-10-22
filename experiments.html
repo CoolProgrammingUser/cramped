@@ -2594,12 +2594,12 @@
                             });
                             
                             // sets the information for the third conversation table
-                            male[2].innerHTML = Number(male[0].innerHTML) / Number(male[1].innerHTML);
-                            female[2].innerHTML = Number(female[0].innerHTML) / Number(female[1].innerHTML);
+                            male[2].innerHTML = Number(male[0].innerHTML) / (Number(male[1].innerHTML)||1);
+                            female[2].innerHTML = Number(female[0].innerHTML) / (Number(female[1].innerHTML)||1);
                             
                             // sets the rest of the information for the fourth conversation table
-                            male[3].innerHTML = Number(male[3].innerHTML) / (interactionNumbers.m==0 ? 1 : interactionNumbers.m);
-                            female[3].innerHTML = Number(female[3].innerHTML) / (interactionNumbers.f==0 ? 1 : interactionNumbers.f);
+                            male[3].innerHTML = interactionNumbers.m==0 ? 4 : (Number(male[3].innerHTML) / interactionNumbers.m);
+                            female[3].innerHTML = interactionNumbers.f==0 ? 4 : (Number(female[3].innerHTML) / interactionNumbers.f);
                             
                             // extends the tables
                             extendTables(day.date, "averageLengths", "enjoyability");
