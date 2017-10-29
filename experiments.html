@@ -565,8 +565,13 @@
                     p95 = {name: "pool supply guy", gender: m},
                     p96 = {name: "p20's blond friend", gender: m},
                     p97 = {name: "p20's girlfriend", gender: f},
-                    p98 = {name: "SotAhro and Ryo's Chinese friend", gender: m};
-                // Name | Gender | Type | Initiator | Special | Length | Talk time | Enjoyability
+                    p98 = {name: "SotAhro and Ryo's Chinese friend", gender: m},
+                    p99 = {name: "girl who knows SotAhro is crazy", gender: f},
+                    p100 = {name: "ox guy", gender: m},
+                    p101 = {name: "p98's friend", gender: m},
+                    p102 = {name: "random red-headed dude", gender: m};
+                // Name | Gender | Classification | Initiator | Indicators | Length | Participation | Enjoyability
+                // Name | Gender | Classification | Initiator | Indicators | Length | Density | Participation | Enjoyability
                 var conversations = [  // This is the raw data.
                     {
                         "date": "8/21/2017",
@@ -2307,7 +2312,11 @@
                     p95: "pool supply guy",
                     p96: "p20's blond friend",
                     p97: "p20's girlfriend",
-                    p98: "SotAhro and Ryo's Chinese friend"
+                    p98: "SotAhro and Ryo's Chinese friend",
+                    p99: "girl who knows SotAhro is crazy",
+                    p100: "ox guy",
+                    p101: "p98's friend",
+                    p102: "random red-headed dude"
                 };
                 function updateConversations() {
                     /**
@@ -2684,12 +2693,12 @@
                 </tr>
                 <tr>
                     <td>
-                        1:37am-12:06pm<note>This is the start of the week-long spring break.</note>| 6:15am-1:49pm | 6:52am-12:19pm| 3:50am-12:25pm| 1:25am-10:34am|11:28pm-8:33am | 1:30am-6:35am<note->*<div class="pop-up"><div>I actually went to bed at 12:30am but lost an hour of sleep due to Daylight Saving Time. I also woke up for a cool event on this day.</div></div></note->
+                        1:37am-12:06pm<note>This is the start of the week-long spring break.</note>| 6:15am-1:49pm | 6:52am-12:19pm| 3:50am-12:25pm| 1:25am-10:34am|11:28pm-8:33am | 1:30am-6:35am<note-><div><div>I actually went to bed at 12:30am but lost an hour of sleep due to Daylight Saving Time. I also woke up for a cool event on this day.</div></div></note->
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        11:49pm-8:23am<note->*<div class="pop-up"><div>There was an interruption from 5:50am to 6:05am because I thought I was turning 600,000,000 seconds old. I wasn't happy to discover that it was actually happening on Wednesday.</div></div></note->| 1:32am-12:01pm<note>[snowDay]</note>| 0:00am-0:00am | 0:00am-0:00am<note>No, I didn't miss any naps.</note>| 4:45am-8:22am<note id="homeworkMove">Homework due on Friday was moved to Monday.</note>| 5:24am-2:01pm | 2:15am-12:26pm
+                        11:49pm-8:23am<note-><div><div>There was an interruption from 5:50am to 6:05am because I thought I was turning 600,000,000 seconds old. I wasn't happy to discover that it was actually happening on Wednesday.</div></div></note->| 1:32am-12:01pm<note>[snowDay]</note>| 0:00am-0:00am | 0:00am-0:00am<note>No, I didn't miss any naps.</note>| 4:45am-8:22am<note id="homeworkMove">Homework due on Friday was moved to Monday.</note>| 5:24am-2:01pm | 2:15am-12:26pm
                     </td>
                 </tr>
                 <tr>
@@ -2709,7 +2718,7 @@
                 </tr>
                 <tr>
                     <td>
-                        4:46am-8:10am<note>[homeworkMove]</note>| 0:00am-0:00am<note>I took a nap from 11:30am to 1:40pm.</note>| 6:37am-9:58am<note>I missed my first class because, apparently, the only alarm capable of waking me up is a fire alarm (test; the real fire was earlier Tuesday night).</note>| 0:00am-0:00am | 6:21am-5:58pm<note->*<div class="pop-up"><div>I missed everything this day. Consequentially, I decided my phone's alarms (3 of them each day) weren't cutting it, so I bought batteries to get my original alarm clock working again. (It died a the Wednesday before the last Thursday I got sleep even though it shouldn't have because I charged up the battery before the start of the semester.)</div></div></note->| 6:12am-1:11pm | 2:26am-12:34pm
+                        4:46am-8:10am<note>[homeworkMove]</note>| 0:00am-0:00am<note>I took a nap from 11:30am to 1:40pm.</note>| 6:37am-9:58am<note>I missed my first class because, apparently, the only alarm capable of waking me up is a fire alarm (test; the real fire was earlier Tuesday night).</note>| 0:00am-0:00am | 6:21am-5:58pm<note-><div><div>I missed everything this day. Consequentially, I decided my phone's alarms (3 of them each day) weren't cutting it, so I bought batteries to get my original alarm clock working again. (It died a the Wednesday before the last Thursday I got sleep even though it shouldn't have because I charged up the battery before the start of the semester.)</div></div></note->| 6:12am-1:11pm | 2:26am-12:34pm
                     </td>
                 </tr>
                 <tr>
@@ -2835,7 +2844,7 @@
                 </tr>
                 <tr>
                     <td>
-                         4:34am-12:42pm<note>[dayOff]</note>| 4:58am-9:29am |11:58pm-6:11am | 1:05am-9:19am | 1:00am-9:51am | 2:59am-11:59am| 4:14am-12:14<note->*<div class="pop-up"><div>This time has been spliced together. The real times are 4:14am-7:38am, awake due to a fire alarm 7:38am-8:25am, and sleeping again 8:25am-1:01pm.</div></div></note->
+                         4:34am-12:42pm<note>[dayOff]</note>| 4:58am-9:29am |11:58pm-6:11am | 1:05am-9:19am | 1:00am-9:51am | 2:59am-11:59am| 4:14am-12:14<note-><div><div>This time has been spliced together. The real times are 4:14am-7:38am, awake due to a fire alarm 7:38am-8:25am, and sleeping again 8:25am-1:01pm.</div></div></note->
                     </td>
                 </tr>
                 <tr>
@@ -2860,12 +2869,17 @@
                 </tr>
                 <tr>
                     <td>
-                         4:53am-6:10am<note->*<div class="pop-up">I took a nap from 11:24am-12:26pm</div></note->| 1:00am-9:56am |10:00pm-6:07am | 2:19am-9:53am | 1:19am-9:50am | 1:44am-10:24am|12:43am-9:47am
+                         4:53am-6:10am<note-><div><div>I took a nap from 11:24am-12:26pm</div></div></note->| 1:00am-9:56am |10:00pm-6:07am | 2:19am-9:53am | 1:19am-9:50am | 1:44am-10:24am|12:43am-9:47am
                     </td>
                 </tr>
                 <tr>
                     <td>
                          2:00am-6:07am | 3:03am-9:56am |10:43pm-6:10am | 1:28am-9:52am | 3:30am-11:39am| 4:45am-12:48pm| 1:45am-10:51am
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                         5:14am-6:12am | 3:42am-12:30pm<note-><div><div>I had an online test instead of my first class this day.</div></div></note->| 1:36am-6:04am<note-><div><div>I had something due in my morning class.</div></div></note->| 1:03am-9:53am | 5:00am-1:01pm | 5:22am-1:21pm | 6:12am-1:16pm<note-><div><div>I need to get my life back on track.</div></div></note->
                     </td>
                 </tr>
             </table>
