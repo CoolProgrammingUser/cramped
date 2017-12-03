@@ -1,320 +1,319 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="behavior.js"></script>
-        <script>
-            var timeNumber = 1;
-            window.addEventListener("finished", function() {
-                makeCountdown("Valentine's Day", "February 14");
-                makeCountdown("my birthday", "March 11");
-                makeCountdown("the Fourth of July", "July 4");
-                makeCountdown("Halloween", "October 31");
-                makeCountdown("Christmas", "December 25");
-                makeCountdown("next year", "January 1");
-                refresh();
-                setInterval(refresh, 1000);
-            });
-            function calculate() {
-                var label = document.getElementById("label").value;
-                var month = document.getElementById("month").value;
-                var day = document.getElementById("day").value;
-                var year = document.getElementById("year").value;
-                var time = document.getElementById("time").value;
-                var timeFormat = document.getElementById("timeFormat").value!="24-hour" ? " "+document.getElementById("timeFormat").value : "";
-                makeCountdown(label, month+" "+day+", "+year+" "+time+timeFormat);
-                var IDs = ["label", "month", "day", "year", "time", "timeFormat"];
-                for (var index in IDs) {  // clears all of the inputs
-                    document.getElementById(IDs[index]).value = "";
-                }
-                refresh();
-            }
-            function makeCountdown(label, date) {
-                var paragraph = document.createElement("p");
-                paragraph.id = timeNumber;
-                timeNumber++;
-                paragraph.label = label;
-                paragraph.date = date;
-                document.getElementById("loser").parentNode.insertBefore(paragraph, document.getElementById("loser"));
-            }
-            function refresh() {
-                for (var number=1; number<timeNumber; number++) {
-                    var element = document.getElementById(number);
-                    var now = new Date();
-                    if ((function() {
-                        var trueFalse = false;
-                        element.date.split(" ").forEach(function(component) {
-                            if (component.length==4 && !isNaN(component)) {
-                                trueFalse = true;
-                            }
-                        });
-                        return trueFalse;
-                    })()) {  // if there's a year
-                        var then = new Date(element.date);
-                    } else {  // if there's not a year
-                        // when dates are only given in a month and day (meant to be annual)
-                        if (now.getTime() <= new Date(element.date+", "+now.getFullYear()).getTime()) {
-                            var then = new Date(element.date+", "+now.getFullYear());
-                        } else {
-                            var then = new Date(element.date+", "+(now.getFullYear()+1));
-                        }
-                    }
-                    var time = "";
-                    if (document.getElementById("loser").checked) {
-                        var seconds = Math.floor((then.getTime()-now.getTime())%60000/1000);
-                        var minutes = Math.floor((then.getTime()-now.getTime())%3600000/60000);
-                        var hours = Math.floor((then.getTime()-now.getTime())%86400000/3600000);
-                        var nowTime = now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
-                        var months = then.getMonth() - now.getMonth();
-                        var days = then.getDate() - now.getDate();
-                        var years = then.getFullYear() - now.getFullYear();
-                        /********
-                        Important nonsense:
-                        .getMonth refers to months as 0-11; new Date("year monthNumber day") uses month numbers 1-12.
-                        Example:
-                        new Date("2017 March 11").getMonth() = 2
-                        new Date("2017 2 11").getMonth() = 1
-                        ********/
-                        if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+then.getDate()+" "+nowTime).getTime() < 0) {
-                            days--;
-                            if (days < 0) {
-                                // This is exempt from month nonsense because the new date is created in a comma-separated format. (It's 0-11.)
-                                // The 1 is added to the month to get to the 0th day of the next month (the number of days in the month of interest).
-                                days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate() - 1;
-                            }
-                        } else {
-                            if (days < 0) {
-                                days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate() - now.getDate() + then.getDate();
-                            }
-                        }
-                        if (then.getTime() - new Date(then.getFullYear()+" "+(then.getMonth()+1)+" "+now.getDate()+" "+nowTime).getTime() < 0) {
-                            months--;
-                            if (months < 0) {
-                                months = 12 - now.getMonth() + then.getMonth();
-                            }
-                        } else {
-                            if (months < 0) {
-                                months = 13 - now.getMonth() + then.getMonth();
-                            }
-                        }
-                        if (then.getTime() - new Date(then.getFullYear()+" "+(now.getMonth()+1)+" "+now.getDate()+" "+nowTime).getTime() < 0) {
-                            years--;
-                        }
-                        if (seconds > 0) {
-                            time = seconds + (seconds!=1?" seconds":" second");
-                        }
-                        if (minutes > 0) {
-                            time = minutes + (minutes!=1?" minutes ":" minute ") + time;
-                        }
-                        if (hours > 0) {
-                            time = hours + (hours!=1?" hours ":" hour ") + time;
-                        }
-                        if (days > 0) {
-                            time = days + (days!=1?" days ":" day ") + time;
-                        }
-                        if (months > 0) {
-                            time = months + (months!=1?" months ":" month ") + time;
-                        }
-                        if (years > 0) {
-                            time = years + (years!=1?" years ":" year ") + time;
-                        }
-                    } else {
-                        var seconds = (then.getTime()-now.getTime()>0) ? String(Math.ceil((then.getTime()-now.getTime())/1000)) : "0";
-                        for (var index=3; index<seconds.length; index+=4) {
-                            seconds = seconds.slice(0, -index) + "," + seconds.slice(-index);
-                        }
-                        time = seconds + " seconds";
-                    }
-                    element.innerHTML = element.label + ": " + time;
-                }
-            }
-        </script>
-    </head>
-    <body>
-        <h1>
-            Countdowns
-        </h1>
-        <p>
-            Note: The loser time is largely incorrect for now.
-        </p>
-        <h2>
-            Time until...
-        </h2>
-        <input type="checkbox" id="loser" onclick="refresh()">
-        <label for="loser">I'm a loser and want the times displayed normally.</label>
-        <br>
-        <br>
-        <h3>
-            Start your own countdown:
-        </h3>
-        <input type="text" id="label" placeholder="Label"/>
-        <br>
-        <br>
-        <select id="month">
-            <option value="" disabled selected>
-                Month
-            </option>
-            <option value="January">
-                January
-            </option>
-            <option value="February">
-                February
-            </option>
-            <option value="March">
-                March
-            </option>
-            <option value="April">
-                April
-            </option>
-            <option value="May">
-                May
-            </option>
-            <option value="June">
-                June
-            </option>
-            <option value="July">
-                July
-            </option>
-            <option value="August">
-                August
-            </option>
-            <option value="September">
-                September
-            </option>
-            <option value="October">
-                October
-            </option>
-            <option value="November">
-                November
-            </option>
-            <option value="December">
-                December
-            </option>
-        </select>
-        <span>&ensp;</span>
-        <select id="day">
-            <option value="" disabled selected>
-                Day
-            </option>
-            <option value="01">
-                1
-            </option>
-            <option value="02">
-                2
-            </option>
-            <option value="03">
-                3
-            </option>
-            <option value="04">
-                4
-            </option>
-            <option value="05">
-                5
-            </option>
-            <option value="06">
-                6
-            </option>
-            <option value="07">
-                7
-            </option>
-            <option value="08">
-                8
-            </option>
-            <option value="09">
-                9
-            </option>
-            <option value="10">
-                10
-            </option>
-            <option value="11">
-                11
-            </option>
-            <option value="12">
-                12
-            </option>
-            <option value="13">
-                13
-            </option>
-            <option value="14">
-                14
-            </option>
-            <option value="15">
-                15
-            </option>
-            <option value="16">
-                16
-            </option>
-            <option value="17">
-                17
-            </option>
-            <option value="18">
-                18
-            </option>
-            <option value="19">
-                19
-            </option>
-            <option value="20">
-                20
-            </option>
-            <option value="21">
-                21
-            </option>
-            <option value="22">
-                22
-            </option>
-            <option value="23">
-                23
-            </option>
-            <option value="24">
-                24
-            </option>
-            <option value="25">
-                25
-            </option>
-            <option value="26">
-                26
-            </option>
-            <option value="27">
-                27
-            </option>
-            <option value="28">
-                28
-            </option>
-            <option value="29">
-                29
-            </option>
-            <option value="30">
-                30
-            </option>
-            <option value="31">
-                31
-            </option>
-        </select>
-        <span>&ensp;</span>
-        <input type="text" id="year" placeholder="Year"/>
-        <br>
-        <br>
-        <input type="text" id="time" placeholder="Time (optional)"/>
-        <span>&ensp;</span>
-        <select id="timeFormat">
-            <option value="" disabled selected>
-                Time format
-            </option>
-            <option value="am">
-                am
-            </option>
-            <option value="pm">
-                pm
-            </option>
-            <option value="24-hour">
-                24-hour
-            </option>
-        </select>
-        <br>
-        <br>
-        <button onclick="calculate()">
-            Calculate
-        </button>
-        <br>
-        <br>
-    </body>
+	<head>
+		<script src="behavior.js"></script>
+		<script>
+			var timeNumber = 1;
+			window.addEventListener("finished", function() {
+				makeCountdown("Valentine's Day", "February 14");
+				makeCountdown("my birthday", "March 11");
+				makeCountdown("the Fourth of July", "July 4");
+				makeCountdown("Halloween", "October 31");
+				makeCountdown("Christmas", "December 25");
+				makeCountdown("next year", "January 1");
+				makeCountdown("the eclipse at SEMO", "April 8, 2024 18:58:18 GMT");
+				refresh();
+				setInterval(refresh, 1000);
+			});
+			function calculate() {
+				var label = document.getElementById("label").value;
+				var month = document.getElementById("month").value;
+				var day = document.getElementById("day").value;
+				var year = document.getElementById("year").value;
+				var time = document.getElementById("time").value;
+				var timeFormat = document.getElementById("timeFormat").value!="24-hour" ? " "+document.getElementById("timeFormat").value : "";
+				makeCountdown(label, month+" "+day+", "+year+" "+time+timeFormat);
+				var IDs = ["label", "month", "day", "year", "time", "timeFormat"];
+				IDs.forEach(function (ID) {  // clears all of the inputs
+					document.getElementById(ID).value = "";
+				});
+				refresh();
+			}
+			function makeCountdown(label, date) {
+				var paragraph = document.createElement("p");
+				paragraph.id = timeNumber;
+				timeNumber++;
+				paragraph.label = label;
+				paragraph.date = date;
+				document.getElementById("loser").parentNode.insertBefore(paragraph, document.getElementById("loser"));
+			}
+			function refresh() {
+				for (var number=1; number<timeNumber; number++) {
+					var element = document.getElementById(number);
+					var now = new Date();
+					if ((function() {
+						var trueFalse = false;
+						element.date.split(" ").forEach(function(component) {
+							if (component.length==4 && !isNaN(component)) {
+								trueFalse = true;
+							}
+						});
+						return trueFalse;
+					})()) {  // if there's a year
+						var then = new Date(element.date);
+					} else {  // if there's not a year
+						// when dates are only given in a month and day (meant to be annual)
+						if (now.getTime() <= new Date(element.date+", "+now.getFullYear()).getTime()) {
+							var then = new Date(element.date+", "+now.getFullYear());
+						} else {
+							var then = new Date(element.date+", "+(now.getFullYear()+1));
+						}
+					}
+					var time = "";
+					if (then.getTime() <= now.getTime()) {
+						time = "0 seconds";
+					} else {
+						if (document.getElementById("loser").checked) {
+							//// There's an issue where "1 year 0 seconds" goes to "1 year 23 hours 59 minutes 59 seconds" for one second.
+							var seconds = Math.floor((then.getTime() - now.getTime()) % 60000 / 1000);
+							var minutes = Math.floor((then.getTime() - now.getTime()) % 3600000 / 60000);
+							var hours = Math.floor((then.getTime() - now.getTime()) % 86400000 / 3600000);
+							var nowTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+							var months = then.getMonth() < now.getMonth() ? 11 - now.getMonth() + (then.getMonth() + 1) : then.getMonth() - now.getMonth();
+							var days = then.getDate() - now.getDate();
+							var years = then.getFullYear() - now.getFullYear();
+							/********
+							Important nonsense:
+							.getMonth refers to months as 0-11; new Date("year monthNumber day") uses month numbers 1-12.
+							Example:
+							new Date("2017 March 11").getMonth() = 2
+							new Date("2017 2 11").getMonth() = 1
+							********/
+							if (then.getTime() < new Date(then.getFullYear() + " " + (then.getMonth() + 1) + " " + then.getDate() + " " + nowTime).getTime()) {
+								days--;
+								if (days < 0) {
+									// This is exempt from month nonsense because the new date is created in a comma-separated format. (It's 0-11.)
+									// The 1 is added to the month to get to the 0th day of the next month (the number of days in the month of interest).
+									days = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate() - now.getDate() + then.getDate() - 1;
+								}
+							} else {  //// This might not be necessary if the date assignment is corrected in the variable declaration.
+								if (days < 0) {
+									days = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate() - now.getDate() + then.getDate();
+								}
+							}
+							if (then.getTime() < new Date(then.getFullYear() + " " + (then.getMonth() + 1) + " " + now.getDate() + " " + nowTime).getTime()) {
+								months--;
+								if (months < 0) {
+									months = 11;
+								}
+							}
+							if (then.getTime() < new Date(then.getFullYear() + " " + (now.getMonth() + 1) + " " + now.getDate() + " " + nowTime).getTime()) {
+								years--;
+							}
+							if (seconds >= 0) {
+								time = seconds + (seconds != 1 ? " seconds" : " second");
+							}
+							if (minutes > 0) {
+								time = minutes + (minutes != 1 ? " minutes " : " minute ") + time;
+							}
+							if (hours > 0) {
+								time = hours + (hours != 1 ? " hours " : " hour ") + time;
+							}
+							if (days > 0) {
+								time = days + (days != 1 ? " days " : " day ") + time;
+							}
+							if (months > 0) {
+								time = months + (months != 1 ? " months " : " month ") + time;
+							}
+							if (years > 0) {
+								time = years + (years != 1 ? " years " : " year ") + time;
+							}
+						} else {
+							var seconds = then.getTime() > now.getTime() ? String(Math.ceil((then.getTime() - now.getTime()) / 1000)) : "0";
+							for (var index = 3; index < seconds.length; index += 4) {
+								seconds = seconds.slice(0, -index) + "," + seconds.slice(-index);
+							}
+							time = seconds + " seconds";
+						}
+					}
+					element.innerHTML = element.label + ": " + time;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h1>
+			Countdowns
+		</h1>
+		<h2>
+			Time until...
+		</h2>
+		<input type="checkbox" id="loser" onclick="refresh()">
+		<label for="loser">I'm a loser and want the times displayed normally.</label>
+		<br>
+		<br>
+		<h3>
+			Start your own countdown:
+		</h3>
+		<input type="text" id="label" placeholder="Label"/>
+		<br>
+		<br>
+		<select id="month">
+			<option value="" disabled selected>
+				Month
+			</option>
+			<option value="January">
+				January
+			</option>
+			<option value="February">
+				February
+			</option>
+			<option value="March">
+				March
+			</option>
+			<option value="April">
+				April
+			</option>
+			<option value="May">
+				May
+			</option>
+			<option value="June">
+				June
+			</option>
+			<option value="July">
+				July
+			</option>
+			<option value="August">
+				August
+			</option>
+			<option value="September">
+				September
+			</option>
+			<option value="October">
+				October
+			</option>
+			<option value="November">
+				November
+			</option>
+			<option value="December">
+				December
+			</option>
+		</select>
+		<span>&ensp;</span>
+		<select id="day">
+			<option value="" disabled selected>
+				Day
+			</option>
+			<option value="01">
+				1
+			</option>
+			<option value="02">
+				2
+			</option>
+			<option value="03">
+				3
+			</option>
+			<option value="04">
+				4
+			</option>
+			<option value="05">
+				5
+			</option>
+			<option value="06">
+				6
+			</option>
+			<option value="07">
+				7
+			</option>
+			<option value="08">
+				8
+			</option>
+			<option value="09">
+				9
+			</option>
+			<option value="10">
+				10
+			</option>
+			<option value="11">
+				11
+			</option>
+			<option value="12">
+				12
+			</option>
+			<option value="13">
+				13
+			</option>
+			<option value="14">
+				14
+			</option>
+			<option value="15">
+				15
+			</option>
+			<option value="16">
+				16
+			</option>
+			<option value="17">
+				17
+			</option>
+			<option value="18">
+				18
+			</option>
+			<option value="19">
+				19
+			</option>
+			<option value="20">
+				20
+			</option>
+			<option value="21">
+				21
+			</option>
+			<option value="22">
+				22
+			</option>
+			<option value="23">
+				23
+			</option>
+			<option value="24">
+				24
+			</option>
+			<option value="25">
+				25
+			</option>
+			<option value="26">
+				26
+			</option>
+			<option value="27">
+				27
+			</option>
+			<option value="28">
+				28
+			</option>
+			<option value="29">
+				29
+			</option>
+			<option value="30">
+				30
+			</option>
+			<option value="31">
+				31
+			</option>
+		</select>
+		<span>&ensp;</span>
+		<input type="text" id="year" placeholder="Year"/>
+		<br>
+		<br>
+		<input type="text" id="time" placeholder="Time (optional)"/>
+		<span>&ensp;</span>
+		<select id="timeFormat">
+			<option value="" disabled selected>
+				Time format
+			</option>
+			<option value="am">
+				am
+			</option>
+			<option value="pm">
+				pm
+			</option>
+			<option value="24-hour">
+				24-hour
+			</option>
+		</select>
+		<br>
+		<br>
+		<button onclick="calculate()">
+			Calculate
+		</button>
+		<br>
+		<br>
+	</body>
 </html>
