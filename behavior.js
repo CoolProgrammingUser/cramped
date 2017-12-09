@@ -13,8 +13,8 @@ if (document.head.getElementsByTagName("script").length > 0) {
         var Standards = {};
         Standards.options = {
             "formatting" : "formatting.css",
-            "icon" : "images/favicon.ico",
-            "title" : "~document.getElementsByTagName('h1')[0].innerHTML",
+            "icon"       : "images/favicon.ico",
+            "title"      : "~document.getElementsByTagName('h1')[0].innerHTML",
             "navigation" : "navigation.html"
         };
         // adds my standard script
@@ -27,8 +27,8 @@ if (document.head.getElementsByTagName("script").length > 0) {
     var Standards = {};
     Standards.options = {
         "formatting" : "formatting.css",
-        "icon" : "images/favicon.ico",
-        "title" : "~document.getElementsByTagName('h1')[0].innerHTML",
+        "icon"       : "images/favicon.ico",
+        "title"      : "~document.getElementsByTagName('h1')[0].innerHTML",
         "navigation" : "navigation.html"
     };
     // adds my standard script
