@@ -1,64 +1,75 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <script src="behavior.js"></script>
-        <script>
-            var cracking = new Audio("audio/Cracking.mp3");
-            setTimeout(function() {
-                cracking.play();
-            }, 4000);
-            setTimeout(function() {
-                document.getElementById("picture1").className = "invisible";
-                document.getElementById("picture2").className = "visible";
-                /*
-                These have to be modified with classes
-                because changing the actual display
-                would override the :hover CSS
-                and make the change permanent.
-                (JavaScript modifications are more specific than styling,
-                but IDs are more specific than classes.)
-                */
-            }, 4055);
-        </script>
-        <style>
-            .visible {
-                display: inline-block;
-            }
-            .invisible {
-                display: none;
-            }
-            #picture1, #picture2 {
-                width: 15em;
-                height: 15em;
-            }
-            #pictures:hover #picture1 {
-                display: inline-block;
-            }
-            #pictures:hover #picture2 {
-                display: none;
-            }
-        </style>
-        <!-- <link rel="import" href="/path/to/template.html"> could be used as a part of importing HTML in the future. -->
-    </head>
-    <body>
-        <h1>
-            Home
-        </h1>
-        <div id="pictures">
-            <img src="images/Closed Shell.png" class="visible" id="picture1">
-            <img src="images/Me in a Nutshell.png" class="invisible" id="picture2">
-        </div>
-        <p>
-            Welcome to the repository of my essence. I created this website in an effort to provide a clearer picture of what type of person I am for my application to MIT. Here, you will find things I've done, circumstances I've experienced, and nerdiness I've acquired. Although I think any influence this website may have had on my admission decision has passed by now, I plan on continuing to expand this website indefinitely because I like how it concentrates everything cool about me into one place. You might even describe this as me in a nutshell.
-        </p>
-        <p>
-            P.S. If something doesn't seem to be working like it should, switch your browser to the latest version of Google Chrome; that's what I test this on, and my cross-browser support may or may not be a little spotty (particularly for Internet Explorer).
-        </p>
-        <p id="MITadditionalInformation" style="display:none">
-            No application can meet the needs of every individual. If you think that additional information or material will give us a more thorough impression of you, please include it here.
-        </p>
-        <p style="display:none">
-            I was worried that this time, like last time, I wouldn't be able fully express what type of person I am in this application. In response, I created the website located at https://coolprogramminguser.github.io/Cramped/ in the hopes that I could more effectively portray things like my personality, accomplishments, and creativity (not to mention my programming abilities). Although there's a lot to look at, I hope you at least skim over some of it because I've spent an absolutely massive amount of time on building it from scratch (that's where all of my time went in the activities section), and I really do think it helps you see a part of me that isn't especially apparent in this application.
-        </p>
-    </body>
+<html class="html-class">
+	<head>
+		<title>
+			Cramped
+		</title>
+		<base target="_blank">
+		<link rel="icon" href="images/favicon.ico">
+		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
+		<script src="behavior.js"></script>
+		<script>
+			var cracking = new Audio("audio/Cracking.mp3");
+			setTimeout(function() {
+				cracking.play();
+			}, 4000);
+			setTimeout(function() {
+				document.getElementById("picture1").className = "invisible";
+				document.getElementById("picture2").className = "visible";
+				/*
+				These have to be modified with classes
+				because changing the actual display
+				would override the :hover CSS
+				and make the change permanent.
+				(JavaScript modifications are more specific than styling,
+				but IDs are more specific than classes.)
+				*/
+			}, 4055);
+		</script>
+		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
+		<link rel="stylesheet" href="formatting.css">
+		<style>
+			.visible {
+				display: inline-block;
+			}
+			.invisible {
+				display: none;
+			}
+			#picture1, #picture2 {
+				width: 15em;
+				height: 15em;
+			}
+			#pictures:hover #picture1 {
+				display: inline-block;
+			}
+			#pictures:hover #picture2 {
+				display: none;
+			}
+		</style>
+		<!-- <link rel="import" href="/path/to/template.html"> could be used as a part of importing HTML in the future. -->
+	</head>
+	<body class="left-nav">
+		<iframe class="left-nav" src="navigation.html"></iframe>
+		<h1 class="main-title">
+			Home
+		</h1>
+		<main>
+			<div id="pictures">
+				<img src="images/Closed Shell.png" class="visible" id="picture1">
+				<img src="images/Me in a Nutshell.png" class="invisible" id="picture2">
+			</div>
+			<p>
+				Welcome to the repository of my essence. I created this website in an effort to provide a clearer picture of what type of person I am for my application to MIT. Here, you will find things I've done, circumstances I've experienced, and nerdiness I've acquired. Although I think any influence this website may have had on my admission decision has passed by now, I plan on continuing to expand this website indefinitely because I like how it concentrates everything cool about me into one place. You might even describe this as me in a nutshell.
+			</p>
+			<p>
+				P.S. If something doesn't seem to be working like it should, switch your browser to the latest version of Google Chrome; that's what I test this on, and my cross-browser support may or may not be a little spotty (particularly for Internet Explorer).
+			</p>
+			<p id="MITadditionalInformation" style="display:none">
+				No application can meet the needs of every individual. If you think that additional information or material will give us a more thorough impression of you, please include it here.
+			</p>
+			<p style="display:none">
+				I was worried that this time, like last time, I wouldn't be able fully express what type of person I am in this application. In response, I created the website located at https://coolprogramminguser.github.io/cramped/<note-><div><div>The original URL was "https://coolprogramminguser.github.io/Cramped/".</div></div></note-> in the hopes that I could more effectively portray things like my personality, accomplishments, and creativity (not to mention my programming abilities). Although there's a lot to look at, I hope you at least skim over some of it because I've spent an absolutely massive amount of time on building it from scratch (that's where all of my time went in the activities section), and I really do think it helps you see a part of me that isn't especially apparent in this application.
+			</p>
+		</main>
+	</body>
 </html>

@@ -1,24 +1,33 @@
-<h2 style="text-align:center">
-    Contents
-</h2>
-<ul id="contentsList"></ul>
-<script>
-    [  // [page URL, title]
-        ["/cramped/", "Home"],
-        ["profile", "Profile"],
-        ["projects", "Projects"],
-        ["seconds", "Countdowns"],
-        ["learning", "Learning"],
-        ["creations", "Creations"],
-        ["programs", "Websites and Programs"],
-        ["experiments", "Uncertainty Settling"],
-        ["journal", "Journal"],
-        ["moments", "Important Moments"],
-        ["stories", "Fun Stories"],
-        ["kindness", "Kind Deeds"]
-    ].forEach(function(pair) {
-        document.getElementById("contentsList").innerHTML += "<li><a href='" + pair[0] + "'>" + pair[1] + "</a></li>";
-    });
-    document.getElementById("contentsList").innerHTML +=
-        "<li><a href='https://github.com/CoolProgrammingUser/cramped/wiki' target='_blank'>Comments</a></li>";
-</script>
+<!DOCTYPE html>
+<html>
+	<head>
+		<base target="_parent">
+		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation">
+	</head>
+	<body class="navigation">
+		<h2 style="text-align:center">
+		    Contents
+		</h2>
+		<ul id="contentsList"></ul>
+		<script>
+		    [  // [page URL, title]
+		        ["/cramped/", "Home"],
+		        ["profile", "Profile"],
+		        ["projects", "Projects"],
+		        ["seconds", "Countdowns"],
+		        ["learning", "Learning"],
+		        ["creations", "Creations"],
+		        ["programs", "Websites and Programs"],
+		        ["experiments", "Uncertainty Settling"],
+		        ["journal", "Journal"],
+		        ["moments", "Important Moments"],
+		        ["stories", "Fun Stories"],
+		        ["kindness", "Kind Deeds"]
+		    ].forEach(function(pair) {
+		        document.getElementById("contentsList").innerHTML += "<li><a href='" + pair[0] + "'>" + pair[1] + "</a></li>";
+		    });
+		    document.getElementById("contentsList").innerHTML +=
+		        "<li><a href='https://github.com/CoolProgrammingUser/cramped/wiki' target='_blank'>Comments</a></li>";
+		</script>
+	</body>
+</html>

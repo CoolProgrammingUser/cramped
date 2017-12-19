@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html class="html-class">
 	<head>
+		<title>
+			Cramped
+		</title>
+		<base target="_blank">
 		<link rel="icon" href="images/favicon.ico">
-		<script src="https://epicenterprograms.github.io/standards/behavior.js"></script>
+		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
+		<script src="behavior.js"></script>
 		<script>
 			var timeNumber = 1;
 			var isEmily = false;
@@ -143,7 +148,7 @@
 		<link rel="stylesheet" href="formatting.css">
 	</head>
 	<body class="left-nav">
-		<nav class="left-nav" data-href="navigation.html"></nav>
+		<iframe class="left-nav" src="navigation.html"></iframe>
 		<h1 class="main-title">
 			Countdowns
 		</h1>
@@ -158,7 +163,7 @@
 			<h3>
 				Start your own countdown:
 			</h3>
-			<input type="text" id="label" placeholder="Label"/>
+			<input type="text" id="label" placeholder="Label">
 			<br>
 			<br>
 			<select id="month">
@@ -302,10 +307,10 @@
 				</option>
 			</select>
 			<span>&ensp;</span>
-			<input type="text" id="year" placeholder="Year"/>
+			<input type="text" id="year" placeholder="Year">
 			<br>
 			<br>
-			<input type="text" id="time" placeholder="Time (optional)"/>
+			<input type="text" id="time" placeholder="Time (optional)">
 			<span>&ensp;</span>
 			<select id="timeFormat">
 				<option value="" disabled selected>

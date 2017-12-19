@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html class="html-class">
 	<head>
+		<title>
+			Cramped
+		</title>
+		<base target="_blank">
+		<link rel="icon" href="images/favicon.ico">
+		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
 		<script src="behavior.js"></script>
 		<script>
 			window.addEventListener("load", function() {
-				pageJump("sections");
 				var iframes = document.getElementsByTagName("iframe");
 				for (var index=0; index<iframes.length; index++) {
 					iframes[index].src = [
@@ -17,308 +22,313 @@
 				}
 			});
 		</script>
+		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
+		<link rel="stylesheet" href="formatting.css">
 	</head>
-	<body>
-		<h1>
+	<body class="left-nav">
+		<iframe class="left-nav" src="navigation.html"></iframe>
+		<h1 class="main-title">
 			Websites and Programs
 		</h1>
-		<p>
-			I'd say I have quite an affinity for programming (in case you didn't notice while you were using a website I made from scratch). As a result, I've accumulated a large number of websites and programs. I've referenced some of these in other sections, but this puts everything in one, convenient place. The headings within each category can be clicked on to visit the page or download the program (App Inventor and Python stuff downloads, the rest brings up a new tab). You can interact with the Scratch and GitHub "pictures".
-		</p>
-		<div id="sections">
-			<h2>
-				Google Sites
-			</h2>
+		<main>
 			<p>
-				For a project in 10<sup>th</sup> grade, one of my teachers had us use this free Google service to put together a research topic of our choice. After discovering this means of making my work available to the world, I naturally had to make use of it for my own various purposes.
+				I'd say I have quite an affinity for programming (in case you didn't notice while you were using a website I made from scratch). As a result, I've accumulated a large number of websites and programs. I've referenced some of these in other sections, but this puts everything in one, convenient place. The headings within each category can be clicked on to visit the page or download the program (App Inventor and Python stuff downloads, the rest brings up a new tab). You can interact with the Scratch and GitHub "pictures".
 			</p>
-			<h3>
-				<a target="_blank" href="https://sites.google.com/site/causesofagingrtb/">
-					The Causes of Aging
-				</a>
-			</h3>
-			<p>
-				This is the the original project I made for my teacher.
-			</p>
-			<h3>
-				<a target="_blank" href="https://sites.google.com/site/beginningofabusiness/">
-					My Business
-				</a>
-			</h3>
-			<p>
-				Starting some time in middle school, I decided that I was tired of relying on years' worth of saved-up money and maybe the occasional birthday or Christmas present to provide me with spending power (which I basically never made use of). Rather than being a loser and getting a real job, I decided to go into business for myself. I started off small but slowly became more successful. Right now, my business is on hiatus, but I plan on bringing it back (again) bigger and better than before. Until then (and after then) you can see the website I made for it.
-			</p>
-			<h3>
-				<a target="_blank" href="https://sites.google.com/site/canphonesandcorners/">
-					Can Phones and Corners
-				</a>
-			</h3>
-			<p>
-				I made this website to talk about how to get can phones to go around corners.
-			</p>
-			<h3>
-				<a target="_blank" href="https://sites.google.com/site/referenceforprogramming/">
-					Programming Reference
-				</a>
-			</h3>
-			<p>
-				I made this website for my computer science teacher, so he could have some programs of mine to use as examples and so he could host his own examples and provide useful tips to the class. I don't think he's used it, and it's quite disappointing. (I don't know because I graduated.)
-			</p>
-			<h3>
-				<a target="_blank" href="https://sites.google.com/site/reallifestereograms/">
-					Real-life Stereograms
-				</a>
-			</h3>
-			<p>
-				There's these awesome things called <a target="_blank" href="https://en.wikipedia.org/wiki/Autostereogram">stereograms</a> which allow you to see things in 3D. I can create my own by taking two pictures of something from slightly different angles. I put some of those pictures side-by-side on this website.
-			</p>
-			<br>
-			<h2>
-				Scratch
-			</h2>
-			<p>
-				During the one year of my high school computer programming class, we used a website called <a target="_blank" href="https://scratch.mit.edu/">Scratch</a> (which just so happens to be run by MIT) to help us learn the fundamentals of programming by arranging blocks of code to create functionality. Here are some of results of the experience.
-			</p>
-			<h3>
-				<a target="_blank" href="https://scratch.mit.edu/projects/73733458/">
-					Egg Catcher
-				</a>
-			</h3>
-			<p>
-				This is the game I made for my project in class. It was finished way ahead of time, and I used the rest of the time to pursue my own endeavors (other cool programs). Use the mouse to keep the eggs from hitting the ground.
-			</p>
-			<iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
-			<h3>
-				<a target="_blank" href="https://scratch.mit.edu/projects/103296981/">
-					ADD and ADHD
-				</a>
-			</h3>
-			<p>
-				For a project in psychology, we were asked to research a psychological disorder and present the information in a PowerPoint and creative way of our own choosing. Naturally, I chose to make a program for it.
-			</p>
-			<iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
-			<h3>
-				<a target="_blank" href="https://scratch.mit.edu/projects/86870295/">
-					Surprise!
-				</a>
-			</h3>
-			<p>
-				My mom's birthday came around at one point, and I was feeling bad for not really doing much for her, so I made a program to surprise her with. The surprise comes after 36 points.
-			</p>
-			<iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
-			<br>
-			<br>
-			<h2>
-				App Inventor
-			</h2>
-			<p>
-				Another thing we used in my computer programming class was <a target="_blank" href="http://appinventor.mit.edu/explore/">App Inventor</a> (which also just so happens to be run by MIT). It was similar to Scratch except that you were building apps which you could download to your Android phone or put on the Google Play Store.
-			</p>
-			<h3>
-				<a href="https://github.com/CoolProgrammingUser/cramped/releases/download/1.0/ConversationalClunker.apk">
-					Conversational Clunker
-				</a>
-			</h3>
-			<p>
-				This is the app I and my partner made for our project using App Inventor. It isn't exactly all that great right now but it could be pretty cool if I got it to work correctly. (It's supposed to be something you can ask questions and get good/funny/random answers with).
-			</p>
-			<h3>
-				<a href="https://github.com/CoolProgrammingUser/cramped/releases/download/2.1/DigitalDoodle.apk">
-					Digital Doodle
-				</a>
-			</h3>
-			<p>
-				At its core, this is a drawing app we were walked through making in my computer science class; however, I made it many times more awesome.
-			</p>
-			<h3>
-				<a href="https://github.com/CoolProgrammingUser/cramped/releases/download/1.4/FlashCards.apk">
-					Flash Cards
-				</a>
-			</h3>
-			<p>
-				There are many things I'm trying to memorize all the time, so I thought I'd make it easy on myself and make an app that allows me to make and access flash cards from my phone.
-			</p>
-			<h3>
-				<a href="https://github.com/CoolProgrammingUser/cramped/releases/download/1.1/PictureOrganizer.apk">
-					Picture Organizer
-				</a>
-			</h3>
-			<p>
-				For a while, I had a phone that wouldn't allow me to name or sort my pictures, and it was quite annoying. Rather than beating my head against the wall in frustration, I decided to get solution-focused and make an app to solve my problem. This app allows you to pick out pictures which you can name, sort, and access later.
-			</p>
-			<br>
-			<h2>
-				Python
-			</h2>
-			<p>
-				The entire second semester of my high school programming class was devoted to learning the programming language Python. I thought for sure we were going to use <a target="_blank" href="http://python.cocos2d.org/"><!-- This link isn't what I originally saw. -->Cocos2d</a> to run our programs (which I originally thought was run by MIT but turned out only to have the MIT license) but instead, we used <a target="_blank" href="https://www.enthought.com/products/canopy/">Canopy</a>. We were only taught how to do boring text-based games using the command line / console, but I wasn't satisfied with that, so I did cooler stuff.
-			</p>
-			<h3>
-				<a href="https://coolprogramminguser.github.io/Programs/python/Pig Latin Translator.py">
-					Pig Latin Translator
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Pig Latin Translator.py">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				This is just about the only thing I have which is text-based, and I didn't even make it in class; I made it when I was teaching myself Python through <a target="_blank" href="https://www.codecademy.com/">Codecademy</a> because I didn't want to wait to learn the language. You can use this program to translate text you type into Pig Latin.
-			</p>
-			<h3>
-				<a href="https://coolprogramminguser.github.io/Programs/python/Key Identifier.py">
-					Key Identifier
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Key Identifier.py">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				To be completely honest, this program is largely not my own; I found it online, so I could figure out how to tell if a certain key was pressed.
-			</p>
-			<h3>
-				<a href="https://coolprogramminguser.github.io/Programs/python/Circle Mover.py">
-					Circle Mover
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Circle Mover.py">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				This is the program I used for my project in class. It's not too amazing, but you can move a smilely face around and create smaller circles which move at various speeds.
-			</p>
-			<h3>
-				<a href="https://coolprogramminguser.github.io/Programs/python/Circle Mover 2.py">
-					Circle Mover 2
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Circle Mover 2.py">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				As you can imagine, this is the second iteration of Circle Mover (although they're hardly comparable). Color shifting smilely faces can be added or taken away, and they bounce off of the walls and each other. The size of the area can also be increased or decreased.
-			</p>
-			<h3>
-				<a href="https://coolprogramminguser.github.io/Programs/python/Super Duper Mario.py">
-					Super Duper Mario
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Super Duper Mario.py">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				This is the program I had originally hoped to use for my project in class, but it became too complex for me to finish in time. Although, at the surface, this may just seem like a basic recreation of a Mario game, I put in an immense amount of work to get it as cool as it is (just like how this may seem like a moderately simple website, but I can't even begin to tell you how much time I've had to invest in this to get it where it is today).
-			</p>
-			<img src="images/Mario Scene.png" width="525" height="300">
-			<br>
-			<h2>
-				GitHub
-			</h2>
-			<p>
-				This is the source of this amazing website. I figured out how to make use of the website capabilities of this website just a few months ago, and due to my sudden ability to use it, my knowledge of JavaScript has increased exponetially.
-			</p>
-			<h3>
-				<a target="_blank" href="https://epicenterprograms.github.io/experimentation/">
-					Experimentation
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/EpicenterPrograms/experimentation">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				I use this website to experiment with JavaScript, in particular, <a href="https://firebase.google.com/">Firebase</a> account management. Pressing keys and buttons still does cool stuff, though.
-			</p>
-			<h3>
-				<a target="_blank" href="https://epicenterprograms.github.io/calculator/">
-					Calculator
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/EpicenterPrograms/calculator">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				I used this for my project in my computer science class this year in college. There's just all sorts of cool stuff you can do with this thing, much of which you might not expect from a calculator.
-			</p>
-			<iframe allowtransparency="true" width="600" height="480" frameborder="0" allowfullscreen></iframe>
-			<h3>
-				<a target="_blank" href="https://coolprogramminguser.github.io/To-Do-List/">
-					To-Do List
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/To-Do-List">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				This is a necessity.
-			</p>
-			<h3>
-				<a target="_blank" href="https://coolprogramminguser.github.io/Decoder/">
-					Decoder
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/Decoder">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				I finally finished this and even got it to run at a reasonable speed. There's a good story behind it.
-			</p>
-			<h3>
-				<a target="_blank" href="https://coolprogramminguser.github.io/Text-Analyzer/">
-					Text Analyzer
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/Text-Analyzer">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				One of the many uses of this is seeing how many words I've typed for an MIT essay (too many).
-			</p>
-			<iframe allowtransparency="true" width="600" height="480" frameborder="0" allowfullscreen></iframe>
-			<h3>
-				<a target="_blank" href="https://epicenterprograms.github.io/standards/">
-					Standards
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/EpicenterPrograms/standards">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				This is the place where I host my formatting and behavior standards. Much of what's there has been copied and pasted from this website.
-			</p>
-			<h3>
-				<a target="_blank" href="/cramped/">
-					This (Cramped)
-				</a>
-			</h3>
-			<p>
-				<a target="_blank" href="https://github.com/CoolProgrammingUser/cramped">
-					View on GitHub
-				</a>
-			</p>
-			<p>
-				I don't think this section really needs to be here, but I wanted to have a place where you could see all of this on GitHub. Also, if you feel like I shouldn't be "cheating" and adding stuff since MIT's application deadline has passed, you can view the version from February 15, 2017 <a target="_blank" href="https://github.com/CoolProgrammingUser/cramped/tree/46271e883adffce6ebc2e828bb17fe1584df6b61">here</a>. (Notice how well I hid the link.)
-			</p>
-		</div>
+			<div class="page-jump-sections">
+				<h2>
+					Google Sites
+				</h2>
+				<p>
+					For a project in 10<sup>th</sup> grade, one of my teachers had us use this free Google service to put together a research topic of our choice. After discovering this means of making my work available to the world, I naturally had to make use of it for my own various purposes.
+				</p>
+				<h3>
+					<a target="_blank" href="https://sites.google.com/site/causesofagingrtb/">
+						The Causes of Aging
+					</a>
+				</h3>
+				<p>
+					This is the the original project I made for my teacher.
+				</p>
+				<h3>
+					<a target="_blank" href="https://sites.google.com/site/beginningofabusiness/">
+						My Business
+					</a>
+				</h3>
+				<p>
+					Starting some time in middle school, I decided that I was tired of relying on years' worth of saved-up money and maybe the occasional birthday or Christmas present to provide me with spending power (which I basically never made use of). Rather than being a loser and getting a real job, I decided to go into business for myself. I started off small but slowly became more successful. Right now, my business is on hiatus, but I plan on bringing it back (again) bigger and better than before. Until then (and after then) you can see the website I made for it.
+				</p>
+				<h3>
+					<a target="_blank" href="https://sites.google.com/site/canphonesandcorners/">
+						Can Phones and Corners
+					</a>
+				</h3>
+				<p>
+					I made this website to talk about how to get can phones to go around corners.
+				</p>
+				<h3>
+					<a target="_blank" href="https://sites.google.com/site/referenceforprogramming/">
+						Programming Reference
+					</a>
+				</h3>
+				<p>
+					I made this website for my computer science teacher, so he could have some programs of mine to use as examples and so he could host his own examples and provide useful tips to the class. I don't think he's used it, and it's quite disappointing. (I don't know because I graduated.)
+				</p>
+				<h3>
+					<a target="_blank" href="https://sites.google.com/site/reallifestereograms/">
+						Real-life Stereograms
+					</a>
+				</h3>
+				<p>
+					There's these awesome things called <a target="_blank" href="https://en.wikipedia.org/wiki/Autostereogram">stereograms</a> which allow you to see things in 3D. I can create my own by taking two pictures of something from slightly different angles. I put some of those pictures side-by-side on this website.
+				</p>
+				<br>
+				<h2>
+					Scratch
+				</h2>
+				<p>
+					During the one year of my high school computer programming class, we used a website called <a target="_blank" href="https://scratch.mit.edu/">Scratch</a> (which just so happens to be run by MIT) to help us learn the fundamentals of programming by arranging blocks of code to create functionality. Here are some of results of the experience.
+				</p>
+				<h3>
+					<a target="_blank" href="https://scratch.mit.edu/projects/73733458/">
+						Egg Catcher
+					</a>
+				</h3>
+				<p>
+					This is the game I made for my project in class. It was finished way ahead of time, and I used the rest of the time to pursue my own endeavors (other cool programs). Use the mouse to keep the eggs from hitting the ground.
+				</p>
+				<iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+				<h3>
+					<a target="_blank" href="https://scratch.mit.edu/projects/103296981/">
+						ADD and ADHD
+					</a>
+				</h3>
+				<p>
+					For a project in psychology, we were asked to research a psychological disorder and present the information in a PowerPoint and creative way of our own choosing. Naturally, I chose to make a program for it.
+				</p>
+				<iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+				<h3>
+					<a target="_blank" href="https://scratch.mit.edu/projects/86870295/">
+						Surprise!
+					</a>
+				</h3>
+				<p>
+					My mom's birthday came around at one point, and I was feeling bad for not really doing much for her, so I made a program to surprise her with. The surprise comes after 36 points.
+				</p>
+				<iframe allowtransparency="true" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+				<br>
+				<br>
+				<h2>
+					App Inventor
+				</h2>
+				<p>
+					Another thing we used in my computer programming class was <a target="_blank" href="http://appinventor.mit.edu/explore/">App Inventor</a> (which also just so happens to be run by MIT). It was similar to Scratch except that you were building apps which you could download to your Android phone or put on the Google Play Store.
+				</p>
+				<h3>
+					<a href="https://github.com/CoolProgrammingUser/cramped/releases/download/1.0/ConversationalClunker.apk">
+						Conversational Clunker
+					</a>
+				</h3>
+				<p>
+					This is the app I and my partner made for our project using App Inventor. It isn't exactly all that great right now but it could be pretty cool if I got it to work correctly. (It's supposed to be something you can ask questions and get good/funny/random answers with).
+				</p>
+				<h3>
+					<a href="https://github.com/CoolProgrammingUser/cramped/releases/download/2.1/DigitalDoodle.apk">
+						Digital Doodle
+					</a>
+				</h3>
+				<p>
+					At its core, this is a drawing app we were walked through making in my computer science class; however, I made it many times more awesome.
+				</p>
+				<h3>
+					<a href="https://github.com/CoolProgrammingUser/cramped/releases/download/1.4/FlashCards.apk">
+						Flash Cards
+					</a>
+				</h3>
+				<p>
+					There are many things I'm trying to memorize all the time, so I thought I'd make it easy on myself and make an app that allows me to make and access flash cards from my phone.
+				</p>
+				<h3>
+					<a href="https://github.com/CoolProgrammingUser/cramped/releases/download/1.1/PictureOrganizer.apk">
+						Picture Organizer
+					</a>
+				</h3>
+				<p>
+					For a while, I had a phone that wouldn't allow me to name or sort my pictures, and it was quite annoying. Rather than beating my head against the wall in frustration, I decided to get solution-focused and make an app to solve my problem. This app allows you to pick out pictures which you can name, sort, and access later.
+				</p>
+				<br>
+				<h2>
+					Python
+				</h2>
+				<p>
+					The entire second semester of my high school programming class was devoted to learning the programming language Python. I thought for sure we were going to use <a target="_blank" href="http://python.cocos2d.org/"><!-- This link isn't what I originally saw. -->Cocos2d</a> to run our programs (which I originally thought was run by MIT but turned out only to have the MIT license) but instead, we used <a target="_blank" href="https://www.enthought.com/products/canopy/">Canopy</a>. We were only taught how to do boring text-based games using the command line / console, but I wasn't satisfied with that, so I did cooler stuff.
+				</p>
+				<h3>
+					<a href="https://coolprogramminguser.github.io/Programs/python/Pig Latin Translator.py">
+						Pig Latin Translator
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Pig Latin Translator.py">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					This is just about the only thing I have which is text-based, and I didn't even make it in class; I made it when I was teaching myself Python through <a target="_blank" href="https://www.codecademy.com/">Codecademy</a> because I didn't want to wait to learn the language. You can use this program to translate text you type into Pig Latin.
+				</p>
+				<h3>
+					<a href="https://coolprogramminguser.github.io/Programs/python/Key Identifier.py">
+						Key Identifier
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Key Identifier.py">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					To be completely honest, this program is largely not my own; I found it online, so I could figure out how to tell if a certain key was pressed.
+				</p>
+				<h3>
+					<a href="https://coolprogramminguser.github.io/Programs/python/Circle Mover.py">
+						Circle Mover
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Circle Mover.py">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					This is the program I used for my project in class. It's not too amazing, but you can move a smilely face around and create smaller circles which move at various speeds.
+				</p>
+				<h3>
+					<a href="https://coolprogramminguser.github.io/Programs/python/Circle Mover 2.py">
+						Circle Mover 2
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Circle Mover 2.py">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					As you can imagine, this is the second iteration of Circle Mover (although they're hardly comparable). Color shifting smilely faces can be added or taken away, and they bounce off of the walls and each other. The size of the area can also be increased or decreased.
+				</p>
+				<h3>
+					<a href="https://coolprogramminguser.github.io/Programs/python/Super Duper Mario.py">
+						Super Duper Mario
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/Programs/blob/master/python/Super Duper Mario.py">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					This is the program I had originally hoped to use for my project in class, but it became too complex for me to finish in time. Although, at the surface, this may just seem like a basic recreation of a Mario game, I put in an immense amount of work to get it as cool as it is (just like how this may seem like a moderately simple website, but I can't even begin to tell you how much time I've had to invest in this to get it where it is today).
+				</p>
+				<img src="images/Mario Scene.png" width="525" height="300">
+				<br>
+				<h2>
+					GitHub
+				</h2>
+				<p>
+					This is the source of this amazing website. I figured out how to make use of the website capabilities of this website just a few months ago, and due to my sudden ability to use it, my knowledge of JavaScript has increased exponetially.
+				</p>
+				<h3>
+					<a target="_blank" href="https://epicenterprograms.github.io/experimentation/">
+						Experimentation
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/EpicenterPrograms/experimentation">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					I use this website to experiment with JavaScript, in particular, <a href="https://firebase.google.com/">Firebase</a> account management. Pressing keys and buttons still does cool stuff, though.
+				</p>
+				<h3>
+					<a target="_blank" href="https://epicenterprograms.github.io/calculator/">
+						Calculator
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/EpicenterPrograms/calculator">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					I used this for my project in my computer science class this year in college. There's just all sorts of cool stuff you can do with this thing, much of which you might not expect from a calculator.
+				</p>
+				<iframe allowtransparency="true" width="600" height="480" frameborder="0" allowfullscreen></iframe>
+				<h3>
+					<a target="_blank" href="https://coolprogramminguser.github.io/To-Do-List/">
+						To-Do List
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/To-Do-List">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					This is a necessity.
+				</p>
+				<h3>
+					<a target="_blank" href="https://coolprogramminguser.github.io/Decoder/">
+						Decoder
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/Decoder">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					I finally finished this and even got it to run at a reasonable speed. There's a good story behind it.
+				</p>
+				<h3>
+					<a target="_blank" href="https://coolprogramminguser.github.io/Text-Analyzer/">
+						Text Analyzer
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/Text-Analyzer">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					One of the many uses of this is seeing how many words I've typed for an MIT essay (too many).
+				</p>
+				<iframe allowtransparency="true" width="600" height="480" frameborder="0" allowfullscreen></iframe>
+				<h3>
+					<a target="_blank" href="https://epicenterprograms.github.io/standards/">
+						Standards
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/EpicenterPrograms/standards">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					This is the place where I host my formatting and behavior standards. Much of what's there has been copied and pasted from this website.
+				</p>
+				<h3>
+					<a target="_blank" href="/cramped/">
+						This (Cramped)
+					</a>
+				</h3>
+				<p>
+					<a target="_blank" href="https://github.com/CoolProgrammingUser/cramped">
+						View on GitHub
+					</a>
+				</p>
+				<p>
+					I don't think this section really needs to be here, but I wanted to have a place where you could see all of this on GitHub. Also, if you feel like I shouldn't be "cheating" and adding stuff since MIT's application deadline has passed, you can view the version from February 15, 2017 <a target="_blank" href="https://github.com/CoolProgrammingUser/cramped/tree/46271e883adffce6ebc2e828bb17fe1584df6b61">here</a>. (Notice how well I hid the link.)
+				</p>
+			</div>
+		</main>
 	</body>
 </html>
