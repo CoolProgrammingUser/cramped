@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="html-class">
 	<head>
 		<base target="_parent">
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
 	</head>
 	<body class="navigation">
-		<h2 style="text-align:center">
+		<h2>
 		    Contents
 		</h2>
 		<ul id="contentsList"></ul>
@@ -23,12 +23,11 @@
 		        ["journal", "Journal"],
 		        ["moments", "Important Moments"],
 		        ["stories", "Fun Stories"],
-		        ["kindness", "Kind Deeds"]
+				["kindness", "Kind Deeds"],
+				["comments", "Comments"]
 		    ].forEach(function(pair) {
 		        document.getElementById("contentsList").innerHTML += "<li><a href='" + pair[0] + "'>" + pair[1] + "</a></li>";
 		    });
-		    document.getElementById("contentsList").innerHTML +=
-		        "<li><a href='https://github.com/CoolProgrammingUser/cramped/wiki' target='_blank'>Comments</a></li>";
 		</script>
 	</body>
 </html>
