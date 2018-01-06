@@ -29,6 +29,18 @@
 			.slim td {
 				padding: .5em 0em;
 			}
+			#rawConversationData {
+				border: .05em solid cyan;
+				padding: 1em;
+				height: 15em;
+				background: white;
+				text-align: left;
+				overflow: auto;
+			}
+			#rawConversationData h4 {
+				margin-top: 0em;
+				text-align: center;
+			}
 		</style>
 	</head>
 	<body class="left-nav">
@@ -266,6 +278,11 @@
 				<p>
 					I transferred in, so this starts from the very beginning of my relationships. This starts on Monday, August 21, 2017.
 				</p>
+				<div id="rawConversationData">
+					<h4>
+						Raw conversation data
+					</h4>
+				</div>
 				<h4>
 					Take into account...
 				</h4>
@@ -2060,8 +2077,8 @@
 								["Kerol Horst",f,a,t,n,3,1,6,5],
 								["Joee Taylrr",m,c,m,c,1,6,4,5],
 								["Kaytlin Ricrrdz",f,c,t,n,1,7,5,5],
-								["g(Kerol Horst&Joee Taylrr&Kaylin Ricrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",m,c+g,3,1,"44620415",4],
-								["g(Kerol Horst&Joee Taylrr&Kaylin Ricrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",n,n,2,6,"12200001",5],
+								["g(Kerol Horst&Joee Taylrr&Kaytlin Ricrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",m,c+g,3,1,"44620415",4],
+								["g(Kerol Horst&Joee Taylrr&Kaytlin Ricrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",n,n,2,6,"12200001",5],
 								["Kerol Horst",f,a,t,n,2,4,4,4],
 								["p34",m,a,t,n,1,7,7,5],
 								["a1",f,s,t,n,1,7,7,4],
@@ -2322,6 +2339,7 @@
 							date: "none",
 							description: "people in Biology lab",
 							time: "none",
+							schedule: ["Wednesday"],
 							notes: [],
 							data: {
 								everyone: [10, 10],
@@ -2338,6 +2356,7 @@
 							date: "none",
 							description: "people in Biology class",
 							time: "none",
+							schedule: ["Monday", "Wednesday", "Friday"],
 							notes: [],
 							data: {
 								everyone: [60, 60],
@@ -2359,6 +2378,7 @@
 							date: "none",
 							description: "people in Art class",
 							time: "none",
+							schedule: ["Monday", "Wednesday", "Friday"],
 							notes: [],
 							data: {
 								everyone: [5, 2],
@@ -2377,37 +2397,51 @@
 						{
 							tags: ["object", "class"],
 							date: "none",
-							description: "people in ____ class",
+							description: "people in Relationships class",
 							time: "none",
+							schedule: ["Tuesday", "Thursday"],
 							notes: [],
 							data: {
-								everyone: ["male", "female"],
-								professor: ["name", "gender"],
-								nearby: ["name", "gender", "proximity"]
+								everyone: [4, 5],
+								professor: ["PuetrIshuh Ferish", "f"],
+								nearby: [
+									["a1", "m", 2],
+									["a2", "f", 2],
+									["a3", "f", 2]
+								]
 							}
 						},
 						{
 							tags: ["object", "class"],
 							date: "none",
-							description: "people in ____ class",
+							description: "people in Economics class",
 							time: "none",
+							schedule: ["Tuesday", "Thursday"],
 							notes: [],
 							data: {
-								everyone: ["male", "female"],
-								professor: ["name", "gender"],
-								nearby: ["name", "gender", "proximity"]
+								everyone: [12, 12],
+								professor: ["Zak Kao", "m"],
+								nearby: [
+									["p40", "f", 3]
+								]
 							}
 						},
 						{
 							tags: ["object", "class"],
 							date: "none",
-							description: "people in ____ class",
+							description: "people in History class",
 							time: "none",
+							schedule: ["Monday", "Wednesday"],
 							notes: [],
 							data: {
-								everyone: ["male", "female"],
-								professor: ["name", "gender"],
-								nearby: ["name", "gender", "proximity"]
+								everyone: [14, 14],
+								professor: ["ViktOreeuh MikAluhstrr", "f"],
+								nearby: [
+									["Kaylin Troo", "m", 3],
+									["p85", "f", 2],
+									["a1", "f", 2],
+									["a2", "m", 1]
+								]
 							}
 						}
 					];
@@ -2515,6 +2549,13 @@
 						p101: "p98's friend",
 						p102: "random red-headed dude"
 					};
+
+					let conversationData = S.getId("rawConversationData").innerHTML;
+					S.forEach(conversations, function (day) {
+						conversationData += JSON.stringify(day) + "<br><br>";
+					});
+					S.getId("rawConversationData").innerHTML = conversationData;
+
 					function updateConversations() {
 						/**
 						puts information into the conversation tables
@@ -2523,7 +2564,7 @@
 							rows = [null, null],
 							male = [],
 							female = [];
-						tables.forEach(function(table) {
+						S.forEach(tables, function(table) {
 							// removes any previous data
 							while (table.rows.length > 4) {
 								table.deleteRow(-1);
@@ -2533,7 +2574,7 @@
 						function prepareTables() {
 							male = [];
 							female = [];
-							tables.forEach(function(table, index) {
+							S.forEach(tables, function(table, index) {
 								rows[index] = table.getElementsByTagName("tr")[table.getElementsByTagName("tr").length-1];
 								if (rows[index].getElementsByTagName("td").length >= 14) {
 									rows[index] = table.insertRow(-1);  // Making a new <tr> and inserting it wouldn't automatically get it in the <tbody>.
@@ -2553,7 +2594,7 @@
 						}
 						function extendTables(date) {
 							let morePreciseTables = Array.prototype.slice.call(arguments, 1);
-							tables.forEach(function(table, index) {
+							S.forEach(tables, function(table, index) {
 								if (!isNaN(male[index].innerHTML)) {
 									if (morePreciseTables.indexOf(table.id) == -1) {
 										male[index].innerHTML = Math.round(male[index].innerHTML);
@@ -2576,11 +2617,12 @@
 						}
 						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
 							initSum = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-						conversations.forEach(function(day) {
+						S.forEach(conversations, function (day) {
 							let dayIsCountable = true;
 							if (day.notes.indexOf("no data") > -1) {
 								dayIsCountable = false;
 							}
+
 							if (dayIsCountable) {  // if the day should be counted
 								prepareTables();
 								let uniquePeople = {m: [], f: []},
@@ -2596,7 +2638,7 @@
 										anonymous: S.getId("anonymousConversations").checked,
 										other: S.getId("otherConversations").checked
 									};
-								day.data.forEach(function(conversation, number) {
+								S.forEach(day.data, function(conversation, number) {
 									let me = {},
 										them = [];
 									if (conversation.length == 8) {
@@ -2742,7 +2784,7 @@
 										});
 									}
 									
-									them.forEach(function(person) {  // adds information to the tables
+									S.forEach(them, function(person) {  // adds information to the tables
 										
 										// determines whether the interaction should be counted
 										let desiredInteraction = true;
@@ -2870,8 +2912,8 @@
 						initiators[2][0] = initiators[0][0] + initiators[1][0];
 						initiators[2][1] = initiators[0][1] + initiators[1][1];
 						initiators[2][2] = initiators[0][2] + initiators[1][2];
-						initiators.forEach(function(row, rowIndex) {
-							row.forEach(function(column, columnIndex) {
+						S.forEach(initiators, function(row, rowIndex) {
+							S.forEach(row, function(column, columnIndex) {
 								document.getElementById("initializers").getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex].innerHTML = column;
 							});
 						});
@@ -2880,8 +2922,8 @@
 						initSum[2][0] = initSum[0][0] + initSum[1][0];
 						initSum[2][1] = initSum[0][1] + initSum[1][1];
 						initSum[2][2] = initSum[0][2] + initSum[1][2];
-						initSum.forEach(function (row, rowIndex) {
-							row.forEach(function (column, columnIndex) {
+						S.forEach(initSum, function (row, rowIndex) {
+							S.forEach(row, function (column, columnIndex) {
 								document.getElementById("initializerSum").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].innerHTML = Math.round(column);
 							});
 						});
@@ -2891,10 +2933,10 @@
 						S.colorCode("enjoyability", null, [255,255,0], [128,255,0]);
 					}
 					updateConversations();
-					S.getId("conversationCheckboxes").getElementsByTagName("input").forEach(function(checkbox) {
+					S.forEach(S.getId("conversationCheckboxes").getElementsByTagName("input"), function(checkbox) {
 						checkbox.addEventListener("click", updateConversations);
 					});
-					S.getId("conversationCheckboxes").getElementsByTagName("label").forEach(function(label) {
+					S.forEach(S.getId("conversationCheckboxes").getElementsByTagName("label"), function(label) {
 						label.addEventListener("click", updateConversations);
 					});
 				</script>
