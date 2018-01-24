@@ -15,31 +15,45 @@
 		<link rel="stylesheet" href="formatting.css">
 		<style>
 			details {
-				border: .05em solid #58a;
-				border-radius: .25em;
+				border: .05rem solid #58a;
+				border-radius: .25rem;
 				background-color: white;
 			}
 			summary {
-				border-radius: .25em;
+				border-radius: .25rem;
 				background-color: #aee;
 			}
 			.smaller th {
-				padding: .4em .2em;
+				padding: .4rem .2rem;
 			}
 			.slim td {
-				padding: .5em 0em;
+				padding: .5rem 0rem;
 			}
 			#rawConversationData {
-				border: .05em solid cyan;
-				padding: 1em;
-				height: 15em;
+				border: .05rem solid cyan;
+				padding: 1rem;
+				height: 15rem;
 				background: white;
 				text-align: left;
 				overflow: auto;
 			}
 			#rawConversationData h4 {
-				margin-top: 0em;
+				margin-top: 0rem;
 				text-align: center;
+			}
+			#conversationCheckboxes {
+				position: -webkit-sticky;
+				position: sticky;
+				top: 0rem;
+				width: 100%;
+				background: rgba(255, 255, 255, .5);
+			}
+			#conversationCheckboxes h4 {
+				margin-top: .5rem;
+				margin-bottom: .5rem;
+			}
+			#conversationCheckboxes div {
+				text-align: left;
 			}
 		</style>
 	</head>
@@ -53,6 +67,7 @@
 				<h2>
 					Conversations
 				</h2>
+				<div>  <!-- This catches the sticky conversation filter for my college data. -->
 				<p>
 					For the longest time, I had been suspecting that I was talking to more girls than boys. I would always try to treat everyone equally, but I couldn't shake the feeling that things weren't quite equal. I thought it could be all in my head, but then again, maybe it wasn't, and if so, was it caused by me or other people? After driving myself crazy going back and forth forever, I decided to finally get scientific about it and collect some data pertaining to female versus male interactions (excluding adults). The results are detailed below.
 				</p>
@@ -283,19 +298,27 @@
 						Raw conversation data
 					</h4>
 				</div>
-				<h4>
-					Take into account...
-				</h4>
+				<br>
+				<br>
 				<div id="conversationCheckboxes">
-					<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label><br>
-					<input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
-					<input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
-					<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
-					<input type="checkbox" id="floorConversations" checked><label for="floorConversations">conversations with people from my floor</label><br>
-					<input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
-					<input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
-					<input type="checkbox" id="anonymousConversations" checked><label for="anonymousConversations">conversations with random people</label><br>
-					<input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label><br>
+					<h4>
+						Take into account...
+					</h4>
+					<div>
+						<input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
+						<input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
+						<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label>
+					</div>
+					<div>
+						<input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
+						<input type="checkbox" id="floorConversations" checked><label for="floorConversations">conversations with people from my floor</label><br>
+						<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label>
+					</div>
+					<div>
+						<input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
+						<input type="checkbox" id="anonymousConversations" checked><label for="anonymousConversations">conversations with random people</label><br>
+						<input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label>
+					</div>
 				</div>
 				<br>
 				<br>
@@ -526,11 +549,11 @@
 						p2 = {name: "Dwayn Jonz", gender: m},
 						p3 = {name: "Mahlee Kuk", gender: f},
 						p4 = {name: "chemistry professor", gender: m},
-						p5 = {name: "bearded guy from history", gender: m},
+						p5 = {name: "Kaylin Troo", gender: m},
 						p6 = {name: "grill guy (Andrew?)", gender: m},
 						p7 = {name: 'Towers West 10 "Micaela"', gender: f},
 						p8 = {name: "Emee Jay", gender: f},
-						p9 = {name: "girl from Pacific High School", gender: f},
+						p9 = {name: "Kler Matlind", gender: f},
 						p10 = {name: "Jahn's out-going friend", gender: m},
 						p11 = {name: "Kaytlin Richrrdz", gender: f},
 						p12 = {name: "AhndrAyuh (from Art)", gender: f},
@@ -538,10 +561,10 @@
 						p14 = {name: "Antuhnee (from Art)", gender: m},
 						p15 = {name: "Kamrin (from Art)", gender: m},
 						p16 = {name: "random guy from next art class", gender: m},
-						p17 = {name: "SotAhro's roommate", gender: m},
+						p17 = {name: "Shoyah (SotAhro's roommate)", gender: m},
 						p18 = {name: "SotAhro's roommate's friend", gender: m},
 						p19 = {name: "DayvAhntay (from floor)", gender: m},
-						p20 = {name: "shorter elevator guy from floor", gender: m},
+						p20 = {name: "Kalvin (from floor)", gender: m},
 						p21 = {name: "blond guy who used to be lonely", gender: m},
 						p22 = {name: "guy from Campus Outreach", gender: m},
 						p23 = {name: "Bridget Tony", gender: f},  //// ?
@@ -562,7 +585,7 @@
 						p38 = {name: "girl who tried to play pool", gender: f},
 						p39 = {name: "Kodee (from Art)", gender: m},
 						p40 = {name: "dark-haired girl in Economics", gender: f},
-						p41 = {name: "new blond guy on floor", gender: m},
+						p41 = {name: "Brahk (from floor)", gender: m},
 						p42 = {name: "dark dining hall Indian girl", gender: f},
 						p43 = {name: "talkative Indian girl food server", gender: f},
 						p44 = {name: "Chinese food server girl who sings", gender: f},
@@ -581,7 +604,7 @@
 						p57 = {name: "Indian guy in dining hall", gender: m},
 						p58 = {name: "guy who joined pool", gender: m},
 						p59 = {name: "tall dark-skinned dining hall guy", gender: m},
-						p60 = {name: "Troodee (random girl who sits in corners)", gender: f},
+						p60 = {name: "Troodee Brrnham", gender: f},
 						p61 = {name: "other new guy in Art", gender: m},
 						p62 = {name: "River Campus guy in History", gender: m},
 						p63 = {name: "out-going girl in History", gender: f},
@@ -592,9 +615,9 @@
 						p68 = {name: "darker-skinned dining hall guy", gender: m},
 						p69 = {name: "red-headed? food server", gender: f},
 						p70 = {name: "African American food lady", gender: f},
-						p71 = {name: "girl with (sometimes) straight blonde hair", gender: f},
+						p71 = {name: "Grays (plays piano well)", gender: f},
 						p72 = {name: "my group's speaker in History", gender: m},
-						p73 = {name: "SotAhro's tall Japanese friend", gender: m},
+						p73 = {name: "Kazuemah (SotAhro's tall friend)", gender: m},
 						p74 = {name: "Ryo (SotAhro's friend)", gender: m},
 						p75 = {name: "older dining hall guy", gender: m},
 						p76 = {name: "p20's more tame friend", gender: m},
@@ -623,7 +646,28 @@
 						p99 = {name: "girl who knows SotAhro is crazy", gender: f},
 						p100 = {name: "ox guy", gender: m},
 						p101 = {name: "p98's friend", gender: m},
-						p102 = {name: "random red-headed dude", gender: m};
+						p102 = {name: "random red-headed dude", gender: m},
+						p103 = {name: "Indian girl in front in Biology", gender: f},
+						p104 = {name: "DHMO guy", gender: m},
+						p105 = {name: "Rowdy cashier girl", gender: f},
+						p106 = {name: "Christian guy from 2nd floor", gender: m},
+						p107 = {name: "older dining hall Indian guy", gender: m},
+						p108 = {name: "Japanese guy not at Carpe Diem", gender: m},
+						p109 = {name: "Asian girl in Relationships class", gender: f},
+						p110 = {name: "new food server guy", gender: m},
+						p111 = {name: "casually dressed meal lady", gender: f},
+						p112 = {name: "other blonde girl in Relatnships class", gender: f},
+						p113 = {name: "Jaykueb's red-headed friend", gender: m},
+						p114 = {name: "dining hall girl with nose ring", gender: f},
+						p115 = {name: "Jahn's Indian friend", gender: m},
+						p116 = {name: "Gavin Welch", gender: m},
+						p117 = {name: "bald dining hall guy", gender: m},
+						p118 = {name: "red-headed? guy in History", gender: m},
+						p119 = {name: "faction game master", gender: m},
+						p120 = {name: "Thorir", gender: m},
+						p121 = {name: "red-headed guy in History", gender: m},
+						p122 = {name: "St. Bridget of Kildare priest", gender: m},
+						p123 = {name: "dark-haired Pacific Care secretary", gender: f};
 					// Name | Gender | Classification | Initiator | Indicators | Length | Participation | Enjoyability
 					// Name | Gender | Classification | Initiator | Indicators | Length | Density | Participation | Enjoyability
 					var conversations = [  // This is the raw data.
@@ -4076,6 +4120,7 @@
 						label.addEventListener("click", updateConversations);
 					});
 				</script>
+				</div>
 				<br>
 				<h2>
 					Amount of sleep
@@ -4358,7 +4403,7 @@
 					</tr>
 					<tr>
 						<td>
-							10:00pm-6:31am
+							10:00pm-6:31am | 1:18am-8:18am<note-><div><div>I got the rest of my conversation data transferred, and it's glorious.</div></div></note->
 						</td>
 					</tr>
 				</table>
