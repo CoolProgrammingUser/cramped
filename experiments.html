@@ -23,6 +23,10 @@
 				border-radius: .25rem;
 				background-color: #aee;
 			}
+			.adjacentTables {
+				display: inline-table;
+				margin: 1rem;
+			}
 			.smaller th {
 				padding: .4rem .2rem;
 			}
@@ -46,13 +50,14 @@
 				position: sticky;
 				top: 0rem;
 				width: 100%;
-				background: rgba(255, 255, 255, .5);
+				background: rgba(255, 255, 255, .75);
 			}
 			#conversationCheckboxes h4 {
 				margin-top: .5rem;
 				margin-bottom: .5rem;
 			}
 			#conversationCheckboxes div {
+				display: inline-table;
 				text-align: left;
 			}
 		</style>
@@ -305,14 +310,21 @@
 						Take into account...
 					</h4>
 					<div>
+						<input type="radio" name="filterType" id="anyFail" checked><label for="anyFail">remove when any requirement fails</label><br>
+						<input type="radio" name="filterType" id="allFail"><label for="allFail">remove when all requirements fail</label>
+					</div>
+					<br>
+					<div>
 						<input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
 						<input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
-						<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label>
+						<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
+						<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label>
 					</div>
 					<div>
 						<input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
 						<input type="checkbox" id="floorConversations" checked><label for="floorConversations">conversations with people from my floor</label><br>
-						<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label>
+						<input type="checkbox" id="groupConversations" checked><label for="groupConversations">group conversations</label><br>
+						<input type="checkbox" id="individualConversations" checked><label for="individualConversations">individual conversations</label>
 					</div>
 					<div>
 						<input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
@@ -454,7 +466,7 @@
 				</table>
 				<br>
 				<br>
-				<table id="initializers">
+				<table class="adjacentTables" id="initializers">
 					<tr>
 						<th colspan="4">
 							Number of started conversations
@@ -485,9 +497,7 @@
 						<td></td>
 					</tr>
 				</table>
-				<br>
-				<br>
-				<table id="initializerSum">
+				<table class="adjacentTables" id="initializerSum">
 					<tr>
 						<th colspan="4">
 							Sum of started conversations
@@ -513,6 +523,23 @@
 					</tr>
 					<tr>
 						<th>Total</th>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				<table class="adjacentTables" id="totalPeople">
+					<tr>
+						<th colspan="3">
+							Overestimation<note-><div><div>This hasn't yet been designed to handle when there are multiple names referring to the same person.</div></div></note-> of total people recorded
+						</th>
+					</tr>
+					<tr>
+						<th>Males</th>
+						<th>Females</th>
+						<th>Total</th>
+					</tr>
+					<tr>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -3794,7 +3821,8 @@
 							});
 						}
 						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-							initSum = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+							initSum = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+							totalPeople = {m: [], f: []};
 						S.forEach(conversations, function (day) {
 							let dayIsCountable = true;
 							if (day.notes.indexOf("no data") > -1) {
@@ -3806,13 +3834,15 @@
 								let uniquePeople = {m: [], f: []},
 									interactionNumbers = {m: 0, f: 0, total: 0},
 									checkboxes = {
-										small: S.getId("smallConversations").checked,
 										adult: S.getId("adultConversations").checked,
 										kid: S.getId("kidConversations").checked,
 										formal: S.getId("formalConversations").checked,
-										floor: S.getId("floorConversations").checked,
-										class: S.getId("classConversations").checked,
+										small: S.getId("smallConversations").checked,
 										familiar: S.getId("familiarConversations").checked,
+										floor: S.getId("floorConversations").checked,
+										group: S.getId("groupConversations").checked,
+										individual: S.getId("individualConversations").checked,
+										class: S.getId("classConversations").checked,
 										anonymous: S.getId("anonymousConversations").checked,
 										other: S.getId("otherConversations").checked
 									};
@@ -3827,7 +3857,7 @@
 											conversation[5] = conversation[5] / 5 * 7;
 										}
 										if (conversation[6].constructor == String) {
-											let participations = conversation[6].split();
+											let participations = conversation[6].split("");
 											participations.forEach(function(participation, index) {
 												participations[index] = Number(participation) / 5 * 7;
 											});
@@ -3859,7 +3889,7 @@
 											if (conversation[1].length == 1) {
 												data.gender = conversation[1];
 											} else {
-												data.gender = conversation[1].split()[index];
+												data.gender = conversation[1].split("")[index];
 											}
 											// sets the classification
 											if (conversation[2].indexOf("_") == -1) {
@@ -3870,7 +3900,7 @@
 											// sets the initiator
 											data.initiator = conversation[3];
 											// sets the indicators
-											data.indicators = conversation[4].split();
+											data.indicators = conversation[4].split("");
 											// sets the length
 											data.length = (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
@@ -3908,7 +3938,7 @@
 												if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
 													data.participation = Number(conversation[7].split("~")[index]);
 												} else {
-													data.participation = Number(conversation[7].split()[index]);
+													data.participation = Number(conversation[7].split("")[index]);
 												}
 											} else if (conversation[7].constructor == Number) {
 												data.participation = conversation[7];
@@ -3926,7 +3956,7 @@
 											gender: conversation[1],
 											classification: conversation[2].match(/\w(?!-)|\w-\w/g),
 											initiator: conversation[3],
-											indicators: conversation[4].split(),
+											indicators: conversation[4].split(""),
 											length: (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
 													return .8333333333;
@@ -3965,27 +3995,61 @@
 									S.forEach(them, function(person) {  // adds information to the tables
 										
 										// determines whether the interaction should be counted
-										let desiredInteraction = true;
-										if (!checkboxes.small && person.length <= 1) {
+										let desiredInteraction;
+										if (S.getName("filterType", true).id == "anyFail") {  // if the interaction should fail if any characteristic isn't wanted
+											desiredInteraction = true;
+											if (!checkboxes.small && person.length <= 1) {
+												desiredInteraction = false;
+											} else if (!checkboxes.adult && person.classification.includes("a")) {
+												desiredInteraction = false;
+											} else if (!checkboxes.kid && person.classification.includes("k")) {
+												desiredInteraction = false;
+											} else if (!checkboxes.formal && person.classification.includes("f")) {
+												desiredInteraction = false;
+											} else if (!checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {
+												desiredInteraction = false;
+											} else if (!checkboxes.group && conversation[0][0] == "g") {
+												desiredInteraction = false;
+											} else if (!checkboxes.individual && conversation[0][0] != "g") {
+												desiredInteraction = false;
+											} else if (!checkboxes.class && person.classification.includes("c")) {
+												desiredInteraction = false;
+											} else if (!checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {
+												desiredInteraction = false;
+											} else if (!checkboxes.anonymous && person.name[0] == "a") {
+												desiredInteraction = false;
+											} else if (!checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
+												return person.classification.includes(indicator);
+											}) || person.name[0] == "a")) {
+												desiredInteraction = false;
+											}
+										} else {  // if the interaction should fail only if all characteristics aren't wanted
 											desiredInteraction = false;
-										} else if (!checkboxes.adult && person.classification.includes("a")) {
-											desiredInteraction = false;
-										} else if (!checkboxes.kid && person.classification.includes("k")) {
-											desiredInteraction = false;
-										} else if (!checkboxes.formal && person.classification.includes("f")) {
-											desiredInteraction = false;
-										} else if (!checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {
-											desiredInteraction = false;
-										} else if (!checkboxes.class && person.classification.includes("c")) {
-											desiredInteraction = false;
-										} else if (!checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {
-											desiredInteraction = false;
-										} else if (!checkboxes.anonymous && person.name[0] == "a") {
-											desiredInteraction = false;
-										} else if (!checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
-											return person.classification.includes(indicator);
-										}) || person.name[0] == "a")) {
-											desiredInteraction = false;
+											if (checkboxes.small && person.length <= 1) {
+												desiredInteraction = true;
+											} else if (checkboxes.adult && person.classification.includes("a")) {
+												desiredInteraction = true;
+											} else if (checkboxes.kid && person.classification.includes("k")) {
+												desiredInteraction = true;
+											} else if (checkboxes.formal && person.classification.includes("f")) {
+												desiredInteraction = true;
+											} else if (checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {
+												desiredInteraction = true;
+											} else if (checkboxes.group && conversation[0][0] == "g") {
+												desiredInteraction = true;
+											} else if (checkboxes.individual && conversation[0][0] != "g") {
+												desiredInteraction = true;
+											} else if (checkboxes.class && person.classification.includes("c")) {
+												desiredInteraction = true;
+											} else if (checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {
+												desiredInteraction = true;
+											} else if (checkboxes.anonymous && person.name[0] == "a") {
+												desiredInteraction = true;
+											} else if (checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
+												return person.classification.includes(indicator);
+											}) || person.name[0] == "a")) {
+												desiredInteraction = true;
+											}
 										}
 										
 										if (desiredInteraction) {  // if the interaction should be counted
@@ -4057,6 +4121,11 @@
 													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
 												}
 											}
+
+											// keeps track of information for the seventh conversation table
+											if (totalPeople[person.gender] != undefined && totalPeople[person.gender].indexOf(person.name) == -1) {
+												totalPeople[person.gender].push(person.name);
+											}
 											
 										}
 									});
@@ -4107,6 +4176,9 @@
 								document.getElementById("initializerSum").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].innerHTML = Math.round(column);
 							});
 						});
+						document.getElementById("totalPeople").getElementsByTagName("td")[0].textContent = totalPeople.m.length;
+						document.getElementById("totalPeople").getElementsByTagName("td")[1].textContent = totalPeople.f.length;
+						document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
 						S.colorCode("conversationLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0], [0,255,0]);
 						S.colorCode("uniquePeople");
 						S.colorCode("averageLengths");
@@ -4121,6 +4193,7 @@
 					});
 				</script>
 				</div>
+				<br>
 				<br>
 				<h2>
 					Amount of sleep
