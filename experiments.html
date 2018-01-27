@@ -313,6 +313,9 @@
 						<input type="radio" name="filterType" id="anyFail" checked><label for="anyFail">remove when any requirement fails</label><br>
 						<input type="radio" name="filterType" id="allFail"><label for="allFail">remove when all requirements fail</label>
 					</div>
+					<div>
+						<input type="text" id="conversationDateRange" placeholder="Start date or range">
+					</div>
 					<br>
 					<div>
 						<input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
@@ -400,10 +403,43 @@
 				</table>
 				<br>
 				<br>
+				<table class="smaller" id="initiatorSkew">
+					<tr>
+						<th colspan="15">
+							Initiator skew (+ = me)
+						</th>
+					</tr>
+					<tr>
+						<th rowspan="2"></th>
+						<th colspan="2">Monday</th>
+						<th colspan="2">Tuesday</th>
+						<th colspan="2">Wednesday</th>
+						<th colspan="2">Thursday</th>
+						<th colspan="2">Friday</th>
+						<th colspan="2">Saturday</th>
+						<th colspan="2">Sunday</th>
+					</tr>
+					<tr>
+						<th>Males</th><th>Females</th>
+						<th>Males</th><th>Females</th>
+						<th>Males</th><th>Females</th>
+						<th>Males</th><th>Females</th>
+						<th>Males</th><th>Females</th>
+						<th>Males</th><th>Females</th>
+						<th>Males</th><th>Females</th>
+					</tr>
+					<tr>
+						<th>
+							Degree<br>of<br>skew
+						</th>
+					</tr>
+				</table>
+				<br>
+				<br>
 				<table class="smaller" id="averageLengths">
 					<tr>
 						<th colspan="15">
-							Average conversation lengths
+							Average conversation lengths (maximum = 49)
 						</th>
 					</tr>
 					<tr>
@@ -572,129 +608,129 @@
 						x = "x",
 						y = "y",
 						z = "z";
-					var p1 = {name: "Dahleeuh", gender: f},
-						p2 = {name: "Dwayn Jonz", gender: m},
-						p3 = {name: "Mahlee Kuk", gender: f},
-						p4 = {name: "chemistry professor", gender: m},
-						p5 = {name: "Kaylin Troo", gender: m},
-						p6 = {name: "grill guy (Andrew?)", gender: m},
-						p7 = {name: 'Towers West 10 "Micaela"', gender: f},
-						p8 = {name: "Emee Jay", gender: f},
-						p9 = {name: "Kler Matlind", gender: f},
-						p10 = {name: "Jahn's out-going friend", gender: m},
-						p11 = {name: "Kaytlin Richrrdz", gender: f},
-						p12 = {name: "AhndrAyuh (from Art)", gender: f},
-						p13 = {name: "Joee Taylrr", gender: m},
-						p14 = {name: "Antuhnee (from Art)", gender: m},
-						p15 = {name: "Kamrin (from Art)", gender: m},
-						p16 = {name: "random guy from next art class", gender: m},
-						p17 = {name: "Shoyah (SotAhro's roommate)", gender: m},
-						p18 = {name: "SotAhro's roommate's friend", gender: m},
-						p19 = {name: "DayvAhntay (from floor)", gender: m},
-						p20 = {name: "Kalvin (from floor)", gender: m},
-						p21 = {name: "blond guy who used to be lonely", gender: m},
-						p22 = {name: "guy from Campus Outreach", gender: m},
-						p23 = {name: "Bridget Tony", gender: f},  //// ?
-						p24 = {name: "girl assisting in lab", gender: f},
-						p25 = {name: "DayvAhn (from floor)", gender: m},
-						p26 = {name: "Emuelee Hamrr", gender: f},
-						p27 = {name: "Rowdy cashier lady", gender: f},
-						p28 = {name: "blond guy from floor", gender: m},
-						p29 = {name: "other blond guy from floor", gender: m},
-						p30 = {name: "Ahlshrr (from floor)", gender: m},
-						p31 = {name: "Heruesin (Kaylueb's friend)", gender: m},
-						p32 = {name: "Patrik (from floor)", gender: m},
-						p33 = {name: "Brittish girl", gender: f},
-						p34 = {name: "shuttle driver", gender: m},
-						p35 = {name: "blonde River Campus meal lady", gender: f},
-						p36 = {name: "other River Campus meal lady", gender: f},
-						p37 = {name: "other guy who played pool", gender: m},
-						p38 = {name: "girl who tried to play pool", gender: f},
-						p39 = {name: "Kodee (from Art)", gender: m},
-						p40 = {name: "dark-haired girl in Economics", gender: f},
-						p41 = {name: "Brahk (from floor)", gender: m},
-						p42 = {name: "dark dining hall Indian girl", gender: f},
-						p43 = {name: "talkative Indian girl food server", gender: f},
-						p44 = {name: "Chinese food server girl who sings", gender: f},
-						p45 = {name: "inquisitive guy in relationships class", gender: m},
-						p46 = {name: "supplemental grill guy", gender: m},
-						p47 = {name: "River Campus meal guy", gender: m},
-						p48 = {name: "my knight who jousted", gender: m},
-						p49 = {name: "older guy in History", gender: m},
-						p50 = {name: "girl in front in Biology without glasses", gender: f},
-						p51 = {name: "girl in front in Biology with glasses", gender: f},
-						p52 = {name: "Robert! :) guy", gender: m},
-						p53 = {name: "Robert! :) guy's friend", gender: m},
-						p54 = {name: "guy who sits near me in Biology", gender: m},
-						p55 = {name: "dark-haired videogame guy", gender: m},
-						p56 = {name: "red-headed? videogame guy", gender: m},
-						p57 = {name: "Indian guy in dining hall", gender: m},
-						p58 = {name: "guy who joined pool", gender: m},
-						p59 = {name: "tall dark-skinned dining hall guy", gender: m},
-						p60 = {name: "Troodee Brrnham", gender: f},
-						p61 = {name: "other new guy in Art", gender: m},
-						p62 = {name: "River Campus guy in History", gender: m},
-						p63 = {name: "out-going girl in History", gender: f},
-						p64 = {name: "guy in History and Economics", gender: m},
-						p65 = {name: "pizza girl", gender: f},
-						p66 = {name: "Nepali guy in relationships class", gender: m},
-						p67 = {name: "unenthusiastic dining hall girl", gender: f},
-						p68 = {name: "darker-skinned dining hall guy", gender: m},
-						p69 = {name: "red-headed? food server", gender: f},
-						p70 = {name: "African American food lady", gender: f},
-						p71 = {name: "Grays (plays piano well)", gender: f},
-						p72 = {name: "my group's speaker in History", gender: m},
-						p73 = {name: "Kazuemah (SotAhro's tall friend)", gender: m},
-						p74 = {name: "Ryo (SotAhro's friend)", gender: m},
-						p75 = {name: "older dining hall guy", gender: m},
-						p76 = {name: "p20's more tame friend", gender: m},
-						p77 = {name: "p20's less tame friend", gender: m},
-						p78 = {name: "girl with vertical ponytail", gender: f},
-						p79 = {name: "African American food girl", gender: f},
-						p80 = {name: "blonde River Campus janitor", gender: f},
-						p81 = {name: "other River Campus janitor", gender: f},
-						p82 = {name: "large guy at River Campus", gender: m},
-						p83 = {name: "Asian guy from floor with glasses", gender: m},
-						p84 = {name: "Rowdy cook lady", gender: f},
-						p85 = {name: "red-headed girl in History", gender: f},
-						p86 = {name: "guy who asks questions in Economics", gender: m},
-						p87 = {name: "SotAhro and p73's Chinese friend", gender: m},
-						p88 = {name: "married dining hall girl", gender: f},
-						p89 = {name: "willing-to-talk relationship class girl", gender: f},
-						p90 = {name: "History guy with cyclical hair", gender: m},
-						p91 = {name: "girl who draws in dining hall", gender: f},
-						p92 = {name: "other Indian dining hall girl", gender: f},
-						p93 = {name: "guy from school look-alike", gender: m},
-						p94 = {name: "guy who gave me the ticket", gender: m},
-						p95 = {name: "pool supply guy", gender: m},
-						p96 = {name: "p20's blond friend", gender: m},
-						p97 = {name: "p20's girlfriend", gender: f},
-						p98 = {name: "SotAhro and Ryo's Chinese friend", gender: m},
-						p99 = {name: "girl who knows SotAhro is crazy", gender: f},
-						p100 = {name: "ox guy", gender: m},
-						p101 = {name: "p98's friend", gender: m},
-						p102 = {name: "random red-headed dude", gender: m},
-						p103 = {name: "Indian girl in front in Biology", gender: f},
-						p104 = {name: "DHMO guy", gender: m},
-						p105 = {name: "Rowdy cashier girl", gender: f},
-						p106 = {name: "Christian guy from 2nd floor", gender: m},
-						p107 = {name: "older dining hall Indian guy", gender: m},
-						p108 = {name: "Japanese guy not at Carpe Diem", gender: m},
-						p109 = {name: "Asian girl in Relationships class", gender: f},
-						p110 = {name: "new food server guy", gender: m},
-						p111 = {name: "casually dressed meal lady", gender: f},
-						p112 = {name: "other blonde girl in Relatnships class", gender: f},
-						p113 = {name: "Jaykueb's red-headed friend", gender: m},
-						p114 = {name: "dining hall girl with nose ring", gender: f},
-						p115 = {name: "Jahn's Indian friend", gender: m},
-						p116 = {name: "Gavin Welch", gender: m},
-						p117 = {name: "bald dining hall guy", gender: m},
-						p118 = {name: "red-headed? guy in History", gender: m},
-						p119 = {name: "faction game master", gender: m},
-						p120 = {name: "Thorir", gender: m},
-						p121 = {name: "red-headed guy in History", gender: m},
-						p122 = {name: "St. Bridget of Kildare priest", gender: m},
-						p123 = {name: "dark-haired Pacific Care secretary", gender: f};
+					var p1 = {name: "Dahleeuh", gender: f, description: "main dining hall cashier"},
+						p2 = {name: "Dwayn Jonz", gender: m, description: "Towers South hall director"},
+						p3 = {name: "Mahlee Kuk", gender: f, description: ""},
+						p4 = {name: "chemistry professor", gender: m, description: ""},
+						p5 = {name: "Kaylin Troo", gender: m, description: "bearded guy in History"},
+						p6 = {name: "grill guy (Andrew?)", gender: m, description: ""},
+						p7 = {name: 'Towers West 10 "Micaela"', gender: f, description: ""},
+						p8 = {name: "Emee Jay", gender: f, description: "girl who used to live in the corner room on my floor"},
+						p9 = {name: "Kler Matlind", gender: f, description: "girl who went to Pacific High School"},
+						p10 = {name: "Jahn's out-going friend", gender: m, description: ""},
+						p11 = {name: "Kaytlin Richrrdz", gender: f, description: "from Art"},
+						p12 = {name: "AhndrAyuh", gender: f, description: "from Art"},
+						p13 = {name: "Joee Taylrr", gender: m, description: "from Art"},
+						p14 = {name: "Antuhnee", gender: m, description: "from Art"},
+						p15 = {name: "Kamrin", gender: m, description: "from Art"},
+						p16 = {name: "random guy from next art class", gender: m, description: ""},
+						p17 = {name: "Shoyah", gender: m, description: "SotAhro's roommate"},
+						p18 = {name: "SotAhro's roommate's friend", gender: m, description: ""},
+						p19 = {name: "DayvAhntay", gender: m, description: "from floor"},
+						p20 = {name: "Kalvin", gender: m, description: "from floor"},
+						p21 = {name: "blond guy who used to be lonely", gender: m, description: ""},
+						p22 = {name: "guy from Campus Outreach", gender: m, description: ""},
+						p23 = {name: "Bridget Tony", gender: f, description: "Tim Tony's sister"},  //// ?
+						p24 = {name: "girl assisting in lab", gender: f, description: ""},
+						p25 = {name: "DayvAhn", gender: m, description: "from floor"},
+						p26 = {name: "Emuelee Hamrr", gender: f, description: ""},
+						p27 = {name: "Rowdy cashier lady", gender: f, description: ""},
+						p28 = {name: "Zack", gender: m, description: "blond guy from floor"},
+						p29 = {name: "other blond guy from floor", gender: m, description: ""},
+						p30 = {name: "Ahlshrr", gender: m, description: "from floor"},
+						p31 = {name: "Heruesin", gender: m, description: "Kaylueb's friend"},
+						p32 = {name: "Patrik", gender: m, description: "from floor"},
+						p33 = {name: "Brittish girl", gender: f, description: ""},
+						p34 = {name: "shuttle driver", gender: m, description: ""},
+						p35 = {name: "blonde River Campus meal lady", gender: f, description: ""},
+						p36 = {name: "other River Campus meal lady", gender: f, description: ""},
+						p37 = {name: "other guy who played pool", gender: m, description: ""},
+						p38 = {name: "girl who tried to play pool", gender: f, description: ""},
+						p39 = {name: "Kodee", gender: m, description: "from Art"},
+						p40 = {name: "dark-haired girl in Economics", gender: f, description: ""},
+						p41 = {name: "Brahk", gender: m, description: "from floor"},
+						p42 = {name: "dark dining hall Indian girl", gender: f, description: ""},
+						p43 = {name: "talkative Indian girl food server", gender: f, description: ""},
+						p44 = {name: "Chinese food server girl who sings", gender: f, description: ""},
+						p45 = {name: "inquisitive guy in relationships class", gender: m, description: ""},
+						p46 = {name: "supplemental grill guy", gender: m, description: ""},
+						p47 = {name: "River Campus meal guy", gender: m, description: ""},
+						p48 = {name: "my knight who jousted", gender: m, description: ""},
+						p49 = {name: "older guy in History", gender: m, description: ""},
+						p50 = {name: "girl in front in Biology without glasses", gender: f, description: ""},
+						p51 = {name: "girl in front in Biology with glasses", gender: f, description: ""},
+						p52 = {name: "Robert! :) guy", gender: m, description: ""},
+						p53 = {name: "Robert! :) guy's friend", gender: m, description: ""},
+						p54 = {name: "Erin", gender: m, description: "guy who sits near me in Biology"},
+						p55 = {name: "dark-haired videogame guy", gender: m, description: ""},
+						p56 = {name: "red-headed? videogame guy", gender: m, description: ""},
+						p57 = {name: "Indian guy in dining hall", gender: m, description: ""},
+						p58 = {name: "guy who joined pool", gender: m, description: ""},
+						p59 = {name: "tall dark-skinned dining hall guy", gender: m, description: ""},
+						p60 = {name: "Troodee Brrnham", gender: f, description: ""},
+						p61 = {name: "other new guy in Art", gender: m, description: ""},
+						p62 = {name: "River Campus guy in History", gender: m, description: ""},
+						p63 = {name: "out-going girl in History", gender: f, description: ""},
+						p64 = {name: "guy in History and Economics", gender: m, description: ""},
+						p65 = {name: "pizza girl", gender: f, description: ""},
+						p66 = {name: "Nepali guy in relationships class", gender: m, description: ""},
+						p67 = {name: "unenthusiastic dining hall girl", gender: f, description: ""},
+						p68 = {name: "darker-skinned dining hall guy", gender: m, description: ""},
+						p69 = {name: "red-headed? food server", gender: f, description: ""},
+						p70 = {name: "African American food lady", gender: f, description: ""},
+						p71 = {name: "Grays", gender: f, description: "plays piano well"},
+						p72 = {name: "my group's speaker in History", gender: m, description: ""},
+						p73 = {name: "Kazuemah", gender: m, description: "SotAhro's tall friend"},
+						p74 = {name: "Ryo", gender: m, description: "SotAhro's friend"},
+						p75 = {name: "older dining hall guy", gender: m, description: ""},
+						p76 = {name: "p20's more tame friend", gender: m, description: ""},
+						p77 = {name: "p20's less tame friend", gender: m, description: ""},
+						p78 = {name: "girl with vertical ponytail", gender: f, description: ""},
+						p79 = {name: "African American food girl", gender: f, description: ""},
+						p80 = {name: "blonde River Campus janitor", gender: f, description: ""},
+						p81 = {name: "other River Campus janitor", gender: f, description: ""},
+						p82 = {name: "large guy at River Campus", gender: m, description: ""},
+						p83 = {name: "Asian guy from floor with glasses", gender: m, description: ""},
+						p84 = {name: "Rowdy cook lady", gender: f, description: ""},
+						p85 = {name: "red-headed girl in History", gender: f, description: ""},
+						p86 = {name: "guy who asks questions in Economics", gender: m, description: ""},
+						p87 = {name: "SotAhro and p73's Chinese friend", gender: m, description: ""},
+						p88 = {name: "married dining hall girl", gender: f, description: ""},
+						p89 = {name: "willing-to-talk relationship class girl", gender: f, description: ""},
+						p90 = {name: "History guy with cyclical hair", gender: m, description: ""},
+						p91 = {name: "girl who draws in dining hall", gender: f, description: ""},
+						p92 = {name: "other Indian dining hall girl", gender: f, description: ""},
+						p93 = {name: "guy from school look-alike", gender: m, description: ""},
+						p94 = {name: "guy who gave me the ticket", gender: m, description: ""},
+						p95 = {name: "pool supply guy", gender: m, description: ""},
+						p96 = {name: "p20's blond friend", gender: m, description: ""},
+						p97 = {name: "p20's girlfriend", gender: f, description: ""},
+						p98 = {name: "SotAhro and Ryo's Chinese friend", gender: m, description: ""},
+						p99 = {name: "girl who knows SotAhro is crazy", gender: f, description: ""},
+						p100 = {name: "ox guy", gender: m, description: ""},
+						p101 = {name: "p98's friend", gender: m, description: ""},
+						p102 = {name: "random red-headed dude", gender: m, description: ""},
+						p103 = {name: "Indian girl in front in Biology", gender: f, description: ""},
+						p104 = {name: "DHMO guy", gender: m, description: ""},
+						p105 = {name: "Rowdy cashier girl", gender: f, description: ""},
+						p106 = {name: "Christian guy from second floor", gender: m, description: ""},
+						p107 = {name: "older dining hall Indian guy", gender: m, description: ""},
+						p108 = {name: "Japanese guy not at Carpe Diem", gender: m, description: ""},
+						p109 = {name: "Asian girl in Relationships class", gender: f, description: ""},
+						p110 = {name: "new food server guy", gender: m, description: ""},
+						p111 = {name: "casually dressed meal lady", gender: f, description: ""},
+						p112 = {name: "other blonde girl in Relatnships class", gender: f, description: ""},
+						p113 = {name: "Jaykueb's red-headed friend", gender: m, description: ""},
+						p114 = {name: "dining hall girl with nose ring", gender: f, description: ""},
+						p115 = {name: "Jahn's Indian friend", gender: m, description: ""},
+						p116 = {name: "Gavin Welch", gender: m, description: "Jahn's friend with glasses"},
+						p117 = {name: "bald dining hall guy", gender: m, description: ""},
+						p118 = {name: "red-headed? guy in History", gender: m, description: ""},
+						p119 = {name: "faction game master", gender: m, description: ""},
+						p120 = {name: "Thoreer", gender: m, description: "Thorir"},
+						p121 = {name: "red-headed guy in History", gender: m, description: ""},
+						p122 = {name: "St. Bridget of Kildare priest", gender: m, description: ""},
+						p123 = {name: "dark-haired Pacific Care secretary", gender: f, description: ""};
 					// Name | Gender | Classification | Initiator | Indicators | Length | Participation | Enjoyability
 					// Name | Gender | Classification | Initiator | Indicators | Length | Density | Participation | Enjoyability
 					var conversations = [  // This is the raw data.
@@ -716,15 +752,14 @@
 								["Trent Spaekrr", "m", "b", "t", "n", 0, 5, 3],
 								["Dad", "m", "a", "t", "pd", 5, 5, 3],
 								["Mom", "f", "a", "t", "pj", 4, 3, 3],
-								["Jeen Milrr", "f", "a", "m", "e", 2, "-", 3],
-								["group", "1m3f", "b", "m", "c", 1, 4, 3],
+								["group", "mfff", "b", "m", "c", 1, 4, 3],
 								["p1", "f", "a", "t", "n", 0, 5, 3],
 								["a6", "f", "f", "m", "i", 1, 4, 3],
 								["a7", "f", "s", "t", "n", 1, 3, 3],
 								["a8", "m", "s", "m", "n", 3, 3, 4],
 								["a9", "m", "s", "t", "n", 0, 5, 4],
 								["Madee Basteen", "f", "ps", "t", "n", 1, 5, 4],
-								["Andee Coo", "m", "p", "m", "t", 0, 0, 2],
+								["Andee Choo", "m", "p", "m", "t", 0, 0, 2],
 								["a10", "f", "a", "t", "n", 1, 4, 3],
 								["a11", "f", "a", "t", "n", 1, 5, 2],
 								["a12", "f", "a", "t", "n", 2, 5, 2],
@@ -733,21 +768,19 @@
 								["Jayk Braet", "m", "r", "m", "n", 1, 3, 3],
 								["Mom", "f", "a", "t", "t", 2, 3, 3],
 								["Brendin", "m", "c", "b", "d", 3, 2, 3],
-								["group", "5m1f", "c", "b", "gj", 4, "33211_1", 3],
+								["group", "mmmmmf", "c", "b", "gj", 4, "332111", 3],
 								["Kristuel", "f", "c", "m", "d", 3, 3, 3],
 								["Seruh", "f", "c", "m", "j", 2, 3, 3],
 								["Kristuel", "f", "c", "t", "n", 0, 5, 3],
 								["a14", "f", "c", "m", "j", 3, 4, 3],
 								["ViktOreeuh MikAluhstrr", "f", "a", "m", "dig", 3, 2, 3],
-								["Jeen Milrr", "f", "a", "t", "e", 2, "-", 3],
 								["Yuevahn", "f", "b", "t", "n", 0, 5, 4],
 								["a15", "m", "f", "m", "d", 4, 3, 3],
 								["YuevAhn", "f", "bf", "t", "j", 4, 3, 3],
 								["Dad", "m", "a", "t", "pd", 4, 4, 3],
 								["Mom", "f", "a", "t", "pj", 3, 2, 3],
 								["Nolin Drayk", "m", "r", "t", "n", 0, 5, 3],
-								["group", "2m", "r", "m", "j", 0, 3, 3],
-								["Jeruemee Elrrmaer", "m", "a", "m", "e", 3, "-", 3]
+								["group", "mm", "r", "m", "j", 0, 3, 3],
 							]
 						},
 						{
@@ -758,14 +791,9 @@
 								["a1", m, s, t, n, 0, 5, 3],
 								["Puetrishuh Ferish", f, a, t, g+c, 2, 3, 3],
 								["a2", f, s, t, n, 0, 5, 3],
-								["federal loans", u, a, t, e, 2, "-", 2],
-								["Jeruemee Elrrmaer", m, a, t, e, 1, "-", 2],
-								["PuetrIshuh Ferish", f, a, t, e, 1, "-", 3],
 								["a3", f, a, m, n, 3, 4, 3],
 								["a4", f, f, m, n, 3, 3, 3],
 								["p1", f, a, t, n, 0, 5, 4],
-								["Zak Kaho", m, a, t, e, 1, "-", 3],
-								["Abhishek SrryuhvAhnee", m, u, t, e, 1, "-", 3],
 								["a5", m, s, m, n, 0, 3, 3],
 								["a6", f, a, m, n, 2, 3, 3],
 								["a7", f, f, m, n, 2, 3, 3],
@@ -785,7 +813,7 @@
 							"date": "8/23/2017",
 							"notes": [],
 							"data": [
-								["g(Antuhnee&Kamrin&Joee Taylrr&Kaytlin Ricrrdz&Kerol Horst)", "mmmff", "c_c_c_c_a", b, g+i, 5, "11333", 5],
+								["g(Antuhnee&Kamrin&Joee Taylrr&Kaytlin Richrrdz&Kerol Horst)", "mmmff", "c_c_c_c_a", b, g+i, 5, "11333", 5],
 								["Kerol Horst", f, a, m, n, 2, 3, 3],
 								["a1", m, a, t, n, 0, 5, 3],
 								["Jahn ZookuhrElo", m, p+s, m, n, 3, 3, 3],
@@ -836,12 +864,11 @@
 								["a4", f, f, m, d, 2, 4, 3],
 								["a5", f, f, t, j, 1, 4, 3],
 								["a6", f, f, m, n, 1, 3, 3],
-								["group", "2f", s, t, n, 0, "55", 3],
+								["group", "ff", s, t, n, 0, "55", 3],
 								["Jayk Braet", m, r, t, n, 0, 5, 3],
 								["Jayk Braet", m, r, m, n, 2, 3, 3],
 								["p6", m, a, t, i, 2, 4, 3],
 								["a7", m, b, t, n, 1, 4, 3],
-								["Jaymz ShampEen", m, a, t, e, 2, "-", 2]
 							]
 						},
 						{
@@ -878,9 +905,6 @@
 								["Kler Soodtrr", f, p, m, t, 4, 3, 3],
 								["Jayk Braet", m, r, t, n, 0, 5, 3],
 								["Jayk Braet", m, r, t, n, 0, 5, 3],
-								["p2", m, f, t, e, 1, "-", 3],
-								["Dean of Students", u, a, t, e, 4, "-", 3],
-								["Cengage Brain", u, a, t, e, 2, "-", 3],
 								["a1", f, a, t, n, 0, 5, 3],
 								["a2", m, s, t, n, 0, 5, 3],
 								["Reemuh Gibz", f, p+s, t, n, 0, 5, 4],
@@ -926,9 +950,9 @@
 								["p1", f, a, t, n, 0, 5, 3],
 								["Tom (bus)", m, a, t, n, 0, 5, 3],
 								["Kerol Horst", f, a, t, n, 1, 3, 3],
-								["g(Kerol Horst&Kaytlin Ricrrdz)", f+f, "a_c", m, c, 0, 3, 3],
+								["g(Kerol Horst&Kaytlin Richrrdz)", f+f, "a_c", m, c, 0, 3, 3],
 								["p12", f, c, t, g, 0, 5, 3],
-								["g(Kerol Horst&Kaytlin Ricrrdz&AndrAyuh&Joee Taylrr&Antuhnee&Kamrin)", "fffmmm", "a_c_c_c_c_c", b, "cgij", 4, "431311", 3],
+								["g(Kerol Horst&Kaytlin Richrrdz&AndrAyuh&Joee Taylrr&Antuhnee&Kamrin)", "fffmmm", "a_c_c_c_c_c", b, "cgij", 4, "431311", 3],
 								["Kerol Horst", f, a, b, n, 3, 3, 3],
 								["g(a1&a2)", f, s, t, j, 2, "30", 3],
 								["Dwayn Jonz", m, f, t, n, 2, 3, 3],
@@ -936,9 +960,6 @@
 								["a3", f, s, t, n, 0, 5, 3],
 								["Jayk Braet", m, r, t, n, 0, 5, 3],
 								["Jayk Braet", m, r, m, n, 1, 3, 3],
-								["Office of Residence Life", u, a, t, e, 3, "-", 3],
-								["Dwayn Jonz", m, f, t, e, 1, "-", 3],
-								["Gwenduhlin Duhnkin", f, u, t, e, 2, "-", 3],
 								["a4", m, s, t, n, 0, 5, 3],
 								["p1", f, a, t, n, 0, 5, 3],
 								["a5", m, a, t, n, 2, 4, 3],
@@ -1091,7 +1112,7 @@
 							"date": "9/2/2017",
 							"notes": [],
 							"data": [
-								["Andee Coo", m, p, t, t+i, 2, 3, 3],
+								["Andee Choo", m, p, t, t+i, 2, 3, 3],
 								["a1", m, s, t, n, 0, 5, 3],
 								["a2", m, a, t, n, 0, 5, 3],
 								["a3", f, a, t, n, 0, 5, 3],
@@ -1140,7 +1161,7 @@
 								["p1", f, a, t, n, 0, 5, 3],
 								["PuetrIshuh Ferish", f, a, m, c, 2, 2, 3],
 								["a1", m, c, t, j, 0, 5, 3],
-								["Andee Coo", m, p, t, t, 1, 5, 3],
+								["Andee Choo", m, p, t, t, 1, 5, 3],
 								["p1", f, a, t, n, 0, 5, 3],
 								["g(Jahn ZookuhrElo&Linzee)", m+f, "ps_s", t, n, 3, "41", 3],
 								["Jahn ZookuhrElo", m, p+s, t, n, 5, 3, 3],
@@ -1362,7 +1383,7 @@
 								["p39", m, c, t, n, 0, 5, 3],
 								["Kerol Horst", f, a, t, i, 1, 4, 3],
 								["a1", f, s, t, n, 0, 3, 3],
-								["Kaytlin Ricrrdz", f, c, t, n, 3, 3, 3],
+								["Kaytlin Richrrdz", f, c, t, n, 3, 3, 3],
 								["Trisdin Keeng", m, c, t, n, 1, 3, 3],
 								["g(Mahlee Kuk&Jeruemee Gray&Trisdin Keeng)", "fmm", c, b, "cig", 4, "323", 4],
 								["RuhbEkuh Krrzawlz", f, a, t, i+g, 3, 2, 3],
@@ -1451,8 +1472,8 @@
 							notes: [],
 							data: [
 								["Dahnoo", m, b, t, "dig", 4, 4, 3],
-								["Alshrr", m, b, t, n, 0, 5, 3],
-								["g(Alshrr&DayvAhn)", m, b, b, "jigc", 4, "13", 3],
+								["Ahlshrr", m, b, t, n, 0, 5, 3],
+								["g(Ahlshrr&DayvAhn)", m, b, b, "jigc", 4, "13", 3],
 								["Jenee Apolgayt", f, p+s, t, n, 0, 5, 3],
 								["a1", m, a, t, n, 0, 4, 4],
 								["a2", m, a, t, n, 0, 5, 4],
@@ -1472,10 +1493,10 @@
 								["Dahnoo", m, b, t, n, 0, 5, 3],
 								["a1", m, s, t, n, 0, 5, 3],
 								["SotAhro", m, b, t, n, 1, 3, 3],
-								["Alshrr", m, b, t, d, 2, 3, 3],
+								["Ahlshrr", m, b, t, d, 2, 3, 3],
 								["SotAhro", m, b, n, j, 4, 3, 3],
 								["p43", f, f, m, n, 0, 4, 3],
-								["Alshrr", m, b, t, j, 3, 3, 3],
+								["Ahlshrr", m, b, t, j, 3, 3, 3],
 								["a2", m, s, m, n, 0, 3, 3],
 								["a3", f, s, t, n, 0, 5, 3],
 								["g(Kaylueb Hamueltin&a4)", m, "r_s", t, n, 1, "10", 3],
@@ -1493,7 +1514,7 @@
 								["p47", m, a, t, n, 0, 5, 3],
 								["Kerol Horst", f, a, t, i, 3, 2, 3],
 								["Joee Taylrr", m, c, m, c, 0, 3, 3],
-								["Kaytlin Ricrrdz", f, c, m, c, 0, 3, 3],
+								["Kaytlin Richrrdz", f, c, m, c, 0, 3, 3],
 								["p34", m, a, t, n, 0, 5, 3],
 								["p34", m, a, t, n, 0, 5, 3],
 								["Kaylueb Hamueltin", m, r, m, n, 2, 2, 3],
@@ -1504,7 +1525,7 @@
 								["Emuelee Hamrr", f, c, m, i, 2, 3, 3],
 								["RuhbEkuh Krrzawlz", f, a, m, n, 2, 4, 3],
 								["SotAhro", m, b, t, n, 1, 3, 3],
-								["Alshrr", m, b, t, n, 0, 3, 3],
+								["Ahlshrr", m, b, t, n, 0, 3, 3],
 								["p5", m, c, m, n, 1, 3, 3],
 								["p5", m, c, t, n, 0, 3, 3],
 								["ViktOreeuh MikAluhstrr", f, a, m, i+g, 1, 3, 3],
@@ -1551,8 +1572,8 @@
 							data: [
 								["p47", m, a, m, n, 0, 1, 3],
 								["Kerol Horst", f, a, b, i, 3, 3, 3],
-								["Kaytlin Ricrrdz", f, c, m, c, 0, 3, 3],
-								["Kaytlin Ricrrdz", f,c, m, c, 0, 3, 3],
+								["Kaytlin Richrrdz", f, c, m, c, 0, 3, 3],
+								["Kaytlin Richrrdz", f,c, m, c, 0, 3, 3],
 								["a1", f, s, t, n, 0, 5, 3],
 								["g(Trisdin Keeng&Jeruemee Gray&Mahlee Kuk)", "mmf", c, m, "cig", 2, "101", 3],
 								["RuhbEkuh Krrzawlz", f, a, b, i, 1, 3, 3],
@@ -1673,14 +1694,14 @@
 								["Kaylueb Hamueltin", m, r, m, n, 1, 6, 3, 4],
 								["p59", m, f, t, n, 1, 7, 7, 4],
 								["p60", f, s, m, n, 3, 7, 4, 5],
-								["Alshrr", m, b, m, n, 1, 0, 0, 4],
+								["Ahlshrr", m, b, m, n, 1, 0, 0, 4],
 								["a1", m, s, t, n, 1, 2, 7, 4],
 								["SotAhro", m, b, t, t, 2, 3, 5, 4],
 								["SotAhro", m, b, b, d, 5, 6, 4, 5],
 								["g(p28&a2&a3)", "mmf", "b_s_s", t, g+j, 1, 7, "032", 5],
 								["a4", f, a, m, n, 1, 3, 1, 4],
 								["a5", f, s, t, j, 1, 6, 4, 4],
-								["Alshrr", m, b, t, j, 2, 7, 4, 5],
+								["Ahlshrr", m, b, t, j, 2, 7, 4, 5],
 								["Kaylueb Hamueltin", m, r, m, n, 1, 6, 4, 4],
 								["Kaylueb Hamueltin", m, r, b, n, 4, 2, 4, 5]
 							]
@@ -1699,8 +1720,8 @@
 								["Kerol Horst", f, a, t, n, 2, 6, 6, 5],
 								["Joee Taylrr", m, c, t, n, 1, 5, 7, 4],
 								["Kerol Horst", f, a, t, g+c, 3, 2, 6, 4],
-								["Kaytlin Ricrrdz", f, c, t, n, 2, 3, 7, 5],
-								["g(Kerol Horst&Joee Taylrr&Kaytlin Ricrrdz&Kamrin&AhndrAyuh&Antuhnee&p39&p61)", "fmfmfmmm", "a_c_c_c_c_c_c_c", n, n, 2, 7, "50000000", 4],
+								["Kaytlin Richrrdz", f, c, t, n, 2, 3, 7, 5],
+								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Kamrin&AhndrAyuh&Antuhnee&p39&p61)", "fmfmfmmm", "a_c_c_c_c_c_c_c", n, n, 2, 7, "50000000", 4],
 								["Kerol Horst", f, a, m, n, 3, 7, 1, 7],
 								["p34", m, a, t, g, 1, 7, 7, 4],
 								["p34", m, a, t, n, 1, 7, 7, 4],
@@ -1721,7 +1742,7 @@
 								["p57", m, f, t, n, 1, 7, 7, 4],
 								["DevAhntay", m, b, t, n, 1, 7, 7, 5],
 								["p65", f, f, m, n, 1, 4, 0, 4],
-								["Alshrr", m, b, t, n, 4, 5, 4, 5],
+								["Ahlshrr", m, b, t, n, 4, 5, 4, 5],
 								["Jahn ZookuhrElo", m, p+s, m, n, 1, 0, 0, 5],
 								["SotAhro", m, b, t, j, 2, 6, 5, 5],
 								["a2", f, s, t, n, 1, 7, 7, 4],
@@ -1768,7 +1789,7 @@
 								["Antuhnee",m,c,m,n,2,6,5,5],
 								["Kerol Horst",f,a,t,n+c,4,1,5,4],
 								["p61",m,c,t,n,1,7,7,4],
-								["Kaytlin Ricrrdz",f,c,t,n,1,6,3,5],
+								["Kaytlin Richrrdz",f,c,t,n,1,6,3,5],
 								["YuevAhn",f,"p-b",m,n,1,7,7,5],
 								["p24",f,f,m,g+c,1,6,4,4],
 								["g(Trisdin Keeng&Mahlee Kuk)",m+f,c,m,c+g,4,5,"44",6],
@@ -1942,9 +1963,9 @@
 								["Raein",m,b,t,n,1,7,7,5],
 								["SotAhro",m,b,t,n,1,6,5,4],
 								["p58",m,s,m,n,1,0,0,5],
-								["Alshrr",m,b,t,n,4,5,4,5],
+								["Ahlshrr",m,b,t,n,4,5,4,5],
 								["Heruesin",m,s,t,n,1,7,7,5],
-								["Alshrr",m,b,t,n,1,5,4,4],
+								["Ahlshrr",m,b,t,n,1,5,4,4],
 								["g(Kaylueb Hamueltin&Heruesin)",m,"r_s",t,n,2,2,"45",5],
 								["Raein",m,b,t,n,1,6,3,5],
 								["Kaylueb Hamueltin",m,r,t,n,3,1,6,5]
@@ -1960,7 +1981,7 @@
 								["Puetrishuh Ferish",f,a,t,g+c,1,7,7,4],
 								["Puetrishuh Ferish",f,a,m,n,2,7,6,4],
 								["a1",f,s,t,n,1,7,7,4],
-								["Alshrr",m,b,t,n,1,6,5,4],
+								["Ahlshrr",m,b,t,n,1,6,5,4],
 								["Dahleeuh",f,a,t,n,1,7,7,4],
 								["a2",f,f,m,n,1,0,0,4],
 								["p40",f,c,m,n,1,7,4,5],
@@ -1979,7 +2000,7 @@
 								["a5",m,f,m,n,1,7,0,4],
 								["p73",m,s,n,j,3,4,4,5],
 								["p74",m,b,n,j,1,0,0,5],
-								["Alshrr",m,b,t,j+g,2,7,3,5],
+								["Ahlshrr",m,b,t,j+g,2,7,3,5],
 								["Kaylueb Hamueltin",m,r,t,n,1,7,7,5],
 								["SotAhro",m,b,t,n,1,7,5,5],
 								["SotAhro",m,b,t,n,1,7,7,4]
@@ -2019,7 +2040,7 @@
 							notes: [],
 							data: [
 								["Kaylueb Hamueltin",m,r,t,n,1,7,4,5],
-								["Alshrr",m,b,t,n,1,0,0,5],
+								["Ahlshrr",m,b,t,n,1,0,0,5],
 								["Dahleeuh",f,a,m,n,1,0,0,4],
 								["a1",m,s,t,n,1,7,7,4],
 								["Kaylueb Hamueltin",m,r,m,n,1,7,7,5],
@@ -2063,7 +2084,7 @@
 								["SotAhro",m,b,t,n,1,6,6,4],
 								["Zak Suhdtin",m,p,m,t,3,2,4,4],
 								["Kaylueb Hamueltin",m,r,m,n,3,3,4,5],
-								["Alshrr",m,b,t,n,1,0,0,5]
+								["Ahlshrr",m,b,t,n,1,0,0,5]
 							]
 						},
 						{
@@ -2074,14 +2095,14 @@
 								["SotAhro",m,b,t,n,2,6,4,4],
 								["p57",m,f,t,n,1,7,7,4],
 								["a1",f,f,m,n,1,7,0,4],
-								["Alshrr",m,b,m,d,4,6,4,5],
+								["Ahlshrr",m,b,m,d,4,6,4,5],
 								["SotAhro",m,b,t,j,2,4,4,4],
 								["a2",m,s,t,n,1,7,4,4],
 								["g(a2&a3)",m,s,m,n,1,6,"35",5],
-								["Alshrr",m,b,t,n,3,7,3,4],
+								["Ahlshrr",m,b,t,n,3,7,3,4],
 								["Kaylueb Hamueltin",m,r,t,n,2,2,4,5],
-								["Alshrr",m,b,t,n,1,7,5,4],
-								["Alshrr",m,b,b,d,3,3,4,5],
+								["Ahlshrr",m,b,t,n,1,7,5,4],
+								["Ahlshrr",m,b,b,d,3,3,4,5],
 								["p42",f,f,t,n,1,7,7,5],
 								["Jahn ZookuhrElo",m,p+s,t,n,1,0,0,5],
 								["p44",f,o,t,n,1,0,0,5],
@@ -2099,7 +2120,7 @@
 							data: [
 								["Kaylueb Hamueltin",m,r,m,n,1,7,7,5],
 								["a1",f,f,t,n,1,7,7,5],
-								["Troodee",f,s,m,n,3,6,4,5],
+								["Troodee Brrnham",f,s,m,n,3,6,4,5],
 								["a2",f,s,t,n,1,7,7,4],
 								["a3",f,s,t,n,1,7,7,4],
 								["SotAhro",m,b,t,d,2,7,4,4],
@@ -2147,9 +2168,9 @@
 								["p82",m,s,b,n,1,0,0,5],
 								["Kerol Horst",f,a,t,n,3,1,6,5],
 								["Joee Taylrr",m,c,m,c,1,6,4,5],
-								["Kaytlin Ricrrdz",f,c,t,n,1,7,5,5],
-								["g(Kerol Horst&Joee Taylrr&Kaytlin Ricrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",m,c+g,3,1,"44620415",4],
-								["g(Kerol Horst&Joee Taylrr&Kaytlin Ricrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",n,n,2,6,"12200001",5],
+								["Kaytlin Richrrdz",f,c,t,n,1,7,5,5],
+								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",m,c+g,3,1,"44620415",4],
+								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",n,n,2,6,"12200001",5],
 								["Kerol Horst",f,a,t,n,2,4,4,4],
 								["p34",m,a,t,n,1,7,7,5],
 								["a1",f,s,t,n,1,7,7,4],
@@ -2228,7 +2249,7 @@
 							data: [
 								["p36", f, a, t, n, 1, 7, 7, 5],
 								["a1", m, s, t, n, 1, 7, 7, 4],
-								["g(Kerol Horst&Kaytlin Ricrrdz&Kodee)", "ffm", "a_c_c", m, g+c, 3, 2, "322", 4],
+								["g(Kerol Horst&Kaytlin Richrrdz&Kodee)", "ffm", "a_c_c", m, g+c, 3, 2, "322", 4],
 								["a2", f, a, t, n, 1, 7, 7, 5],
 								["g(Jeruemee Gray&Trisdin Keeng&Mahlee Kuk)", "mmf", c, b, "ncd", 3, 6, "153", 5],
 								["RuhbEkuh Krrzawlz", f, a, t, j, 2, 4, 4, 4],
@@ -2426,7 +2447,7 @@
 								["p67", f, o, t, n, 1, 7, 7, 5],
 								["p59", m, f, m, n, 1, 0, 0, 4],
 								["p67", f, f, m, n, 1, 0, 0, 4],
-								["Troodee", f, s, m, n, 1, 7, 4, 6],
+								["Troodee Brrnham", f, s, m, n, 1, 7, 4, 6],
 								["Ahlshrr", m, b, t, p, 2, 6, 4, 4],
 								["Ahlshrr", m, b, t, n, 4, 6, 4, 4],
 								["p41", m, b, t, n, 1, 6, 4, 5],
@@ -2441,7 +2462,7 @@
 							data: [
 								["a1", f, a, t, n, 1, 7, 7, 4],
 								["Kerol Horst", f, a, t, d, 4, 2, 4, 4],
-								["Kaytlin Ricrrdz", f, c, t, j, 2, 2, 4, 4],
+								["Kaytlin Richrrdz", f, c, t, j, 2, 2, 4, 4],
 								["Kaylueb Hamueltin", m, r, t, n, 1, 4, 4, 5],
 								["Trisdin Keeng", m, c, t, d, 3, 6, 5, 4],
 								["Mahlee Kuk", f, c, m, j, 2, 6, 4, 5],
@@ -2531,7 +2552,7 @@
 								["Dahleeuh", f, a, t, n, 1, 7, 7, 4],
 								["a1", m, a, m, n, 1, 4, 1, 4],
 								["Ahlshrr", m, b, b, n, 1, 0, 0, 4],
-								["Troodee", f, s, m, n, 3, 7, 4, 5],
+								["Troodee Brrnham", f, s, m, n, 3, 7, 4, 5],
 								["Emuelee Hamrr", f, c, m, n, 3, 1, 3, 4],
 								["Emuelee Hamrr", f, c, m, n, 3, 6, 4, 5],
 								["a2", m, f, t, n, 1, 7, 7, 4],
@@ -2575,7 +2596,7 @@
 								["p57", m, f, m, n, 1, 7, 6, 5],
 								["p43", f, f, m, n, 1, 4, 3, 4],
 								["p44", f, o, b, n, 1, 7, 7, 5],
-								["Troodee", f, s, m, n, 1, 0, 0, 5],
+								["Troodee Brrnham", f, s, m, n, 1, 0, 0, 5],
 								["Ryo", m, s, t, j, 3, 2, 4, 5],
 								["p98", m, s, n, j, 1, 7, 4, 4]
 							]
@@ -2586,12 +2607,12 @@
 							data: [
 								["Dwayn Jonz", m, s, t, n, 1, 7, 7, 4],
 								["p44", f, f, t, n, 1, 6, 4, 5],
-								["Troodee", f, s, b, n, 1, 0, 0, 5],
+								["Troodee Brrnham", f, s, b, n, 1, 0, 0, 5],
 								["p73", m, s, b, n, 1, 0, 0, 5],
-								["Troodee", f, s, m, n, 1, 7, 4, 5],
+								["Troodee Brrnham", f, s, m, n, 1, 7, 4, 5],
 								["p20", m, b, t, n, 1, 7, 7, 5],
 								["p20", m, b, t, n, 1, 0, 0, 5],
-								["Troodee", f, s, m, n, 1, 0, 0, 4],
+								["Troodee Brrnham", f, s, m, n, 1, 0, 0, 4],
 								["Mom", f, a, t, t, 1, 7, 5, 4],
 								["Jaykueb Brrgmin", m, r, m, n, 1, 7, 3, 4],
 								["SotAhro", m, b, t, t, 1, 7, 5, 4],
@@ -2817,7 +2838,7 @@
 								["p93", m, s, m, n, 1, 7, 7, 5],
 								["p6", m, a, n, g, 1, 7, 7, 4],
 								["Ahlshrr", m, b, m, n, 2, 2, 4, 4],
-								["Troodee", f, s, m, n, 1, 7, 7, 4],
+								["Troodee Brrnham", f, s, m, n, 1, 7, 7, 4],
 								["p41", m, b, m, n, 1, 7, 5, 5],
 								["a9", "f", "s", "t", "nc", 1, 6, 4, 5],
 								["a10", f, f, t, n, 2, 2, 6, 4],
@@ -2857,7 +2878,7 @@
 								["a5", f, f, m, n, 1, 3, 0, 4],
 								["Kaylueb Hamueltin", m, "p-r", b, n, 1, 0, 0, 5],
 								["p100", m, s, b, n, 1, 7, 7, 5],
-								["Troodee", f, s, m, n, 2, 7, 4, 5]
+								["Troodee Brrnham", f, s, m, n, 2, 7, 4, 5]
 							]
 						},
 						{
@@ -2946,7 +2967,7 @@
 								["Jahn ZookuhrElo", "m", "ps", "t", "d", 3, 5, 5, 5],
 								["a4", m, s, t, j, 2, 3, 6, 5],
 								["a4", m, s, m, c, 1, 7, 0, 4],
-								["Troodee", f, s, m, n, 1, 7, 4, 5],
+								["Troodee Brrnham", f, s, m, n, 1, 7, 4, 5],
 								["p101", m, s, t, n, 1, 7, 7, 5],
 								["Peedtrr", m, s, t, n, 1, 7, 7, 5],
 								["Ahlshrr", m, b, t, n, 1, 7, 7, 4],
@@ -3064,7 +3085,7 @@
 							date: "11/10/2017",
 							notes: [],
 							data: [
-								["Alshrr", m, b, m, n, 1, 0, 0, 4],
+								["Ahlshrr", m, b, m, n, 1, 0, 0, 4],
 								["a1", m, f, m, c, 1, 5, 4, 5],
 								["a2", f, s, t, n, 1, 7, 3, 4],
 								["a3", f, f, m, n, 2, 7, 4, 5],
@@ -3278,7 +3299,7 @@
 								["SotAhro", m, b, t, t, 2, 7, 4, 4],
 								["p42", f, f, m, n, 1, 0, 0, 4],
 								["p92", f, f, m, n, 1, 5, 2, 4],
-								["Troodee", f, s, m, n, 3, 6, 4, 6],
+								["Troodee Brrnham", f, s, m, n, 3, 6, 4, 6],
 								["p73", m, s, t, n, 3, 6, 4, 5],
 								["p20", m, b, t, n, 1, 7, 6, 5],
 								["Jaykueb Brrgmin", m, r, m, n, 2, 7, 4, 5],
@@ -3630,129 +3651,129 @@
 						}
 					];
 					var peopleKey = {
-						p1: "Dahleeuh",
-						p2: "Dwayn Jonz",
-						p3: "Mahlee Kuk",
-						p4: "chemistry professor",
-						p5: "Kaylin Troo",
-						p6: "grill guy (Andrew?)",
-						p7: "Towers West tenth floor 'Micaela'",
-						p8: "Emee Jay",
-						p9: "Kler Matlind",
-						p10: "Jahn's out-going friend",
-						p11: "Kaytlin Ricrrdz",
-						p12: "AhndrAyuh (from art)",
-						p13: "Joee Taylrr",
-						p14: "Antuhnee (from art)",
-						p15: "Kamrin (from art)",
-						p16: "random guy from next art class",
-						p17: "SotAhro's roommate",
-						p18: "SotAhro's roommate's friend",
-						p19: "DayvAhntay",
-						p20: "Calvin",
-						p21: "blond guy who used to be lonely",
-						p22: "guy from Campus Outreach",
-						p23: "Bridget Tony",  //// ?
-						p24: "girl assisting in lab",
-						p25: "DayvAhn",
-						p26: "Emuelee Hamrr",
-						p27: "Rowdy cashier lady",
-						p28: "blond guy from floor",
-						p29: "other blond guy from floor",
-						p30: "Ahlshrr",
-						p31: "Heruesin",
-						p32: "Patrik",
-						p33: "Brittish girl",
-						p34: "shuttle driver",
-						p35: "blonde River Campus meal lady",
-						p36: "other River Campus meal lady",
-						p37: "other guy who played pool",
-						p38: "girl who tried to play pool",
-						p39: "Kodee (from art)",
-						p40: "dark-haired girl in Economics",
-						p41: "new blond guy on floor",
-						p42: "dark dining hall Indian girl",
-						p43: "talkative Indian girl food server",
-						p44: "Chinese food server girl who sings",
-						p45: "inquisitive guy in Relationships class",
-						p46: "supplemental grill guy",
-						p47: "River Campus meal guy",
-						p48: "my knight who jousted",
-						p49: "older guy in History",
-						p50: "girl in front in biology without glasses",
-						p51: "girl in front in biology with glasses",
-						p52: "Robert! :) guy",
-						p53: "Robert! :) guy's friend",
-						p54: "guy who sits near me in biology",
-						p55: "dark-haired videogame guy",
-						p56: "red-headed? videogame guy",
-						p57: "Indian guy in dining hall",
-						p58: "guy who joined pool",
-						p59: "tall dark-skinned dining hall guy",
-						p60: "Troodee",  // Troodee Brrnham
-						p61: "other new guy in art",
-						p62: "River Campus guy in History",
-						p63: "out-going girl in History",
-						p64: "guy in History and Economics",
-						p65: "pizza girl",
-						p66: "Nepali guy in relationships class",
-						p67: "unenthusiastic dining hall girl",
-						p68: "tall darker-skinned dining hall guy",
-						p69: "red-headed food server",
-						p70: "African American adult food lady",
-						p71: "girl with sometimes straight blonde hair and glasses",
-						p72: "my group's speaker in History",
-						p73: "Kahzuemah",
-						p74: "Ryo",
-						p75: "older dining hall guy",
-						p76: "p20's more tame friend",
-						p77: "p20's less tame friend",
-						p78: "girl with vertical ponytail",
-						p79: "African American food girl",
-						p80: "blonde River Campus janitor",
-						p81: "other River Campus janitor",
-						p82: "large guy at River Campus",
-						p83: "Asian guy from floor with glasses",
-						p84: "Rowdy cook lady",
-						p85: "red-headed girl in History",
-						p86: "guy who asks questions in Economics",
-						p87: "SotAhro and p73's Chinese friend",
-						p88: "married dining hall girl",
-						p89: "willing-to-talk Relationships class girl",
-						p90: "History guy with cyclical hair",
-						p91: "girl who draws in dining hall",
-						p92: "other Indian dining hall girl",
-						p93: "guy from school look-alike",
-						p94: "guy who gave me the ticket",
-						p95: "pool supply guy",
-						p96: "p20's blond friend",
-						p97: "p20's girlfriend",
-						p98: "SotAhro and Ryo's Chinese friend",
-						p99: "girl who knows SotAhro is crazy",
-						p100: "ox guy",
-						p101: "p98's friend",
-						p102: "random red-headed dude",
-						p103: "Indian girl in front in Biology",
-						p104: "DHMO guy",
-						p105: "Rowdy cashier girl",
-						p106: "Christian guy from 2nd floor",
-						p107: "older dining hall Indian guy",
-						p108: "Japanese guy not at Carpe Diem",
-						p109: "Asian girl in Relationships class",
-						p110: "new food server guy",
-						p111: "casually dressed meal lady",
-						p112: "other blonde girl in Relatnships class",
-						p113: "Jaykueb's red-headed friend",
-						p114: "dining hall girl with nose ring",
-						p115: "Jahn's Indian friend",
-						p116: "Jahn's friend with glasses",
-						p117: "bald dining hall guy",
-						p118: "red-headed? guy in History",
-						p119: "faction game master",
-						p120: "Thorir",
-						p121: "red-headed guy in History",
-						p122: "St. Bridget of Kildare priest",
-						p123: "dark-haired Pacific Care secretary"
+						p1: ["Dahleeuh"],
+						p2: ["Dwayn Jonz"],
+						p3: ["Mahlee Kuk"],
+						p4: ["chemistry professor"],
+						p5: ["Kaylin Troo"],
+						p6: ["grill guy (Andrew?)"],
+						p7: ["Towers West tenth floor 'Micaela'"],
+						p8: ["Emee Jay"],
+						p9: ["Kler Matlind"],
+						p10: ["Jahn's out-going friend"],
+						p11: ["Kaytlin Richrrdz"],
+						p12: ["AhndrAyuh (from art)"],
+						p13: ["Joee Taylrr"],
+						p14: ["Antuhnee (from art)"],
+						p15: ["Kamrin (from art)"],
+						p16: ["random guy from next art class"],
+						p17: ["SotAhro's roommate"],
+						p18: ["SotAhro's roommate's friend"],
+						p19: ["DayvAhntay"],
+						p20: ["Calvin"],
+						p21: ["blond guy who used to be lonely"],
+						p22: ["guy from Campus Outreach"],
+						p23: ["Bridget Tony"],  //// ?
+						p24: ["girl assisting in lab"],
+						p25: ["DayvAhn"],
+						p26: ["Emuelee Hamrr"],
+						p27: ["Rowdy cashier lady"],
+						p28: ["blond guy from floor"],
+						p29: ["other blond guy from floor"],
+						p30: ["Ahlshrr"],
+						p31: ["Heruesin"],
+						p32: ["Patrik"],
+						p33: ["Brittish girl"],
+						p34: ["shuttle driver"],
+						p35: ["blonde River Campus meal lady"],
+						p36: ["other River Campus meal lady"],
+						p37: ["other guy who played pool"],
+						p38: ["girl who tried to play pool"],
+						p39: ["Kodee (from art)"],
+						p40: ["dark-haired girl in Economics"],
+						p41: ["new blond guy on floor"],
+						p42: ["dark dining hall Indian girl"],
+						p43: ["talkative Indian girl food server"],
+						p44: ["Chinese food server girl who sings"],
+						p45: ["inquisitive guy in Relationships class"],
+						p46: ["supplemental grill guy"],
+						p47: ["River Campus meal guy"],
+						p48: ["my knight who jousted"],
+						p49: ["older guy in History"],
+						p50: ["girl in front in biology without glasses"],
+						p51: ["girl in front in biology with glasses"],
+						p52: ["Robert! :) guy"],
+						p53: ["Robert! :) guy's friend"],
+						p54: ["guy who sits near me in biology"],
+						p55: ["dark-haired videogame guy"],
+						p56: ["red-headed? videogame guy"],
+						p57: ["Indian guy in dining hall"],
+						p58: ["guy who joined pool"],
+						p59: ["tall dark-skinned dining hall guy"],
+						p60: ["Troodee Brrnham"],
+						p61: ["other new guy in art"],
+						p62: ["River Campus guy in History"],
+						p63: ["out-going girl in History"],
+						p64: ["guy in History and Economics"],
+						p65: ["pizza girl"],
+						p66: ["Nepali guy in relationships class"],
+						p67: ["unenthusiastic dining hall girl"],
+						p68: ["tall darker-skinned dining hall guy"],
+						p69: ["red-headed food server"],
+						p70: ["African American adult food lady"],
+						p71: ["girl with sometimes straight blonde hair and glasses"],
+						p72: ["my group's speaker in History"],
+						p73: ["Kahzuemah"],
+						p74: ["Ryo"],
+						p75: ["older dining hall guy"],
+						p76: ["p20's more tame friend"],
+						p77: ["p20's less tame friend"],
+						p78: ["girl with vertical ponytail"],
+						p79: ["African American food girl"],
+						p80: ["blonde River Campus janitor"],
+						p81: ["other River Campus janitor"],
+						p82: ["large guy at River Campus"],
+						p83: ["Asian guy from floor with glasses"],
+						p84: ["Rowdy cook lady"],
+						p85: ["red-headed girl in History"],
+						p86: ["guy who asks questions in Economics"],
+						p87: ["SotAhro and p73's Chinese friend"],
+						p88: ["married dining hall girl"],
+						p89: ["willing-to-talk Relationships class girl"],
+						p90: ["History guy with cyclical hair"],
+						p91: ["girl who draws in dining hall"],
+						p92: ["other Indian dining hall girl"],
+						p93: ["guy from school look-alike"],
+						p94: ["guy who gave me the ticket"],
+						p95: ["pool supply guy"],
+						p96: ["p20's blond friend"],
+						p97: ["p20's girlfriend"],
+						p98: ["SotAhro and Ryo's Chinese friend"],
+						p99: ["girl who knows SotAhro is crazy"],
+						p100: ["ox guy"],
+						p101: ["p98's friend"],
+						p102: ["random red-headed dude"],
+						p103: ["Indian girl in front in Biology"],
+						p104: ["DHMO guy"],
+						p105: ["Rowdy cashier girl"],
+						p106: ["Christian guy from 2nd floor"],
+						p107: ["older dining hall Indian guy"],
+						p108: ["Japanese guy not at Carpe Diem"],
+						p109: ["Asian girl in Relationships class"],
+						p110: ["new food server guy"],
+						p111: ["casually dressed meal lady"],
+						p112: ["other blonde girl in Relatnships class"],
+						p113: ["Jaykueb's red-headed friend"],
+						p114: ["dining hall girl with nose ring"],
+						p115: ["Jahn's Indian friend"],
+						p116: ["Jahn's friend with glasses"],
+						p117: ["bald dining hall guy"],
+						p118: ["red-headed? guy in History"],
+						p119: ["faction game master"],
+						p120: ["Thorir"],
+						p121: ["red-headed guy in History"],
+						p122: ["St. Bridget of Kildare priest"],
+						p123: ["dark-haired Pacific Care secretary"]
 					};
 
 					let conversationData = S.getId("rawConversationData").innerHTML;
@@ -3765,7 +3786,7 @@
 						/**
 						puts information into the conversation tables
 						*/
-						var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople"), document.getElementById("averageLengths"), document.getElementById("enjoyability")],
+						var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople"), document.getElementById("averageLengths"), document.getElementById("enjoyability"), document.getElementById("initiatorSkew")],
 							rows = [null, null],
 							male = [],
 							female = [];
@@ -3786,15 +3807,15 @@
 								}
 								male.push(document.createElement("td"));
 								female.push(document.createElement("td"));
-								male[male.length-1].innerHTML = 0;
-								female[female.length-1].innerHTML = 0;
+								male[male.length-1].textContent = 0;
+								female[female.length-1].textContent = 0;
 							});
 						}
 						function addInformation(tableNumber, gender, information) {
 							if (gender == "m") {
-								male[tableNumber-1].innerHTML = Number(male[tableNumber-1].innerHTML) + information;
+								male[tableNumber-1].textContent = Number(male[tableNumber-1].textContent) + information;
 							} else if (gender == "f") {
-								female[tableNumber-1].innerHTML = Number(female[tableNumber-1].innerHTML) + information;
+								female[tableNumber-1].textContent = Number(female[tableNumber-1].textContent) + information;
 							}
 						}
 						function extendTables(date) {
@@ -3802,16 +3823,16 @@
 							S.forEach(tables, function(table, index) {
 								if (!isNaN(male[index].innerHTML)) {
 									if (morePreciseTables.indexOf(table.id) == -1) {
-										male[index].innerHTML = Math.round(male[index].innerHTML);
+										male[index].textContent = Math.round(male[index].textContent);
 									} else {  // rounds to one decimal place
-										male[index].innerHTML = Math.round(Number(male[index].innerHTML)*10) / 10;
+										male[index].textContent = Math.round(Number(male[index].textContent)*10) / 10;
 									}
 								}
 								if (!isNaN(female[index].innerHTML)) {
 									if (morePreciseTables.indexOf(table.id) == -1) {
-										female[index].innerHTML = Math.round(female[index].innerHTML);
+										female[index].textContent = Math.round(female[index].textContent);
 									} else {
-										female[index].innerHTML = Math.round(Number(female[index].innerHTML)*10) / 10;
+										female[index].textContent = Math.round(Number(female[index].textContent)*10) / 10;
 									}
 								}
 								male[index].title = date;
@@ -3822,11 +3843,66 @@
 						}
 						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
 							initSum = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-							totalPeople = {m: [], f: []};
+							recordedPeople = { m: [], f: [] },
+							totalPeople = { m: [], f: [] };
 						S.forEach(conversations, function (day) {
 							let dayIsCountable = true;
 							if (day.notes.indexOf("no data") > -1) {
 								dayIsCountable = false;
+							} else if (document.getElementById("conversationDateRange").value) {
+								let dateRange = document.getElementById("conversationDateRange").value.trim();
+								if (dateRange.search(/[^\d\/-]/) > -1) {
+									alert("An invalid date (range) was given.");
+									throw "An invalid date (range) was given.";
+								}
+								let studyStart = new Date("8/21/2017").getTime(),
+									studyEnd = new Date("11/19/2017").getTime();
+								if (dateRange.indexOf("-") > -1) {
+									if (dateRange.search(/[\d\/]-[\d\/]/) == -1) {
+										alert("An invalid date range was given.");
+										throw "An invalid date range was given.";
+									}
+									let date1 = dateRange.split("-")[0],
+										date2 = dateRange.split("-")[1];
+									if (date1.search(/\d{1,2}\/\d{1,2}\/\d{4}/) > -1) {
+										date1 = new Date(date1).getTime();
+									} else if (date1.search(/\d{1,2}\/d{1,2}\/\d{2}/) > -1) {
+										date1 = new Date(date1.splice(date1.lastIndexOf("/") + 1, 0, "20" + date1.slice(-2))).getTime();
+									} else if (date1.search(/\d{1,2}\/\d{1,2}/) > -1) {
+										date1 = new Date(date1 + "/2017").getTime();
+									} else {
+										alert("The date wasn't formatted properly.");
+										throw "The date wasn't formatted properly.";
+									}
+									if (date2.search(/\d{1,2}\/\d{1,2}\/\d{4}/) > -1) {
+										date2 = new Date(date2).getTime();
+									} else if (date2.search(/\d{1,2}\/d{1,2}\/\d{2}/) > -1) {
+										date2 = new Date(date2.splice(date2.lastIndexOf("/") + 1, 0, "20" + date2.slice(-2))).getTime();
+									} else if (date2.search(/\d{1,2}\/\d{1,2}/) > -1) {
+										date2 = new Date(date2 + "/2017").getTime();
+									} else {
+										alert("The date wasn't formatted properly.");
+										throw "The date wasn't formatted properly.";
+									}
+									let dateMilliseconds = new Date(day.date).getTime();
+									if (dateMilliseconds < date1 || dateMilliseconds > date2) {
+										dayIsCountable = false;
+									}
+								} else {
+									if (dateRange.search(/\d{1,2}\/\d{1,2}\/\d{4}/) > -1) {
+										dateRange = new Date(dateRange).getTime();
+									} else if (dateRange.search(/\d{1,2}\/d{1,2}\/\d{2}/) > -1) {
+										dateRange = new Date(dateRange.splice(dateRange.lastIndexOf("/") + 1, 0, "20" + dateRange.slice(-2))).getTime();
+									} else if (dateRange.search(/\d{1,2}\/\d{1,2}/) > -1) {
+										dateRange = new Date(dateRange + "/2017").getTime();
+									} else {
+										alert("The date wasn't formatted properly.");
+										throw "The date wasn't formatted properly.";
+									}
+									if (new Date(day.date).getTime() < dateRange) {
+										dayIsCountable = false;
+									}
+								}
 							}
 
 							if (dayIsCountable) {  // if the day should be counted
@@ -3857,16 +3933,28 @@
 											conversation[5] = conversation[5] / 5 * 7;
 										}
 										if (conversation[6].constructor == String) {
-											let participations = conversation[6].split("");
-											participations.forEach(function(participation, index) {
-												participations[index] = Number(participation) / 5 * 7;
-											});
-											conversation[6] = participations.join("~");
+											if (conversation[6].indexOf("_") > -1) {
+												let firstSet = conversation[6].split("_")[0].split(""),
+													secondSet = conversation[6].split("_")[1].split("");
+												firstSet.forEach(function (participation, index) {
+													firstSet[index] = Number(participation) / 5 * 7;
+												});
+												secondSet.forEach(function (participation, index) {
+													secondSet[index] = Number(participation) / 5 * 7;
+												});
+												conversation[6] = firstSet.join("~") + "_" + secondSet.join("~");
+											} else {
+												let participations = conversation[6].split("");
+												participations.forEach(function (participation, index) {
+													participations[index] = Number(participation) / 5 * 7;
+												});
+												conversation[6] = participations.join("~");
+											}
 										} else {
 											conversation[6] = conversation[6] / 5 * 7;
 										}
 										conversation[7] = conversation[7] / 5 * 7;
-										// adds an estimated conversation desity
+										// adds an estimated conversation density
 										if (conversation[4].indexOf("i") > -1) {
 											conversation.splice(6, 0, 4);
 										} else {
@@ -3881,7 +3969,7 @@
 										console.error("Conversation number " + (number+1) + " on " + day.date + " has too many data points.");
 									}
 									if (conversation[0].slice(0, 2) == "g(") {
-										conversation[0].slice(2, conversation[0].length-1).split("&").forEach(function(person, index) {
+										conversation[0].slice(2, conversation[0].length - 1).split("&").forEach(function (person, index) {
 											let data = {};
 											// sets the name
 											data.name = person.trim();
@@ -3904,46 +3992,128 @@
 											// sets the length
 											data.length = (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
-													return .8333333333;
+													return 5/6;
 												} else {
 													return Math.pow(conversation[5], 2);
 												}
 											})();
 											// sets the density
-											data.density = (function() {
+											data.density = (function () {
 												switch (conversation[6]) {
 													case 0:
 														return 0;
 													case 1:
 														return .05;
 													case 2:
-														return .1666666667;
+														return 1/6;
 													case 3:
-														return .3333333333;
+														return 1/3;
 													case 4:
 														return .5;
 													case 5:
-														return .6666666667;
+														return 2/3;
 													case 6:
-														return .8333333333;
+														return 5/6;
 													case 7:
 														return 1;
 													default:
-														console.error("Conversation number " + (number+1) + " on " + day.date + " has an invalid conversation density.");
+														console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid conversation density.");
 														return 0;
 												}
 											})();
 											// sets the participation
-											if (conversation[7].constructor == String) {  // if there was a group of people
+											if (conversation[7].constructor == String) {  // if there were multiple degrees of participation
 												if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
 													data.participation = Number(conversation[7].split("~")[index]);
 												} else {
 													data.participation = Number(conversation[7].split("")[index]);
 												}
-											} else if (conversation[7].constructor == Number) {
+											} else if (!isNaN(conversation[7])) {
 												data.participation = conversation[7];
 											} else {
-												console.error("Conversation number " + (number+1) + " on " + day.date + " has an invalid data type for participation.");
+												console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid data type for participation.");
+											}
+											// sets the enjoyability
+											data.enjoyability = conversation[8];
+											// adds the data to the person list
+											them.push(data);
+										});
+									} else if (conversation[0] == "group") {
+										let people = [];
+										S.forEach(conversation[1], function () {
+											people.push(null);
+										});
+										people.forEach(function (person, index) {
+											let data = {};
+											// sets the name
+											data.name = "";
+											// sets the gender
+											data.gender = conversation[1][index];
+											// sets the classification
+											if (conversation[2].indexOf("_") == -1) {
+												data.classification = conversation[2].match(/\w(?!-)|\w-\w/g);
+											} else {
+												if (conversation[1][0] == "m") {
+													if (data.gender == "m") {
+														data.classification = conversation[2].split("_")[0].match(/\w(?!-)|\w-\w/g);
+													} else {
+														data.classification = conversation[2].split("_")[1].match(/\w(?!-)|\w-\w/g);
+													}
+												} else {
+													if (data.gender == "m") {
+														data.classification = conversation[2].split("_")[1].match(/\w(?!-)|\w-\w/g);
+													} else {
+														data.classification = conversation[2].split("_")[0].match(/\w(?!-)|\w-\w/g);
+													}
+												}
+											}
+											// sets the initiator
+											data.initiator = conversation[3];
+											// sets the indicators
+											data.indicators = conversation[4].split("");
+											// sets the length
+											data.length = (function () {
+												if (conversation[5] == 1 && conversation[6] == 7) {
+													return 5/6;
+												} else {
+													return Math.pow(conversation[5], 2);
+												}
+											})();
+											// sets the density
+											data.density = (function () {
+												switch (conversation[6]) {
+													case 0:
+														return 0;
+													case 1:
+														return .05;
+													case 2:
+														return 1/6;
+													case 3:
+														return 1/3;
+													case 4:
+														return .5;
+													case 5:
+														return 2/3;
+													case 6:
+														return 5/6;
+													case 7:
+														return 1;
+													default:
+														console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid conversation density.");
+														return 0;
+												}
+											})();
+											// sets the participation
+											if (conversation[7].constructor == String) {  // if there were multiple degrees of participation
+												if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
+													data.participation = Number(conversation[7].split("~")[index]);
+												} else {
+													data.participation = Number(conversation[7].split("")[index]);
+												}
+											} else if (!isNaN(conversation[7])) {
+												data.participation = conversation[7];
+											} else {
+												console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid data type for participation.");
 											}
 											// sets the enjoyability
 											data.enjoyability = conversation[8];
@@ -3959,7 +4129,7 @@
 											indicators: conversation[4].split(""),
 											length: (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
-													return .8333333333;
+													return 5/6;
 												} else {
 													return Math.pow(conversation[5], 2);
 												}
@@ -3971,15 +4141,15 @@
 													case 1:
 														return .05;
 													case 2:
-														return .1666666667;
+														return 1/6;
 													case 3:
-														return .3333333333;
+														return 1/3;
 													case 4:
 														return .5;
 													case 5:
-														return .6666666667;
+														return 2/3;
 													case 6:
-														return .8333333333;
+														return 5/6;
 													case 7:
 														return 1;
 													default:
@@ -3992,87 +4162,93 @@
 										});
 									}
 									
-									S.forEach(them, function(person) {  // adds information to the tables
+									let index = them.length;
+									while (index--) {  // adds information to the tables
+
+										let person = them[index];
 										
 										// determines whether the interaction should be counted
 										let desiredInteraction;
 										if (S.getName("filterType", true).id == "anyFail") {  // if the interaction should fail if any characteristic isn't wanted
 											desiredInteraction = true;
-											if (!checkboxes.small && person.length <= 1) {
+											if (!checkboxes.small && person.length <= 1) {  // if the conversation is small
 												desiredInteraction = false;
-											} else if (!checkboxes.adult && person.classification.includes("a")) {
+											} else if (!checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
 												desiredInteraction = false;
-											} else if (!checkboxes.kid && person.classification.includes("k")) {
+											} else if (!checkboxes.kid && person.classification.includes("k")) {  // if the person is a kid (below my age range)
 												desiredInteraction = false;
-											} else if (!checkboxes.formal && person.classification.includes("f")) {
+											} else if (!checkboxes.formal && person.classification.includes("f")) {  // if the conversation was formal
 												desiredInteraction = false;
-											} else if (!checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {
+											} else if (!checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {  // if the person is or was from my floor
 												desiredInteraction = false;
-											} else if (!checkboxes.group && conversation[0][0] == "g") {
+											} else if (!checkboxes.group && conversation[0][0] == "g") {  // if the conversation was with a group
 												desiredInteraction = false;
-											} else if (!checkboxes.individual && conversation[0][0] != "g") {
+											} else if (!checkboxes.individual && conversation[0][0] != "g") {  // if the conversation was with an individual
 												desiredInteraction = false;
-											} else if (!checkboxes.class && person.classification.includes("c")) {
+											} else if (!checkboxes.class && person.classification.includes("c")) {  // if the conversation was with someone from my class
 												desiredInteraction = false;
-											} else if (!checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {
+											} else if (!checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I knew before the start of this study
 												desiredInteraction = false;
-											} else if (!checkboxes.anonymous && person.name[0] == "a") {
+											} else if (!checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
 												desiredInteraction = false;
 											} else if (!checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
 												return person.classification.includes(indicator);
-											}) || person.name[0] == "a")) {
+											}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad"))) {  // if it was any other conversation
 												desiredInteraction = false;
 											}
 										} else {  // if the interaction should fail only if all characteristics aren't wanted
 											desiredInteraction = false;
-											if (checkboxes.small && person.length <= 1) {
+											if (checkboxes.small && person.length <= 1) {  // if the conversation is small
 												desiredInteraction = true;
-											} else if (checkboxes.adult && person.classification.includes("a")) {
+											} else if (checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
 												desiredInteraction = true;
-											} else if (checkboxes.kid && person.classification.includes("k")) {
+											} else if (checkboxes.kid && person.classification.includes("k")) {  // if the person is a kid (below my age range)
 												desiredInteraction = true;
-											} else if (checkboxes.formal && person.classification.includes("f")) {
+											} else if (checkboxes.formal && person.classification.includes("f")) {  // if the conversation was formal
 												desiredInteraction = true;
-											} else if (checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {
+											} else if (checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {  // if the person is or was from my floor
 												desiredInteraction = true;
-											} else if (checkboxes.group && conversation[0][0] == "g") {
+											} else if (checkboxes.group && conversation[0][0] == "g") {  // if the conversation was with a group
 												desiredInteraction = true;
-											} else if (checkboxes.individual && conversation[0][0] != "g") {
+											} else if (checkboxes.individual && conversation[0][0] != "g") {  // if the conversation was with an individual
 												desiredInteraction = true;
-											} else if (checkboxes.class && person.classification.includes("c")) {
+											} else if (checkboxes.class && person.classification.includes("c")) {  // if the conversation was with someone from my class
 												desiredInteraction = true;
-											} else if (checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {
+											} else if (checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I knew before the start of this study
 												desiredInteraction = true;
-											} else if (checkboxes.anonymous && person.name[0] == "a") {
+											} else if (checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
 												desiredInteraction = true;
 											} else if (checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
 												return person.classification.includes(indicator);
-											}) || person.name[0] == "a")) {
+											}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad"))) {  // if it was any other conversation
 												desiredInteraction = true;
 											}
 										}
 										
 										if (desiredInteraction) {  // if the interaction should be counted
-											
+
 											// increases the number of interactions
 											interactionNumbers.total++;
 											if (interactionNumbers[person.gender] != undefined) {
 												interactionNumbers[person.gender]++;
 											}
-											
-											// sets the information for the first conversation table
+
+											// sets the information for the sum of conversation lengths table
 											addInformation(1, person.gender, person.length * person.density);
-											
-											// sets the information for the second conversation table
-											if (uniquePeople[person.gender] != undefined && uniquePeople[person.gender].indexOf(person.name) == -1) {
+
+											// sets the information for the unique people who interacted with me table
+											if (uniquePeople[person.gender] != undefined && conversation[0] != "group" && uniquePeople[person.gender].indexOf(person.name) == -1) {
 												uniquePeople[person.gender].push(person.name);
 												addInformation(2, person.gender, 1);
 											}
-											
-											// sets part of the information for the fourth conversation table
+
+											// sets the information for the initiator skew table
+											addInformation(5, person.gender, person.initiator=="m" ? 1 : -1);
+
+											// sets part of the information for the average enjoyability table
 											addInformation(4, person.gender, person.enjoyability);
-											
-											// sets the information for the fifth conversation table
+
+											// sets the information for the number of started conversations table
 											if (person.gender == "m") {
 												if (person.initiator == "m") {
 													initiators[0][0] += 1;
@@ -4082,7 +4258,7 @@
 													initiators[0][0] += 1;
 													initiators[0][1] += 1;
 												} else if (person.initiator != "-" && person.initiator != "n") {
-													console.error("Conversation number " + (number+1) + " on " + day.date + " has an invalid type of initiator.");
+													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
 												}
 											} else if (person.gender == "f") {
 												if (person.initiator == "m") {
@@ -4093,11 +4269,11 @@
 													initiators[1][0] += 1;
 													initiators[1][1] += 1;
 												} else if (person.initiator != "-" && person.initiator != "n") {
-													console.error("Conversation number " + (number+1) + " on " + day.date + " has an invalid type of initiator.");
+													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
 												}
 											}
 
-											// sets the information for the sixth conversation table
+											// sets the information for the sum of started conversations table
 											if (person.gender == "m") {
 												if (person.initiator == "m") {
 													initSum[0][0] += person.length * person.density;
@@ -4122,34 +4298,47 @@
 												}
 											}
 
-											// keeps track of information for the seventh conversation table
-											if (totalPeople[person.gender] != undefined && person.name[0] != "a" && totalPeople[person.gender].indexOf(person.name) == -1) {
+											// keeps track of information for the total people recorded table
+											if (recordedPeople[person.gender] != undefined && person.name[0] != "a" && recordedPeople[person.gender].indexOf(person.name) == -1) {
+												recordedPeople[person.gender].push(person.name);
 												totalPeople[person.gender].push(person.name);
 											}
-											
+
+										} else {
+
+											// makes sure people I just met are counted in the future
+											if (recordedPeople[person.gender] != undefined && person.name[0] != "a" && recordedPeople[person.gender].indexOf(person.name) == -1) {
+												recordedPeople[person.gender].push(person.name);
+											}
+
 										}
-									});
+									}
 								});
 								
-								// sets the information for the third conversation table
-								male[2].innerHTML = Number(male[0].innerHTML) / (Number(male[1].innerHTML)||1);
-								female[2].innerHTML = Number(female[0].innerHTML) / (Number(female[1].innerHTML)||1);
+								// sets the information for the average conversation length table
+								male[2].textContent = Number(male[0].textContent) / (Number(male[1].textContent)||1);
+								female[2].textContent = Number(female[0].textContent) / (Number(female[1].textContent)||1);
 								
-								// sets the rest of the information for the fourth conversation table
-								male[3].innerHTML = interactionNumbers.m==0 ? 4 : (Number(male[3].innerHTML) / interactionNumbers.m);
-								female[3].innerHTML = interactionNumbers.f==0 ? 4 : (Number(female[3].innerHTML) / interactionNumbers.f);
+								// sets the rest of the information for the average enjoyability table
+								male[3].textContent = interactionNumbers.m==0 ? 4 : (Number(male[3].textContent) / interactionNumbers.m);
+								female[3].textContent = interactionNumbers.f==0 ? 4 : (Number(female[3].textContent) / interactionNumbers.f);
 								
 								// extends the tables
 								extendTables(day.date, "averageLengths", "enjoyability");
 							} else if (day.notes.indexOf("no data") > -1) {
 								prepareTables();
 								tables.forEach(function(table, index) {
-									male[index].innerHTML = "?";
-									female[index].innerHTML = "?";
+									male[index].textContent = "?";
+									female[index].textContent = "?";
 								});
 								extendTables(day.date);
 							} else {
 								prepareTables();
+								tables.forEach(function (table, index) {
+									male[index].innerHTML = "&nbsp;";
+									female[index].innerHTML = "&nbsp;";
+									/// adding &nbsp; makes sure the rows aren't crunched
+								});
 								extendTables(day.date);
 							}
 						});
@@ -4163,7 +4352,7 @@
 						initiators[2][2] = initiators[0][2] + initiators[1][2];
 						S.forEach(initiators, function(row, rowIndex) {
 							S.forEach(row, function(column, columnIndex) {
-								document.getElementById("initializers").getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex].innerHTML = column;
+								document.getElementById("initializers").getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex].textContent = column;
 							});
 						});
 						initSum[0][2] = initSum[0][0] + initSum[0][1];
@@ -4173,7 +4362,7 @@
 						initSum[2][2] = initSum[0][2] + initSum[1][2];
 						S.forEach(initSum, function (row, rowIndex) {
 							S.forEach(row, function (column, columnIndex) {
-								document.getElementById("initializerSum").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].innerHTML = Math.round(column);
+								document.getElementById("initializerSum").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = Math.round(column);
 							});
 						});
 						document.getElementById("totalPeople").getElementsByTagName("td")[0].textContent = totalPeople.m.length;
@@ -4181,7 +4370,8 @@
 						document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
 						S.colorCode("conversationLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0], [0,255,0]);
 						S.colorCode("uniquePeople");
-						S.colorCode("averageLengths");
+						S.colorCode("initiatorSkew");
+						S.colorCode("averageLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0]);
 						S.colorCode("enjoyability", null, [255,255,0], [128,255,0]);
 					}
 					updateConversations();
@@ -4476,7 +4666,7 @@
 					</tr>
 					<tr>
 						<td>
-							10:00pm-6:31am | 1:18am-8:18am<note-><div><div>I got the rest of my conversation data transferred, and it's glorious. (This also explains the digression from ideal bedtimes for the next few nights as I marvel at my data and come up with more ways of visualizing it. Yes, that's what kind of a nerd I am.)</div></div></note->|10:37pm-6:35am
+							10:00pm-6:31am | 1:18am-8:18am<note-><div><div>I got the rest of my conversation data transferred, and it's glorious. This also explains the digression from ideal bedtimes for the next few nights as I marvel at my data and come up with more ways of visualizing it. (Yes, that's what kind of a nerd I am.)</div></div></note->|10:37pm-6:35am
 						</td>
 					</tr>
 				</table>
