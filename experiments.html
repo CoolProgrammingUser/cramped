@@ -9,21 +9,19 @@
 		<script src="behavior.js"></script>
 		<script>
 			S.colorCode("table1");
+			S.listen("conversationCheckboxesVisibility", "change", function () {
+				if (this.checked) {
+					S.getId("conversationCheckboxes").querySelector("div:nth-of-type(2)").style.display = "inline-block";
+				} else {
+					S.getId("conversationCheckboxes").querySelector("div:nth-of-type(2)").style.display = "none";
+				}
+			});
 			S.colorCode(["sleep1", "sleep2", "sleep3", "sleep4"]);
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
 		<style>
-			details {
-				border: .05rem solid #58a;
-				border-radius: .25rem;
-				background-color: white;
-			}
-			summary {
-				border-radius: .25rem;
-				background-color: #aee;
-			}
-			.adjacentTables {
+			.details > input:first-child:checked ~ .adjacentTables {
 				display: inline-table;
 				margin: 1rem;
 			}
@@ -34,16 +32,10 @@
 				padding: .5rem 0rem;
 			}
 			#rawConversationData {
-				border: .05rem solid cyan;
-				padding: 1rem;
-				height: 15rem;
-				background: white;
+				border-radius: 0rem 0rem .5rem .5rem;
+				padding: .5rem;
 				text-align: left;
-				overflow: auto;
-			}
-			#rawConversationData h4 {
-				margin-top: 0rem;
-				text-align: center;
+				white-space: pre-line;
 			}
 			#conversationCheckboxes {
 				position: -webkit-sticky;
@@ -56,7 +48,12 @@
 				margin-top: .5rem;
 				margin-bottom: .5rem;
 			}
-			#conversationCheckboxes div {
+			#conversationCheckboxes > div:first-of-type {
+				position: absolute;
+				right: 1rem;
+				top: 0rem;
+			}
+			#conversationCheckboxes div:nth-of-type(2) div {
 				display: inline-table;
 				text-align: left;
 			}
@@ -79,508 +76,516 @@
 				<h3>
 					Before the end of high school
 				</h3>
-				<h4>
-					Presence ratio
-				</h4>
-				<ul>
-					<li>
-						Morning bus = 6:4, 6:4, 7:5, 6:4, 4:6, 6:4, 6:5, 6:5, 5:5, 5:5, 4:6, 2:5 &rarr; 63:58 &rarr; 5.25:4.8<over>3</over>
-					</li>
-					<li>
-						<span style="color:purple">Band</span> = 7:5
-					</li>
-					<li>
-						<span style="color:white">Psychology</span> = 5:0
-					</li>
-					<li>
-						<span style="color:purple">Spanish</span> = 1:1
-					</li>
-					<li>
-						<span style="color:white">Academic Advisory</span> = 3:3
-					</li>
-					<li>
-						<span style="color:white">"A" lunch</span> = 5:2
-					</li>
-					<li>
-						<span style="color:purple">Math</span> = 2:0
-					</li>
-					<li>
-						<span style="color:white">Computer Science and Software Engineering</span> = 0:4
-					</li>
-					<li>
-						<span style="color:#c4c">"B" lunch</span> = 5:0
-					</li>
-					<li>
-						<span style="color:purple">English</span> = 3:0
-					</li>
-					<li>
-						<span style="color:white">Science</span> = 2:0
-					</li>
-					<li>
-						Afternoon bus = 3:5, 1:5, 4:8, 2:6, 2:8, 2:10, 3:5, 3:6 &rarr; 20:53 &rarr; 2.5:6.625
-					</li>
-					<li>
-						<span style="color:magenta">All-classes day</span> = 32.75:21.458<over>3</over> &rarr; 3.275:2.1458<over>3</over>
-					</li>
-					<li>
-						<span style="color:purple">Purple day</span> = 25.75:19.458<over>3</over> &rarr; 3.67<over>857142</over>:2.779<over>761904</over>
-					</li>
-					<li>
-						<span style="color:white">White day</span> = 22.75:18.458<over>3</over> &rarr; 3.25:2.636<over>904761</over>
-					</li>
-					<li>
-						<mark>
-							Full week = 17.132<over>142857</over>:12.9791<over>6</over> &rarr; 3.426<over>428571</over>:2.5958<over>3</over> &rarr; &asymp; 1.32:1 &asymp; <div class="circle">4:3</div>
-						</mark>
-					</li>
-					<li>
-						Bus and lunch = 17.75:13.458<over>3</over> &rarr; 4.375:3.36458<over>3</over>
-					</li>
-				</ul>
-				<h4 id="title2">
-					Unique people who talked to me per day
-				</h4>
-				<table id="table1">
-					<tr>
-						<th rowspan="2"></th>
-						<th colspan="2" style="color:magenta">Monday</th>
-						<th colspan="2" style="color:purple">Tuesday</th>
-						<th colspan="2" style="color:white">Wednesday</th>
-						<th colspan="2" style="color:purple">Thursday</th>
-						<th colspan="2" style="color:white">Friday</th>
-						<th colspan="2">Saturday</th>
-						<th colspan="2">Sunday</th>
-					</tr>
-					<tr>
-						<th>Girls</th><th>Boys</th>
-						<th>Girls</th><th>Boys</th>
-						<th>Girls</th><th>Boys</th>
-						<th>Girls</th><th>Boys</th>
-						<th>Girls</th><th>Boys</th>
-						<th>Girls</th><th>Boys</th>
-						<th>Girls</th><th>Boys</th>
-					</tr>
-					<tr>
-						<th rowspan="6">
-							Individuals
-						</th>
-						<td colspan="2"></td>
-						<td>19</td>
-						<td>5</td>
-						<td>11</td>
-						<td>9</td>
-						<td>21</td>
-						<td>7</td>
-						<td>11</td>
-						<td>5</td>
-						<td>0</td>
-						<td>1</td>
-						<td>1</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>17</td>
-						<td>13</td>
-						<td>13</td>
-						<td>12</td>
-						<td>12</td>
-						<td>7</td>
-						<td>14</td>
-						<td>12</td>
-						<td>16</td>
-						<td>6</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>1</td>
-					</tr>
-					<tr>
-						<td>25</td>
-						<td>13</td>
-						<td colspan="2">?</td>
-						<td>14</td>
-						<td>15</td>
-						<td>20</td>
-						<td>7</td>
-						<td>13</td>
-						<td>7</td>
-						<td>0</td>
-						<td>0</td>
-						<td>1</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>16</td>
-						<td>10</td>
-						<td>27</td>
-						<td>9</td>
-						<td>27</td>
-						<td>22</td>
-						<td>17</td>
-						<td>16</td>
-						<td>9</td>
-						<td>12</td>
-						<td>0</td>
-						<td>1</td>
-						<td>0</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>14</td>
-						<td>9</td>
-						<td colspan="2">?</td>
-						<td colspan="2">?</td>
-						<td colspan="2">?</td>
-						<td>16</td>
-						<td>8</td>
-						<td>0</td>
-						<td>0</td>
-						<td>1</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td>24</td>
-						<td>16</td>
-						<td>21</td>
-						<td>10</td>
-						<td>23</td>
-						<td>13</td>
-						<td colspan="2">?</td>
-						<td>21</td>
-						<td>12</td>
-						<td colspan="4"></td>
-					</tr>
-				</table>
-				<br>
-				<h4>
-					Conversation initializers
-				</h4>
-				<table>
-					<tr>
-						<th></th>
-						<th>Me</th>
-						<th>Them</th>
-						<th>Total</th>
-						<th>Me:Them</th>
-					</tr>
-					<tr>
-						<th>Girls</th>
-						<td>212</td>
-						<td>191</td>
-						<td>403</td>
-						<td>&asymp; 1.10995:1</td>
-					</tr>
-					<tr>
-						<th>Boys</th>
-						<td>96</td>
-						<td>144</td>
-						<td>240</td>
-						<td>0.<over>6</over>:1 = 2:3 = 1:1.5</td>
-					</tr>
-					<tr>
-						<th>Total</th>
-						<td>308</td>
-						<td>335</td>
-						<td>643</td>
-						<td></td>
-					<tr>
-						<th>Girls:Boys</th>
-						<td><mark style="background-color:red">2.208<over>3</over>:1</mark></td>
-						<td><mark>1.3263<over>8</over>:1 &asymp; <div class="circle">4:3</div></mark></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
+				<div class="details">
+					<div class="summary">
+						Presence ratio
+					</div>
+					<ul>
+						<li>
+							Morning bus = 6:4, 6:4, 7:5, 6:4, 4:6, 6:4, 6:5, 6:5, 5:5, 5:5, 4:6, 2:5 &rarr; 63:58 &rarr; 5.25:4.8<over>3</over>
+						</li>
+						<li>
+							<span style="color:purple">Band</span> = 7:5
+						</li>
+						<li>
+							<span style="color:white">Psychology</span> = 5:0
+						</li>
+						<li>
+							<span style="color:purple">Spanish</span> = 1:1
+						</li>
+						<li>
+							<span style="color:white">Academic Advisory</span> = 3:3
+						</li>
+						<li>
+							<span style="color:white">"A" lunch</span> = 5:2
+						</li>
+						<li>
+							<span style="color:purple">Math</span> = 2:0
+						</li>
+						<li>
+							<span style="color:white">Computer Science and Software Engineering</span> = 0:4
+						</li>
+						<li>
+							<span style="color:#c4c">"B" lunch</span> = 5:0
+						</li>
+						<li>
+							<span style="color:purple">English</span> = 3:0
+						</li>
+						<li>
+							<span style="color:white">Science</span> = 2:0
+						</li>
+						<li>
+							Afternoon bus = 3:5, 1:5, 4:8, 2:6, 2:8, 2:10, 3:5, 3:6 &rarr; 20:53 &rarr; 2.5:6.625
+						</li>
+						<li>
+							<span style="color:magenta">All-classes day</span> = 32.75:21.458<over>3</over> &rarr; 3.275:2.1458<over>3</over>
+						</li>
+						<li>
+							<span style="color:purple">Purple day</span> = 25.75:19.458<over>3</over> &rarr; 3.67<over>857142</over>:2.779<over>761904</over>
+						</li>
+						<li>
+							<span style="color:white">White day</span> = 22.75:18.458<over>3</over> &rarr; 3.25:2.636<over>904761</over>
+						</li>
+						<li>
+							<mark>
+								Full week = 17.132<over>142857</over>:12.9791<over>6</over> &rarr; 3.426<over>428571</over>:2.5958<over>3</over> &rarr; &asymp; 1.32:1 &asymp; <div class="circle">4:3</div>
+							</mark>
+						</li>
+						<li>
+							Bus and lunch = 17.75:13.458<over>3</over> &rarr; 4.375:3.36458<over>3</over>
+						</li>
+					</ul>
+				</div>
+				<div class="details">
+					<div class="summary" id="title2">
+						Unique people who talked to me per day
+					</div>
+					<table id="table1">
+						<tr>
+							<th rowspan="2"></th>
+							<th colspan="2" style="color:magenta">Monday</th>
+							<th colspan="2" style="color:purple">Tuesday</th>
+							<th colspan="2" style="color:white">Wednesday</th>
+							<th colspan="2" style="color:purple">Thursday</th>
+							<th colspan="2" style="color:white">Friday</th>
+							<th colspan="2">Saturday</th>
+							<th colspan="2">Sunday</th>
+						</tr>
+						<tr>
+							<th>Girls</th><th>Boys</th>
+							<th>Girls</th><th>Boys</th>
+							<th>Girls</th><th>Boys</th>
+							<th>Girls</th><th>Boys</th>
+							<th>Girls</th><th>Boys</th>
+							<th>Girls</th><th>Boys</th>
+							<th>Girls</th><th>Boys</th>
+						</tr>
+						<tr>
+							<th rowspan="6">
+								Individuals
+							</th>
+							<td colspan="2"></td>
+							<td>19</td>
+							<td>5</td>
+							<td>11</td>
+							<td>9</td>
+							<td>21</td>
+							<td>7</td>
+							<td>11</td>
+							<td>5</td>
+							<td>0</td>
+							<td>1</td>
+							<td>1</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>17</td>
+							<td>13</td>
+							<td>13</td>
+							<td>12</td>
+							<td>12</td>
+							<td>7</td>
+							<td>14</td>
+							<td>12</td>
+							<td>16</td>
+							<td>6</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>25</td>
+							<td>13</td>
+							<td colspan="2">?</td>
+							<td>14</td>
+							<td>15</td>
+							<td>20</td>
+							<td>7</td>
+							<td>13</td>
+							<td>7</td>
+							<td>0</td>
+							<td>0</td>
+							<td>1</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>16</td>
+							<td>10</td>
+							<td>27</td>
+							<td>9</td>
+							<td>27</td>
+							<td>22</td>
+							<td>17</td>
+							<td>16</td>
+							<td>9</td>
+							<td>12</td>
+							<td>0</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>14</td>
+							<td>9</td>
+							<td colspan="2">?</td>
+							<td colspan="2">?</td>
+							<td colspan="2">?</td>
+							<td>16</td>
+							<td>8</td>
+							<td>0</td>
+							<td>0</td>
+							<td>1</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>24</td>
+							<td>16</td>
+							<td>21</td>
+							<td>10</td>
+							<td>23</td>
+							<td>13</td>
+							<td colspan="2">?</td>
+							<td>21</td>
+							<td>12</td>
+							<td colspan="4"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Conversation initializers
+					</div>
+					<table>
+						<tr>
+							<th></th>
+							<th>Me</th>
+							<th>Them</th>
+							<th>Total</th>
+							<th>Me:Them</th>
+						</tr>
+						<tr>
+							<th>Girls</th>
+							<td>212</td>
+							<td>191</td>
+							<td>403</td>
+							<td>&asymp; 1.10995:1</td>
+						</tr>
+						<tr>
+							<th>Boys</th>
+							<td>96</td>
+							<td>144</td>
+							<td>240</td>
+							<td>0.<over>6</over>:1 = 2:3 = 1:1.5</td>
+						</tr>
+						<tr>
+							<th>Total</th>
+							<td>308</td>
+							<td>335</td>
+							<td>643</td>
+							<td></td>
+						<tr>
+							<th>Girls:Boys</th>
+							<td><mark style="background-color:red">2.208<over>3</over>:1</mark></td>
+							<td><mark>1.3263<over>8</over>:1 &asymp; <div class="circle">4:3</div></mark></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
 				<br>
 				<h3>
 					Starting my second year of college
 				</h3>
 				<p>
-					I transferred in, so this starts from the very beginning of my relationships. This starts on Monday, August 21, 2017.
+					I wasn't satisfied with the limited amount of infomation I had to work with in the first study, so when I realized that I was about to have the perfect opportunity to track everything from the very beginning (because I was transferring) with the means of interpreting it (via my newfound programming knowledge), I couldn't pass it up (however grueling it may be). This starts on Monday, August 21, 2017.
 				</p>
-				<div id="rawConversationData">
-					<h4>
+				<div class="details" style="background-color: white">
+					<div class="summary">
 						Raw conversation data
-					</h4>
+					</div>
+					<div id="rawConversationData"></div>
 				</div>
 				<br>
-				<br>
 				<div id="conversationCheckboxes">
+					<div>
+						<input type="checkbox" id="conversationCheckboxesVisibility" checked>
+						<label for="conversationCheckboxesVisibility">show options</label>
+					</div>
 					<h4>
 						Take into account...
 					</h4>
 					<div>
-						<input type="radio" name="filterType" id="anyFail" checked><label for="anyFail">remove when any requirement fails</label><br>
-						<input type="radio" name="filterType" id="allFail"><label for="allFail">remove when all requirements fail</label>
-					</div>
-					<div>
-						<input type="text" id="conversationDateRange" placeholder="Start date or range">
-					</div>
-					<br>
-					<div>
-						<input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
-						<input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
-						<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
-						<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label>
-					</div>
-					<div>
-						<input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
-						<input type="checkbox" id="floorConversations" checked><label for="floorConversations">conversations with people from my floor</label><br>
-						<input type="checkbox" id="groupConversations" checked><label for="groupConversations">group conversations</label><br>
-						<input type="checkbox" id="individualConversations" checked><label for="individualConversations">individual conversations</label>
-					</div>
-					<div>
-						<input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
-						<input type="checkbox" id="anonymousConversations" checked><label for="anonymousConversations">conversations with random people</label><br>
-						<input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label>
+						<div>
+							<input type="radio" name="filterType" id="anyFail" checked><label for="anyFail">remove when any requirement fails</label><br>
+							<input type="radio" name="filterType" id="allFail"><label for="allFail">remove when all requirements fail</label>
+						</div>
+						<div>
+							<input type="text" id="conversationDateRange" placeholder="Start date or range">
+						</div>
+						<br>
+						<div>
+							<input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
+							<input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
+							<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
+							<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label>
+						</div>
+						<div>
+							<input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
+							<input type="checkbox" id="floorConversations" checked><label for="floorConversations">conversations with people from my floor</label><br>
+							<input type="checkbox" id="groupConversations" checked><label for="groupConversations">group conversations</label><br>
+							<input type="checkbox" id="individualConversations" checked><label for="individualConversations">individual conversations</label><br>
+							<input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label>
+						</div>
+						<div>
+							<input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
+							<input type="checkbox" id="anonymousConversations" checked><label for="anonymousConversations">conversations with random people</label><br>
+							<input type="checkbox" id="myConversations" checked><label for="myConversations">conversations I started</label><br>
+							<input type="checkbox" id="theirConversations" checked><label for="theirConversations">conversations someone else started</label>
+						</div>
 					</div>
 				</div>
 				<br>
 				<br>
-				<table class="smaller" id="conversationLengths">
-					<tr>
-						<th colspan="15">
-							Sum of conversation lengths
-						</th>
-					</tr>
-					<tr>
-						<th rowspan="2"></th>
-						<th colspan="2">Monday</th>
-						<th colspan="2">Tuesday</th>
-						<th colspan="2">Wednesday</th>
-						<th colspan="2">Thursday</th>
-						<th colspan="2">Friday</th>
-						<th colspan="2">Saturday</th>
-						<th colspan="2">Sunday</th>
-					</tr>
-					<tr>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-					</tr>
-					<tr>
-						<th>
-							Amount of<br>conversation
-						</th>
-					</tr>
-				</table>
-				<br>
-				<br>
-				<table class="smaller" id="uniquePeople">
-					<tr>
-						<th colspan="15">
-							Unique people who interacted with me
-						</th>
-					</tr>
-					<tr>
-						<th rowspan="2"></th>
-						<th colspan="2">Monday</th>
-						<th colspan="2">Tuesday</th>
-						<th colspan="2">Wednesday</th>
-						<th colspan="2">Thursday</th>
-						<th colspan="2">Friday</th>
-						<th colspan="2">Saturday</th>
-						<th colspan="2">Sunday</th>
-					</tr>
-					<tr>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-					</tr>
-					<tr>
-						<th>
-							Number<br>of<br>people
-						</th>
-					</tr>
-				</table>
-				<br>
-				<br>
-				<table class="smaller" id="initiatorSkew">
-					<tr>
-						<th colspan="15">
-							Initiator skew<note-><div><div>how many more conversations I started with people than people started with me</div></div></note-> (+ = me)
-						</th>
-					</tr>
-					<tr>
-						<th rowspan="2"></th>
-						<th colspan="2">Monday</th>
-						<th colspan="2">Tuesday</th>
-						<th colspan="2">Wednesday</th>
-						<th colspan="2">Thursday</th>
-						<th colspan="2">Friday</th>
-						<th colspan="2">Saturday</th>
-						<th colspan="2">Sunday</th>
-					</tr>
-					<tr>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-					</tr>
-					<tr>
-						<th>
-							Degree<br>of<br>skew
-						</th>
-					</tr>
-				</table>
-				<br>
-				<br>
-				<table class="smaller" id="averageLengths">
-					<tr>
-						<th colspan="15">
-							Average conversation lengths (maximum = 49)
-						</th>
-					</tr>
-					<tr>
-						<th rowspan="2"></th>
-						<th colspan="2">Monday</th>
-						<th colspan="2">Tuesday</th>
-						<th colspan="2">Wednesday</th>
-						<th colspan="2">Thursday</th>
-						<th colspan="2">Friday</th>
-						<th colspan="2">Saturday</th>
-						<th colspan="2">Sunday</th>
-					</tr>
-					<tr>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-					</tr>
-					<tr>
-						<th>
-							Average<br>conversation<br>length
-						</th>
-					</tr>
-				</table>
-				<br>
-				<br>
-				<table class="smaller" id="enjoyability">
-					<tr>
-						<th colspan="15">
-							Average conversation enjoyability
-						</th>
-					</tr>
-					<tr>
-						<th rowspan="2"></th>
-						<th colspan="2">Monday</th>
-						<th colspan="2">Tuesday</th>
-						<th colspan="2">Wednesday</th>
-						<th colspan="2">Thursday</th>
-						<th colspan="2">Friday</th>
-						<th colspan="2">Saturday</th>
-						<th colspan="2">Sunday</th>
-					</tr>
-					<tr>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-						<th>Males</th><th>Females</th>
-					</tr>
-					<tr>
-						<th>
-							Enjoyability
-						</th>
-					</tr>
-				</table>
-				<br>
-				<br>
-				<table class="adjacentTables" id="initializers">
-					<tr>
-						<th colspan="4">
-							Number of started conversations
-						</th>
-					</tr>
-					<tr>
-						<th></th>
-						<th>Me</th>
-						<th>Them</th>
-						<th>Total</th>
-					</tr>
-					<tr>
-						<th>Males</th>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>Females</th>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>Total</th>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-				<table class="adjacentTables" id="initializerSum">
-					<tr>
-						<th colspan="4">
-							Sum of started conversations
-						</th>
-					</tr>
-					<tr>
-						<th></th>
-						<th>Me</th>
-						<th>Them</th>
-						<th>Total</th>
-					</tr>
-					<tr>
-						<th>Males</th>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>Females</th>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th>Total</th>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-				<table class="adjacentTables" id="totalPeople">
-					<tr>
-						<th colspan="3">
-							Overestimation<note-><div><div>This hasn't yet been designed to handle when there are multiple names referring to the same person.</div></div></note-> of total people recorded
-						</th>
-					</tr>
-					<tr>
-						<th>Males</th>
-						<th>Females</th>
-						<th>Total</th>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
+				<div class="details">
+					<div class="summary">
+						Sum of conversation lengths
+					</div>
+					<table class="smaller" id="conversationLengths">
+						<tr>
+							<th rowspan="2"></th>
+							<th colspan="2">Monday</th>
+							<th colspan="2">Tuesday</th>
+							<th colspan="2">Wednesday</th>
+							<th colspan="2">Thursday</th>
+							<th colspan="2">Friday</th>
+							<th colspan="2">Saturday</th>
+							<th colspan="2">Sunday</th>
+						</tr>
+						<tr>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+						</tr>
+						<tr>
+							<th>
+								Amount of<br>conversation
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Unique people who interacted with me
+					</div>
+					<table class="smaller" id="uniquePeople">
+						<tr>
+							<th rowspan="2"></th>
+							<th colspan="2">Monday</th>
+							<th colspan="2">Tuesday</th>
+							<th colspan="2">Wednesday</th>
+							<th colspan="2">Thursday</th>
+							<th colspan="2">Friday</th>
+							<th colspan="2">Saturday</th>
+							<th colspan="2">Sunday</th>
+						</tr>
+						<tr>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+						</tr>
+						<tr>
+							<th>
+								Number<br>of<br>people
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Initiator skew<note-><div><div>how many more conversations I started with people than people started with me</div></div></note-> (+ = me)
+					</div>
+					<table class="smaller" id="initiatorSkew">
+						<tr>
+							<th rowspan="2"></th>
+							<th colspan="2">Monday</th>
+							<th colspan="2">Tuesday</th>
+							<th colspan="2">Wednesday</th>
+							<th colspan="2">Thursday</th>
+							<th colspan="2">Friday</th>
+							<th colspan="2">Saturday</th>
+							<th colspan="2">Sunday</th>
+						</tr>
+						<tr>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+						</tr>
+						<tr>
+							<th>
+								Degree<br>of<br>skew
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Average conversation lengths (maximum = 49)
+					</div>
+					<table class="smaller" id="averageLengths">
+						<tr>
+							<th rowspan="2"></th>
+							<th colspan="2">Monday</th>
+							<th colspan="2">Tuesday</th>
+							<th colspan="2">Wednesday</th>
+							<th colspan="2">Thursday</th>
+							<th colspan="2">Friday</th>
+							<th colspan="2">Saturday</th>
+							<th colspan="2">Sunday</th>
+						</tr>
+						<tr>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+						</tr>
+						<tr>
+							<th>
+								Average<br>conversation<br>length
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Average conversation enjoyability
+					</div>
+					<table class="smaller" id="enjoyability">
+						<tr>
+							<th rowspan="2"></th>
+							<th colspan="2">Monday</th>
+							<th colspan="2">Tuesday</th>
+							<th colspan="2">Wednesday</th>
+							<th colspan="2">Thursday</th>
+							<th colspan="2">Friday</th>
+							<th colspan="2">Saturday</th>
+							<th colspan="2">Sunday</th>
+						</tr>
+						<tr>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+							<th>Males</th><th>Females</th>
+						</tr>
+						<tr>
+							<th>
+								Enjoyability
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Aggregate tables
+					</div>
+					<table class="adjacentTables" id="initializers">
+						<tr>
+							<th colspan="4">
+								Number of started conversations
+							</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th>Me</th>
+							<th>Them</th>
+							<th>Total</th>
+						</tr>
+						<tr>
+							<th>Males</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Females</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Total</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+					<table class="adjacentTables" id="initializerSum">
+						<tr>
+							<th colspan="4">
+								Sum of started conversations
+							</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th>Me</th>
+							<th>Them</th>
+							<th>Total</th>
+						</tr>
+						<tr>
+							<th>Males</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Females</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Total</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+					<table class="adjacentTables" id="totalPeople">
+						<tr>
+							<th colspan="3">
+								Overestimation<note-><div><div>This hasn't yet been designed to handle when there are multiple names referring to the same person.</div></div></note-> of total people recorded<note-><div><div>Random people are excluded.</div></div></note->
+							</th>
+						</tr>
+						<tr>
+							<th>Males</th>
+							<th>Females</th>
+							<th>Total</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
 				<script>
 					var a = "a",
 						b = "b",
@@ -2116,7 +2121,7 @@
 						},
 						{
 							date: "10/8/2017",
-							notes: ["Alshrr=Ahlshrr"],
+							notes: [],
 							data: [
 								["Kaylueb Hamueltin",m,r,m,n,1,7,7,5],
 								["a1",f,f,t,n,1,7,7,5],
@@ -3776,26 +3781,27 @@
 						p123: ["dark-haired Pacific Care secretary"]
 					};
 
-					let conversationData = S.getId("rawConversationData").innerHTML;
+					let conversationData = "";
 					S.forEach(conversations, function (day) {
-						conversationData += JSON.stringify(day) + "<br><br>";
+						conversationData += "date: " + day.date + "\nnotes: " + day.notes + "\ndata: " + JSON.stringify(day.data) + "\n\n";
 					});
-					S.getId("rawConversationData").innerHTML = conversationData;
+					S.getId("rawConversationData").textContent = conversationData;
 
 					function updateConversations() {
 						/**
 						puts information into the conversation tables
 						*/
 						var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople"), document.getElementById("averageLengths"), document.getElementById("enjoyability"), document.getElementById("initiatorSkew")],
+							tableModified = [false, false, false, false, false],
 							rows = [null, null],
 							male = [],
 							female = [];
 						S.forEach(tables, function(table) {
 							// removes any previous data
-							while (table.rows.length > 4) {
+							while (table.rows.length > 3) {
 								table.deleteRow(-1);
 							}
-							table.getElementsByTagName("tr")[3].innerHTML = table.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].outerHTML;
+							table.getElementsByTagName("tr")[2].innerHTML = table.getElementsByTagName("tr")[2].getElementsByTagName("th")[0].outerHTML;
 						});
 						function prepareTables() {
 							male = [];
@@ -3817,6 +3823,7 @@
 							} else if (gender == "f") {
 								female[tableNumber-1].textContent = Number(female[tableNumber-1].textContent) + information;
 							}
+							tableModified[tableNumber-1] = true;
 						}
 						function extendTables(date) {
 							let morePreciseTables = Array.prototype.slice.call(arguments, 1);
@@ -3834,6 +3841,12 @@
 									} else {
 										female[index].textContent = Math.round(Number(female[index].textContent)*10) / 10;
 									}
+								}
+								if (!tableModified[index] && male[index].textContent != "?") {
+									male[index].textContent = "\u00a0";
+									female[index].textContent = "\u00a0";
+								} else {
+									tableModified[index] = false;
 								}
 								male[index].title = date;
 								female[index].title = date;
@@ -3920,7 +3933,9 @@
 										individual: S.getId("individualConversations").checked,
 										class: S.getId("classConversations").checked,
 										anonymous: S.getId("anonymousConversations").checked,
-										other: S.getId("otherConversations").checked
+										other: S.getId("otherConversations").checked,
+										mine: S.getId("myConversations").checked,
+										theirs: S.getId("theirConversations").checked
 									};
 								S.forEach(day.data, function(conversation, number) {
 									let me = {},
@@ -4191,9 +4206,15 @@
 												desiredInteraction = false;
 											} else if (!checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
 												desiredInteraction = false;
+											} else if (!checkboxes.mine && person.initiator == "m") {  // if I started the conversation
+												desiredInteraction = false;
+											} else if (!checkboxes.theirs && person.initiator == "t") {  // if someone else started the conversation
+												desiredInteraction = false;
+											} else if (!checkboxes.mine && !checkboxes.theirs && person.initiator == "b") {  // if the conversation was started mutually
+												desiredInteraction = false;
 											} else if (!checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
 												return person.classification.includes(indicator);
-											}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad"))) {  // if it was any other conversation
+											}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
 												desiredInteraction = false;
 											}
 										} else {  // if the interaction should fail only if all characteristics aren't wanted
@@ -4218,9 +4239,15 @@
 												desiredInteraction = true;
 											} else if (checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
 												desiredInteraction = true;
+											} else if (checkboxes.mine && person.initiator == "m") {  // if I started the conversation
+												desiredInteraction = true;
+											} else if (checkboxes.theirs && person.initiator == "t") {  // if someone else started the conversation
+												desiredInteraction = true;
+											} else if (checkboxes.mine && !checkboxes.theirs && person.initiator == "b") {  // if the conversation was started mutually
+												desiredInteraction = true;
 											} else if (checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
 												return person.classification.includes(indicator);
-											}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad"))) {  // if it was any other conversation
+											}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
 												desiredInteraction = true;
 											}
 										}
@@ -4243,7 +4270,7 @@
 											}
 
 											// sets the information for the initiator skew table
-											addInformation(5, person.gender, person.initiator=="m" ? 1 : -1);
+											addInformation(5, person.gender, person.initiator=="m" ? 1 : person.initiator=="t" ? -1 : 0);
 
 											// sets part of the information for the average enjoyability table
 											addInformation(4, person.gender, person.enjoyability);
@@ -4316,12 +4343,12 @@
 								});
 								
 								// sets the information for the average conversation length table
-								male[2].textContent = Number(male[0].textContent) / (Number(male[1].textContent)||1);
-								female[2].textContent = Number(female[0].textContent) / (Number(female[1].textContent)||1);
+								addInformation(3, "m", Number(male[0].textContent) / (Number(male[1].textContent)||1));
+								addInformation(3, "f", Number(female[0].textContent) / (Number(female[1].textContent)||1));
 								
 								// sets the rest of the information for the average enjoyability table
-								male[3].textContent = interactionNumbers.m==0 ? 4 : (Number(male[3].textContent) / interactionNumbers.m);
-								female[3].textContent = interactionNumbers.f==0 ? 4 : (Number(female[3].textContent) / interactionNumbers.f);
+								male[3].textContent = interactionNumbers.m==0 ? "\u00a0" : (Number(male[3].textContent) / interactionNumbers.m);
+								female[3].textContent = interactionNumbers.f==0 ? "\u00a0" : (Number(female[3].textContent) / interactionNumbers.f);
 								
 								// extends the tables
 								extendTables(day.date, "averageLengths", "enjoyability");
@@ -4343,7 +4370,7 @@
 							}
 						});
 						tables.forEach(function(table) {
-							table.getElementsByTagName("tr")[3].getElementsByTagName("th")[0].rowSpan = table.getElementsByTagName("tr").length - 3;
+							table.getElementsByTagName("tr")[2].getElementsByTagName("th")[0].rowSpan = table.getElementsByTagName("tr").length - 2;
 						});
 						initiators[0][2] = initiators[0][0] + initiators[0][1];
 						initiators[1][2] = initiators[1][0] + initiators[1][1];
@@ -4372,7 +4399,7 @@
 						S.colorCode("uniquePeople");
 						S.colorCode("initiatorSkew");
 						S.colorCode("averageLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0]);
-						S.colorCode("enjoyability", null, [255,255,0], [128,255,0]);
+						S.colorCode("enjoyability", null, [255,255,0], [85,255,0]);
 					}
 					updateConversations();
 					S.forEach(S.getId("conversationCheckboxes").getElementsByTagName("input"), function(checkbox) {
@@ -4381,6 +4408,7 @@
 					S.forEach(S.getId("conversationCheckboxes").getElementsByTagName("label"), function(label) {
 						label.addEventListener("click", updateConversations);
 					});
+					S.listen("conversationDateRange", "change", updateConversations);
 				</script>
 				</div>
 				<br>
@@ -4388,289 +4416,307 @@
 				<h2>
 					Amount of sleep
 				</h2>
-				<h3>
-					Second semester of college
-				</h3>
-				<p>
-					This is how much sleep I've been getting starting on the night between January 29, 2017 and January 30, 2017. The days of the week refer to the day I wake up after getting the amount of sleep described in that column. The starting time for my sleep may or may not come from the day before. Most of the times are exact (right before I get into bed), but a few are approximations likely within 10 minutes. I might have missed a few naps earlier on.
-				</p>
-				<table class="compact slim" id="sleep1">
-					<tr>
-						<th>
-							Monday         |    Tuesday	   |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
-						</th>
-					</tr>
-					<tr>
-						<td>
-							2:30am-8:05am | 2:09am-7:03am | 3:15am-7:56am | 6:03am-9:12am<note-><div><div>I missed an hour of class because of turning off my alarm in a semi-conscious state.</div></div></note->| 6:45am-8:26am | 2:50am-12:15pm| 2:47am-12:06pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							3:10am-8:12am | 6:26am-7:12am | 1:47am-8:11am |12:56am-12:15pm<note id="snowDay">Snow day</note>| 7:08am-8:11am | 3:32am-1:50pm | 4:11am-12:55pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							4:07am-8:10am | 5:07am-7:07am | 4:22am-8:06am | 6:31am-7:02am | 7:54am-8:55am | 3:51am-2:31pm | 3:25am-1:00pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							3:01am-12:46pm<note id="dayOff">Day off</note>| 1:30am-8:09am | 5:18am-8:10am | 0:00am-0:00am<note-><div><div>I took an intentional nap on this day from 4:24pm to 5:41pm.</div></div></note->| 7:47am-8:15am | 5:35am-2:30pm | 6:18am-2:35pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							11:30pm-8:33am| 3:59am-7:05am |12:30am-8:36am | 4:45am-7:04am | 0:00am-0:00am | 7:37am-1:11pm | 2:27am-12:13pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							1:37am-12:06pm<note-><div><div>This is the start of the week-long spring break.</div></div></note->| 6:15am-1:49pm | 6:52am-12:19pm| 3:50am-12:25pm| 1:25am-10:34am|11:28pm-8:33am | 1:30am-6:35am<note-><div><div>I actually went to bed at 12:30am but lost an hour of sleep due to Daylight Saving Time. I also woke up for a cool event on this day.</div></div></note->
-						</td>
-					</tr>
-					<tr>
-						<td>
-							11:49pm-8:23am<note-><div><div>There was an interruption from 5:50am to 6:05am because I thought I was turning 600,000,000 seconds old. I wasn't happy to discover that it was actually happening on Wednesday.</div></div></note->| 1:32am-12:01pm<note>[snowDay]</note>| 0:00am-0:00am | 0:00am-0:00am<note-><div><div>No, I didn't miss any naps.</div></div></note->| 4:45am-8:22am<note id="homeworkMove">Homework due on Friday was moved to Monday.</note>| 5:24am-2:01pm | 2:15am-12:26pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							6:58am-8:11am<note>[homeworkMove]</note>| 5:53am-7:12am<note-><div><div>I also took a nap from 11:59am to 1:11pm.</div></div></note->| 5:08am-8:15am | 0:00am-0:00am | 0:00am-0:00am<note-><div><div>My life is depressing.</div></div></note->| 3:33am-2:37pm | 7:48am-3:20pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							2:30am-8:08am | 0:00am-0:00am | 2:54am-8:11am | 4:58am-7:10am | 3:13am-7:50am<note>[homeworkMove]</note>| 6:36am-2:40pm | 1:48am-1:15pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							5:40am-8:10am<note>[homeworkMove]</note>| 0:00am-0:00am | 5:17am-8:11am | 0:00am-0:00am<note-><div><div>I took a nap from 11:29am to 1:00pm.</div></div></note->|12:40am-8:40am<note>[homeworkMove]</note>| 6:12am-2:20pm | 3:17am-1:18pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							4:46am-8:10am<note>[homeworkMove]</note>| 0:00am-0:00am<note-><div><div>I took a nap from 11:30am to 1:40pm.</div></div></note->| 6:37am-9:58am<note-><div><div>I missed my first class because, apparently, the only alarm capable of waking me up is a fire alarm (test; the real fire was earlier Tuesday night).</div></div></note->| 0:00am-0:00am | 6:21am-5:58pm<note-><div><div>I missed everything this day. Consequentially, I decided my phone's alarms (3 of them each day) weren't cutting it, so I bought batteries to get my original alarm clock working again. (It died a the Wednesday before the last Thursday I got sleep even though it shouldn't have because I charged up the battery before the start of the semester.)</div></div></note->| 6:12am-1:11pm | 2:26am-12:34pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							12:32am-11:18am<note>[dayOff]</note>| 0:00am-0:00am<note-><div><div>I took a nap from 11:28am to 1:28pm</div></div></note->| 4:32am-8:18am | 6:26am-7:05am | 0:00am-0:00am | 7:27am-2:35pm | 4:59am-2:09pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							12:01am-8:39am | 0:00am-0:00am | 1:46am-8:06am | 4:30am-7:06am<note-><div><div>No homework due</div></div></note->| 6:58am-10:45am<note-><div><div>I missed my first class and the beginning of my second class. I swear I'm doing a ridiculous amount of stuff to make sure I wake up in the morning, but nothing is good enough.</div></div></note->| 6:12am-2:21pm | 2:12am-12:25pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							3:37am-8:14am | 6:00am-7:12am | 4:00am-8:14am | 3:50am-1:04pm<note-><div><div>Classes ended</div></div></note->| 2:03am-12:44pm|2:23am-12:40pm| 6:46am-2:17pm<note-><div><div>I finished the decoder!</div></div></note->
-						</td>
-					</tr>
-				</table>
-				<h3>
-					Summer break
-				</h3>
-				<p>
-					Starts on the night between May 14, 2017 and May 15, 2017.
-				</p>
-				<table class="compact slim" id="sleep2">
-					<tr>
-						<th>
-							Monday         |    Tuesday	   |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
-						</th>
-					</tr>
-					<tr>
-						<td>
-							 1:59am-9:57am |12:47am-9:49am | 1:35am-10:21am| 4:21am-12:30pm| 3:52am-10:20am|12:40am-9:36am | 3:00am-9:01am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:16am-10:13am| 1:11am-9:55am | 1:55am-10:35am| 3:58am-10:04am| 1:03am-10:44am| 1:56am-8:38am |12:36am-8:56am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:13am-10:00am| 3:40am-10:00am| 1:26am-10:05am| 1:09am-9:48am |12:28am-10:00am| 2:19am-12:03pm| 2:48am-9:06am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:41am-10:12am| 1:49am-10:13am| 3:12am-10:02am| 1:18am-11:12am|12:02am-10:26am| 1:09am-10:33am| 2:37am-9:51am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 1:09am-10:07am| 2:26am-9:04am | 2:43am-9:04am | 1:30am-9:08am | 1:25am-9:04am | 3:58am-11:56am| 2:26am-8:58am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 3:08am-9:04am | 4:09am-9:12am | 2:48am-9:05am |12:06am-9:05am | 1:10am-9:08am |12:32am-10:41am| 2:09am-10:35am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							12:28am-9:01am | 3:03am-9:13am | 4:05am-12:41pm<note-><div><div>I was awake from 10:10am-10:59am.</div></div></note->| 3:22am-9:04am | 2:22am-9:04am | 1:56am-12:02pm| 1:29am-8:58am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:45am-9:03am | 3:00am-9:04am | 4:10am-9:12am | 3:36am-9:03am | 3:13am-9:08am | 4:25am-12:00pm| 3:12am-10:36am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:55am-9:04am | 2:10am-9:13am | 1:19am-9:04am<note-><div><div>I was awake from 8:13am-8:29am.</div></div></note->| 3:03am-9:04am | 1:47am-9:04am | 2:20am-10:32am| 3:05am-9:08am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:25am-9:08am | 1:49am-8:24am | 2:28am-9:03am | 2:19am-9:08am | 2:27am-9:07am | 1:48am-10:45am| 5:03am-9:28am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:35am-9:03am | 2:19am-8:43am | 2:03am-8:38am | 3:42am-8:39am | 2:25am-8:39am | 2:33am-12:03pm| 3:31am-10:31am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 3:42am-8:39am | 3:14am-8:56am | 2:35am-8:39am | 3:12am-8:43am | 4:40am-9:02am | 4:41am-9:55am |10:25pm-9:14am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:17am-8:41am |12:53am-8:40am | 3:35am-11:16am| 2:06am-8:40am | 4:06am-8:49am | 4:00am-12:02pm| 3:36am-10:52am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:55am-9:02am | 3:36am-8:41am | 2:47am-8:40am | 3:40am-8:41am | 1:39am-8:41am | 7:01am-8:34am<note-><div><div>I was finishing writing in my journal.</div></div></note->|12:21am-10:40am<note-><div><div>I started college</div></div></note->
-						</td>
-					</tr>
-				</table>
-				<h3>
-					First semester sophomore year
-				</h3>
-				<p>
-					This starts on the night between August 20, 2017 and August 21, 2017.
-				</p>
-				<table class="compact slim" id="sleep3">
-					<tr>
-						<th>
-							Monday         |    Tuesday	   |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
-						</th>
-					</tr>
-					<tr>
-						<td>
-							 2:37am-6:01am |12:12am-9:22am | 1:02am-6:02am |12:35am-9:17am | 1:31am-11:42am| 3:00am-12:04pm| 1:27am-10:30am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 1:40am-6:03am | 5:15am-9:07am<note-><div><div>I moved rooms.</div></div></note->| 3:24am-6:05am | 11:43pm-9:10am |12:08am-9:20am | 4:32am-1:03pm | 4:14am-12:30pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 4:34am-12:42pm<note>[dayOff]</note>| 4:58am-9:29am |11:58pm-6:11am | 1:05am-9:19am | 1:00am-9:51am | 2:59am-11:59am| 4:14am-12:14<note-><div><div>This time has been spliced together. The real times are 4:14am-7:38am, awake due to a fire alarm 7:38am-8:25am, and sleeping again 8:25am-1:01pm.</div></div></note->
-						</td>
-					</tr>
-					<tr>
-						<td>
-							12:06am-6:12am | 2:52am-9:34am |11:39pm-6:03am | 1:05am-9:13am | 1:40am-9:51am | 5:13am-1:14pm<note-><div><div>I had homework due the night before.</div></div></note->| 3:17am-12:22pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:41am-6:06am | 2:22am-10:15am|12:17am-6:06am | 2:19am-9:44am | 2:27am-10:05am| 3:59am-12:45pm| 1:52am-10:47am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 4:06am-6:08am | 1:32am-9:44am | 1:29am-6:05am | 2:13am-9:53am |11:34pm-9:17am | 1:48am-10:35am|12:00am-8:43am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 4:57am-6:05am |12:17am-8:50am | 9:56pm-6:10am | 1:30am-9:35am |12:00am-9:07am | 3:00am-12:04pm|12:52am-10:08am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 4:53am-6:10am<note-><div><div>I took a nap from 11:24am-12:26pm</div></div></note->| 1:00am-9:56am |10:00pm-6:07am | 2:19am-9:53am | 1:19am-9:50am | 1:44am-10:24am|12:43am-9:47am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:00am-6:07am | 3:03am-9:56am |10:43pm-6:10am | 1:28am-9:52am | 3:30am-11:39am| 4:45am-12:48pm| 1:45am-10:51am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 5:14am-6:12am | 3:42am-12:30pm<note-><div><div>I had an online test instead of my first class this day.</div></div></note->| 1:36am-6:04am<note-><div><div>I had something due in my morning class.</div></div></note->| 1:03am-9:53am | 5:00am-1:01pm | 5:22am-1:21pm | 6:12am-1:16pm<note-><div><div>I need to get my life back on track.</div></div></note->
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:59am-6:05am | 2:07am-10:07am|12:00am-6:02am | 1:08am-10:14am|1:58am-10:06am| 5:28am-1:26pm<note-><div><div>I had homework due the night before</div></div></note->| 6:23am-1:26pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 5:20am-6:23am | 1:34am-10:06am<note-><div><div>I was doing class planning the night before as well as this night and the next night.</div></div></note->|12:36am-6:02am | 2:52am-7:58am<note-><div><div>This time has been spliced together. The real times are 2:52am-6:39am, awake to register for classes and discover how many problems there are 6:39am-8:18am, and trying to sleep my troubles away 8:18am-9:37am.</div></div></note->| 4:10am-11:35am| 4:51am-1:16pm | 1:33am-10:37am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							12:31am-6:24am | 2:39am-10:06am| 1:25am-6:02am<note-><div><div>There's no excuse for this. (I was programming.)</div></div></note->| 4:06am-10:11am<note-><div><div>There was a moderately reasonable excuse for this, but I'm not quite sure what it was anymore. I might have been trying to keep up with my conversations.</div></div></note->|12:01am-8:02am<note-><div><div>I was trying to do my laundry early before I went home later.</div></div></note->| 1:38am-9:37am |12:38am-8:30am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 3:07am-11:27am| 3:25am-11:55am| 4:55am-12:35pm| 3:19am-10:42am| 4:29am-12:38pm| 4:53am-11:53am| 2:22am-8:21am
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 2:22am-6:02am<note-><div><div>I took a nap from 10:51am to 11:50am.</div></div></note->|12:01am-10:07am|11:50pm-6:02am | 3:44am-10:06am| 1:59am-10:08am| 6:04am-1:02pm | 5:21am-1:09pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							11:21pm-6:02am | 2:49am-10:07am| 5:02am-6:03am<note-><div><div>This is what happens when you have two large projects due on the same day.</div></div></note->|12:35am-9:38am | 4:49am-12:45pm<note-><div><div>I think I was trying to help <a href="https://fontforge.github.io/en-US/">FontForge</a> move some of their documentation to their new website. Since it was for the good of someone else, it's justified.</div></div></note->| 5:50am-1:16pm<note-><div><div>Waiting around for things to happen related to a gift exchange was a large contributor to this.</div></div></note->| 5:54am-1:23pm<note-><div><div>Maybe one of these days, staying up late to work on my to-do list website will actually pay off.</div></div></note->
-						</td>
-					</tr>
-				</table>
-				<h3>
-					Second semester sophomore year
-				</h3>
-				<p>
-					This starts on the night between January 14, 2018 and January 15, 2018.
-				</p>
-				<table class="compact slim" id="sleep4">
-					<tr>
-						<th>
-							Monday         |    Tuesday	   |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
-						</th>
-					</tr>
-					<tr>
-						<td>
-							 2:56am-10:08am<note-><div><div>This was while I was still at home.</div></div></note->|12:23am-8:29am |10:46pm-6:44am |12:23am-8:39am |12:30am-6:01am<note-><div><div>I had to get homework turned in before midnight.</div></div></note->| 1:53am-11:17am| 3:49am-12:35pm
-						</td>
-					</tr>
-					<tr>
-						<td>
-							10:00pm-6:31am | 1:18am-8:18am<note-><div><div>I got the rest of my conversation data transferred, and it's glorious. This also explains the digression from ideal bedtimes for the next few nights as I marvel at my data and come up with more ways of visualizing it. (Yes, that's what kind of a nerd I am.)</div></div></note->|10:37pm-6:35am | 2:50am-11:28am|12:18am-6:00am<note-><div><div>Making a cardboard trash can turned out to take a lot longer than I thought it would, but that probably wouldn't have been a problem if I had started working on it earlier like I planned instead of improving my conversation data visualizations.</div></div></note->
-						</td>
-					</tr>
-				</table>
-				<br>
+				<div class="details">
+					<div class="summary">
+						Second semester of college
+					</div>
+					<p>
+						This is how much sleep I've been getting starting on the night between January 29, 2017 and January 30, 2017. The days of the week refer to the day I wake up after getting the amount of sleep described in that column. The starting time for my sleep may or may not come from the day before. Most of the times are exact (right before I get into bed), but a few are approximations likely within 10 minutes. I might have missed a few naps earlier on. The main factors at play here are an 8:00am lab on Tuesday and Thursday which always had tons of homework due and a class that often had tons of homework due on Friday (and then there's tons of stuff to do in between there).
+					</p>
+					<table class="compact slim" id="sleep1">
+						<tr>
+							<th>
+								Monday         |    Tuesday		   |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
+							</th>
+						</tr>
+						<tr>
+							<td>
+								2:30am-8:05am | 2:09am-7:03am | 3:15am-7:56am | 6:03am-9:12am<note-><div><div>I missed an hour of class because of turning off my alarm in a semi-conscious state.</div></div></note->| 6:45am-8:26am | 2:50am-12:15pm| 2:47am-12:06pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								3:10am-8:12am | 6:26am-7:12am | 1:47am-8:11am |12:56am-12:15pm<note id="snowDay">Snow day</note>| 7:08am-8:11am | 3:32am-1:50pm | 4:11am-12:55pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								4:07am-8:10am | 5:07am-7:07am | 4:22am-8:06am | 6:31am-7:02am | 7:54am-8:55am | 3:51am-2:31pm | 3:25am-1:00pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								3:01am-12:46pm<note id="dayOff">Day off</note>| 1:30am-8:09am | 5:18am-8:10am | 0:00am-0:00am<note-><div><div>I took an intentional nap on this day from 4:24pm to 5:41pm.</div></div></note->| 7:47am-8:15am | 5:35am-2:30pm | 6:18am-2:35pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								11:30pm-8:33am| 3:59am-7:05am |12:30am-8:36am | 4:45am-7:04am | 0:00am-0:00am | 7:37am-1:11pm | 2:27am-12:13pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								1:37am-12:06pm<note-><div><div>This is the start of the week-long spring break.</div></div></note->| 6:15am-1:49pm | 6:52am-12:19pm| 3:50am-12:25pm| 1:25am-10:34am|11:28pm-8:33am | 1:30am-6:35am<note-><div><div>I actually went to bed at 12:30am but lost an hour of sleep due to Daylight Saving Time. I also woke up for a cool event on this day.</div></div></note->
+							</td>
+						</tr>
+						<tr>
+							<td>
+								11:49pm-8:23am<note-><div><div>There was an interruption from 5:50am to 6:05am because I thought I was turning 600,000,000 seconds old. I wasn't happy to discover that it was actually happening on Wednesday.</div></div></note->| 1:32am-12:01pm<note>[snowDay]</note>| 0:00am-0:00am | 0:00am-0:00am<note-><div><div>No, I didn't miss any naps.</div></div></note->| 4:45am-8:22am<note id="homeworkMove">Homework due on Friday was moved to Monday.</note>| 5:24am-2:01pm | 2:15am-12:26pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								6:58am-8:11am<note>[homeworkMove]</note>| 5:53am-7:12am<note-><div><div>I also took a nap from 11:59am to 1:11pm.</div></div></note->| 5:08am-8:15am | 0:00am-0:00am | 0:00am-0:00am<note-><div><div>My life is depressing.</div></div></note->| 3:33am-2:37pm | 7:48am-3:20pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								2:30am-8:08am | 0:00am-0:00am | 2:54am-8:11am | 4:58am-7:10am | 3:13am-7:50am<note>[homeworkMove]</note>| 6:36am-2:40pm | 1:48am-1:15pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								5:40am-8:10am<note>[homeworkMove]</note>| 0:00am-0:00am | 5:17am-8:11am | 0:00am-0:00am<note-><div><div>I took a nap from 11:29am to 1:00pm.</div></div></note->|12:40am-8:40am<note>[homeworkMove]</note>| 6:12am-2:20pm | 3:17am-1:18pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								4:46am-8:10am<note>[homeworkMove]</note>| 0:00am-0:00am<note-><div><div>I took a nap from 11:30am to 1:40pm.</div></div></note->| 6:37am-9:58am<note-><div><div>I missed my first class because, apparently, the only alarm capable of waking me up is a fire alarm (test; the real fire was earlier Tuesday night).</div></div></note->| 0:00am-0:00am | 6:21am-5:58pm<note-><div><div>I missed everything this day. Consequentially, I decided my phone's alarms (3 of them each day) weren't cutting it, so I bought batteries to get my original alarm clock working again. (It died a the Wednesday before the last Thursday I got sleep even though it shouldn't have because I charged up the battery before the start of the semester.)</div></div></note->| 6:12am-1:11pm | 2:26am-12:34pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								12:32am-11:18am<note>[dayOff]</note>| 0:00am-0:00am<note-><div><div>I took a nap from 11:28am to 1:28pm</div></div></note->| 4:32am-8:18am | 6:26am-7:05am | 0:00am-0:00am | 7:27am-2:35pm | 4:59am-2:09pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								12:01am-8:39am | 0:00am-0:00am | 1:46am-8:06am | 4:30am-7:06am<note-><div><div>No homework due</div></div></note->| 6:58am-10:45am<note-><div><div>I missed my first class and the beginning of my second class. I swear I'm doing a ridiculous amount of stuff to make sure I wake up in the morning, but nothing is good enough.</div></div></note->| 6:12am-2:21pm | 2:12am-12:25pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								3:37am-8:14am | 6:00am-7:12am | 4:00am-8:14am | 3:50am-1:04pm<note-><div><div>Classes ended</div></div></note->| 2:03am-12:44pm|2:23am-12:40pm| 6:46am-2:17pm<note-><div><div>I finished the decoder!</div></div></note->
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Summer break
+					</div>
+					<p>
+						Starts on the night between May 14, 2017 and May 15, 2017. A progression of events is at play here:
+					</p>
+					<ol>
+						<li>I'm kept away from home until late at night.</li>
+						<li>The Price Is Right comes on at 10:00am on weekdays, and my dad really wants me to watch it.</li>
+						<li>I get tired of getting yelled at every morning to watch the show.</li>
+						<li>I set my alarm to give me enough time to get ready in the morning before The Price Is Right comes on.</li>
+						<li>My dad sees that I'm up earlier in the morning, so he wants me to eat breakfast before the show.</li>
+						<li>I get tired of getting yelled at every morning to eat breakfast.</li>
+						<li>I set my alarm to give me enough time to get ready <em>and</em> eat breakfast.</li>
+						<li>I get tired.</li>
+						<li>There's also church every Sunday at 10:00am.</li>
+					</ol>
+					<table class="compact slim" id="sleep2">
+						<tr>
+							<th>
+								Monday         |    Tuesday    |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
+							</th>
+						</tr>
+						<tr>
+							<td>
+								 1:59am-9:57am |12:47am-9:49am | 1:35am-10:21am| 4:21am-12:30pm| 3:52am-10:20am|12:40am-9:36am | 3:00am-9:01am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:16am-10:13am| 1:11am-9:55am | 1:55am-10:35am| 3:58am-10:04am| 1:03am-10:44am| 1:56am-8:38am |12:36am-8:56am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:13am-10:00am| 3:40am-10:00am| 1:26am-10:05am| 1:09am-9:48am |12:28am-10:00am| 2:19am-12:03pm| 2:48am-9:06am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:41am-10:12am| 1:49am-10:13am| 3:12am-10:02am| 1:18am-11:12am|12:02am-10:26am| 1:09am-10:33am| 2:37am-9:51am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 1:09am-10:07am| 2:26am-9:04am | 2:43am-9:04am | 1:30am-9:08am | 1:25am-9:04am | 3:58am-11:56am| 2:26am-8:58am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 3:08am-9:04am | 4:09am-9:12am | 2:48am-9:05am |12:06am-9:05am | 1:10am-9:08am |12:32am-10:41am| 2:09am-10:35am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								12:28am-9:01am | 3:03am-9:13am | 4:05am-12:41pm<note-><div><div>I was awake from 10:10am-10:59am.</div></div></note->| 3:22am-9:04am | 2:22am-9:04am | 1:56am-12:02pm| 1:29am-8:58am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:45am-9:03am | 3:00am-9:04am | 4:10am-9:12am | 3:36am-9:03am | 3:13am-9:08am | 4:25am-12:00pm| 3:12am-10:36am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:55am-9:04am | 2:10am-9:13am | 1:19am-9:04am<note-><div><div>I was awake from 8:13am-8:29am.</div></div></note->| 3:03am-9:04am | 1:47am-9:04am | 2:20am-10:32am| 3:05am-9:08am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:25am-9:08am | 1:49am-8:24am | 2:28am-9:03am | 2:19am-9:08am | 2:27am-9:07am | 1:48am-10:45am| 5:03am-9:28am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:35am-9:03am | 2:19am-8:43am | 2:03am-8:38am | 3:42am-8:39am | 2:25am-8:39am | 2:33am-12:03pm| 3:31am-10:31am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 3:42am-8:39am | 3:14am-8:56am | 2:35am-8:39am | 3:12am-8:43am | 4:40am-9:02am | 4:41am-9:55am |10:25pm-9:14am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:17am-8:41am |12:53am-8:40am | 3:35am-11:16am| 2:06am-8:40am | 4:06am-8:49am | 4:00am-12:02pm| 3:36am-10:52am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:55am-9:02am | 3:36am-8:41am | 2:47am-8:40am | 3:40am-8:41am | 1:39am-8:41am | 7:01am-8:34am<note-><div><div>I was finishing writing in my journal.</div></div></note->|12:21am-10:40am<note-><div><div>I started college</div></div></note->
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						First semester sophomore year
+					</div>
+					<p>
+						This starts on the night between August 20, 2017 and August 21, 2017. The major factor at play here is an 8:00am class on Monday and Wednesday which always has something due on Monday.
+					</p>
+					<table class="compact slim" id="sleep3">
+						<tr>
+							<th>
+								Monday         |    Tuesday    |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
+							</th>
+						</tr>
+						<tr>
+							<td>
+								 2:37am-6:01am |12:12am-9:22am | 1:02am-6:02am |12:35am-9:17am | 1:31am-11:42am| 3:00am-12:04pm| 1:27am-10:30am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 1:40am-6:03am | 5:15am-9:07am<note-><div><div>I moved rooms.</div></div></note->| 3:24am-6:05am | 11:43pm-9:10am |12:08am-9:20am | 4:32am-1:03pm | 4:14am-12:30pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 4:34am-12:42pm<note>[dayOff]</note>| 4:58am-9:29am |11:58pm-6:11am | 1:05am-9:19am | 1:00am-9:51am | 2:59am-11:59am| 4:14am-12:14<note-><div><div>This time has been spliced together. The real times are 4:14am-7:38am, awake due to a fire alarm 7:38am-8:25am, and sleeping again 8:25am-1:01pm.</div></div></note->
+							</td>
+						</tr>
+						<tr>
+							<td>
+								12:06am-6:12am | 2:52am-9:34am |11:39pm-6:03am | 1:05am-9:13am | 1:40am-9:51am | 5:13am-1:14pm<note-><div><div>I had homework due the night before.</div></div></note->| 3:17am-12:22pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:41am-6:06am | 2:22am-10:15am|12:17am-6:06am | 2:19am-9:44am | 2:27am-10:05am| 3:59am-12:45pm| 1:52am-10:47am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 4:06am-6:08am | 1:32am-9:44am | 1:29am-6:05am | 2:13am-9:53am |11:34pm-9:17am | 1:48am-10:35am|12:00am-8:43am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 4:57am-6:05am |12:17am-8:50am | 9:56pm-6:10am | 1:30am-9:35am |12:00am-9:07am | 3:00am-12:04pm|12:52am-10:08am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 4:53am-6:10am<note-><div><div>I took a nap from 11:24am-12:26pm</div></div></note->| 1:00am-9:56am |10:00pm-6:07am | 2:19am-9:53am | 1:19am-9:50am | 1:44am-10:24am|12:43am-9:47am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:00am-6:07am | 3:03am-9:56am |10:43pm-6:10am | 1:28am-9:52am | 3:30am-11:39am| 4:45am-12:48pm| 1:45am-10:51am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 5:14am-6:12am | 3:42am-12:30pm<note-><div><div>I had an online test instead of my first class this day.</div></div></note->| 1:36am-6:04am<note-><div><div>I had something due in my morning class.</div></div></note->| 1:03am-9:53am | 5:00am-1:01pm | 5:22am-1:21pm | 6:12am-1:16pm<note-><div><div>I need to get my life back on track.</div></div></note->
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:59am-6:05am | 2:07am-10:07am|12:00am-6:02am | 1:08am-10:14am|1:58am-10:06am| 5:28am-1:26pm<note-><div><div>I had homework due the night before</div></div></note->| 6:23am-1:26pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 5:20am-6:23am | 1:34am-10:06am<note-><div><div>I was doing class planning the night before as well as this night and the next night.</div></div></note->|12:36am-6:02am | 2:52am-7:58am<note-><div><div>This time has been spliced together. The real times are 2:52am-6:39am, awake to register for classes and discover how many problems there are 6:39am-8:18am, and trying to sleep my troubles away 8:18am-9:37am.</div></div></note->| 4:10am-11:35am| 4:51am-1:16pm | 1:33am-10:37am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								12:31am-6:24am | 2:39am-10:06am| 1:25am-6:02am<note-><div><div>There's no excuse for this. (I was programming.)</div></div></note->| 4:06am-10:11am<note-><div><div>There was a moderately reasonable excuse for this, but I'm not quite sure what it was anymore. I might have been trying to keep up with my conversations.</div></div></note->|12:01am-8:02am<note-><div><div>I was trying to do my laundry early before I went home later.</div></div></note->| 1:38am-9:37am |12:38am-8:30am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 3:07am-11:27am| 3:25am-11:55am| 4:55am-12:35pm| 3:19am-10:42am| 4:29am-12:38pm| 4:53am-11:53am| 2:22am-8:21am
+							</td>
+						</tr>
+						<tr>
+							<td>
+								 2:22am-6:02am<note-><div><div>I took a nap from 10:51am to 11:50am.</div></div></note->|12:01am-10:07am|11:50pm-6:02am | 3:44am-10:06am| 1:59am-10:08am| 6:04am-1:02pm | 5:21am-1:09pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								11:21pm-6:02am | 2:49am-10:07am| 5:02am-6:03am<note-><div><div>This is what happens when you have two large projects due on the same day.</div></div></note->|12:35am-9:38am | 4:49am-12:45pm<note-><div><div>I think I was trying to help <a href="https://fontforge.github.io/en-US/">FontForge</a> move some of their documentation to their new website. Since it was for the good of someone else, it's justified.</div></div></note->| 5:50am-1:16pm<note-><div><div>Waiting around for things to happen related to a gift exchange was a large contributor to this.</div></div></note->| 5:54am-1:23pm<note-><div><div>Maybe one of these days, staying up late to work on my to-do list website will actually pay off.</div></div></note->
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Second semester sophomore year
+					</div>
+					<p>
+						This starts on the night between January 14, 2018 and January 15, 2018.
+					</p>
+					<table class="compact slim" id="sleep4">
+						<tr>
+							<th>
+								Monday         |    Tuesday    |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
+							</th>
+						</tr>
+						<tr>
+							<td>
+								 2:56am-10:08am<note-><div><div>This was while I was still at home.</div></div></note->|12:23am-8:29am |10:46pm-6:44am |12:23am-8:39am |12:30am-6:01am<note-><div><div>I had to get homework turned in before midnight.</div></div></note->| 1:53am-11:17am| 3:49am-12:35pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								10:00pm-6:31am | 1:18am-8:18am<note-><div><div>I got the rest of my conversation data transferred, and it's glorious. This also explains the digression from ideal bedtimes for the next few nights as I marvel at my data and come up with more ways of visualizing it. (Yes, that's what kind of a nerd I am.)</div></div></note->|10:37pm-6:35am | 2:50am-11:28am|12:18am-6:00am<note-><div><div>Making a cardboard trash can turned out to take a lot longer than I thought it would, but that probably wouldn't have been a problem if I had started working on it earlier like I planned instead of improving my conversation data visualizations.</div></div></note->| 5:24am-1:15pm<note-><div><div>I'm not programming again until Friday (after today).</div></div></note->
+							</td>
+						</tr>
+					</table>
+				</div>
 				<br>
 				<h2>
 					Frequency of dreams
