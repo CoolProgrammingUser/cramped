@@ -16,6 +16,30 @@
 					S.getId("conversationCheckboxes").querySelector("div:nth-of-type(2)").style.display = "none";
 				}
 			});
+			S.listen("personFinder", "change", function () {
+				updateConversations();
+			});
+			S.listen("checkAll", "click", function () {
+				["specificConversations", "adultConversations", "kidConversations", "formalConversations", "smallConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+					document.getElementById(ID).checked = true;
+				});
+				updateConversations();
+			});
+			S.listen("checkStandard", "click", function () {
+				["specificConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+					document.getElementById(ID).checked = true;
+				});
+				["smallConversations", "adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations"].forEach(function (ID) {
+					document.getElementById(ID).checked = false;
+				});
+				updateConversations();
+			});
+			S.listen("checkNone", "click", function () {
+				["specificConversations", "adultConversations", "kidConversations", "formalConversations", "smallConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+					document.getElementById(ID).checked = false;
+				});
+				updateConversations();
+			});
 			S.colorCode(["sleep1", "sleep2", "sleep3", "sleep4"]);
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
@@ -41,6 +65,7 @@
 				position: -webkit-sticky;
 				position: sticky;
 				top: 0rem;
+				z-index: 1;
 				width: 100%;
 				background: rgba(255, 255, 255, .75);
 			}
@@ -53,7 +78,10 @@
 				right: 1rem;
 				top: 0rem;
 			}
-			#conversationCheckboxes div:nth-of-type(2) div {
+			#conversationCheckboxes > div:nth-of-type(2) {
+				display: none;
+			}
+			#conversationCheckboxes > div:nth-of-type(2) div {
 				display: inline-table;
 				text-align: left;
 			}
@@ -298,7 +326,7 @@
 					Starting my second year of college
 				</h3>
 				<p>
-					I wasn't satisfied with the limited amount of infomation I had to work with in the first study, so when I realized that I was about to have the perfect opportunity to track everything from the very beginning (because I was transferring) with the means of interpreting it (via my newfound programming knowledge), I couldn't pass it up (however grueling it may be). This starts on Monday, August 21, 2017.
+					I wasn't satisfied with the limited amount of infomation I had to work with in the first study, so when I realized that I was about to have the perfect opportunity to track everything from the very beginning (because I was transferring) with the means of interpreting it (via my newfound programming knowledge), I couldn't pass it up (however grueling it may be). One unit of talking time is roughly equal to one minute. Everything else (and technically that as well) is ranked on a scale of 1-7.
 				</p>
 				<div class="details" style="background-color: white">
 					<div class="summary">
@@ -309,7 +337,7 @@
 				<br>
 				<div id="conversationCheckboxes">
 					<div>
-						<input type="checkbox" id="conversationCheckboxesVisibility" checked>
+						<input type="checkbox" id="conversationCheckboxesVisibility">
 						<label for="conversationCheckboxesVisibility">show options</label>
 					</div>
 					<h4>
@@ -321,7 +349,19 @@
 							<input type="radio" name="filterType" id="allFail"><label for="allFail">remove when all requirements fail</label>
 						</div>
 						<div>
-							<input type="text" id="conversationDateRange" placeholder="Start date or range">
+							<input type="radio" name="personFocus" id="theirTalkTotal" checked><label for="theirTalkTotal">focus on other people</label><br>
+							<input type="radio" name="personFocus" id="myTalkTotal"><label for="myTalkTotal">focus on me</label>
+						</div>
+						<div>
+							<input type="text" id="conversationDateRange" placeholder="Start date or range"><br>
+							<input type="checkbox" id="specificConversations" checked>
+							<input type="text" id="personFinder" placeholder="Find specific people">
+						</div>
+						<br>
+						<div>
+							<button id="checkAll">Check all boxes</button>
+							<button id="checkStandard">Check standard boxes</button>
+							<button id="checkNone">Uncheck all boxes</button>
 						</div>
 						<br>
 						<div>
@@ -442,7 +482,7 @@
 				</div>
 				<div class="details">
 					<div class="summary">
-						Average conversation lengths (maximum = 49)
+						Average conversation lengths
 					</div>
 					<table class="smaller" id="averageLengths">
 						<tr>
@@ -774,9 +814,9 @@
 								["Mom", "f", "a", "t", "t", 2, 3, 3],
 								["Brendin", "m", "c", "b", "d", 3, 2, 3],
 								["group", "mmmmmf", "c", "b", "gj", 4, "332111", 3],
-								["Kristuel", "f", "c", "m", "d", 3, 3, 3],
+								["Kristol", "f", "c", "m", "d", 3, 3, 3],
 								["Seruh", "f", "c", "m", "j", 2, 3, 3],
-								["Kristuel", "f", "c", "t", "n", 0, 5, 3],
+								["Kristol", "f", "c", "t", "n", 0, 5, 3],
 								["a14", "f", "c", "m", "j", 3, 4, 3],
 								["ViktOreeuh MikAluhstrr", "f", "a", "m", "dig", 3, 2, 3],
 								["Yuevahn", "f", "b", "t", "n", 0, 5, 4],
@@ -1196,7 +1236,7 @@
 								["RuhbEkuh Krrzawlz", f, a, m, n, 2, 3, 3],
 								["p4", m, a, m, n, 1, 2, 3],
 								["a6", m, s, t, n, 0, 5, 3],
-								["Kristuel", f, c, m, n, 2, 3, 3],
+								["Kristol", f, c, m, n, 2, 3, 3],
 								["a7", m, s, t, n, 0, 5, 3],
 								["a8", m, s, t, n, 0, 5, 3],
 								["a9", f, a, t, n, 0, 5, 3],
@@ -2154,7 +2194,7 @@
 								["Kaylueb Hamueltin",m,r,t,n,2,5,4,5],
 								["Heruesin",m,s,t,n,1,0,0,5],
 								["DayvAhn",m,b,t,n,1,7,7,4],
-								["g(Mom&Dad)",m+f,a,b,p,3,7,"45",4],
+								["g(Mom&Dad)",f+m,a,b,p,3,7,"45",4],
 								["Kaylueb Hamueltin",m,r,t,n,2,6,4,5],
 								["Kaylueb Hamueltin",m,r,m,n,3,1,4,4]
 							]
@@ -2407,7 +2447,7 @@
 								["a1", m, s, t, n, 1, 6, 4, 4],
 								["p41", m, b, t, n, 1, 6, 4, 4],
 								["Ahlshrr", m, b, t, n, 1, 7, 7, 4],
-								["g(Mom&Dad)", "mf", "a", "t", "p", 5, 7, "55", 4],
+								["g(Mom&Dad)", "fm", "a", "t", "p", 5, 7, "55", 4],
 								["SotAhro", m, b, t, t, 1, 5, 4, 4],
 								["Kaylueb Hamueltin", m, r, t, n, 2, 4, 5, 5],
 								["SotAhro", m, b, t, t, 2, 1, 4, 4],
@@ -3194,8 +3234,8 @@
 								["Dahleeuh", f, a, t, n, 1, 2, 7, 4],
 								["a2", m, o, t, n, 1, 5, 7, 5],
 								["a3", f, a, m, n, 1, 7, 0, 4],
-								["Emuelee Hamrr", m, c, m, n, 3, 2, 3, 5],
-								["Emuelee Hamrr", m, c, m, n, 3, 7, 6, 5],
+								["Emuelee Hamrr", f, c, m, n, 3, 2, 3, 5],
+								["Emuelee Hamrr", f, c, m, n, 3, 7, 6, 5],
 								["p77", m, s, m, n, 1, 0, 0, 5],
 								["Kalin Troo", m, c, m, n, 3, 2, 4, 5],
 								["g(p63&p118&p119)", "fmm", "c_c_f", "b", "gcdn", 3, 2, "524", 4],
@@ -3244,7 +3284,7 @@
 								["p61", m, c, m, n, 2, 6, 4, 4],
 								["Ahlshrr", m, b, t, n, 1, 7, 7, 5],
 								["Ahlshrr", m, b, t, n, 1, 7, 7, 4],
-								["Mahlee Kuk", m, c, b, d, 3, 2, 4, 5],
+								["Mahlee Kuk", f, c, b, d, 3, 2, 4, 5],
 								["Jeruemee Gray", m, c, b, j, 3, 1, 4, 5],
 								["RuhbEkuh Krrzawlz", "f", "a", "t", "gc", 1, 7, 4, 5],
 								["RuhbEkuh Krrzawlz", "f", "a", "m", "cg", 1, 6, 5, 4],
@@ -3346,7 +3386,7 @@
 								["Jahn ZookuhrElo", "m", "ps", "t", "t", 2, 1, 4, 4],
 								["Ahlshrr", m, b, t, n, 1, 7, 4, 5],
 								["Jahn ZookuhrElo", "m", "ps", "b", "d", 6, 6, 4, 5],
-								["g(Dad&Mom)", "mf", "a", "b", "j", 6, 5, "4", 5]
+								["g(Dad&Mom)", "mf", "a", "b", "j", 6, 5, 4, 5]
 							]
 						},
 						{
@@ -3825,8 +3865,8 @@
 							}
 							tableModified[tableNumber-1] = true;
 						}
-						function extendTables(date) {
-							let morePreciseTables = Array.prototype.slice.call(arguments, 1);
+						function extendTables(date, maleRawData, femaleRawData) {
+							let morePreciseTables = Array.prototype.slice.call(arguments, 3);
 							S.forEach(tables, function(table, index) {
 								if (!isNaN(male[index].innerHTML)) {
 									if (morePreciseTables.indexOf(table.id) == -1) {
@@ -3848,10 +3888,61 @@
 								} else {
 									tableModified[index] = false;
 								}
+								male[index].className = "trigger";
+								female[index].className = "trigger";
 								male[index].title = date;
 								female[index].title = date;
 								rows[index].appendChild(male[index]);
 								rows[index].appendChild(female[index]);
+
+								let maleClicked = false;
+								let femaleClicked = false;
+								let maleData;
+								let femaleData;
+								male[index].addEventListener("click", function () {
+									if (maleClicked) {
+										this.removeChild(maleData);
+										maleClicked = false;
+									} else {
+										maleData = document.createElement("div");
+										maleData.style.textAlign = "left";
+										maleData.style.whiteSpace = "nowrap";
+										maleData.style.opacity = 1;
+										let HTML = "<div>";
+										maleRawData.forEach(function (conversation) {
+											S.forEach(conversation, function (value, key) {
+												HTML += key + ": " + value + "<br>";
+											});
+											HTML += "<br>";
+										});
+										HTML += "</div>";
+										maleData.innerHTML = HTML;
+										this.appendChild(maleData);
+										maleClicked = true;
+									}
+								});
+								female[index].addEventListener("click", function () {
+									if (femaleClicked) {
+										this.removeChild(femaleData);
+										femaleClicked = false;
+									} else {
+										femaleData = document.createElement("div");
+										femaleData.style.textAlign = "left";
+										femaleData.style.whiteSpace = "nowrap";
+										femaleData.style.opacity = 1;
+										let HTML = "<div>";
+										femaleRawData.forEach(function (conversation) {
+											S.forEach(conversation, function (value, key) {
+												HTML += key + ": " + value + "<br>";
+											});
+											HTML += "<br>";
+										});
+										HTML += "</div>";
+										femaleData.innerHTML = HTML;
+										this.appendChild(femaleData);
+										femaleClicked = true;
+									}
+								});
 							});
 						}
 						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
@@ -3922,7 +4013,9 @@
 								prepareTables();
 								let uniquePeople = {m: [], f: []},
 									interactionNumbers = {m: 0, f: 0, total: 0},
+									rawData = {m: [], f: []},
 									checkboxes = {
+										specific: S.getId("specificConversations").checked,
 										adult: S.getId("adultConversations").checked,
 										kid: S.getId("kidConversations").checked,
 										formal: S.getId("formalConversations").checked,
@@ -3942,33 +4035,34 @@
 										them = [];
 									if (conversation.length == 8) {
 										// converts things from base 5 to base 7
+										// (I know this isn't an exact conversion; I'm trying to convert the intended values, not the literal numbers.)
 										if (conversation[5] == 0) {
-											conversation[5] = 1;
+											conversation[5] = .617;
 										} else {
-											conversation[5] = conversation[5] / 5 * 7;
+											conversation[5] = 1.25 * conversation[5];
 										}
 										if (conversation[6].constructor == String) {
 											if (conversation[6].indexOf("_") > -1) {
 												let firstSet = conversation[6].split("_")[0].split(""),
 													secondSet = conversation[6].split("_")[1].split("");
 												firstSet.forEach(function (participation, index) {
-													firstSet[index] = Number(participation) / 5 * 7;
+													firstSet[index] = 1.25 * Number(participation);
 												});
 												secondSet.forEach(function (participation, index) {
-													secondSet[index] = Number(participation) / 5 * 7;
+													secondSet[index] = 1.25 * Number(participation);
 												});
 												conversation[6] = firstSet.join("~") + "_" + secondSet.join("~");
 											} else {
 												let participations = conversation[6].split("");
 												participations.forEach(function (participation, index) {
-													participations[index] = Number(participation) / 5 * 7;
+													participations[index] = 1.25 * Number(participation);
 												});
 												conversation[6] = participations.join("~");
 											}
 										} else {
-											conversation[6] = conversation[6] / 5 * 7;
+											conversation[6] = 1.25 * conversation[6];
 										}
-										conversation[7] = conversation[7] / 5 * 7;
+										conversation[7] = 1.25 * conversation[7];
 										// adds an estimated conversation density
 										if (conversation[4].indexOf("i") > -1) {
 											conversation.splice(6, 0, 4);
@@ -4007,9 +4101,9 @@
 											// sets the length
 											data.length = (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
-													return 5/6;
+													return .25;
 												} else {
-													return Math.pow(conversation[5], 2);
+													return Math.pow(conversation[5], 10/3) / 2;
 												}
 											})();
 											// sets the density
@@ -4039,20 +4133,87 @@
 											// sets the participation
 											if (conversation[7].constructor == String) {  // if there were multiple degrees of participation
 												if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
-													data.participation = Number(conversation[7].split("~")[index]);
+													data.participation = Number(conversation[7].split("~")[index]) / 7;
 												} else {
-													data.participation = Number(conversation[7].split("")[index]);
+													data.participation = (function () {
+														switch (Number(conversation[7].split("")[index])) {
+															case 0:
+																return 0;
+															case 1:
+																return .05;
+															case 2:
+																return 1/6;
+															case 3:
+																return 1/3;
+															case 4:
+																return .5;
+															case 5:
+																return 2/3;
+															case 6:
+																return 5/6;
+															case 7:
+																return 1;
+														}
+													})();
 												}
 											} else if (!isNaN(conversation[7])) {
-												data.participation = conversation[7];
+												data.participation = (function () {
+													switch (conversation[7]) {
+														case 0:
+															return 0;
+														case 1:
+															return .05;
+														case 2:
+															return 1/6;
+														case 3:
+															return 1/3;
+														case 4:
+															return .5;
+														case 5:
+															return 2/3;
+														case 6:
+															return 5/6;
+														case 7:
+															return 1;
+														default:  // if the participation used to be base-5
+															return conversation[7] / 7;
+													}
+												})();
 											} else {
 												console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid data type for participation.");
 											}
 											// sets the enjoyability
 											data.enjoyability = conversation[8];
+											// sets the total effective talk time
+											data.total = data.length * data.density * data.participation;
 											// adds the data to the person list
 											them.push(data);
 										});
+										// set my total effective talk time
+										let participations = [];
+										them.forEach(function (dataSet) {
+											participations.push(dataSet.participation);
+										});
+										participations.sort(function (a, b) {
+											return a - b;
+										});
+										let median;
+										if (participations.length % 2) {
+											median = participations[Math.floor(participations.length/2)];
+										} else {
+											median = (participations[Math.floor(participations.length/2)-1] + participations[Math.floor(participations.length/2)]) / 2;
+										}
+										while (participations[0] < median) {
+											participations = participations.slice(1);
+										}
+										me.total = participations.length / 2 + .5;
+										participations.forEach(function (participation) {
+											me.total -= participation;
+										});
+										me.total = them[0].length * them[0].density * me.total;
+										if (me.total < .25) {
+											me.total = .25;
+										}
 									} else if (conversation[0] == "group") {
 										let people = [];
 										S.forEach(conversation[1], function () {
@@ -4089,9 +4250,9 @@
 											// sets the length
 											data.length = (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
-													return 5/6;
+													return .25;
 												} else {
-													return Math.pow(conversation[5], 2);
+													return Math.pow(conversation[5], 10/3) / 2;
 												}
 											})();
 											// sets the density
@@ -4121,22 +4282,89 @@
 											// sets the participation
 											if (conversation[7].constructor == String) {  // if there were multiple degrees of participation
 												if (conversation[7].indexOf("~") > -1) {  // if the data used to be base 5
-													data.participation = Number(conversation[7].split("~")[index]);
+													data.participation = Number(conversation[7].split("~")[index]) / 7;
 												} else {
-													data.participation = Number(conversation[7].split("")[index]);
+													data.participation = (function () {
+														switch (Number(conversation[7].split("")[index])) {
+															case 0:
+																return 0;
+															case 1:
+																return .05;
+															case 2:
+																return 1/6;
+															case 3:
+																return 1/3;
+															case 4:
+																return .5;
+															case 5:
+																return 2/3;
+															case 6:
+																return 5/6;
+															case 7:
+																return 1;
+														}
+													})();
 												}
 											} else if (!isNaN(conversation[7])) {
-												data.participation = conversation[7];
+												data.participation = (function () {
+													switch (conversation[7]) {
+														case 0:
+															return 0;
+														case 1:
+															return .05;
+														case 2:
+															return 1/6;
+														case 3:
+															return 1/3;
+														case 4:
+															return .5;
+														case 5:
+															return 2/3;
+														case 6:
+															return 5/6;
+														case 7:
+															return 1;
+														default:  // if the participation used to be base-5
+															return conversation[7] / 7;
+													}
+												})();
 											} else {
 												console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid data type for participation.");
 											}
 											// sets the enjoyability
 											data.enjoyability = conversation[8];
+											// sets the total effective talk time
+											data.total = data.length * data.density * data.participation
 											// adds the data to the person list
 											them.push(data);
 										});
+										// sets my total effective talk time
+										let participations = [];
+										them.forEach(function (dataSet) {
+											participations.push(dataSet.participation);
+										});
+										participations.sort(function (a, b) {
+											return a - b;
+										});
+										let median;
+										if (participations.length % 2) {
+											median = participations[Math.floor(participations.length/2)];
+										} else {
+											median = (participations[Math.floor(participations.length/2)-1] + participations[Math.floor(participations.length/2)]) / 2;
+										}
+										while (participations[0] < median) {
+											participations = participations.slice(1);
+										}
+										me.total = participations.length / 2 + .5;
+										participations.forEach(function (participation) {
+											me.total -= participation;
+										});
+										me.total = them[0].length * them[0].density * me.total;
+										if (me.total < .25) {
+											me.total = .25;
+										}
 									} else if (conversation[0][0].search(/[A-Zap]/) > -1) {  // if the first letter of the name is "a", "p", or a capital
-										them.push({
+										let data = {
 											name: conversation[0].trim(),
 											gender: conversation[1],
 											classification: conversation[2].match(/\w(?!-)|\w-\w/g),
@@ -4144,9 +4372,9 @@
 											indicators: conversation[4].split(""),
 											length: (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
-													return 5/6;
+													return .25;
 												} else {
-													return Math.pow(conversation[5], 2);
+													return Math.pow(conversation[5], 10/3) / 2;
 												}
 											})(),
 											density: (function() {
@@ -4172,9 +4400,33 @@
 														return 0;
 												}
 											})(),
-											participation: conversation[7],
+											participation: (function () {
+												switch (conversation[7]) {
+													case 0:
+														return 0;
+													case 1:
+														return .05;
+													case 2:
+														return 1/6;
+													case 3:
+														return 1/3;
+													case 4:
+														return .5;
+													case 5:
+														return 2/3;
+													case 6:
+														return 5/6;
+													case 7:
+														return 1;
+													default:  // if the participation used to be base-5
+														return conversation[7] / 7;
+												}
+											})(),
 											enjoyability: conversation[8]
-										});
+										};
+										data.total = data.length * data.density * data.participation;
+										me.total = data.length * data.density * (1 - data.participation);
+										them.push(data);
 									}
 									
 									let index = them.length;
@@ -4186,7 +4438,9 @@
 										let desiredInteraction;
 										if (S.getName("filterType", true).id == "anyFail") {  // if the interaction should fail if any characteristic isn't wanted
 											desiredInteraction = true;
-											if (!checkboxes.small && person.length <= 1) {  // if the conversation is small
+											if (!checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person isn't specifically requested
+												desiredInteraction = false;
+											} else if (!checkboxes.small && person.length <= 2.1) {  // if the conversation is small
 												desiredInteraction = false;
 											} else if (!checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
 												desiredInteraction = false;
@@ -4219,7 +4473,9 @@
 											}
 										} else {  // if the interaction should fail only if all characteristics aren't wanted
 											desiredInteraction = false;
-											if (checkboxes.small && person.length <= 1) {  // if the conversation is small
+											if (checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person is specifically requested
+												desiredInteraction = true;
+											} else if (checkboxes.small && person.length <= 2.1) {  // if the conversation is small
 												desiredInteraction = true;
 											} else if (checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
 												desiredInteraction = true;
@@ -4254,14 +4510,16 @@
 										
 										if (desiredInteraction) {  // if the interaction should be counted
 
+											// adds to the raw data
+											if (person.gender == "m" || person.gender == "f") {
+												rawData[person.gender].push(person);
+											}
+
 											// increases the number of interactions
 											interactionNumbers.total++;
 											if (interactionNumbers[person.gender] != undefined) {
 												interactionNumbers[person.gender]++;
 											}
-
-											// sets the information for the sum of conversation lengths table
-											addInformation(1, person.gender, person.length * person.density);
 
 											// sets the information for the unique people who interacted with me table
 											if (uniquePeople[person.gender] != undefined && conversation[0] != "group" && uniquePeople[person.gender].indexOf(person.name) == -1) {
@@ -4300,35 +4558,46 @@
 												}
 											}
 
+											// keeps track of information for the total people recorded table
+											if (recordedPeople[person.gender] != undefined && person.name[0] != "a" && recordedPeople[person.gender].indexOf(person.name) == -1) {
+												recordedPeople[person.gender].push(person.name);
+												totalPeople[person.gender].push(person.name);
+											}
+
+											// decides which totals should be used
+											let total;
+											if (S.getName("personFocus", true).id == "myTalkTotal") {
+												total = me.total;
+											} else {
+												total = person.total;
+											}
+
+											// sets the information for the sum of conversation lengths table
+											addInformation(1, person.gender, total);
+
 											// sets the information for the sum of started conversations table
 											if (person.gender == "m") {
 												if (person.initiator == "m") {
-													initSum[0][0] += person.length * person.density;
+													initSum[0][0] += total;
 												} else if (person.initiator == "t") {
-													initSum[0][1] += person.length * person.density;
+													initSum[0][1] += total;
 												} else if (person.initiator == "b") {
-													initSum[0][0] += person.length * person.density;
-													initSum[0][1] += person.length * person.density;
+													initSum[0][0] += total;
+													initSum[0][1] += total;
 												} else if (person.initiator != "-" && person.initiator != "n") {
 													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
 												}
 											} else if (person.gender == "f") {
 												if (person.initiator == "m") {
-													initSum[1][0] += person.length * person.density;
+													initSum[1][0] += total;
 												} else if (person.initiator == "t") {
-													initSum[1][1] += person.length * person.density;
+													initSum[1][1] += total;
 												} else if (person.initiator == "b") {
-													initSum[1][0] += person.length * person.density;
-													initSum[1][1] += person.length * person.density;
+													initSum[1][0] += total;
+													initSum[1][1] += total;
 												} else if (person.initiator != "-" && person.initiator != "n") {
 													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
 												}
-											}
-
-											// keeps track of information for the total people recorded table
-											if (recordedPeople[person.gender] != undefined && person.name[0] != "a" && recordedPeople[person.gender].indexOf(person.name) == -1) {
-												recordedPeople[person.gender].push(person.name);
-												totalPeople[person.gender].push(person.name);
 											}
 
 										} else {
@@ -4351,14 +4620,14 @@
 								female[3].textContent = interactionNumbers.f==0 ? "\u00a0" : (Number(female[3].textContent) / interactionNumbers.f);
 								
 								// extends the tables
-								extendTables(day.date, "averageLengths", "enjoyability");
+								extendTables(day.date, rawData.m, rawData.f, "averageLengths", "enjoyability");
 							} else if (day.notes.indexOf("no data") > -1) {
 								prepareTables();
 								tables.forEach(function(table, index) {
 									male[index].textContent = "?";
 									female[index].textContent = "?";
 								});
-								extendTables(day.date);
+								extendTables(day.date, [], []);
 							} else {
 								prepareTables();
 								tables.forEach(function (table, index) {
@@ -4366,7 +4635,7 @@
 									female[index].innerHTML = "&nbsp;";
 									/// adding &nbsp; makes sure the rows aren't crunched
 								});
-								extendTables(day.date);
+								extendTables(day.date, [], []);
 							}
 						});
 						tables.forEach(function(table) {
@@ -4712,7 +4981,12 @@
 						</tr>
 						<tr>
 							<td>
-								10:00pm-6:31am | 1:18am-8:18am<note-><div><div>I got the rest of my conversation data transferred, and it's glorious. This also explains the digression from ideal bedtimes for the next few nights as I marvel at my data and come up with more ways of visualizing it. (Yes, that's what kind of a nerd I am.)</div></div></note->|10:37pm-6:35am | 2:50am-11:28am|12:18am-6:00am<note-><div><div>Making a cardboard trash can turned out to take a lot longer than I thought it would, but that probably wouldn't have been a problem if I had started working on it earlier like I planned instead of improving my conversation data visualizations.</div></div></note->| 5:24am-1:15pm<note-><div><div>I'm not programming again until Friday (after today).</div></div></note->
+								10:00pm-6:31am | 1:18am-8:18am<note-><div><div>I got the rest of my conversation data transferred, and it's glorious. This also explains the digression from ideal bedtimes for the next few nights as I marvel at my data and come up with more ways of visualizing it. (Yes, that's what kind of a nerd I am.)</div></div></note->|10:37pm-6:35am | 2:50am-11:28am|12:18am-6:00am<note-><div><div>Making a cardboard trash can turned out to take a lot longer than I thought it would, but that probably wouldn't have been a problem if I had started working on it earlier like I planned instead of improving my conversation data visualizations.</div></div></note->| 5:24am-1:15pm<note-><div><div>I'm not programming again until Friday (after today).</div></div></note->| 5:18am-1:11pm
+							</td>
+						</tr>
+						<tr>
+							<td>
+								10:15pm-6:32am |12:53am-8:50am |11:23pm-6:25am<note-><div><div>I was doing homework due that night.</div></div></note->|12:02am-9:08am |10:05pm-6:28am | 1:47am-11:30am| 5:41am-1:22pm
 							</td>
 						</tr>
 					</table>
