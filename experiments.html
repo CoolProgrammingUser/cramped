@@ -41,6 +41,15 @@
 				updateConversations();
 			});
 			S.colorCode(["sleep1", "sleep2", "sleep3", "sleep4"]);
+			S.onLoad(function () {
+				[["sleep1", "January 30, 2017"], ["sleep2", "May 15, 2017"], ["sleep3", "August 21, 2017"], ["sleep4", "January 15, 2018"]].forEach(function (pair) {
+					let date = new Date(pair[1]);
+					S.forEach(S.getId(pair[0]).getElementsByTagName("td"), function (item) {
+						item.title = date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
+						date = new Date(date.getTime() + 86400000);
+					});
+				});
+			});
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
