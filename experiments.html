@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html class="html-class">
+<!doctype html>
+<html>
 	<head>
 		<title>
 			Cramped
@@ -3838,6 +3838,10 @@
 						p123: ["dark-haired Pacific Care secretary"]
 					};
 
+					////
+					var peopleMentionedArray = [];
+					var peopleMentionedString = "";
+
 					let conversationData = "";
 					S.forEach(conversations, function (day) {
 						conversationData += "date: " + day.date + "\nnotes: " + day.notes + "\ndata: " + JSON.stringify(day.data) + "\n\n";
@@ -4625,6 +4629,12 @@
 											}
 
 										}
+
+										//// records the people mentioned
+										if (person.name[0].search(/A-Z/) > -1 && !peopleMentionedArray.includes(person.name)) {
+											peopleMentionedArray.push(person.name);
+											peopleMentionedString += person.name + "\n";
+										}
 									}
 								});
 								
@@ -4681,11 +4691,14 @@
 						document.getElementById("totalPeople").getElementsByTagName("td")[0].textContent = totalPeople.m.length;
 						document.getElementById("totalPeople").getElementsByTagName("td")[1].textContent = totalPeople.f.length;
 						document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
-						S.colorCode("conversationLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0], [0,255,0]);
+						S.colorCode("conversationLengths", null, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0], [0, 255, 0]);
 						S.colorCode("uniquePeople");
 						S.colorCode("initiatorSkew");
-						S.colorCode("averageLengths", null, [255,0,0], [255,255,0], [0,255,0], [0,255,0]);
-						S.colorCode("enjoyability", null, [255,255,0], [85,255,0]);
+						S.colorCode("averageLengths", null, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0]);
+						S.colorCode("enjoyability", null, [255, 255, 0], [85, 255, 0]);
+
+						////
+						console.log(peopleMentionedString);
 					}
 					updateConversations();
 					S.forEach(S.getId("conversationCheckboxes").getElementsByTagName("input"), function(checkbox) {
@@ -5013,7 +5026,12 @@
 						</tr>
 						<tr>
 							<td>
-								10:48pm-6:41am |12:33am-8:35am |10:59pm-6:57am | 2:29am-10:45am|11:32pm-6:38am<note-><div><div>I was helping someone with their homework.</div></div></note->| 2:00am-11:21am
+								10:48pm-6:41am |12:33am-8:35am |10:59pm-6:57am | 2:29am-10:45am|11:32pm-6:38am<note-><div><div>I was helping someone with their homework.</div></div></note->| 2:00am-11:21am| 6:32am-1:30pm<note-><div><div>I know, I know...</div></div></note->
+							</td>
+						</tr>
+						<tr>
+							<td>
+								10:43pm-6:43am | 1:09am-8:54am |12:22-6:29am<note-><div><div>I was doing homework due that night.</div></div></note->| 1:53am-10:23am|12:46am-6:42am<note-><div><div>I was typing an email, but I could've had more focus.</div></div></note->| 2:04am-11:24am
 							</td>
 						</tr>
 					</table>
@@ -5034,6 +5052,13 @@
 				</p>
 				<br>
 				<h2>
+					Matching attire with weather conditions
+				</h2>
+				<p>
+					Eventually, I got tired of guessing what I should wear based on weather conditions, so I started keeping track of what the weather was and what I thought I'd be comfortable wearing (once I felt what it was like outside).
+				</p>
+				<br>
+				<h2>
 					Polynomial function critical points
 				</h2>
 				<p>
@@ -5042,27 +5067,6 @@
 				<br>
 				<h2>
 					Prime numbers
-				</h2>
-				<p>
-					
-				</p>
-				<br>
-				<h2>
-					Moment of inertia values
-				</h2>
-				<p>
-					
-				</p>
-				<br>
-				<h2>
-					Completing the square
-				</h2>
-				<p>
-					
-				</p>
-				<br>
-				<h2>
-					Sound frequencies
 				</h2>
 				<p>
 					
@@ -5138,6 +5142,27 @@
 					</tr>
 				</table>
 				<br>
+				<br>
+				<h2>
+					Moment of inertia values
+				</h2>
+				<p>
+					
+				</p>
+				<br>
+				<h2>
+					Completing the square
+				</h2>
+				<p>
+					
+				</p>
+				<br>
+				<h2>
+					Sound frequencies
+				</h2>
+				<p>
+					
+				</p>
 				<br>
 				<h2>
 					Rubik's Cube solving speed
