@@ -4633,6 +4633,7 @@
 										//// records the people mentioned
 										if (person.name.charAt(0).search(/A-Z/) > -1 && !peopleMentionedArray.includes(person.name)) {
 											// This uses .charAt() so an empty string is returned if there aren't any characters.
+											console.log(person.name);
 											peopleMentionedArray.push(person.name);
 											peopleMentionedString += person.name + "\n";
 										}
