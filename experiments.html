@@ -4631,6 +4631,9 @@
 										}
 
 										//// records the people mentioned
+										console.log(person.name);
+										console.log(person.name[0]);
+										console.log(person.name.charAt(0));
 										if (person.name[0].search(/A-Z/) > -1 && !peopleMentionedArray.includes(person.name)) {
 											peopleMentionedArray.push(person.name);
 											peopleMentionedString += person.name + "\n";
