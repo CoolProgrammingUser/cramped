@@ -19,23 +19,34 @@
 			S.listen("personFinder", "change", function () {
 				updateConversations();
 			});
+			S.listen("topMales", "change", function () {
+				updateConversations();
+			});
+			S.listen("topFemales", "change", function () {
+				updateConversations();
+			});
 			S.listen("checkAll", "click", function () {
-				["specificConversations", "adultConversations", "kidConversations", "formalConversations", "smallConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["adultConversations", "kidConversations", "formalConversations", "smallConversations", "otherConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
 				updateConversations();
 			});
 			S.listen("checkStandard", "click", function () {
-				["specificConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
-				["smallConversations", "adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations"].forEach(function (ID) {
+				["smallConversations", "adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations", "affiliatedConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = false;
 				});
+				document.getElementById("anyFail").checked = true;
+				document.getElementById("allFail").checked = false;
+				document.getElementById("conversationDateRange").value = "8/22";
+				document.getElementById("topMales").value = 1;
+				document.getElementById("topFemales").value = 1;
 				updateConversations();
 			});
 			S.listen("checkNone", "click", function () {
-				["specificConversations", "adultConversations", "kidConversations", "formalConversations", "smallConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["adultConversations", "kidConversations", "formalConversations", "smallConversations", "otherConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = false;
 				});
 				updateConversations();
@@ -93,6 +104,12 @@
 			#conversationCheckboxes > div:nth-of-type(2) div {
 				display: inline-table;
 				text-align: left;
+			}
+			#topMales {
+				width: 1rem;
+			}
+			#topFemales {
+				width: 1rem;
 			}
 		</style>
 	</head>
@@ -363,8 +380,11 @@
 						</div>
 						<div>
 							<input type="text" id="conversationDateRange" placeholder="Start date or range"><br>
-							<input type="checkbox" id="specificConversations" checked>
-							<input type="text" id="personFinder" placeholder="Find specific people">
+							<input type="checkbox" id="specificConversations"><input type="text" id="personFinder" placeholder="Find specific people">
+						</div>
+						<div>
+							filter top <input type="text" id="topMales" placeholder="#"> male(s)<br>
+							filter top <input type="text" id="topFemales" placeholder="#"> female(s)
 						</div>
 						<br>
 						<div>
@@ -377,14 +397,15 @@
 							<input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
 							<input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
 							<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
-							<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label>
+							<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label><br>
+							<input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label>
 						</div>
 						<div>
 							<input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
 							<input type="checkbox" id="floorConversations" checked><label for="floorConversations">conversations with people from my floor</label><br>
 							<input type="checkbox" id="groupConversations" checked><label for="groupConversations">group conversations</label><br>
 							<input type="checkbox" id="individualConversations" checked><label for="individualConversations">individual conversations</label><br>
-							<input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label>
+							<input type="checkbox" id="affiliatedConversations" checked><label for="affiliatedConversations">people tracing back to someone filtered out (or in)</label>
 						</div>
 						<div>
 							<input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
@@ -628,7 +649,7 @@
 					<table class="adjacentTables" id="totalPeople">
 						<tr>
 							<th colspan="3">
-								Overestimation<note-><div><div>This hasn't yet been designed to handle when there are multiple names referring to the same person.</div></div></note-> of total people recorded<note-><div><div>Random people are excluded.</div></div></note->
+								Approximation of total people recorded<note-><div><div>Random people are excluded. Also, something strange happens with certain people.</div></div></note->
 							</th>
 						</tr>
 						<tr>
@@ -672,7 +693,7 @@
 						z = "z";
 					var p1 = {name: "Dahleeuh", gender: f, description: "main dining hall cashier"},
 						p2 = {name: "Dwayn Jonz", gender: m, description: "Towers South hall director"},
-						p3 = {name: "Mahlee Kuk", gender: f, description: ""},
+						p3 = {name: "Mahlee Kuk", gender: f, description: "from Biology lab"},
 						p4 = {name: "chemistry professor", gender: m, description: ""},
 						p5 = {name: "Kaylin Troo", gender: m, description: "bearded guy in History"},
 						p6 = {name: "grill guy (Andrew?)", gender: m, description: ""},
@@ -706,7 +727,7 @@
 						p34 = {name: "shuttle driver", gender: m, description: ""},
 						p35 = {name: "blonde River Campus meal lady", gender: f, description: ""},
 						p36 = {name: "other River Campus meal lady", gender: f, description: ""},
-						p37 = {name: "other guy who played pool", gender: m, description: ""},
+						p37 = {name: "Baker?", gender: m, description: "other guy who played pool"},
 						p38 = {name: "girl who tried to play pool", gender: f, description: ""},
 						p39 = {name: "Kodee", gender: m, description: "from Art"},
 						p40 = {name: "dark-haired girl in Economics", gender: f, description: ""},
@@ -741,7 +762,7 @@
 						p69 = {name: "red-headed? food server", gender: f, description: ""},
 						p70 = {name: "African American food lady", gender: f, description: ""},
 						p71 = {name: "Grays", gender: f, description: "plays piano well"},
-						p72 = {name: "my group's speaker in History", gender: m, description: ""},
+						p72 = {name: "my group's speaker in History", gender: m, description: "Thorir"},
 						p73 = {name: "Kazuemah", gender: m, description: "SotAhro's tall friend"},
 						p74 = {name: "Ryo", gender: m, description: "SotAhro's friend"},
 						p75 = {name: "older dining hall guy", gender: m, description: ""},
@@ -789,10 +810,8 @@
 						p117 = {name: "bald dining hall guy", gender: m, description: ""},
 						p118 = {name: "red-headed? guy in History", gender: m, description: ""},
 						p119 = {name: "faction game master", gender: m, description: ""},
-						p120 = {name: "Thoreer", gender: m, description: "Thorir"},
-						p121 = {name: "red-headed guy in History", gender: m, description: ""},
-						p122 = {name: "St. Bridget of Kildare priest", gender: m, description: ""},
-						p123 = {name: "dark-haired Pacific Care secretary", gender: f, description: ""};
+						p120 = {name: "St. Bridget of Kildare priest", gender: m, description: ""},
+						p121 = {name: "dark-haired Pacific Care secretary", gender: f, description: ""};
 					// Name | Gender | Classification | Initiator | Indicators | Length | Participation | Enjoyability
 					// Name | Gender | Classification | Initiator | Indicators | Length | Density | Participation | Enjoyability
 					var conversations = [  // This is the raw data.
@@ -802,8 +821,8 @@
 							"data": [
 								["a1", "m", "s", "t", "n", 0, 5, 3],
 								["a2", "m", "s", "t", "n", 0, 5, 3],
-								["p1", "f", "a", "t", "n", 1, 2, 3],
-								["p1", "f", "a", "m", "n", 1, 4, 3],
+								["Dahleeuh", "f", "a", "t", "n", 1, 2, 3],
+								["Dahleeuh", "f", "a", "m", "n", 1, 4, 3],
 								["a3", "m", "a", "t", "n", 0, 5, 3],
 								["Kerol Horst", "f", "a", "t", "n", 2, 3, 3],
 								["Kerol Horst", "f", "a", "t", "n", 4, 4, 4],
@@ -815,7 +834,7 @@
 								["Dad", "m", "a", "t", "pd", 5, 5, 3],
 								["Mom", "f", "a", "t", "pj", 4, 3, 3],
 								["group", "mfff", "b", "m", "c", 1, 4, 3],
-								["p1", "f", "a", "t", "n", 0, 5, 3],
+								["Dahleeuh", "f", "a", "t", "n", 0, 5, 3],
 								["a6", "f", "f", "m", "i", 1, 4, 3],
 								["a7", "f", "s", "t", "n", 1, 3, 3],
 								["a8", "m", "s", "m", "n", 3, 3, 4],
@@ -836,7 +855,7 @@
 								["Kristol", "f", "c", "t", "n", 0, 5, 3],
 								["a14", "f", "c", "m", "j", 3, 4, 3],
 								["ViktOreeuh MikAluhstrr", "f", "a", "m", "dig", 3, 2, 3],
-								["Yuevahn", "f", "b", "t", "n", 0, 5, 4],
+								["YuevAhn", "f", "b", "t", "n", 0, 5, 4],
 								["a15", "m", "f", "m", "d", 4, 3, 3],
 								["YuevAhn", "f", "bf", "t", "j", 4, 3, 3],
 								["Dad", "m", "a", "t", "pd", 4, 4, 3],
@@ -849,19 +868,19 @@
 							"date": "8/22/2017",
 							"notes": [],
 							"data": [
-								["p1", f, a, t, n, 2, 4, 3],
+								["Dahleeuh", f, a, t, n, 2, 4, 3],
 								["a1", m, s, t, n, 0, 5, 3],
-								["Puetrishuh Ferish", f, a, t, g+c, 2, 3, 3],
+								["PuetrIshuh Ferish", f, a, t, g+c, 2, 3, 3],
 								["a2", f, s, t, n, 0, 5, 3],
 								["a3", f, a, m, n, 3, 4, 3],
 								["a4", f, f, m, n, 3, 3, 3],
-								["p1", f, a, t, n, 0, 5, 4],
+								["Dahleeuh", f, a, t, n, 0, 5, 4],
 								["a5", m, s, m, n, 0, 3, 3],
 								["a6", f, a, m, n, 2, 3, 3],
 								["a7", f, f, m, n, 2, 3, 3],
 								["a6", f, a, m, n, 2, 3, 3],
 								["a8", f, s, t, n, 0, 5, 3],
-								["p2", m, f, m, n, 3, 3, 3],
+								["Dwayn Jonz", m, f, m, n, 3, 3, 3],
 								["Jayk Braet", m, r, t, n, 0, 3, 4],
 								["Jayk Braet", m, r, t, n, 0, 3, 3],
 								["a9", f, s, t, n, 0, 5, 3],
@@ -889,10 +908,10 @@
 								["RuhbEkuh Krrzawlz", f, a, m, n, 1, 4, 3],
 								["p4", m, a, m, n, 1, 3, 3],
 								["Vikee Hahol", f, a, m, n, 2, 3, 3],
-								["Jaymz Shampeen", m, a, b, n, 4, 3, 2],
+								["Jaymz ShampEen", m, a, b, n, 4, 3, 2],
 								["RuhbEkuh Krrzawlz", f, a, b, n, 1, 3, 3],
 								["Brendin", m, c, m, n, 0, 3, 3],
-								["p5", m, c, m, n, 0, 3, 3],
+								["Kaylin Troo", m, c, m, n, 0, 3, 3],
 								["YuevAhn", f, b, t, n, 1, 4, 3],
 								["Jenee Apolgayt", f, p+s, t, n, 0, 5, 4],
 								["a4", m, s, t, n, 1, 4, 3],
@@ -913,14 +932,14 @@
 							"notes": [],
 							"data": [
 								["YuevAhn", f, b, t, t, 1, 5, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["Jahn ZookuhrElo", m, p+s, t, i, 4, 3, 3],
 								["a1", f, s, t, n, 0, 5, 3],
 								["a2", m, s, t, n, 0, 5, 3],
 								["a3", f, a, t, n, 0, 5, 3],
 								["YuevAhn", f, b, m, n, 0, 5, 3],
 								["Jayk Braet", m, r, m, n, 2, 3, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["Vikee Hahol", f, a, m, i, 2, 3, 3],
 								["Jaymz ShampEen", m, a, m, n, 2, 4, 3],
 								["a4", f, f, m, d, 2, 4, 3],
@@ -940,7 +959,7 @@
 								["Jayk Braet", m, r, t, n, 0, 5, 3],
 								["Nolin Drayk", m, r, t, n, 0, 3, 3],
 								["Nolin Drayk", m, r, m, n, 1, 3, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["a1", m, a, t, n, 0, 5, 3],
 								["RuhbEkuh Krrzawlz", f, a, m, n, 2, 3, 3],
 								["p4", m, a, m, n, 2, 2, 4],
@@ -949,7 +968,7 @@
 								["a3", m, b, t, n, 0, 5, 3],
 								["p7", f, b, t, n, 1, 4, 3],
 								["Jayk Braet", m, r, t, n, 0, 5, 3],
-								["p8", f, b, t, n, 1, 4, 4],
+								["Emee Jay", f, b, t, n, 1, 4, 4],
 								["a4", f, s, t, n, 0, 5, 3],
 								["a5", f, f, t, n, 0, 5, 3],
 								["Jahn ZookuhrElo", m, p+s, t, n, 0, 5, 3],
@@ -970,7 +989,7 @@
 								["a1", f, a, t, n, 0, 5, 3],
 								["a2", m, s, t, n, 0, 5, 3],
 								["Reemuh Gibz", f, p+s, t, n, 0, 5, 4],
-								["p9", f, p+s, t, n, 0, 5, 3],
+								["Kler Matlind", f, p+s, t, n, 0, 5, 3],
 								["a3", m, s, t, n, 0, 5, 3],
 								["Reemuh Gibz", f, p+s, t, n, 0, 5, 4],
 								["Dad", m, a, t, p+d, 4, 4, 3],
@@ -1009,12 +1028,12 @@
 							"date": "8/28/2017",
 							"notes": [],
 							"data": [
-								["p1", f, a, t, n, 0, 5, 3],
-								["Tom (bus)", m, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
+								["Tahm (bus)", m, a, t, n, 0, 5, 3],
 								["Kerol Horst", f, a, t, n, 1, 3, 3],
 								["g(Kerol Horst&Kaytlin Richrrdz)", f+f, "a_c", m, c, 0, 3, 3],
-								["p12", f, c, t, g, 0, 5, 3],
-								["g(Kerol Horst&Kaytlin Richrrdz&AndrAyuh&Joee Taylrr&Antuhnee&Kamrin)", "fffmmm", "a_c_c_c_c_c", b, "cgij", 4, "431311", 3],
+								["AhndrAyuh", f, c, t, g, 0, 5, 3],
+								["g(Kerol Horst&Kaytlin Richrrdz&AhndrAyuh&Joee Taylrr&Antuhnee&Kamrin)", "fffmmm", "a_c_c_c_c_c", b, "cgij", 4, "431311", 3],
 								["Kerol Horst", f, a, b, n, 3, 3, 3],
 								["g(a1&a2)", f, s, t, j, 2, "30", 3],
 								["Dwayn Jonz", m, f, t, n, 2, 3, 3],
@@ -1023,7 +1042,7 @@
 								["Jayk Braet", m, r, t, n, 0, 5, 3],
 								["Jayk Braet", m, r, m, n, 1, 3, 3],
 								["a4", m, s, t, n, 0, 5, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["a5", m, a, t, n, 2, 4, 3],
 								["p4", m, a, t, n, 1, 4, 3],
 								["g(Krishdin&Saeahn Pikslee&Madisin S.&Trent Spaekrr&Nik Kentzuel)", "mmfmm", b, m, "tcg", 3, "31233", 3],
@@ -1034,7 +1053,7 @@
 								["Dwayn Jonz", m, f, t, j, 1, 3, 3],
 								["Trent Spaekrr", m, b, m, t, 1, 3, 3],
 								["YuevAhn", f, b, t, t, 1, 5, 3],
-								["p5", m, c, m, n, 0, 3, 3],
+								["Kaylin Troo", m, c, m, n, 0, 3, 3],
 								["a11", f, f, t, n, 0, 5, 3],
 								["p6", m, a, t, n, 1, 4, 3],
 								["a12", m, s, t, n, 0, 5, 3],
@@ -1051,7 +1070,7 @@
 								["YuevAhn", f, f, m, d, 4, 4, 3],
 								["Nolin Drayk", m, r, b, j, 0, 2, 3],
 								["Krishdin", m, b, t, j, 1, 3, 3],
-								["g(p19&p20&a17)", "mmf", "b_b_s", b, g+c, 2, "441", 4],
+								["g(DayvAhntay&p20&a17)", "mmf", "b_b_s", b, g+c, 2, "441", 4],
 								["Kaylueb Hamueltin", m, r, m, i, 3, 3, 3]
 							]
 						},
@@ -1060,12 +1079,12 @@
 							"notes": [],
 							"data": [
 								["Kaylueb Hamueltin", m, r, b, i, 2, 3, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["a1", m, a, t, n, 0, 4, 3],
 								["PuetrIshuh Ferish", f, a, t, g+c, 0, 3, 3],
 								["Kaylueb Hamueltin", m, r, b, i, 3, 3, 3],
-								["Linda Williams", f, u, m, p+i, 3, 3, 3],
-								["p1", f, a, m, n, 1, 4, 3],
+								["Linduh Wileeuhmz", f, u, m, p+i, 3, 3, 3],
+								["Dahleeuh", f, a, m, n, 1, 4, 3],
 								["a2", f, s, t, i, 0, 5, 3],
 								["a3", f, c, m, n, 0, 0, 3],
 								["p23", f, p+s, t, n, 2, 4, 4],
@@ -1080,7 +1099,7 @@
 							"notes": [],
 							"data": [
 								["a1", m, s, m, n, 1, 3, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["Jahn ZookuhrElo", m, p+s, t, n, 0, 5, 3],
 								["Kerol Horst", f, a, t, n, 0, 5, 3],
 								["Kerol Horst", f, a, b, i, 3, 3, 3],
@@ -1090,7 +1109,7 @@
 								["p24", f, f, b, n, 2, 3, 3],
 								["Kaylueb Hamueltin", m, r, t, n, 0, 4, 3],
 								["a2", m, s, t, n, 0, 5, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["a3", f, a, t, n, 0, 5, 3],
 								["a4", f, s, m, n, 0, 0, 3],
 								["p4", m, a, t, n, 1, 4, 3],
@@ -1118,12 +1137,12 @@
 							"notes": [],
 							"data": [
 								["Kaylueb Hamueltin", m, r, m, n, 1, 3, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["Jahn ZookuhrElo", m, p+s, t, i, 1, 5, 3],
 								["Emuh", f, p+s, m, n, 0, 3, 3],
 								["Jahn ZookuhrElo", m, p+s, b, n, 3, 3, 3],
 								["Kandis Grant", f, c, t, i, 2, 4, 3],
-								["Puetrishuh Ferish", f, a, t, n, 0, 3, 3],
+								["PuetrIshuh Ferish", f, a, t, n, 0, 3, 3],
 								["a1", f, a, t, n, 0, 5, 3],
 								["Dahnoo", m, b, t, n, 0, 5, 3],
 								["p22", m, a, t, n, 0, 5, 3],
@@ -1149,7 +1168,7 @@
 							"notes": [],
 							"data": [
 								["Kaylueb Hamueltin", m, r, m, n, 0, 3, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["a1", m, s, t, n, 0, 5, 3],
 								["Kaylueb Hamueltin", m, r, t, n, 3, 3, 4],
 								["Kaylueb Hamueltin", m, r, m, n, 1, 3, 3],
@@ -1208,11 +1227,11 @@
 								["Dahnoo", m, b, t, n, 3, 4, 3],
 								["a3", m, s, t, n, 0, 4, 3],
 								["Dahnoo", m, b, m, t, 0, 3, 3],
-								["g(GabreeOn&p25)", m, b, t, n, 0, 5, 3],
+								["g(GabreeOn&DayvAhn)", m, b, t, n, 0, 5, 3],
 								["GabreeOn", m, b, m, "igcj", 1, 3, 3],
-								["p25", m, b, t, n, 0, 5, 3],
-								["p25", m, b, m, n, 0, 0, 3],
-								["p19", m, b, t, n, 0, 5, 3],
+								["DayvAhn", m, b, t, n, 0, 5, 3],
+								["DayvAhn", m, b, m, n, 0, 0, 3],
+								["DayvAhntay", m, b, t, n, 0, 5, 3],
 								["Dahnoo", m, b, b, i, 4, 4, 3]
 							]
 						},
@@ -1220,11 +1239,11 @@
 							date: "9/5/2017",
 							notes: [],
 							data: [
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["PuetrIshuh Ferish", f, a, m, c, 2, 2, 3],
 								["a1", m, c, t, j, 0, 5, 3],
 								["Andee Choo", m, p, t, t, 1, 5, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["g(Jahn ZookuhrElo&Linzee)", m+f, "ps_s", t, n, 3, "41", 3],
 								["Jahn ZookuhrElo", m, p+s, t, n, 5, 3, 3],
 								["a2", m, s, t, n, 0, 5, 3],
@@ -1248,8 +1267,8 @@
 								["Mahlee Kuk", f, c, b, n, 2, 3, 4],
 								["RuhbEkuh Krrzawlz", f, a, b, i, 1, 3, 3],
 								["g(Trisdin Keeng&Mahlee Kuk&Jeruemee Gray)", "mfm", c, b, "cidj", 1, "221", 3],
-								["p1", f, a, t, n, 0, 5, 3],
-								["p26", f, c, b, i, 2, 3, 4],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
+								["Emuelee Hamrr", f, c, b, i, 2, 3, 4],
 								["RuhbEkuh Krrzawlz", f, a, m, n, 2, 3, 3],
 								["p4", m, a, m, n, 1, 2, 3],
 								["a6", m, s, t, n, 0, 5, 3],
@@ -1266,7 +1285,7 @@
 							date: "9/7/2017",
 							notes: [],
 							data: [
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["a1", m, s, b, "cig", 1, 3, 3],
 								["Jenee Apolgayt", f, p+s, t, n, 0, 5, 3],
 								["Kaylueb Hamueltin", m, r, b, i, 1, 3, 3],
@@ -1280,7 +1299,7 @@
 								["p6", m, a, m, n, 1, 3, 3],
 								["SotAhro", m, b, t, n, 1, 3, 3],
 								["p6", m, a, m, c, 0, 5, 3],
-								["g(Dahnoo&p25&p28&p19)", m, b, b, "cgjd", 5, "4332", 4],
+								["g(Dahnoo&DayvAhn&p28&DayvAhntay)", m, b, b, "cgjd", 5, "4332", 4],
 								["Kaylueb Hamueltin", m, r, b, n, 1, 3, 3],
 								["Kaylueb Hamueltin", m, r, m, n, 1, 3, 3]
 							]
@@ -1290,7 +1309,7 @@
 							notes: [],
 							data: [
 								["Kaylueb Hamueltin", m, r, m, i, 0, 5, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["a1", m, s, m, n, 0, 3, 3],
 								["a2", m, c+a, t, n, 0, 5, 3],
 								["RuhbEkuh Krrzawlz", f, a, m, n, 1, 4, 3],
@@ -1303,7 +1322,7 @@
 								["DayvAhntay", m, b, t, i+j, 3, 1, 3],
 								["a4", m, s, t, n, 0, 5, 3],
 								["p29", m, b, t, g, 0, 3, 3],
-								["p30", m, b, t, i, 3, 3, 3],
+								["Ahlshrr", m, b, t, i, 3, 3, 3],
 								["p37", m, s, b, i, 2, 3, 3],
 								["Kaylueb Hamueltin", m, r, t, n, 0, 5, 3],
 								["Jahn ZookuhrElo", m, p+s, t, i, 1, 3, 3],
@@ -1318,33 +1337,33 @@
 								["Kaylueb Hamueltin", m, r, t, i, 0, 4, 3],
 								["SotAhro", m, b, t, n, 1, 4, 3],
 								["a1", m, a, t, n, 0, 5, 3],
-								["p30", m, b, t, n, 1, 4, 3],
+								["Ahlshrr", m, b, t, n, 1, 4, 3],
 								["a2", m, b, t, n, 0, 5, 3],
-								["g(Kaylueb Hamueltin&p31)", m, "r_s", t, n, 2, "33", 4],
+								["g(Kaylueb Hamueltin&Heruesin)", m, "r_s", t, n, 2, "33", 4],
 								["SotAhro", m, b, t, n, 2, 3, 3],
-								["p30", m, b, t, n, 1, 3, 3],
+								["Ahlshrr", m, b, t, n, 1, 3, 3],
 								["a3", f, a, t, n, 0, 5, 3],
 								["a4", f, a, m, i, 1, 3, 3],
 								["SotAhro", m, b, t, i, 4, 3, 3],
-								["p30", m, b, t, i, 2, 3, 3],
+								["Ahlshrr", m, b, t, i, 2, 3, 3],
 								["GabreeOn", m, b, t, n, 0, 5, 3],
 								["a5", m, s, m, d, 2, 3, 3],
 								["a6", f, s, t, j, 1, 2, 3],
 								["a7", m, s, m, p, 1, 3, 3],
 								["a7", m, s, t, n, 1, 3, 3],
-								["g(SotAhro&p30)", m, b, b, "dig", 5, "33", 4],
+								["g(SotAhro&Ahlshrr)", m, b, b, "dig", 5, "33", 4],
 								["p38", f, s, n, "jig", 3, 1, 3],
 								["p58", m, s, n, "jig", 4, 3, 3],
-								["g(DayvAhntay&p25)", m, b, t, "jig", 3, "33", 3],
+								["g(DayvAhntay&DayvAhn)", m, b, t, "jig", 3, "33", 3],
 								["GabreeOn", m, b, t, "jig", 3, 2, 3],
 								["Dahnoo", m, b, t, "jig", 2, 2, 3],
 								["Dahnoo", m, b, t, "jig", 2, 1, 3],
 								["g(a10&a11)", m, s, t, "jig", 2, 1, 3],
 								["a7", m, s, m, p, 0, 3, 3],
 								["a7", m, s, t, n, 1, 3, 3],
-								["p30", m, b, t, n, 0, 5, 3],
+								["Ahlshrr", m, b, t, n, 0, 5, 3],
 								["GabreeOn", m, b, t, "digc", 4, 3, 4],
-								["g(DayvAhntay&p25&p32)", m, b, b, "cigd", 4, "223", 4],
+								["g(DayvAhntay&DayvAhn&Patrik)", m, b, b, "cigd", 4, "223", 4],
 								["SotAhro", m, b, t, j+i, 4, 2, 3],
 								["p58", m, s, t, j+g, 3, 0, 3],
 								["Kaylueb Hamueltin", m, r, m, n, 1, 3, 3]
@@ -1359,7 +1378,7 @@
 								["a1", m, s, m, j, 0, 3, 3],
 								["a2", f, s, m, n, 0, 0, 3],
 								["GabreeOn", m, b, t, n, 0, 5, 3],
-								["p25", m, b, t, n, 0, 5, 3],
+								["DayvAhn", m, b, t, n, 0, 5, 3],
 								["Dahnoo", m, b, t, n, 0, 5, 3],
 								["a3", f, a, t, n, 0, 5, 3],
 								["p33", f, s, m, n, 3, 3, 3],
@@ -1387,21 +1406,21 @@
 								["Kerol Horst", f, a, t, n, 1, 4, 3],
 								["p34", m, a, t, n, 0, 5, 3],
 								["Kaylueb Hamueltin", m, r, t, i, 1, 4, 3],
-								["p1", f, a, t, n, 0, 5, 3],
-								["p26", f, c, t, n, 0, 5, 3],
-								["p26", f, c, t, w, 0, 5, 3],
-								["p26", f, c, b, i, 2, 3, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
+								["Emuelee Hamrr", f, c, t, n, 0, 5, 3],
+								["Emuelee Hamrr", f, c, t, w, 0, 5, 3],
+								["Emuelee Hamrr", f, c, b, i, 2, 3, 3],
 								["RuhbEkuh Krrzawlz", f, a, t, n, 1, 4, 3],
 								["a1", f, s, t, n, 0, 5, 3],
 								["Kaylueb Hamueltin", m, r, t, i, 1, 3, 3],
-								["p5", m, c, m, n, 1, 3, 3],
-								["p5", m, c, b, n, 2, 3, 3],
+								["Kaylin Troo", m, c, m, n, 1, 3, 3],
+								["Kaylin Troo", m, c, b, n, 2, 3, 3],
 								["ViktOreeuh MikAluhstrr", f, a, m, n, 1, 3, 3],
 								["Nolin Drayk", m, "p-r", t, n, 0, 5, 3],
 								["a2", f, f, t, n, 0, 5, 3],
 								["a3", f, a, t, n, 0, 4, 3],
 								["a4", f, s, m, i, 2, 2, 2],
-								["p31", m, s, t, n, 0, 5, 3],
+								["Heruesin", m, s, t, n, 0, 5, 3],
 								["Jahn ZookuhrElo", m, p+s, t, n, 2, 4, 3],
 								["Linzee", f, s, t, n, 1, 3, 3],
 								["p17", m, s, t, n, 1, 3, 3],
@@ -1415,7 +1434,7 @@
 							notes: [],
 							data: [
 								["Kaylueb Hamueltin", m, r, m, i, 1, 3, 3],
-								["p1", f, a, t, n, 0, 5, 3],
+								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["a1", m, s, t, n, 0, 3, 3],
 								["PuetrIshuh Ferish", f, a, m, n, 1, 3, 3],
 								["p37", m, s, t, n, 0, 5, 3],
@@ -1429,7 +1448,7 @@
 								["a4", f, s, t, n, 0, 5, 3],
 								["Reemuh Gibz", f, p+s, t, n, 0, 5, 3],
 								["Ben", m, s, m, n, 3, 3, 4],
-								["p30", m, b, t, n, 0, 5, 3],
+								["Ahlshrr", m, b, t, n, 0, 5, 3],
 								["p38", f, s, t, n, 0, 5, 3],
 								["Jahn ZookuhrElo", m, p+s, t, i, 0, 5, 3],
 								["SotAhro", m, b, t, n, 2, 3, 4],
@@ -1441,8 +1460,8 @@
 							date: "9/13/2017",
 							notes: [],
 							data: [
-								["p39", m, c, t, i, 0, 4, 3],
-								["p39", m, c, t, n, 0, 5, 3],
+								["Kodee", m, c, t, i, 0, 4, 3],
+								["Kodee", m, c, t, n, 0, 5, 3],
 								["Kerol Horst", f, a, t, i, 1, 4, 3],
 								["a1", f, s, t, n, 0, 3, 3],
 								["Kaytlin Richrrdz", f, c, t, n, 3, 3, 3],
@@ -1453,13 +1472,13 @@
 								["Dahleeuh", f, a, t, n, 0, 5, 3],
 								["Emuelee Hamrr", f, c, b, i, 3, 1, 3],
 								["Jeruemee Gray", m, c, t, n, 0, 5, 3],
-								["p30", m, b, t, n, 0, 5, 3],
+								["Ahlshrr", m, b, t, n, 0, 5, 3],
 								["SotAhro", m, b, t, n, 0, 5, 3],
 								["ViktOreeuh MikAluhstrr", f, a, m, n, 0, 3, 3],
 								["a3", f, s, t, n, 0, 5, 3],
 								["Jayk Braet", m, "p-r", t, n, 0, 5, 3],
 								["a4", m, a, t, n, 0, 5, 3],
-								["p30", m, b, t, n, 0, 4, 3],
+								["Ahlshrr", m, b, t, n, 0, 4, 3],
 								["Kaylueb Hamueltin", m, r, t, n, 1, 3, 3],
 								["Kaylueb Hamueltin", m, r, t, i, 3, 3, 4],
 								["GabreeOn", m, b, t, n, 0, 5, 3],
@@ -1487,7 +1506,7 @@
 								["Raein", m, b, t, j, 3, 3, 4],
 								["a4", m, s, t, g, 0, 4, 3],
 								["Kaylueb Hamueltin", m, r, n, j, 2, 2, 3],
-								["p30", m, b, t, "cij", 1, 3, 3],
+								["Ahlshrr", m, b, t, "cij", 1, 3, 3],
 								["Kaylueb Hamueltin", m, r, m, i, 1, 2, 3],
 								["a5", m, f, t, n, 1, 3, 3],
 								["Dahnoo", m, f, t, n, 1, 3, 3]
@@ -1520,7 +1539,7 @@
 								["p42", f, f, b, n, 1, 4, 3],
 								["p43", f, f, t, n, 0, 4, 3],
 								["p38", f, s, t, n, 0, 5, 3],
-								["Jakee Awrcrr", f, p, m, t+i, 1, 3, 3],
+								["Jakee Awrchrr", f, p, m, t+i, 1, 3, 3],
 								["p44", f, f, t, n, 0, 5, 3],
 								["p44", f, f, t, n, 0, 4, 3],
 								["a8", m, a, t, n, 0, 5, 3],
@@ -1588,11 +1607,11 @@
 								["RuhbEkuh Krrzawlz", f, a, m, n, 2, 4, 3],
 								["SotAhro", m, b, t, n, 1, 3, 3],
 								["Ahlshrr", m, b, t, n, 0, 3, 3],
-								["p5", m, c, m, n, 1, 3, 3],
-								["p5", m, c, t, n, 0, 3, 3],
+								["Kaylin Troo", m, c, m, n, 1, 3, 3],
+								["Kaylin Troo", m, c, t, n, 0, 3, 3],
 								["ViktOreeuh MikAluhstrr", f, a, m, i+g, 1, 3, 3],
 								["Kaylueb Hamueltin", m, r, t, n, 0, 5, 3],
-								["p31", m, s, t, n, 0, 5, 3],
+								["Heruesin", m, s, t, n, 0, 5, 3],
 								["a1", f, s, t, n, 0, 5, 3],
 								["YuevAhn", f, "p-b", t, n, 0, 5, 3],
 								["Kaylueb Hamueltin", m, r, m, i, 3, 3, 3]
@@ -1646,11 +1665,11 @@
 								["p34", m, a, t, n, 0, 5, 3],
 								["p35", f, a, m, n, 0, 0, 3],
 								["a5", m, a, t, i, 0, 5, 3],
-								["p5", m, c, t, n, 1, 3, 3],
+								["Kaylin Troo", m, c, t, n, 1, 3, 3],
 								["SotAhro", m, b, t, n, 3, 3, 3],
 								["g(a6&a7)", m, c, t, n, 1, "41", 3],
 								["p41", m, b, t, n, 0, 5, 3],
-								["p5", m, c, t, i, 2, 3, 3],
+								["Kaylin Troo", m, c, t, i, 2, 3, 3],
 								["ViktOreeuh MikAluhstrr", f, a, m, "cig", 3, 2, 3],
 								["g(Raein&p48&p49)", m, "cb_c_ac", b, "jcg", 1, "222", 4],
 								["Kristol", f, c, t, i, 1, 3, 3],
@@ -1658,7 +1677,7 @@
 								["Raein", m, b+c, m, n, 0, 5, 4],
 								["p49", m, a+c, t, n, 0, 3, 3],
 								["g(a8&a9)", f, c, m, n, 1, "32", 3],
-								["p5", m, c, t, n, 0, 3, 3],
+								["Kaylin Troo", m, c, t, n, 0, 3, 3],
 								["GabreeOn", m, b, t, n, 0, 5, 3],
 								["p6", m, a, m, n, 0, 3, 3],
 								["a10", m, a, m, n, 0, 1, 3],
@@ -1708,7 +1727,7 @@
 								["a3", f, f, t, n, 1, 7, 7, 5],
 								["a4", f, a, t, n, 1, 7, 7, 4],
 								["Emuelee Hamrr", f, c, n, "gdj", 4, 2, 4, 5],
-								["g(RuhbEkuh Krrzawlz&p50&p51&p52&p53&p54&Jeruemee Gray)", "fffmmmm", "a_c_c_c_c_c_c", b, "jcg", 4, 6, "5422223", 6],
+								["g(RuhbEkuh Krrzawlz&p50&p51&p52&p53&Erin&Jeruemee Gray)", "fffmmmm", "a_c_c_c_c_c_c", b, "jcg", 4, 6, "5422223", 6],
 								["Kris", m, a+c, t, n, 2, 7, 4, 5],
 								["g(Kaylueb Hamueltin&Heruesin)", m, "r_s", t, n, 3, 5, "36", 5],
 								["Kaylueb Hamueltin", m, r, t, n, 2, 6, 4, 5],
@@ -1755,7 +1774,7 @@
 							data: [
 								["Kaylueb Hamueltin", m, r, m, n, 1, 6, 3, 4],
 								["p59", m, f, t, n, 1, 7, 7, 4],
-								["p60", f, s, m, n, 3, 7, 4, 5],
+								["Troodee Brrnham", f, s, m, n, 3, 7, 4, 5],
 								["Ahlshrr", m, b, m, n, 1, 0, 0, 4],
 								["a1", m, s, t, n, 1, 2, 7, 4],
 								["SotAhro", m, b, t, t, 2, 3, 5, 4],
@@ -1783,7 +1802,7 @@
 								["Joee Taylrr", m, c, t, n, 1, 5, 7, 4],
 								["Kerol Horst", f, a, t, g+c, 3, 2, 6, 4],
 								["Kaytlin Richrrdz", f, c, t, n, 2, 3, 7, 5],
-								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Kamrin&AhndrAyuh&Antuhnee&p39&p61)", "fmfmfmmm", "a_c_c_c_c_c_c_c", n, n, 2, 7, "50000000", 4],
+								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Kamrin&AhndrAyuh&Antuhnee&Kodee&p61)", "fmfmfmmm", "a_c_c_c_c_c_c_c", n, n, 2, 7, "50000000", 4],
 								["Kerol Horst", f, a, m, n, 3, 7, 1, 7],
 								["p34", m, a, t, g, 1, 7, 7, 4],
 								["p34", m, a, t, n, 1, 7, 7, 4],
@@ -1798,11 +1817,11 @@
 								["Kaylueb Hamueltin", m, r, m, n, 1, 7, 4, 4],
 								["ViktOreeuh MikAluhstrr", f, a, m, g+c, 1, 7, 4, 4],
 								["Raein", m, b+c, t, n, 1, 7, 6, 5],
-								["g(p5&p62&p63)", "mmf", c, n, "dcg", 3, 6, "455", 5],
+								["g(Kaylin Troo&p62&p63)", "mmf", c, n, "dcg", 3, 6, "455", 5],
 								["ViktOreeuh MikAluhstrr", f, a, t, j+c, 2, 6, 5, 4],
 								["p64", m, c, m, n, 1, 7, 4, 4],
 								["p57", m, f, t, n, 1, 7, 7, 4],
-								["DevAhntay", m, b, t, n, 1, 7, 7, 5],
+								["DayvAhntay", m, b, t, n, 1, 7, 7, 5],
 								["p65", f, f, m, n, 1, 4, 0, 4],
 								["Ahlshrr", m, b, t, n, 4, 5, 4, 5],
 								["Jahn ZookuhrElo", m, p+s, m, n, 1, 0, 0, 5],
@@ -1918,8 +1937,8 @@
 								["Dahleeuh",f,a,t,n,1,0,0,4],
 								["a5",f,f,t,n,1,4,6,4],
 								["Kris",m,a+c,t,n,1,7,7,4],
-								["p54",m,c,t,n,1,7,7,4],
-								["p54",m,c,t,n,1,7,7,4],
+								["Erin",m,c,t,n,1,7,7,4],
+								["Erin",m,c,t,n,1,7,7,4],
 								["Emuelee Hamrr",f,c,m,n,4,2,4,6],
 								["a6",m,f,t,n,1,7,7,4],
 								["a7",m,s,t,n,1,7,7,4],
@@ -2009,13 +2028,13 @@
 								["Raein",m,b,n,j,3,2,4,5],
 								["Dahnoo",m,b,t,"jcg",1,6,4,5],
 								["Emuelee Hamrr",f,c,m,n,4,2,4,5],
-								["p54",m,c,m,c,1,7,0,4],
+								["Erin",m,c,m,c,1,7,0,4],
 								["a3",f,c,t,n,1,7,7,4],
 								["g(Kaylueb Hamueltin&Heruesin)",m,"r_s",t,n,2,2,"45",5],
 								["Kaylueb Hamueltin",m,r,t,n,1,6,5,5],
 								["Kaylueb Hamueltin",m,r,t,n,1,7,4,5],
 								["a4",f,f,m,n,1,6,4,4],
-								["g(p5&p62&p72)",m,c,n,"gcd",2,5,"435",4],
+								["g(Kaylin Troo&p62&p72)",m,c,n,"gcd",2,5,"435",4],
 								["ViktOreeuh MikAluhstrr",f,a,t,j,1,6,5,4],
 								["ViktOreeuh MikAluhstrr",f,a,t,n,1,7,7,4],
 								["p42",f,f,t,n,1,7,5,5],
@@ -2039,9 +2058,9 @@
 							data: [
 								["Dahleeuh",f,a,t,n,1,7,7,4],
 								["Peedtrr",m,s,t,n,2,2,5,5],
-								["Puetrishuh Ferish",f,a,t,g+c,1,7,4,4],
-								["Puetrishuh Ferish",f,a,t,g+c,1,7,7,4],
-								["Puetrishuh Ferish",f,a,m,n,2,7,6,4],
+								["PuetrIshuh Ferish",f,a,t,g+c,1,7,4,4],
+								["PuetrIshuh Ferish",f,a,t,g+c,1,7,7,4],
+								["PuetrIshuh Ferish",f,a,m,n,2,7,6,4],
 								["a1",f,s,t,n,1,7,7,4],
 								["Ahlshrr",m,b,t,n,1,6,5,4],
 								["Dahleeuh",f,a,t,n,1,7,7,4],
@@ -2061,7 +2080,7 @@
 								["p46",m,f,t,n,1,7,7,4],
 								["a5",m,f,m,n,1,7,0,4],
 								["p73",m,s,n,j,3,4,4,5],
-								["p74",m,b,n,j,1,0,0,5],
+								["Ryo",m,b,n,j,1,0,0,5],
 								["Ahlshrr",m,b,t,j+g,2,7,3,5],
 								["Kaylueb Hamueltin",m,r,t,n,1,7,7,5],
 								["SotAhro",m,b,t,n,1,7,5,5],
@@ -2134,7 +2153,7 @@
 								["Jaykueb",m,s,t,j,3,3,5,5],
 								["a11",f,s,t,n,1,7,7,4],
 								["p43",f,f,t,n,1,7,7,4],
-								["p74",m,b,b,n,1,0,0,5],
+								["Ryo",m,b,b,n,1,0,0,5],
 								["SotAhro",m,b,t,n,1,7,5,4],
 								["p44",f,f,b,n,1,6,6,5],
 								["p6",m,a,t,g,1,7,7,4],
@@ -2231,8 +2250,8 @@
 								["Kerol Horst",f,a,t,n,3,1,6,5],
 								["Joee Taylrr",m,c,m,c,1,6,4,5],
 								["Kaytlin Richrrdz",f,c,t,n,1,7,5,5],
-								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",m,c+g,3,1,"44620415",4],
-								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Antuhnee&AhndrAyuh&Kamrin&p39&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",n,n,2,6,"12200001",5],
+								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Antuhnee&AhndrAyuh&Kamrin&Kodee&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",m,c+g,3,1,"44620415",4],
+								["g(Kerol Horst&Joee Taylrr&Kaytlin Richrrdz&Antuhnee&AhndrAyuh&Kamrin&Kodee&p61)","fmfmfmmm","a_c_c_c_c_c_c_c",n,n,2,6,"12200001",5],
 								["Kerol Horst",f,a,t,n,2,4,4,4],
 								["p34",m,a,t,n,1,7,7,5],
 								["a1",f,s,t,n,1,7,7,4],
@@ -2244,16 +2263,16 @@
 								["g(a2&a3)",u,f,m,n,1,7,5,4],
 								["a4",f,s,t,n,1,7,7,4],
 								["SotAhro",m,b,m,n,3,3,4,4],
-								["p74",m,b,b,n,1,0,0,5],
+								["Ryo",m,b,b,n,1,0,0,5],
 								["Emuelee Hamrr",f,c,m,n,3,2,4,5],
 								["RuhbEkuh Krrzawlz",f,a,m,c,2,1,4,4],
 								["Patrik",m,b,t,n,1,7,7,5],
 								["Kaylueb Hamueltin",m,r,t,n,2,2,6,4],
 								["SotAhro",m,b,t,t,1,5,4,4],
-								["p5",m,c,t,n,2,5,4,5],
-								["VictOreeuh MikAluhstrr",f,a,b,n,1,7,0,4],
-								["VictOreeuh MikAluhstrr",f,a,t,n,1,7,4,4],
-								["VictOreeuh MikAluhstrr",f,a,t,n,1,7,7,4],
+								["Kaylin Troo",m,c,t,n,2,5,4,5],
+								["ViktOreeuh MikAluhstrr",f,a,b,n,1,7,0,4],
+								["ViktOreeuh MikAluhstrr",f,a,t,n,1,7,4,4],
+								["ViktOreeuh MikAluhstrr",f,a,t,n,1,7,7,4],
 								["Jahn ZookuhrElo",m,p+s,t,d,2,7,4,5],
 								["Heruesin",m,s,t,j,1,0,0,5],
 								["a5",m,s,t,j,1,7,7,5],
@@ -2324,11 +2343,11 @@
 								["Emuelee Hamrr", f, c, m, n, 3, 2, 4, 5],
 								["Jeruemee Gray", m, c, m, n, 1, 7, 0, 5],
 								["group", m+f, s, m, g, 1, 7, 0, 5],
-								["Patrick", m, b, m, n, 1, 7, 4, 5],
+								["Patrik", m, b, m, n, 1, 7, 4, 5],
 								["SotAhro", m, b, t, t, 3, 2, 4, 4],
 								["Kaylueb Hamueltin", m, r, t, n, 2, 2, 4, 5],
 								["SotAhro", m, b, t, d+n, 4, 2, 5, 4],
-								["p74", m, b, n, j, 4, 1, 2, 4],
+								["Ryo", m, b, n, j, 4, 1, 2, 4],
 								["p85", f, c, t, n, 1, 7, 5, 4],
 								["p57", m, f, t, n, 1, 7, 7, 4],
 								["a3", m, f, m, n, 1, 7, 0, 4],
@@ -2350,7 +2369,7 @@
 								["Dahleeuh", f, a, t, n, 1, 7, 7, 4],
 								["p57", m, f, t, n, 1, 0, 0, 4],
 								["PuetrIshuh Ferish", f, a, t, g, 1, 6, 4, 4],
-								["Puetrishuh Ferish", f, a, m, n, 1, 7, 6, 4],
+								["PuetrIshuh Ferish", f, a, m, n, 1, 7, 6, 4],
 								["Kaylueb Hamueltin", m, r, m, n, 3, 5, 3, 5],
 								["SotAhro", m, b, t, t, 1, 3, 4, 4],
 								["SotAhro", m, b, t, n, 5, 5, 5, 4],
@@ -2402,7 +2421,7 @@
 								["Ryo", m, s, t, j, 2, 2, 5, 4],
 								["Emuelee Hamrr", f, c, m, n, 3, 2, 4, 5],
 								["Emuelee Hamrr", f, c, b, n, 3, 7, 4, 5],
-								["Kaylueb Hamuelltin", m, r, t, n, 1, 7, 5, 4],
+								["Kaylueb Hamueltin", m, r, t, n, 1, 7, 5, 4],
 								["Kaylueb Hamueltin", m, r, t, n, 1, 5, 6, 5],
 								["SotAhro", m, b, t, n, 2, 6, 6, 4],
 								["Dwayn Jonz", m, s, t, n, 1, 7, 7, 4],
@@ -2539,7 +2558,7 @@
 								["Raein", "m", "bc", "t", "d", 2, 6, 4, 5],
 								["p90", m, c, m, j, 1, 7, 4, 5],
 								["Kristol", f, c, t, n, 1, 6, 4, 4],
-								["p5", m, c, t, n, 1, 7, 4, 4],
+								["Kaylin Troo", m, c, t, n, 1, 7, 4, 4],
 								["Kristol", f, c, m, n, 1, 7, 4, 5],
 								["p63", f, c, t, n, 1, 7, 7, 4],
 								["ViktOreeuh MikAluhstrr", f, a, t, n, 1, 7, 7, 4],
@@ -2560,8 +2579,8 @@
 								["p61", m, c, t, n, 1, 7, 7, 4],
 								["Jahn ZookuhrElo", "m", "ps", "t", "j", 3, 6, 4, 5],
 								["g(p73&p17)", "m", "s_b", "m", "n", 1, 7, "40", 5],
-								["Jaykueb Bergmin", m, r, t, n, 1, 7, 4, 5],
-								["Jaykueb Bergmin", m, r, m, n, 1, 5, 3, 4]
+								["Jaykueb Brrgmin", m, r, t, n, 1, 7, 4, 5],
+								["Jaykueb Brrgmin", m, r, m, n, 1, 5, 3, 4]
 							]
 						},
 						{
@@ -2638,7 +2657,7 @@
 								["Naythin", m, s, t, n, 1, 7, 4, 5],
 								["p96", m, s, t, j, 2, 3, 7, 4],
 								["p97", f, s, t, j, 2, 2, 5, 4],
-								["g(Naythin&p93&p55p56)", m, s, b, n, 3, 2, "6221", 5],
+								["g(Naythin&p93&p55&p56)", m, s, b, n, 3, 2, "6221", 5],
 								["Jaykueb Brrgmin", m, r, t, n, 1, 7, 4, 4]
 							]
 						},
@@ -2652,7 +2671,7 @@
 								["g(a1&a2)", "mf", "f", "m", "n", 2, 7, 5, 4],
 								["Naythin", m, s, t, n, 1, 7, 7, 4],
 								["SotAhro", m, b, t, t, 2, 4, 4, 4],
-								["Zak Sudtin", m, p, m, t, 1, 7, 0, 4],
+								["Zak Suhdtin", m, p, m, t, 1, 7, 0, 4],
 								["SotAhro", m, b, t, n, 1, 7, 4, 4],
 								["SotAhro", m, b, t, d, 4, 6, 5, 5],
 								["p57", m, f, m, n, 1, 7, 6, 5],
@@ -2714,10 +2733,10 @@
 								["Trisdin Keeng", m, c, t, n, 2, 6, 4, 4],
 								["Emuelee Hamrr", f, c, b, n, 3, 7, 5, 4],
 								["a5", m, s, t, n, 1, 7, 7, 4],
-								["p5", m, c, t, n, 1, 7, 7, 5],
+								["Kaylin Troo", m, c, t, n, 1, 7, 7, 5],
 								["a6", f, f, m, n, 1, 0, 0, 4],
 								["p64", m, c, t, n, 2, 4, 4, 5],
-								["p5", m, c, t, n, 1, 7, 3, 5],
+								["Kaylin Troo", m, c, t, n, 1, 7, 3, 5],
 								["p64", m, c, m, n, 1, 7, 0, 5],
 								["Kristol", f, c, m, n, 1, 7, 5, 5],
 								["SotAhro", m, b, t, n, 1, 7, 6, 4],
@@ -2928,7 +2947,7 @@
 								["Ahlshrr", m, b, m, n, 3, 7, 4, 5],
 								["p33", f, s, b, n, 1, 0, 0, 5],
 								["Emuelee Hamrr", f, c, b, n, 5, 2, 4, 5],
-								["p54", "m", "c", "b", "nj", 3, 1, 4, 5],
+								["Erin", "m", "c", "b", "nj", 3, 1, 4, 5],
 								["Trisdin Keeng", m, c, t, n, 1, 7, 7, 4],
 								["p93", m, s, t, n, 1, 7, 6, 5],
 								["a4", f, s, t, n, 1, 7, 7, 4],
@@ -3051,7 +3070,7 @@
 								["Kandis Grant", f, c, t, n, 1, 6, 4, 5],
 								["p109", f, c, t, n, 1, 7, 7, 4],
 								["a1", f, s, t, n, 1, 7, 7, 4],
-								["Jeruemee Elrrmaerr", m, a, m, n, 3, 6, 4, 4],
+								["Jeruemee Elrrmaer", m, a, m, n, 3, 6, 4, 4],
 								["p18", m, s, b, n, 1, 7, 7, 4],
 								["Zak Kao", m, a, m, n, 2, 6, 4, 4],
 								["a2", f, f, m, n, 1, 4, 2, 4],
@@ -3124,8 +3143,8 @@
 								["p64", m, c, m, n, 2, 7, 4, 5],
 								["a6", m, a, t, n, 1, 7, 7, 4],
 								["a7", f, a, m, n, 3, 7, 4, 4],
-								["Jeruemee Elrrmaeerr", m, a, m, n, 2, 7, 4, 4],
-								["Jeruemee Elrrmaeerr", m, a, t, n, 1, 7, 6, 4],
+								["Jeruemee Elrrmaer", m, a, m, n, 2, 7, 4, 4],
+								["Jeruemee Elrrmaer", m, a, t, n, 1, 7, 6, 4],
 								["a8", f, a, b, d, 3, 3, 4, 4],
 								["a9", f, a, t, j, 1, 4, 5, 4],
 								["a10", f, a, m, n, 1, 0, 0, 4],
@@ -3167,7 +3186,7 @@
 								["Dahnoo", m, b, t, n, 1, 7, 7, 5],
 								["SotAhro", m, b, t, n, 2, 7, 4, 4],
 								["SotAhro", m, b, t, t, 2, 5, 4, 4],
-								["Dahnoo", m, o, t, n, 1, 7, 7, 4],
+								["Dahnoo", m, b+o, t, n, 1, 7, 7, 4],
 								["p42", f, f, m, n, 1, 0, 0, 4],
 								["p44", f, o, t, n, 1, 7, 7, 5],
 								["p67", f, f, m, n, 1, 3, 3, 4],
@@ -3186,7 +3205,7 @@
 							data: [
 								["SotAhro", m, b, t, t, 1, 7, 4, 4],
 								["p57", m, f, m, n, 1, 0, 0, 4],
-								["p9", "f", "ps", "t", "n", 1, 7, 7, 5],
+								["Kler Matlind", "f", "ps", "t", "n", 1, 7, 7, 5],
 								["Reemuh Gibz", "f", "ps", "t", "n", 1, 7, 7, 5],
 								["SotAhro", m, b, m, n, 1, 7, 4, 5],
 								["p114", f, f, m, n, 1, 2, 0, 4],
@@ -3215,7 +3234,7 @@
 								["p41", f, f, m, n, 1, 0, 0, 4],
 								["p117", m, a, m, n, 1, 2, 2, 4],
 								["Krishdin", m, "p-b", m, d, 3, 3, 5, 5],
-								["Erin", f, "p-b", t, j, 3, 1, 5, 4],
+								["Erin (from Towers West)", f, "p-b", t, j, 3, 1, 5, 4],
 								["UhlIveeuh", f, "p-b", t, j, 3, 2, 5, 5],
 								["SotAhro", m, b, t, t, 1, 3, 5, 4],
 								["SotAhro", m, b, t, t, 2, 3, 5, 4],
@@ -3254,7 +3273,7 @@
 								["Emuelee Hamrr", f, c, m, n, 3, 2, 3, 5],
 								["Emuelee Hamrr", f, c, m, n, 3, 7, 6, 5],
 								["p77", m, s, m, n, 1, 0, 0, 5],
-								["Kalin Troo", m, c, m, n, 3, 2, 4, 5],
+								["Kaylin Troo", m, c, m, n, 3, 2, 4, 5],
 								["g(p63&p118&p119)", "fmm", "c_c_f", "b", "gcdn", 3, 2, "524", 4],
 								["a4", m, f, t, n, 1, 7, 7, 4],
 								["p79", f, f, m, n, 1, 4, 0, 4],
@@ -3315,14 +3334,14 @@
 								["p98", m, s, t, n, 1, 7, 5, 5],
 								["Emuelee Hamrr", f, c, m, n, 3, 2, 3, 5],
 								["p50", f, c, t, j, 1, 5, 5, 5],
-								["p54", m, c, t, j, 1, 6, 4, 5],
+								["Erin", m, c, t, j, 1, 6, 4, 5],
 								["Emuelee Hamrr", f, c, b, n, 3, 7, 4, 5],
 								["a4", m, s, t, n, 1, 7, 7, 4],
 								["SotAhro", m, b, t, t, 1, 7, 7, 4],
 								["Mom", f, a, m, t, 1, 7, 4, 4],
 								["Raein", m, "bc", t, n, 1, 7, 7, 5],
 								["Kaylin Troo", m, c, m, n, 2, 6, 4, 5],
-								["g(Raychol Padtrrsin&Taylrr Lorimaerr&p90&p119&p120&p121)", "ffmmmm", "c_c_c_f_c_c", "b", "ngcjd", 4, 7, "522355", 5],
+								["g(Raychol Padtrrsin&Taylrr Lorimaerr&p90&p119&p72&p118)", "ffmmmm", "c_c_c_f_c_c", "b", "ngcjd", 4, 7, "522355", 5],
 								["p85", f, c, m, d, 2, 3, 4, 5],
 								["Jahn ZookuhrElo", "m", "ps", "t", "t", 2, 6, 4, 4],
 								["p57", m, f, m, n, 1, 0, 0, 4],
@@ -3339,7 +3358,7 @@
 								["Mom", f, a, t, t, 4, 5, 4, 4],
 								["Dad", f, a, t, t, 1, 6, 5, 5],
 								["a7", f, f, m, n, 2, 7, 4, 4],
-								["g(Dahnoo&p95&a7&a8)", "mmff", "o_s_o_s", "b", "dg", 4, 6, "3251", 6],
+								["g(Dahnoo&p95&a7&a8)", "mmff", "bo_s_o_s", "b", "dg", 4, 6, "3251", 6],
 								["a9", f, s, t, n, 1, 7, 7, 5],
 								["Dwayn Jonz", m, s, t, n, 1, 7, 7, 5],
 								["p20", m, b, t, n, 2, 6, 4, 5],
@@ -3393,7 +3412,7 @@
 								["Raein", m, b, t, n, 1, 0, 0, 4],
 								["p38", m, s, t, n, 1, 0, 0, 5],
 								["p111", f, a, m, n, 1, 6, 0, 4],
-								["Emily Hamrr", f, c, m, n, 2, 1, 4, 5],
+								["Emuelee Hamrr", f, c, m, n, 2, 1, 4, 5],
 								["Jeruemee Gray", m, c, t, n, 1, 7, 7, 5],
 								["Emuelee Hamrr", f, c, b, n, 3, 7, 4, 5],
 								["p44", f, s, t, n, 2, 4, 5, 5],
@@ -3438,13 +3457,13 @@
 								["Deluh West", f, a, b, n, 1, 0, 0, 4],
 								["a3", f, a, b, n, 1, 7, 7, 5],
 								["a4", f, a, b, n, 1, 7, 7, 5],
-								["p122", m, a, b, n, 1, 7, 4, 4],
+								["p120", m, a, b, n, 1, 7, 4, 4],
 								["a5", f, k, b, n, 1, 7, 4, 4],
 								["a6", f, k, m, n, 1, 0, 0, 5],
 								["Dad", m, a, t, n, 1, 4, 7, 5],
 								["Vaelit Telgmin", f, a, m, c, 1, 5, 4, 4],
-								["p123", f, a, t, j, 1, 5, 6, 4],
-								["Ruth (from Pacific Care)", f, a, n, n, 1, 0, 0, 5],
+								["p121", f, a, t, j, 1, 5, 6, 4],
+								["Rooth (from Pacific Care)", f, a, n, n, 1, 0, 0, 5],
 								["MuekEnzee Ekrin", f, p, b, n, 2, 7, 4, 6],
 								["MuekEnzee Ekrin", f, p, b, n, 1, 7, 7, 6],
 								["Dad", m, a, m, n, 1, 7, 4, 4],
@@ -3630,7 +3649,7 @@
 								professor: ["RuhbEkuh Krrzawlz", "f"],
 								nearby: [
 									["Emuelee Hamrr", "f", 3],
-									["p54", "m", 3],
+									["Erin", "m", 3],
 									["Mahlee Kuk", "f", 2],
 									["p50", "f", 1],
 									["p51", "f", 2],
@@ -3832,15 +3851,202 @@
 						p117: ["bald dining hall guy"],
 						p118: ["red-headed? guy in History"],
 						p119: ["faction game master"],
-						p120: ["Thorir"],
-						p121: ["red-headed guy in History"],
-						p122: ["St. Bridget of Kildare priest"],
-						p123: ["dark-haired Pacific Care secretary"]
+						p120: ["St. Bridget of Kildare priest"],
+						p121: ["dark-haired Pacific Care secretary"]
 					};
 
-					////
-					var peopleMentionedArray = [];
-					var peopleMentionedString = "";
+					var peopleAffiliations = {
+						"Dahleeuh": "",  // Towers Cafe cashier
+						"Kerol Horst": "",  // Art professor
+						"Tahm (bus)": "",  // shuttle bus driver
+						"Trent Spaekrr": "",  // guy from Towers West
+						"Dad": "",  // dad
+						"Mom": "",  // mom
+						"Madee Basteen": "",  // girl from Odessey
+						"Andee Choo": "",  // Boston University roommate
+						"Jayk Braet": "",  // Towers West roommate
+						"Brendin": "",  // ?
+						"Kristol": "",  // girl from History class
+						"Seruh": "",  // girl from History class
+						"ViktOreeuh MikAluhstrr": "",  // History professor
+						"YuevAhn": "",  // Towers West RA
+						"Nolin Drayk": "",  // Towers West roommate
+						"PuetrIshuh Ferish": "",  // Relationships professor
+						"Dwayn Jonz": "",  // Towers South hall director
+						"Kaytlin Richrrdz": "",  // girl from Art class
+						"Joee Taylrr": "",  // guy from Art class
+						"Kamrin": "",  // guy from Art class
+						"Antuhnee": "",  // guy from Art class
+						"Jahn ZookuhrElo": "",  // neighbor from Patriots Lane
+						"Mahlee Kuk": "",  // girl from Biology lab
+						"Jeruemee Gray": "",  // guy from Biology lab
+						"Trisdin Keeng": "",  // guy from Biology lab
+						"RuhbEkuh Krrzawlz": "",  // Biology professor (and lab teacher)
+						"Reemuh Gibz": "",  // girl from Pacific High School
+						"p4": "",
+						"Vikee Hahol": "",  // oversees biology office
+						"Jaymz ShampEen": "",  // head of biology department
+						"Kaylin Troo": "",  // guy from History class
+						"Jenee Apolgayt": "",  // girl from Pacific High School
+						"Nik KlaethRrmis": "",  // guy from Pacific Hight School
+						"p6": "",
+						"p7": "",
+						"Emee Jay": "",  // girl from Towers West
+						"Kler Soodtrr": "",  // girl from Pacific High School
+						"Kler Matlind": "",  // girl from Pacific High School
+						"p21": "",
+						"p22": "",
+						"Linzee": "Jahn ZookuhrElo",  // Jahn ZookuhrElo's friend
+						"Jo": "Jahn ZookuhrElo",  // Jahn ZookuhrElo's friend
+						"p10": "Jahn ZookuhrElo",
+						"AhndrAyuh": "",  // girl from Art class
+						"Nik Kentzuel": "",  // guy from Towers West
+						"Madisin S.": "",  // girl from Towers West
+						"Saeahn Pikslee": "",  // guy from Towers West
+						"Krishdin": "",  // guy from Towers West
+						"Kaylueb Hamueltin": "",  // original roommate at Towers South
+						"p18": "SotAhro",
+						"p17": "SotAhro",
+						"p20": "",
+						"DayvAhntay": "",  // neighbor in Towers South
+						"Linduh Wileeuhmz": "",  // person in charge of administrative stuff
+						"p23": "",
+						"p24": "",
+						"Dahnoo": "",  // Towers South RA
+						"Emuh": "",  // ?
+						"Kandis Grant": "",  // girl from relationships class
+						"Raein (random guy)": "",  // random guy from Towers Cafe
+						"DayvAhn": "",  // neighbor in Towers South
+						"GabreeOn": "",  // neighbor in Towers South
+						"Emuelee Hamrr": "",  // girl from Biology class
+						"p27": "",
+						"SotAhro": "",  // neighbor in Towers South
+						"p28": "",
+						"p29": "",
+						"Ahlshrr": "",  // neighbor in Towers South
+						"p37": "Ahlshrr",
+						"Heruesin": "",  // Kaylueb Hamueltin's friend
+						"p38": "Ahlshrr",
+						"p58": "Ahlshrr",
+						"Patrik": "",  // neighbor in Towers South
+						"p33": "",
+						"p34": "",
+						"p36": "",
+						"p35": "",
+						"Ben": "",  // random guy from Towers Cafe?
+						"Kodee": "",  // guy from Art class
+						"p40": "",
+						"Zak Kao": "",  // Economics professor
+						"Raein": "",  // neighbor in Towers South
+						"p41": "",
+						"p42": "",
+						"p43": "",
+						"Jakee Awrchrr": "",  // girl from Pacific High School
+						"p44": "",
+						"Naythin": "Peedtrr",  // videogame guy from Towers South
+						"p55": "Peedtrr",
+						"p45": "",
+						"Peedtrr": "",  // originally random guy from Towers Cafe
+						"p46": "",
+						"p47": "",
+						"UhlIveeuh": "Emee Jay",  // girl from Towers West (Emee Jay's roommate)
+						"p49": "",
+						"p48": "",
+						"Seth": "",  // neighbor from Towers South
+						"Maysin": "",  // ?
+						"Erin": "",  // guy from Biology class
+						"Erin (from Towers West)": "",  // from Towers West
+						"p53": "",
+						"p52": "",
+						"p51": "",
+						"p50": "",
+						"Kris": "Peedtrr",  // guy who play Super Smash Brothers?
+						"Kevin": "Peedtrr",  // guy who played Super Smash Brothers?
+						"p56": "Peedtrr",
+						"p57": "",
+						"p59": "",
+						"Troodee Brrnham": "",  // originally random girl from Towers Cafe
+						"p61": "",
+						"p63": "",
+						"p62": "",
+						"p64": "",
+						"p65": "",
+						"p66": "",
+						"p67": "",
+						"p68": "",
+						"p69": "",
+						"p70": "",
+						"p71": "",
+						"p16": "",
+						"p72": "",
+						"p73": "SotAhro",
+						"Ryo": "SotAhro",
+						"p75": "",
+						"Zak Suhdtin": "",  // guy from Pacific High School
+						"p76": "p20",
+						"p78": "",
+						"Jaykueb": "",  // guy from Towers South
+						"Cole": "Jaykueb",  // Jaykueb's friend?
+						"p79": "",
+						"p81": "",
+						"p80": "",
+						"p82": "",
+						"p83": "",
+						"p84": "",
+						"p85": "",
+						"p86": "",
+						"p87": "SotAhro",
+						"p88": "",
+						"p89": "",
+						"p90": "Raein",
+						"Jaykueb Brrgmin": "",  // subsequent roommate at Towers South
+						"p91": "",
+						"p92": "",
+						"p93": "",
+						"p94": "",
+						"p95": "",
+						"p96": "p20",
+						"p97": "p20",
+						"p98": "SotAhro",
+						"p101": "SotAhro",
+						"p100": "SotAhro",
+						"p99": "SotAhro",
+						"Bahnoo": "Dahnoo",  // second floor Towers South RA
+						"p102": "",
+						"p103": "",
+						"p104": "",
+						"p105": "",
+						"p106": "Alshrr",
+						"p77": "p20",
+						"p107": "",
+						"p108": "SotAhro",
+						"p109": "",
+						"Jeruemee Elrrmaer": "",  // biology advisor
+						"p110": "",
+						"p111": "",
+						"p112": "",
+						"DakOdtuh": "",  // girl from relationships class?
+						"p113": "Jaykueb",
+						"p114": "",
+						"p116": "Jahn ZookuhrElo",
+						"p115": "Jahn ZookuhrElo",
+						"Emuh Bushrree": "",  // girl from Pacific High School
+						"Dahnee Jahnsin": "",  // girl from conference band
+						"p117": "",
+						"Nao": "",  // girl from Towers Cafe
+						"p119": "",
+						"p118": "",
+						"Taylrr Lorimaerr": "",  // girl from History class
+						"Raychol Padtrrsin": "",  // girl from History class
+						"Dayv Hentrik": "",  // uncle-in-law
+						"Vaelit Telgmin": "",  // my mom's aunt
+						"Deluh West": "",  // Vaelit Telgmin's roommate
+						"p120": "",
+						"p121": "",
+						"Rooth (from Pacific Care)": "",  // from Pacific Care
+						"MuekEnzee Ekrin": "",  // girl from Pacific High School
+						"Haylee Man": "",  // girl from Pacific High School
+					};
 
 					let conversationData = "";
 					S.forEach(conversations, function (day) {
@@ -3848,12 +4054,14 @@
 					});
 					S.getId("rawConversationData").textContent = conversationData;
 
-					function updateConversations() {
+					var topConversationFilter = { m: [], f: [] };
+
+					function updateConversations(setTopFilter) {
 						/**
 						puts information into the conversation tables
 						*/
 						var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople"), document.getElementById("averageLengths"), document.getElementById("enjoyability"), document.getElementById("initiatorSkew")],
-							tableModified = [false, false, false, false, false],
+							tableModified = [{ m: false, f: false }, { m: false, f: false }, { m: false, f: false }, { m: false, f: false }, { m: false, f: false }],
 							rows = [null, null],
 							male = [],
 							female = [];
@@ -3881,10 +4089,11 @@
 						function addInformation(tableNumber, gender, information) {
 							if (gender == "m") {
 								male[tableNumber-1].textContent = Number(male[tableNumber-1].textContent) + information;
+								tableModified[tableNumber-1].m = true;
 							} else if (gender == "f") {
 								female[tableNumber-1].textContent = Number(female[tableNumber-1].textContent) + information;
+								tableModified[tableNumber-1].f = true;
 							}
-							tableModified[tableNumber-1] = true;
 						}
 						function extendTables(date, maleRawData, femaleRawData) {
 							let morePreciseTables = Array.prototype.slice.call(arguments, 3);
@@ -3903,11 +4112,15 @@
 										female[index].textContent = Math.round(Number(female[index].textContent)*10) / 10;
 									}
 								}
-								if (!tableModified[index] && male[index].textContent != "?") {
+								if (!tableModified[index].m && male[index].textContent != "?") {
 									male[index].textContent = "\u00a0";
+								} else {
+									tableModified[index].m = false;
+								}
+								if (!tableModified[index].f && female[index].textContent != "?") {
 									female[index].textContent = "\u00a0";
 								} else {
-									tableModified[index] = false;
+									tableModified[index].f = false;
 								}
 								male[index].className = "trigger";
 								female[index].className = "trigger";
@@ -3966,10 +4179,40 @@
 								});
 							});
 						}
+
 						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
 							initSum = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
 							recordedPeople = { m: [], f: [] },
-							totalPeople = { m: [], f: [] };
+							totalPeople = { m: [], f: [] },
+							unfilteredPeople = [],
+							topFilter = { m: [], f: [] };
+						if (setTopFilter === false) {
+							if (topConversationFilter.m.length > 0) {
+								topConversationFilter.m.sort(function (item1, item2) {
+									return (item2.occurrences * 1000 + item2.total) - (item1.occurrences * 1000 + item1.total);
+								});
+								let index = 0,
+									filterNumber = S.getId("topMales").value.trim() == "" ? 0 : Number(S.getId("topMales").value);
+								while (index < topConversationFilter.m.length && index < filterNumber) {
+									topFilter.m.push(topConversationFilter.m[index].name);
+									index++;
+								}
+							}
+							if (topConversationFilter.f.length > 0) {
+								topConversationFilter.f.sort(function (item1, item2) {
+									return (item2.occurrences * 1000 + item2.total) - (item1.occurrences * 1000 + item1.total);
+								});
+								let index = 0,
+									filterNumber = S.getId("topFemales").value.trim() == "" ? 0 : Number(S.getId("topFemales").value);
+								while (index < topConversationFilter.f.length && index < filterNumber) {
+									topFilter.f.push(topConversationFilter.f[index].name);
+									index++;
+								}
+							}
+						} else {
+							topConversationFilter = { m: [], f: [] };
+						}
+
 						S.forEach(conversations, function (day) {
 							let dayIsCountable = true;
 							if (day.notes.indexOf("no data") > -1) {
@@ -4041,13 +4284,14 @@
 										kid: S.getId("kidConversations").checked,
 										formal: S.getId("formalConversations").checked,
 										small: S.getId("smallConversations").checked,
+										other: S.getId("otherConversations").checked,
 										familiar: S.getId("familiarConversations").checked,
 										floor: S.getId("floorConversations").checked,
 										group: S.getId("groupConversations").checked,
 										individual: S.getId("individualConversations").checked,
+										affiliated: S.getId("affiliatedConversations").checked,
 										class: S.getId("classConversations").checked,
 										anonymous: S.getId("anonymousConversations").checked,
-										other: S.getId("otherConversations").checked,
 										mine: S.getId("myConversations").checked,
 										theirs: S.getId("theirConversations").checked
 									};
@@ -4491,6 +4735,8 @@
 												return person.classification.includes(indicator);
 											}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
 												desiredInteraction = false;
+											} else if (!checkboxes.affiliated && peopleAffiliations[person.name] && !unfilteredPeople.includes(peopleAffiliations[person.name])) {
+												desiredInteraction = false;
 											}
 										} else {  // if the interaction should fail only if all characteristics aren't wanted
 											desiredInteraction = false;
@@ -4526,99 +4772,142 @@
 												return person.classification.includes(indicator);
 											}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
 												desiredInteraction = true;
+											} else if (checkboxes.affiliated && peopleAffiliations[person.name] && unfilteredPeople.includes(peopleAffiliations[person.name])) {
+												desiredInteraction = true;
 											}
+										}
+										if (setTopFilter === false && topFilter[person.gender] && topFilter[person.gender].includes(person.name)) {
+											desiredInteraction = false;
 										}
 										
 										if (desiredInteraction) {  // if the interaction should be counted
 
-											// adds to the raw data
-											if (person.gender == "m" || person.gender == "f") {
-												rawData[person.gender].push(person);
-											}
+											if (setTopFilter !== false) {
+												// if setting the top people I had conversations with
+												// (!== false is needed because onClick listeners pass a MouseEvent object to their function)
 
-											// increases the number of interactions
-											interactionNumbers.total++;
-											if (interactionNumbers[person.gender] != undefined) {
-												interactionNumbers[person.gender]++;
-											}
-
-											// sets the information for the unique people who interacted with me table
-											if (uniquePeople[person.gender] != undefined && conversation[0] != "group" && uniquePeople[person.gender].indexOf(person.name) == -1) {
-												uniquePeople[person.gender].push(person.name);
-												addInformation(2, person.gender, 1);
-											}
-
-											// sets the information for the initiator skew table
-											addInformation(5, person.gender, person.initiator=="m" ? 1 : person.initiator=="t" ? -1 : 0);
-
-											// sets part of the information for the average enjoyability table
-											addInformation(4, person.gender, person.enjoyability);
-
-											// sets the information for the number of started conversations table
-											if (person.gender == "m") {
-												if (person.initiator == "m") {
-													initiators[0][0] += 1;
-												} else if (person.initiator == "t") {
-													initiators[0][1] += 1;
-												} else if (person.initiator == "b") {
-													initiators[0][0] += 1;
-													initiators[0][1] += 1;
-												} else if (person.initiator != "-" && person.initiator != "n") {
-													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
+												if (topConversationFilter[person.gender] && person.name.charAt(0).search(/[A-Zp]/) > -1) {
+													let present = false;
+													let filterIndex = 0;
+													if (topConversationFilter[person.gender].length > 0) {
+														while (filterIndex < topConversationFilter[person.gender].length && topConversationFilter[person.gender][filterIndex].name != person.name) {
+															filterIndex++;
+														}
+														if (filterIndex < topConversationFilter[person.gender].length) {
+															present = true;
+														}
+													}
+													let total;
+													if (S.getName("personFocus", true).id == "myTalkTotal") {
+														total = me.total;
+													} else {
+														total = person.total;
+													}
+													if (present) {
+														topConversationFilter[person.gender][filterIndex].occurrences += 1;
+														topConversationFilter[person.gender][filterIndex].total += total;
+													} else {
+														topConversationFilter[person.gender].push({ name: person.name, occurrences: 1, total: total });
+													}
 												}
-											} else if (person.gender == "f") {
-												if (person.initiator == "m") {
-													initiators[1][0] += 1;
-												} else if (person.initiator == "t") {
-													initiators[1][1] += 1;
-												} else if (person.initiator == "b") {
-													initiators[1][0] += 1;
-													initiators[1][1] += 1;
-												} else if (person.initiator != "-" && person.initiator != "n") {
-													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
-												}
-											}
 
-											// keeps track of information for the total people recorded table
-											if (recordedPeople[person.gender] != undefined && person.name[0] != "a" && recordedPeople[person.gender].indexOf(person.name) == -1) {
-												recordedPeople[person.gender].push(person.name);
-												totalPeople[person.gender].push(person.name);
-											}
-
-											// decides which totals should be used
-											let total;
-											if (S.getName("personFocus", true).id == "myTalkTotal") {
-												total = me.total;
 											} else {
-												total = person.total;
-											}
 
-											// sets the information for the sum of conversation lengths table
-											addInformation(1, person.gender, total);
+												// keeps track of people who haven't been filtered out (for affiliation filtering)
+												if (!unfilteredPeople.includes(person.name)) {
+													unfilteredPeople.push(person.name);
+												}
 
-											// sets the information for the sum of started conversations table
-											if (person.gender == "m") {
-												if (person.initiator == "m") {
-													initSum[0][0] += total;
-												} else if (person.initiator == "t") {
-													initSum[0][1] += total;
-												} else if (person.initiator == "b") {
-													initSum[0][0] += total;
-													initSum[0][1] += total;
-												} else if (person.initiator != "-" && person.initiator != "n") {
-													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
+												// adds to the raw data
+												if (person.gender == "m" || person.gender == "f") {
+													rawData[person.gender].push(person);
 												}
-											} else if (person.gender == "f") {
-												if (person.initiator == "m") {
-													initSum[1][0] += total;
-												} else if (person.initiator == "t") {
-													initSum[1][1] += total;
-												} else if (person.initiator == "b") {
-													initSum[1][0] += total;
-													initSum[1][1] += total;
-												} else if (person.initiator != "-" && person.initiator != "n") {
-													console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
+
+												// increases the number of interactions
+												interactionNumbers.total++;
+												if (interactionNumbers[person.gender] != undefined) {
+													interactionNumbers[person.gender]++;
 												}
+
+												// sets the information for the unique people who interacted with me table
+												if (uniquePeople[person.gender] != undefined && conversation[0] != "group" && uniquePeople[person.gender].indexOf(person.name) == -1) {
+													uniquePeople[person.gender].push(person.name);
+													addInformation(2, person.gender, 1);
+												}
+
+												// sets the information for the initiator skew table
+												addInformation(5, person.gender, person.initiator == "m" ? 1 : person.initiator == "t" ? -1 : 0);
+
+												// sets part of the information for the average enjoyability table
+												addInformation(4, person.gender, person.enjoyability);
+
+												// sets the information for the number of started conversations table
+												if (person.gender == "m") {
+													if (person.initiator == "m") {
+														initiators[0][0] += 1;
+													} else if (person.initiator == "t") {
+														initiators[0][1] += 1;
+													} else if (person.initiator == "b") {
+														initiators[0][0] += 1;
+														initiators[0][1] += 1;
+													} else if (person.initiator != "-" && person.initiator != "n") {
+														console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
+													}
+												} else if (person.gender == "f") {
+													if (person.initiator == "m") {
+														initiators[1][0] += 1;
+													} else if (person.initiator == "t") {
+														initiators[1][1] += 1;
+													} else if (person.initiator == "b") {
+														initiators[1][0] += 1;
+														initiators[1][1] += 1;
+													} else if (person.initiator != "-" && person.initiator != "n") {
+														console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
+													}
+												}
+
+												// keeps track of information for the total people recorded table
+												if (recordedPeople[person.gender] != undefined && person.name.charAt(0).search(/[A-Zp]/) > -1 && recordedPeople[person.gender].indexOf(person.name) == -1) {
+													recordedPeople[person.gender].push(person.name);
+													totalPeople[person.gender].push(person.name);
+												}
+
+												// decides which totals should be used
+												let total;
+												if (S.getName("personFocus", true).id == "myTalkTotal") {
+													total = me.total;
+												} else {
+													total = person.total;
+												}
+
+												// sets the information for the sum of conversation lengths table
+												addInformation(1, person.gender, total);
+
+												// sets the information for the sum of started conversations table
+												if (person.gender == "m") {
+													if (person.initiator == "m") {
+														initSum[0][0] += total;
+													} else if (person.initiator == "t") {
+														initSum[0][1] += total;
+													} else if (person.initiator == "b") {
+														initSum[0][0] += total;
+														initSum[0][1] += total;
+													} else if (person.initiator != "-" && person.initiator != "n") {
+														console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
+													}
+												} else if (person.gender == "f") {
+													if (person.initiator == "m") {
+														initSum[1][0] += total;
+													} else if (person.initiator == "t") {
+														initSum[1][1] += total;
+													} else if (person.initiator == "b") {
+														initSum[1][0] += total;
+														initSum[1][1] += total;
+													} else if (person.initiator != "-" && person.initiator != "n") {
+														console.error("Conversation number " + (number + 1) + " on " + day.date + " has an invalid type of initiator.");
+													}
+												}
+
 											}
 
 										} else {
@@ -4629,14 +4918,7 @@
 											}
 
 										}
-
-										//// records the people mentioned
-										if (person.name.charAt(0).search(/A-Z/) > -1 && !peopleMentionedArray.includes(person.name)) {
-											// This uses .charAt() so an empty string is returned if there aren't any characters.
-											console.log(person.name);
-											peopleMentionedArray.push(person.name);
-											peopleMentionedString += person.name + "\n";
-										}
+										
 									}
 								});
 								
@@ -4667,40 +4949,41 @@
 								extendTables(day.date, [], []);
 							}
 						});
-						tables.forEach(function(table) {
-							table.getElementsByTagName("tr")[2].getElementsByTagName("th")[0].rowSpan = table.getElementsByTagName("tr").length - 2;
-						});
-						initiators[0][2] = initiators[0][0] + initiators[0][1];
-						initiators[1][2] = initiators[1][0] + initiators[1][1];
-						initiators[2][0] = initiators[0][0] + initiators[1][0];
-						initiators[2][1] = initiators[0][1] + initiators[1][1];
-						initiators[2][2] = initiators[0][2] + initiators[1][2];
-						S.forEach(initiators, function(row, rowIndex) {
-							S.forEach(row, function(column, columnIndex) {
-								document.getElementById("initializers").getElementsByTagName("tr")[rowIndex+2].getElementsByTagName("td")[columnIndex].textContent = column;
+						if (setTopFilter === false) {
+							tables.forEach(function (table) {
+								table.getElementsByTagName("tr")[2].getElementsByTagName("th")[0].rowSpan = table.getElementsByTagName("tr").length - 2;
 							});
-						});
-						initSum[0][2] = initSum[0][0] + initSum[0][1];
-						initSum[1][2] = initSum[1][0] + initSum[1][1];
-						initSum[2][0] = initSum[0][0] + initSum[1][0];
-						initSum[2][1] = initSum[0][1] + initSum[1][1];
-						initSum[2][2] = initSum[0][2] + initSum[1][2];
-						S.forEach(initSum, function (row, rowIndex) {
-							S.forEach(row, function (column, columnIndex) {
-								document.getElementById("initializerSum").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = Math.round(column);
+							initiators[0][2] = initiators[0][0] + initiators[0][1];
+							initiators[1][2] = initiators[1][0] + initiators[1][1];
+							initiators[2][0] = initiators[0][0] + initiators[1][0];
+							initiators[2][1] = initiators[0][1] + initiators[1][1];
+							initiators[2][2] = initiators[0][2] + initiators[1][2];
+							S.forEach(initiators, function (row, rowIndex) {
+								S.forEach(row, function (column, columnIndex) {
+									document.getElementById("initializers").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = column;
+								});
 							});
-						});
-						document.getElementById("totalPeople").getElementsByTagName("td")[0].textContent = totalPeople.m.length;
-						document.getElementById("totalPeople").getElementsByTagName("td")[1].textContent = totalPeople.f.length;
-						document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
-						S.colorCode("conversationLengths", null, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0], [0, 255, 0]);
-						S.colorCode("uniquePeople");
-						S.colorCode("initiatorSkew");
-						S.colorCode("averageLengths", null, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0]);
-						S.colorCode("enjoyability", null, [255, 255, 0], [85, 255, 0]);
-
-						////
-						console.log(peopleMentionedString);
+							initSum[0][2] = initSum[0][0] + initSum[0][1];
+							initSum[1][2] = initSum[1][0] + initSum[1][1];
+							initSum[2][0] = initSum[0][0] + initSum[1][0];
+							initSum[2][1] = initSum[0][1] + initSum[1][1];
+							initSum[2][2] = initSum[0][2] + initSum[1][2];
+							S.forEach(initSum, function (row, rowIndex) {
+								S.forEach(row, function (column, columnIndex) {
+									document.getElementById("initializerSum").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = Math.round(column);
+								});
+							});
+							document.getElementById("totalPeople").getElementsByTagName("td")[0].textContent = totalPeople.m.length;
+							document.getElementById("totalPeople").getElementsByTagName("td")[1].textContent = totalPeople.f.length;
+							document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
+							S.colorCode("conversationLengths", null, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0], [0, 255, 0]);
+							S.colorCode("uniquePeople");
+							S.colorCode("initiatorSkew");
+							S.colorCode("averageLengths", null, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0]);
+							S.colorCode("enjoyability", null, [255, 255, 0], [85, 255, 0]);
+						} else {
+							updateConversations(false);
+						}
 					}
 					updateConversations();
 					S.forEach(S.getId("conversationCheckboxes").getElementsByTagName("input"), function(checkbox) {
@@ -5033,7 +5316,12 @@
 						</tr>
 						<tr>
 							<td>
-								10:43pm-6:43am | 1:09am-8:54am |12:22-6:29am<note-><div><div>I was doing homework due that night.</div></div></note->| 1:53am-10:23am|12:46am-6:42am<note-><div><div>I was typing an email, but I could've had more focus.</div></div></note->| 2:04am-11:24am
+								10:43pm-6:43am | 1:09am-8:54am |12:22am-6:29am<note-><div><div>I was doing homework due that night.</div></div></note->| 1:53am-10:23am|12:46am-6:42am<note-><div><div>I was typing an email, but I could've had more focus.</div></div></note->| 2:04am-11:24am| 5:55am-1:34pm<note-><div><div>I had to go to the bathroom (and get dressed) from 11:15am-11:47am</div></div></note->
+							</td>
+						</tr>
+						<tr>
+							<td>
+								10:57pm-6:50am | 1:18am-8:19am<note-><div><div>I was doing homework due that night.</div></div></note->|11:24pm-6:32<note-><div><div>I was having a long talk with Sotaro the night before about him moving in.</div></div></note->| 3:57am-11:52<note-><div><div>I was making a planned entry in my journal.</div></div></note->|11:25pm-6:28am<note-><div><div>I was finishing a scholarship essay and a housing contract.</div></div></note->| 2:47am-12:02pm
 							</td>
 						</tr>
 					</table>
@@ -5059,6 +5347,77 @@
 				<p>
 					Eventually, I got tired of guessing what I should wear based on weather conditions, so I started keeping track of what the weather was and what I thought I'd be comfortable wearing (once I felt what it was like outside).
 				</p>
+				<div class="details">
+					<div class="summary">
+						Raw data
+					</div>
+					<table class="compact">
+						<tr>
+							<th>
+								Temperature feeling (1-8)|Actual temperature (&deg;F)|Wind (mph)|Humidity (%)|Cloud cover (1-3)
+							</tr>
+						<tr>
+							<td>
+								5|62|18|89|3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								5|70|21|70|3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								2|35|13|90|3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								3|45| 5|87|3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								5|52| 7|92|3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								4|53| 3|87|3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								4|57| 6|38|1
+							</td>
+						</tr>
+						<tr>
+							<td>
+								3|59| 8|34|1
+							</td>
+						</tr>
+						<tr>
+							<td>
+								4|61|12|43|1
+							</td>
+						</tr>
+						<tr>
+							<td>
+								4|59| 9|93|3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								3|55|17|72|1
+							</td>
+						</tr>
+						<tr>
+							<td>
+								3|49| 7|46|1
+							</td>
+						</tr>
+					</table>
+				</div>
 				<br>
 				<h2>
 					Polynomial function critical points
@@ -5143,7 +5502,6 @@
 						</td>
 					</tr>
 				</table>
-				<br>
 				<br>
 				<h2>
 					Moment of inertia values
