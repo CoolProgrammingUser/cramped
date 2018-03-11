@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html class="html-class">
+<!doctype html>
+<html>
 	<head>
 		<title>
 			Cramped
@@ -64,7 +64,7 @@
 						var then = new Date(element.date);
 					} else {  // if there's not a year
 						// when dates are only given in a month and day (meant to be annual)
-						if (now.getTime() <= new Date(element.date+", "+now.getFullYear()).getTime()) {
+						if (now.getTime() <= new Date(element.date+", "+now.getFullYear()).getTime() + 86400000) {
 							var then = new Date(element.date+", "+now.getFullYear());
 						} else {
 							var then = new Date(element.date+", "+(now.getFullYear()+1));
