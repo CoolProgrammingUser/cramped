@@ -27,44 +27,50 @@ window.addEventListener("finished", function() {
 		document.createElement("div")
 		];
 	faceArray.forEach(function(face) {
-		face.style.width = "25px";
-		face.style.height = "25px";
-		face.style.backgroundImage = "url('images/Me in a Nutshell.png')";
-		face.style.backgroundSize = "cover";
-		face.style.position = "absolute";
-		face.style.left = "-"+face.style.width;
-		face.style.top = "-"+face.style.height;
+		face.className = "following-face";
 		document.body.appendChild(face);
 	});
+	var pastPosition = [];
+	faceArray.forEach(function (face) {
+		pastPosition.push([cursor.x + 15, cursor.y + 15]);
+	});
 	document.addEventListener("mousemove", function(event) {
-		var coords = [event.pageX, event.pageY];
+		var coords = [event.clientX, event.clientY];  // [event.pageX, event.pageY];
 		cursor.moving = true;
 		cursor.x = coords[0];
 		cursor.y = coords[1];
+		pastPosition.push([cursor.x + 15, cursor.y + 15]);
 		setTimeout(function() {
 			if (coords[0]==cursor.x && coords[1]==cursor.y) {  // if the cursor is in the same place as it was 100 milliseconds ago
 				cursor.moving = false;
 			}
 		}, 100);
 	});
+	faceArray.forEach(function (face, index) {
+		let place = 0;
+		if (index == faceArray.length - 1) {
+			setInterval(function () {
+				if (place < pastPosition.length) {
+					faceArray[index].style.left = pastPosition[place][0] + "px";
+					faceArray[index].style.top = pastPosition[place][1] + "px";
+					/*  // This would help decrease the length of pastPosition if it didn't mess everything up.
+					if (pastPosition.length > 1) {
+						pastPosition.shift();
+					}
+					*/
+				}
+			}, (index + 4) * 5);
+		} else {
+			setInterval(function () {
+				if (place < pastPosition.length) {
+					faceArray[index].style.left = pastPosition[place][0] + "px";
+					faceArray[index].style.top = pastPosition[place][1] + "px";
+					place++;
+				}
+			}, (index + 4) * 5);
+		}
+	});
 	/*
-	var pastPosition = [];
-	faceArray.forEach(function(face) {
-		pastPosition.push([cursor.x+15, cursor.y+15]);
-	});
-	function position (index, timeout) {
-		faceArray[index].style.left = pastPosition[index][0];
-		faceArray[index].style.top = pastPosition[index][1];
-		pastPosition[index][0] = cursor.x + 15;
-		pastPosition[index][1] = cursor.y + 15;
-		setTimeout(function() {
-			position(index, timeout);
-		}, timeout);
-	}
-	faceArray.forEach(function(face, index) {
-		position(index, (index+.2)*10);
-	});
-	*/
 	setInterval(function() {
 		faceArray.forEach(function(face, index, faces) {
 			if (index == 0) {
@@ -146,4 +152,5 @@ window.addEventListener("finished", function() {
 			}
 		});
 	}, 20);
+	*/
 });
