@@ -1,12 +1,12 @@
 var S = Standards.general;
 
 //holds the cursor position
-var cursor = {"moving":false, "x":"-20", "y":"-20"};
+var cursor = { moving: false, x: "-20", y: "-20" };
 
 window.addEventListener("finished", function() {
 	// interprets <note> tags
 	let noteNumber = 1;
-	S.getTag("note").forEach(function (note, index, notes) {
+	S.forEach(S.getTag("note"), function (note, index, notes) {
 		if (note.innerHTML[0] == "[" && note.innerHTML[note.innerHTML.length - 1] == "]") {
 			let reference = S.getId(note.innerHTML.slice(1, -1));
 			note.title = reference.title;
