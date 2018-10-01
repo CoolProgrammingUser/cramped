@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html class="html-class">
+<!doctype html>
+<html>
 	<head>
 		<title>
 			Cramped
@@ -21,12 +21,12 @@
 				setInterval(update, 1000);
 				S.colorCode(document.getElementById("eyeColor"), null, [0, 200, 50], [0, 200, 250], [0, 50, 250]);
 				S.colorCode(document.getElementById("favoriteColor"), null, [250, 0, 0], [250, 240, 0], [0, 240, 0], [0, 240, 250], [0, 0, 250]);
-				var sound = new S.Sound({"waveform":"square"});  // Standards.audio doesn't exist in some browsers, so trying to access it at the end allows the rest of the script to end
+				var sound = new S.Sound({waveform:"square"});  // Standards.audio doesn't exist in some browsers, so trying to access it at the end allows the rest of the script to end
 				var playing = false;
 				document.getElementById("morseCode").addEventListener("mouseenter", function() {
 					if (!playing) {
 						playing = true;
-						sound.play("a4-- a4--   a4-- a4-- a4--   a4 a4-- a4   a4 a4 a4   a4       a4-- a4 a4-- a4   a4-- a4-- a4--   a4-- a4 a4   a4", {"volume":.2, "attack":1, "noteLength":50, "decay":1}, function() {
+						sound.play("a4-- a4--   a4-- a4-- a4--   a4 a4-- a4   a4 a4 a4   a4       a4-- a4 a4-- a4   a4-- a4-- a4--   a4-- a4 a4   a4", {volume:.6, attack:1, noteLength:50, decay:1}, function() {
 							playing = false;
 						});
 					}
