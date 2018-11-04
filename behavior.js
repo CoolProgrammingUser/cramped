@@ -58,6 +58,7 @@ window.addEventListener("finished", function() {
 						pastPosition.shift();
 					}
 					*/
+					place++;
 				}
 			}, (index + 4) * 5);
 		} else {

@@ -27,3 +27,10 @@ h1.main-title {
 	background-image: url("images/Me in a Nutshell.png");
 	background-size: cover;
 }
+note {
+	color: blue;
+	cursor: help;
+}
+note:hover {
+	text-decoration: underline;
+}
