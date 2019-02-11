@@ -10,6 +10,20 @@
 		<script src="behavior.js"></script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
+		<style>
+			#badDuckSample > span {
+				display: none;
+			}
+			#badDuckSample > span:first-child {
+				display: inline;
+			}
+			#badDuckSample:hover > span {
+				display: inline;
+			}
+			#badDuckSample:hover > span:first-child {
+				display: none;
+			}
+		</style>
 	</head>
 	<body class="left-nav">
 		<iframe class="left-nav" src="navigation.html"></iframe>
@@ -36,8 +50,10 @@
 						<ul>
 							<li>
 								Sample:<br>
-								&emsp;<span style="font-family: Bad Duck">this </span>&thinsp;<span style="font-family: Bad Duck">is </span>&thinsp;<span style="font-family: Bad Duck">\bad </span>&thinsp;<span style="font-family: Bad Duck">\duck.</span><br>
-								&emsp;<span style="font-family: Bad Duck">THIS </span>&thinsp;<span style="font-family: Bad Duck">IS </span>&thinsp;<span style="font-family: Bad Duck">\BAD </span>&thinsp;<span style="font-family: Bad Duck">\DUCK.</span>
+								<div id="badDuckSample">
+									<span>&emsp;<span style="font-family: Bad Duck">this </span>&thinsp;<span style="font-family: Bad Duck">is </span>&thinsp;<span style="font-family: Bad Duck">\bad </span>&thinsp;<span style="font-family: Bad Duck">\duck.</span></span>
+									<span>&emsp;<span style="font-family: Bad Duck">THIS </span>&thinsp;<span style="font-family: Bad Duck">IS </span>&thinsp;<span style="font-family: Bad Duck">\BAD </span>&thinsp;<span style="font-family: Bad Duck">\DUCK.</span></span>
+								</div>
 							</li>
 						</ul>
 					</li>
