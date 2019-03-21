@@ -17,23 +17,6 @@ window.addEventListener("finished", function() {
 			noteNumber++;
 		}
 	});
-	if (!window.location.href.includes("experiments") && !window.location.href.includes("programs")) {
-		// messes with Kyra and Logan
-		S.makeDialog("Are you Kyra or Logan?",
-			["Yes", function () {
-				S.getClass("main-title")[0].textContent = "Rejected!";
-				S.getTag("main")[0].innerHTML = "Sorry, no stalkers allowed.";
-				S.storage.local.store("stalker", true);
-			}], ["No", function () {
-				if (S.storage.local.recall("stalker") == true) {
-					S.makeDialog("I don't believe you.", ["Fine, you<br>caught me", function () {
-						S.getClass("main-title")[0].textContent = "Rejected!";
-						S.getTag("main")[0].innerHTML = "Sorry, no stalkers allowed.";
-					}]);
-				}
-			}]
-		);
-	}
 	// makes a bunch of my faces follow the cursor
 	var faceArray = [
 		document.createElement("div"),
