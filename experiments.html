@@ -57,7 +57,7 @@
 					let date = new Date(pair[1]);
 					S.forEach(S.getId(pair[0]).getElementsByTagName("td"), function (item) {
 						item.title = date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
-						date = new Date(date.getTime() + 86400000);
+						date.setDate(date.getDate() + 1);
 					});
 				});
 			});
