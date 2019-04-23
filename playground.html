@@ -10,6 +10,7 @@
 		<script src="behavior.js"></script>
 		<script>
 			var randomNoises;
+			var blabbermouth = new S.Speaker();
 
 			S.listen("playRandomNoises", "click", function () {
 				if (this.textContent.trim() == "Play random noises") {
@@ -45,6 +46,20 @@
 				}
 			});
 
+			S.listen("script", "dblclick", function () {
+				this.value = "";
+			});
+			S.listen("speak", "click", function () {
+				if (!blabbermouth.speaking) {
+					blabbermouth.speak(S.getId("script").value);
+				}
+			});
+			S.onKeyDown("Enter", function () {
+				if (S.getId("script") === document.activeElement) {
+					S.getId("speak").click();
+				}
+			});
+
 			S.onLoad(function () {
 				S.makeToneGenerator(true);
 			});
@@ -63,6 +78,12 @@
 		<main>
 			<button id="playRandomNoises">
 				Play random noises
+			</button>
+			<br>
+			<br>
+			<input type="text" id="script">
+			<button id="speak">
+				Speak
 			</button>
 		</main>
 	</body>
