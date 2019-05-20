@@ -51,9 +51,9 @@
 				});
 				updateConversations();
 			});
-			S.colorCode(["sleep1", "sleep2", "sleep3", "sleep4", "sleep5", "sleep6", "sleep7"]);
+			S.colorCode(["sleep1", "sleep2", "sleep3", "sleep4", "sleep5", "sleep6", "sleep7", "sleep8"]);
 			S.onLoad(function () {
-				[["sleep1", "January 30, 2017"], ["sleep2", "May 15, 2017"], ["sleep3", "August 21, 2017"], ["sleep4", "January 15, 2018"], ["sleep5", "May 14, 2018"], ["sleep6", "August 20, 2018"], ["sleep7", "January 14, 2019"]].forEach(function (pair) {
+				[["sleep1", "January 30, 2017"], ["sleep2", "May 15, 2017"], ["sleep3", "August 21, 2017"], ["sleep4", "January 15, 2018"], ["sleep5", "May 14, 2018"], ["sleep6", "August 20, 2018"], ["sleep7", "January 14, 2019"], ["sleep8", "May 13, 2019"]].forEach(function (pair) {
 					let date = new Date(pair[1]);
 					S.forEach(S.getId(pair[0]).getElementsByTagName("td"), function (item) {
 						item.title = date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
@@ -5645,6 +5645,26 @@
 						<tr>
 							<td>
 								 2:30am-5:15am<note-><div><div>TIAWIFAAMC</div></div></note->| 2:15am-10:00am<note-><div><div>This is a combination of the accidental sleeping times of 2:15am-6:00am and 7:30am-11:30am.</div></div></note->| 1:00am-5:00am<note-><div><div>TIAWIFAAMC</div></div></note->| 0:00am-0:00am | 1:00am-6:00am<note-><div><div>This is a combination of the accidental sleeping times of 1:00am-2:00am and 2:45am-6:45am.</div></div></note->| 8:30am-12:15pm<note-><div><div>TIAWIFAAMC</div></div></note->| 12:30am-8:15am<note-><div><div>TIAWIFAAMC</div></div></note->
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						Summer Break 3
+					</div>
+					<p>
+
+					</p>
+					<table class="compact slim" id="sleep8">
+						<tr>
+							<th>
+								Monday         |    Tuesday    |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
+							</th>
+						</tr>
+						<tr>
+							<td>
+								 3:45am-11:45am| 3:15am-10:15am| 3:09am-10:42am| 4:15am-12:22pm| 3:13am-10:16am| 5:24am-11:05am| 4:04am-8:39am
 							</td>
 						</tr>
 					</table>
