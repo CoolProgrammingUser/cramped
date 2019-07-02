@@ -5692,6 +5692,11 @@
 								 4:10am-12:31pm| 4:30am-11:04am| 6:10am-2:15pm | 4:43am-10:57am| 4:45am-10:55am| 4:23am-11:00am| 4:30am-11:43am
 							</td>
 						</tr>
+						<tr>
+							<td>
+								 3:48am-11:40am| 3:44am-10:28am| 4:14am-12:30pm| 3:30am-12:12pm| 3:04am-10:39am| 3:07am-10:22am| 3:05am-9:07am
+							</td>
+						</tr>
 					</table>
 				</div>
 				<br>
@@ -5713,7 +5718,7 @@
 					Matching attire with weather conditions
 				</h2>
 				<p>
-					Eventually, I got tired of guessing what I should wear based on weather conditions, so I started keeping track of what the weather was and what I thought I'd be comfortable wearing (once I felt what it was like outside). Temperature feeling corresponds to this gauge of what to wear: 1 = super warm clothing; 2 = coat and thick shirt; 3 = jacket and thick shirt; 4 = thick shirt; 5 = only long-sleeve shirt; 6 = short-sleeve shirt; 7 = shorts; 8 = super cool clothing. Results seem to suggest the following equation: temperature feeling = (actual temperature - wind&divide;2 + humidity&divide;8 - cloud cover&divide;4) &divide; 9 - 2.8. (I'm skeptical of this since it places essentially no weight on the amount of cloud cover whereas I've noticed it to have a large effect; however, this equation graphs my data fairly well.)
+					Eventually, I got tired of guessing what I should wear based on weather conditions, so I started keeping track of what the weather was and what I thought I'd be comfortable wearing (once I felt what it was like outside). Temperature feeling corresponds to this gauge of what to wear: 1 = super warm clothing; 2 = coat and thick shirt; 3 = jacket and thick shirt; 4 = thick shirt; 5 = only long-sleeve shirt; 6 = short-sleeve shirt; 7 = shorts; 8 = super cool clothing. Results seem to suggest the following equation: temperature feeling = (actual temperature &times; 7.5 - wind &times; 2 + 1.047<sup>humidity</sup> - 2.4<sup>cloud cover</sup>) &divide; 60.375 - 3.07. Since this equation is too complicated for me to memorize (easily), I decided to make a simple app to do the math for me. Although this gives fairly accurate results, I established certain cut-offs to account for the slight discrepancies: 1.4, 2.5, 3.7, 4.5, 5.3, 6.2, 7.9
 				</p>
 				<div class="details">
 					<div class="summary">
@@ -5882,6 +5887,41 @@
 						<tr>
 							<td>
 								6|72|11|58|2
+							</td>
+						</tr>
+						<tr>
+							<td>
+								6|77|24|45|3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								6|69| 8|55|1
+							</td>
+						</tr>
+						<tr>
+							<td>
+								7|79|13|66|2
+							</td>
+						</tr>
+						<tr>
+							<td>
+								7|83|15|52|1
+							</td>
+						</tr>
+						<tr>
+							<td>
+								6|73| 5|46|2
+							</td>
+						</tr>
+						<tr>
+							<td>
+								7|80| 1|55|2
+							</td>
+						</tr>
+						<tr>
+							<td>
+								6|74|12|53|1
 							</td>
 						</tr>
 					</table>
