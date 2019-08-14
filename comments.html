@@ -29,10 +29,18 @@
 									let section = document.createElement("section");
 									section.textContent = comment;
 									S.getId("commentsList").appendChild(section);
+								}).catch(function (error) {
+									console.error("A comment couldn't be recalled.");
+									console.error(error);
 								});
 							});
+						}).catch(function (error) {
+							console.error("The information couldn't be listed.");
+							console.error(error);
 						});
-					}).catch(function () {
+					}).catch(function (error) {
+						console.error("The information couldn't be stored.");
+						console.error(error);
 						S.makeDialog("The comment couldn't be stored.");
 					});
 				}
@@ -47,8 +55,14 @@
 								let section = document.createElement("section");
 								section.textContent = comment;
 								S.getId("commentsList").appendChild(section);
+							}).catch(function (error) {
+								console.error("A comment couldn't be recalled.");
+								console.error(error);
 							});
 						});
+					}).catch(function (error) {
+						console.error("The information couldn't be listed.");
+						console.error(error);
 					});
 				});
 			});
