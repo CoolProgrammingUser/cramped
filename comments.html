@@ -6,8 +6,53 @@
 		</title>
 		<base target="_blank">
 		<link rel="icon" href="images/favicon.ico">
+		<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase-firestore.js"></script>
+		<script src="https://epicenterprograms.github.io/standards/behavior/firebaseinit.js"></script>
 		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
 		<script src="behavior.js"></script>
+		<script>
+			var S = Standards.general;
+			var server = S.storage.server;
+			server.defaultLocation = "~websites/cramped/comments";
+
+			function leaveComment() {
+				if (S.getId("commentArea").value.trim() != "") {
+					S.makeDialog("Storing your comment...");
+					server.store(new Date().getTime(), S.getId("commentArea").value.trim()).then(function () {
+						S.makeDialog("Comment stored.");
+						S.getId("commentArea").value = "";
+						S.getId("commentsList").innerHTML = "";
+						server.list().then(function (comments) {
+							S.forEach(comments, function (commentKey) {
+								server.recall(commentKey).then(function (comment) {
+									let section = document.createElement("section");
+									section.textContent = comment;
+									S.getId("commentsList").appendChild(section);
+								});
+							});
+						});
+					}).catch(function () {
+						S.makeDialog("The comment couldn't be stored.");
+					});
+				}
+			}
+
+			S.onLoad(function () {
+				server.signIn("anonymous").then(function () {
+					S.getTag("button")[0].disabled = false;
+					server.list().then(function (comments) {
+						S.forEach(comments, function (commentKey) {
+							server.recall(commentKey).then(function (comment) {
+								let section = document.createElement("section");
+								section.textContent = comment;
+								S.getId("commentsList").appendChild(section);
+							});
+						});
+					});
+				});
+			});
+		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
 	</head>
@@ -18,11 +63,13 @@
 		</h1>
 		<main>
 			<p>
-				This will allow you to leave comments.
+				This allows you to leave comments.
 			</p>
-			<button onclick="S.makeDialog('This doesn\'t work yet.')">
+			<textarea id="commentArea"></textarea>
+			<button onclick="leaveComment()" disabled>
 				Leave a comment
 			</button>
+			<div class="list" id="commentsList"></div>
 		</main>
 	</body>
 </html>
