@@ -19,7 +19,7 @@
 			function leaveComment() {
 				if (S.getId("commentArea").value.trim() != "") {
 					S.makeDialog("Storing your comment...");
-					server.store(new Date().getTime(), S.getId("commentArea").value.trim()).then(function () {
+					server.store(String(new Date().getTime()), S.getId("commentArea").value.trim()).then(function () {
 						S.makeDialog("Comment stored.");
 						S.getId("commentArea").value = "";
 						S.getId("commentsList").innerHTML = "";
