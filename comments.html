@@ -65,7 +65,7 @@
 
 			S.listen("commentEditor", "click", function () {
 				if (this.textContent.trim() == "Edit comments") {  // if attempting to edit
-					S.makeDialog('Enter the password<br><input type="password" id="commentsEditorPassword">',
+					S.makeDialog('Enter the password<br><br><input type="password" id="commentsEditorPassword">',
 						"Cancel",
 						["Submit",
 							function () {
@@ -103,8 +103,12 @@
 								console.error(error);
 							});
 						} else {
+							console.log(row.dataet.timestamp);
 							server.forget(row.dataset.timestamp).then(function () {
 								remaining.value--;
+								server.list().then(function (list) {
+									console.log(list);
+								});
 							}).catch(function (error) {
 								console.error("The empty comment couldn't be deleted.");
 								console.error(error);
@@ -148,7 +152,7 @@
 				This allows you to tell me how amazing this website is.
 			</p>
 			<p>
-				//Stuff// = <em>Stuff</em>; **Stuff** = <strong>Stuff</strong>; __Stuff__ = <span style="text-decoration:underline">Stuff</span>
+				//Stuff// = <em>Stuff</em>&emsp;**Stuff** = <strong>Stuff</strong>&emsp;__Stuff__ = <span style="text-decoration:underline">Stuff</span>
 			</p>
 			<input type="text" id="author" placeholder="Name/username (optional)">
 			<br>
