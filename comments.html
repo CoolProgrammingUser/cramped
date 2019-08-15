@@ -93,7 +93,7 @@
 						remaining.value++;
 						let data = {};
 						data.author = row.getElementsByTagName("th")[0].textContent;
-						data.message = row.getElementsByTagName("td")[0].innerHTML;
+						data.message = row.getElementsByTagName("td")[0].innerHTML.trim();
 						data.message = data.message.replace(/<em>(.+?)<\/em>/g, "//$1//").replace(/<strong>(.+?)<\/strong>/g, "**$1**").replace(/<span style="text-decoration:underline">(.+?)<\/span>/g, "__$1__");
 						console.log(data.message);
 						console.log(!!data.message);
