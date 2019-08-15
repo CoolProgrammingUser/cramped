@@ -71,7 +71,8 @@
 							function () {
 								if (S.getId("commentsEditorPassword").value == "b3a8A3i6b") {
 									S.getId("commentsList").contentEditable = true;
-									this.textContent = "Finish";
+									S.getId("commentEditor").textContent = "Finish";
+									S.makeDialog("Login successful.");
 								} else {
 									S.makeDialog("The password was incorrect.");
 								}
@@ -82,7 +83,7 @@
 					remaining.value = 0;
 					remaining.addEventListener("set", function (value) {
 						if (value == 0) {  // if all items have been iterated through
-							this.textContent = "Edit comments";
+							S.getId("commentEditor").textContent = "Edit comments";
 							S.getId("commentsList").contentEditable = false;
 							S.makeDialog("Editing successful.");
 							refreshComments();
