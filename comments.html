@@ -103,7 +103,7 @@
 								console.error(error);
 							});
 						} else {
-							server.delete(row.dataset.timestamp).then(function () {
+							server.forget(row.dataset.timestamp).then(function () {
 								remaining.value--;
 							}).catch(function (error) {
 								console.error("The empty comment couldn't be deleted.");
