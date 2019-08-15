@@ -16,28 +16,45 @@
 			var server = S.storage.server;
 			server.defaultLocation = "~websites/cramped/comments";
 
-			function leaveComment() {
-				if (S.getId("commentArea").value.trim() != "") {
-					S.makeDialog("Storing your comment...");
-					server.store(String(new Date().getTime()), S.getId("commentArea").value.trim()).then(function () {
-						S.makeDialog("Comment stored.");
-						S.getId("commentArea").value = "";
-						S.getId("commentsList").innerHTML = "";
-						server.list().then(function (comments) {
-							S.forEach(comments, function (commentKey) {
-								server.recall(commentKey).then(function (comment) {
-									let section = document.createElement("section");
-									section.textContent = comment;
-									S.getId("commentsList").appendChild(section);
-								}).catch(function (error) {
-									console.error("A comment couldn't be recalled.");
-									console.error(error);
-								});
-							});
+			function refreshComments() {
+				server.list().then(function (comments) {
+					S.getId("commentsList").innerHTML = "";
+					S.forEach(comments, function (commentKey) {
+						server.recall(commentKey).then(function (data) {
+							let row = S.getId("commentsList").insertRow(-1);
+							let author = document.createElement("th");
+							if (data.author) {
+								author.textContent = data.author;
+							} else {
+								author.textContent = "Anonymous";
+							}
+							let comment = document.createElement("td");
+							comment.textContent = data.message;
+							comment.innerHTML = comment.textContent.replace(/\/\/(.+)\/\//g, "<em>$1</em>").replace(/\*\*(.+)\*\*/g, "<strong>$1</strong>").replace(/__(.+)__/g, '<span style="text-decoration:underline">$1</span>');
+							row.dataset.timestamp = commentKey;
+							row.appendChild(author);
+							row.appendChild(comment);
 						}).catch(function (error) {
-							console.error("The information couldn't be listed.");
+							console.error("A comment couldn't be recalled.");
 							console.error(error);
 						});
+					});
+				}).catch(function (error) {
+					console.error("The information couldn't be listed.");
+					console.error(error);
+				});
+			}
+
+			function leaveComment() {
+				if (S.getId("commentArea").value.trim() != "") {
+					let data = {};
+					data.message = S.getId("commentArea").value.trim();
+					data.author = S.getId("author").value.trim();
+					server.store(String(new Date().getTime()), data).then(function () {
+						S.makeDialog("Comment stored.");
+						S.getId("commentArea").value = "";
+						S.getId("author").value = "";
+						refreshComments();
 					}).catch(function (error) {
 						console.error("The information couldn't be stored.");
 						console.error(error);
@@ -46,29 +63,79 @@
 				}
 			}
 
+			S.listen("commentEditor", "click", function () {
+				if (this.textContent.trim() == "Edit comments") {  // if attempting to edit
+					S.makeDialog('Enter the password<br><input type="password" id="commentsEditorPassword">',
+						"Cancel",
+						["Submit",
+							function () {
+								if (S.getId("commentsEditorPassword").value == "b3a8A3i6b") {
+									S.getId("commentsList").contentEditable = true;
+									this.textContent = "Finish";
+								} else {
+									S.makeDialog("The password was incorrect.");
+								}
+							}]
+					);
+				} else {  // if currently editing
+					let remaining = new S.Listenable();
+					remaining.value = 0;
+					remaining.addEventListener("set", function (value) {
+						if (value == 0) {  // if all items have been iterated through
+							this.textContent = "Edit comments";
+							S.getId("commentsList").contentEditable = false;
+							S.makeDialog("Editing successful.");
+							refreshComments();
+						}
+					});
+					S.forEach(S.getId("commentsList").rows, function (row) {
+						remaining.value++;
+						let data = {};
+						data.author = row.getElementsByTagName("th")[0].textContent;
+						data.message = row.getElementsByTagName("td")[0].innerHTML;
+						data.message = data.message.replace(/<em>(.+)<\/em>/g, "//$1//").replace(/<strong>(.+)<\/strong>/g, "**$1**").replace(/<span style="text-decoration:underline">(.+)<\/span>/g, "__$1__");
+						if (data.message) {
+							server.store(row.dataset.timestamp, data).then(function () {
+								remaining.value--;
+							}).catch(function (error) {
+								console.error("The edits couldn't be saved.");
+								console.error(error);
+							});
+						} else {
+							server.delete(row.dataset.timestamp).then(function () {
+								remaining.value--;
+							}).catch(function (error) {
+								console.error("The empty comment couldn't be deleted.");
+								console.error(error);
+							});
+						}
+					});
+					remaining.value = remaining.value;
+				}
+			});
+
 			S.onLoad(function () {
 				server.signIn("anonymous").then(function () {
 					S.getTag("button")[0].disabled = false;
-					server.list().then(function (comments) {
-						S.forEach(comments, function (commentKey) {
-							server.recall(commentKey).then(function (comment) {
-								let section = document.createElement("section");
-								section.textContent = comment;
-								S.getId("commentsList").appendChild(section);
-							}).catch(function (error) {
-								console.error("A comment couldn't be recalled.");
-								console.error(error);
-							});
-						});
-					}).catch(function (error) {
-						console.error("The information couldn't be listed.");
-						console.error(error);
-					});
+					refreshComments();
 				});
 			});
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
+		<style>
+			#commentsList tr {
+				margin: .5em;
+				border-radius: 1em;
+				background: white;
+			}
+			#commentsList th {
+				border-right: .05em solid black;
+			}
+			#commentsList td {
+				white-space: pre-wrap;
+			}
+		</style>
 	</head>
 	<body class="left-nav">
 		<iframe class="left-nav" src="navigation.html"></iframe>
@@ -77,15 +144,24 @@
 		</h1>
 		<main>
 			<p>
-				This allows you to leave comments.
+				This allows you to tell me how amazing this website is.
 			</p>
+			<p>
+				//Stuff// = <em>Stuff</em>; **Stuff** = <strong>Stuff</strong>; __Stuff__ = <span style="text-decoration:underline">Stuff</span>
+			</p>
+			<input type="text" id="author" placeholder="Name/username (optional)">
+			<br>
 			<textarea id="commentArea" placeholder="Enter your comment..."></textarea>
 			<br>
 			<button onclick="leaveComment()" disabled>
 				Leave a comment
 			</button>
 			<br>
-			<div class="list" id="commentsList"></div>
+			<table class="labeled-list" id="commentsList">No comments could be loaded.</table>
+			<br>
+			<button id="commentEditor">
+				Edit comments
+			</button>
 		</main>
 	</body>
 </html>
