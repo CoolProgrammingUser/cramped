@@ -95,6 +95,9 @@
 						data.author = row.getElementsByTagName("th")[0].textContent;
 						data.message = row.getElementsByTagName("td")[0].innerHTML;
 						data.message = data.message.replace(/<em>(.+?)<\/em>/g, "//$1//").replace(/<strong>(.+?)<\/strong>/g, "**$1**").replace(/<span style="text-decoration:underline">(.+?)<\/span>/g, "__$1__");
+						console.log(data.message);
+						console.log(!!data.message);
+						console.log(!!data.message.trim());
 						if (data.message) {
 							server.store(row.dataset.timestamp, data).then(function () {
 								remaining.value--;
@@ -103,7 +106,7 @@
 								console.error(error);
 							});
 						} else {
-							console.log(row.dataet.timestamp);
+							console.log(row.dataset.timestamp);
 							server.forget(row.dataset.timestamp).then(function () {
 								remaining.value--;
 								server.list().then(function (list) {
@@ -162,7 +165,7 @@
 				Leave a comment
 			</button>
 			<br>
-			<table class="labeled-list" id="commentsList">No comments could be loaded.</table>
+			<table class="labeled-list" id="commentsList"><tr>No comments could be loaded.</tr></table>
 			<br>
 			<button id="commentEditor">
 				Edit comments
