@@ -2,6 +2,26 @@
 <html>
 	<head>
 		<base target="_parent">
+		<script src="https://epicenterprograms.github.io/standards/behavior/navigation.js"></script>
+		<script>
+			Standards.navigation.contents = [  // [page URL, title]
+				[".", "Home"],
+				["profile", "Profile"],
+				["projects", "Projects"],
+				["seconds", "Countdowns"],
+				["learning", "Learning"],
+				["creations", "Creations"],
+				["programs", "Websites and Programs"],
+				["miscellaneous", "Random Cool Stuff"],
+				["experiments", "Uncertainty Settling"],
+				["journal", "Journal"],
+				["moments", "Important Moments"],
+				["stories", "Fun Stories"],
+				["kindness", "Kind Deeds"],
+				["playground", "Playground"],
+				["comments", "Comments"]
+			];
+		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
 	</head>
@@ -10,26 +30,5 @@
 		    Contents
 		</h2>
 		<ul id="contentsList"></ul>
-		<script>
-		    [  // [page URL, title]
-		        ["/cramped/", "Home"],
-		        ["profile", "Profile"],
-		        ["projects", "Projects"],
-		        ["seconds", "Countdowns"],
-		        ["learning", "Learning"],
-		        ["creations", "Creations"],
-				["programs", "Websites and Programs"],
-				["miscellaneous", "Random Cool Stuff"],
-		        ["experiments", "Uncertainty Settling"],
-		        ["journal", "Journal"],
-		        ["moments", "Important Moments"],
-		        ["stories", "Fun Stories"],
-				["kindness", "Kind Deeds"],
-				["playground", "Playground"],
-				["comments", "Comments"]
-		    ].forEach(function(pair) {
-		        document.getElementById("contentsList").innerHTML += "<li><a href='" + pair[0] + "'>" + pair[1] + "</a></li>";
-		    });
-		</script>
 	</body>
 </html>
