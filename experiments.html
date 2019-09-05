@@ -8,6 +8,7 @@
 		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
 		<script src="behavior.js"></script>
 		<script>
+			// colors and filters the conversation tables
 			S.colorCode("table1");
 			S.listen("conversationCheckboxesVisibility", "change", function () {
 				if (this.checked) {
@@ -51,9 +52,11 @@
 				});
 				updateConversations();
 			});
-			S.colorCode(["sleep1", "sleep2", "sleep3", "sleep4", "sleep5", "sleep6", "sleep7", "sleep8"]);
+
+			// colors and titles the sleep tables
+			S.colorCode(["sleep1", "sleep2", "sleep3", "sleep4", "sleep5", "sleep6", "sleep7", "sleep8", "sleep9"]);
 			S.onLoad(function () {
-				[["sleep1", "January 30, 2017"], ["sleep2", "May 15, 2017"], ["sleep3", "August 21, 2017"], ["sleep4", "January 15, 2018"], ["sleep5", "May 14, 2018"], ["sleep6", "August 20, 2018"], ["sleep7", "January 14, 2019"], ["sleep8", "May 13, 2019"]].forEach(function (pair) {
+				[["sleep1", "January 30, 2017"], ["sleep2", "May 15, 2017"], ["sleep3", "August 21, 2017"], ["sleep4", "January 15, 2018"], ["sleep5", "May 14, 2018"], ["sleep6", "August 20, 2018"], ["sleep7", "January 14, 2019"], ["sleep8", "May 13, 2019"], ["sleep9", "August 19, 2019"]].forEach(function (pair) {
 					let date = new Date(pair[1]);
 					S.forEach(S.getId(pair[0]).getElementsByTagName("td"), function (item) {
 						item.title = date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
@@ -5725,6 +5728,29 @@
 						<tr>
 							<td>
 								 2:25am-12:24pm| 2:35am-11:00am| 2:46am-12:26pm| 3:52am-9:09am<note-><div><div>Tess and Linda visited.</div></div></note->| 1:15am-12:07pm| 4:03am-11:50am| 2:15am-9:05am
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="details">
+					<div class="summary">
+						First semester senior year
+					</div>
+					<p>
+
+					</p>
+					<table class="compact slim" id="sleep9">
+						<tr>
+							<th>
+								Monday         |    Tuesday    |   Wednesday   |   Thursday    |     Friday    |    Saturday   |    Sunday
+							</th>
+						</tr>
+						<tr>
+							<td>
+								 3:50am-7:30am | 6:42am-8:10am<note-><div><div>I took a nap from 11:28am to 12:25pm.</div></div></note->| 7:06am-7:20am?| 0:00am-0:00am| 5:30am-11:09am| 0:00am-0:00am | 0:00am-0:00am
+							</td>
+							<td>
+								 4:20am-7:33am | 1:45am-5:15am<note-><div><div>The starting time could be highly inaccurate.</div></div></note->| 4:20am-7:33am | 1:05am-7:25am | 1:00am-7:00am<note-><div><div>There were many starts and stops, but I got about 6 hours of sleep between 12:30am and 7:00am.</div></div></note->|12:51am-2:23am<note-><div><div>6:20-1:20?</div></div></note->| 2:10am-7:40am<note-><div><div>I took a nap from 1:06pm to 2:45pm.</div></div></note->
 							</td>
 						</tr>
 					</table>
