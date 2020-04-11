@@ -21,7 +21,7 @@
 					S.getId("commentsList").innerHTML = "";
 					S.forEach(comments, function (commentKey) {
 						server.recall(commentKey).then(function (data) {
-							let row = S.getId("commentsList").insertRow(-1);
+							let row = S.getId("commentsList").insertRow(0);
 							let author = document.createElement("th");
 							if (data.author) {
 								author.textContent = data.author;
