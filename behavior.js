@@ -60,7 +60,7 @@ window.addEventListener("finished", function() {
 					*/
 					place++;
 				}
-			}, (index + 4) * 5);
+			}, (index + 2) * 5);
 		} else {
 			setInterval(function () {
 				if (place < pastPosition.length) {
@@ -68,7 +68,7 @@ window.addEventListener("finished", function() {
 					faceArray[index].style.top = pastPosition[place][1] + "px";
 					place++;
 				}
-			}, (index + 4) * 5);
+			}, (index + 2) * 5);
 		}
 	});
 	/*
