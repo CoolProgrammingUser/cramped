@@ -57,7 +57,7 @@
 					blabbermouth.speak(S.getId("script").value);
 				}
 			});
-			S.onKeyDown("Enter", function () {
+			S.listen(["Enter"], "keydown", function () {
 				if (S.getId("script") === document.activeElement) {
 					S.getId("speak").click();
 				}
