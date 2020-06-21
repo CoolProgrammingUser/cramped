@@ -36,12 +36,16 @@
 				refresh();
 			}
 			function makeCountdown(label, date) {
-				var paragraph = document.createElement("p");
-				paragraph.id = timeNumber;
+				let row = S.getClass("labeled-list")[0].insertRow(-1);
+				let title = document.createElement("th");
+				title.textContent = label + ":";
+				row.appendChild(title);
+				let time = document.createElement("td");
+				time.id = timeNumber;
 				timeNumber++;
-				paragraph.label = label;
-				paragraph.date = date;
-				document.getElementById("loser").parentNode.insertBefore(paragraph, document.getElementById("loser"));
+				time.label = label;
+				time.date = date;
+				row.appendChild(time);
 			}
 			function refresh() {
 				for (var number=1; number<timeNumber; number++) {
@@ -132,7 +136,7 @@
 							time = seconds + " seconds";
 						}
 					}
-					element.innerHTML = element.label + ": " + time;
+					element.textContent = time;
 				}
 			}
 		</script>
@@ -148,6 +152,7 @@
 			<h2>
 				Time until...
 			</h2>
+			<table class="labeled-list"></table>
 			<input type="checkbox" id="loser" onclick="refresh()">
 			<label for="loser">I'm a loser and want the times displayed normally.</label>
 			<br>
