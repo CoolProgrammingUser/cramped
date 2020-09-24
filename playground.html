@@ -84,6 +84,7 @@
 			});
 			S.listen("doodle", ["mousemove", "touchmove"], function (event) {
 				if (doodling) {
+					event.preventDefault();
 					newCoords = { x: event.clientX - box.left, y: event.clientY - box.top };
 					doodle.strokeStyle = "#"
 						+ ("0" + Math.round(newCoords.x / canvas.width * 255).toString(16)).slice(-2)
