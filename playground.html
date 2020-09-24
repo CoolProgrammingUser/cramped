@@ -19,8 +19,8 @@
 			var doodling = false;
 			var doodled = false;
 			var canvas;
-            var doodle;
-            var box;
+			var doodle;
+			var box;
 
 			S.listen("playRandomNoises", "click", function () {
 				if (this.textContent.trim() == "Play random noises") {
@@ -82,12 +82,11 @@
 			S.listen("doodle", ["mousedown", "touchstart"], function (event) {
 				doodling = true;
 				doodled = false;
-                oldCoords = { x: event.clientX - box.left, y: event.clientY - box.top };  // cursor position within the canvas
+				oldCoords = { x: event.clientX - box.left, y: event.clientY - box.top };  // cursor position within the canvas
 			});
 			S.listen("doodle", ["mousemove", "touchmove"], function (event) {
 				if (doodling) {
-                    event.preventDefault();
-                    doodled = true;
+					doodled = true;
 					newCoords = { x: event.clientX - box.left, y: event.clientY - box.top };
 					doodle.strokeStyle = "#"
 						+ ("0" + Math.round(newCoords.x / canvas.width * 255).toString(16)).slice(-2)
@@ -98,6 +97,7 @@
 					doodle.lineTo(newCoords.x, newCoords.y);
 					doodle.stroke();
 					oldCoords = newCoords;
+					event.preventDefault();
 				}
 			});
 			S.listen("doodle", ["mouseup", "touchend"], function () {
@@ -110,7 +110,7 @@
 					doodle.beginPath();
 					doodle.arc(oldCoords.x, oldCoords.y, doodle.lineWidth / 2, 0, Math.PI * 2);
 					doodle.fill();
-                }
+				}
 			});
 			S.listen("clearDoodle", "click", function () {
 				doodle.clearRect(0, 0, canvas.width, canvas.height);
