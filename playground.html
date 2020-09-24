@@ -14,6 +14,12 @@
 		<script>
 			var randomNoises;
 			var blabbermouth = new S.Speaker();
+			var oldCoords = { x: 0, y: 0 };
+			var newCoords = { x: 0, y: 0 };
+			var doodling = false;
+			var canvas;
+            var doodle;
+            var box;
 
 			S.listen("playRandomNoises", "click", function () {
 				if (this.textContent.trim() == "Play random noises") {
@@ -72,14 +78,46 @@
 				}
 			});
 
+			S.listen("doodle", ["mousedown", "touchstart"], function (event) {
+				doodling = true;
+                oldCoords = { x: event.clientX - box.left, y: event.clientY - box.top };  // cursor position within the canvas
+			});
+			S.listen("doodle", ["mousemove", "touchmove"], function (event) {
+				if (doodling) {
+					newCoords = { x: event.clientX - box.left, y: event.clientY - box.top };
+					doodle.strokeStyle = "#"
+						+ ("0" + Math.round(newCoords.x / canvas.width * 255).toString(16)).slice(-2)
+						+ ("0" + Math.round(newCoords.y / canvas.height * 255).toString(16)).slice(-2)
+						+ ("0" + Math.round(255 - newCoords.x / canvas.width * 255).toString(16)).slice(-2);
+					doodle.beginPath();
+					doodle.moveTo(oldCoords.x, oldCoords.y);
+					doodle.lineTo(newCoords.x, newCoords.y);
+					doodle.stroke();
+					oldCoords = newCoords;
+				}
+			});
+			S.listen("doodle", ["mouseup", "touchend"], function () {
+				doodling = false;
+			});
+			S.listen("clearDoodle", "click", function () {
+				doodle.clearRect(0, 0, canvas.width, canvas.height);
+			});
+
 			S.onLoad(function () {
 				S.makeToneGenerator(true);
+
+				canvas = S.getId("doodle");
+				doodle = canvas.getContext("2d");
+				doodle.lineWidth = 3;
+				box = canvas.getBoundingClientRect();
 			});
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
 		<style>
-
+			canvas {
+				background: white;
+			}
 		</style>
 	</head>
 	<body class="left-nav">
@@ -101,6 +139,13 @@
 			<label for="vodka">
 				Drunken puberty voice
 			</label>
+			<br>
+			<br>
+			<canvas width="500" height="300" id="doodle"></canvas>
+			<br>
+			<button id="clearDoodle">
+				Clear drawing
+			</button>
 		</main>
 	</body>
 </html>
