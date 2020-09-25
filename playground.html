@@ -80,33 +80,44 @@
 			});
 
 			S.listen("doodle", ["mousedown", "touchstart"], function (event) {
+				console.log("Starting");
 				doodling = true;
 				doodled = false;
 				oldCoords = { x: event.clientX - box.left, y: event.clientY - box.top };  // cursor position within the canvas
 			});
 			S.listen("doodle", ["mousemove", "touchmove"], function (event) {
+				console.log("Moving");
 				if (doodling) {
+					console.log("Doodling");
+					console.log(event);
+                    event.preventDefault();
 					doodled = true;
 					newCoords = { x: event.clientX - box.left, y: event.clientY - box.top };
+					console.log(oldCoords);
+					console.log(newCoords);
 					doodle.strokeStyle = "#"
 						+ ("0" + Math.round(newCoords.x / canvas.width * 255).toString(16)).slice(-2)
 						+ ("0" + Math.round(newCoords.y / canvas.height * 255).toString(16)).slice(-2)
 						+ ("0" + Math.round(255 - newCoords.x / canvas.width * 255).toString(16)).slice(-2);
+					console.log(doodle.strokeStyle);
 					doodle.beginPath();
 					doodle.moveTo(oldCoords.x, oldCoords.y);
 					doodle.lineTo(newCoords.x, newCoords.y);
 					doodle.stroke();
 					oldCoords = newCoords;
-					event.preventDefault();
 				}
 			});
 			S.listen("doodle", ["mouseup", "touchend"], function () {
+				console.log("Ending");
 				doodling = false;
 				if (!doodled) {
+					console.log("Didn't doodle");
+					console.log(oldCoords);
 					doodle.fillStyle = "rgb("
 						+ Math.round(oldCoords.x / canvas.width * 255) + ", "
 						+ Math.round(oldCoords.y / canvas.height * 255) + ", "
 						+ Math.round(255 - oldCoords.x / canvas.width * 255) + ")";
+					console.log(doodle.fillStyle);
 					doodle.beginPath();
 					doodle.arc(oldCoords.x, oldCoords.y, doodle.lineWidth / 2, 0, Math.PI * 2);
 					doodle.fill();
