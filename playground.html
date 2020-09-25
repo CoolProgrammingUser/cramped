@@ -82,17 +82,19 @@
 			S.listen("doodle", ["mousedown", "touchstart"], function (event) {
 				doodling = true;
 				doodled = false;
-                let x = event.clientX === undefined ? event.touches[0].clientX : event.clientX;
-                let y = event.clientY === undefined ? event.touches[0].clientY : event.clientY;
-				oldCoords = { x: x - box.left, y: y - box.top };  // cursor position within the canvas
+                oldCoords = {  // cursor position within the canvas
+                    x: (event.pageX === undefined ? event.touches[0].pageX : event.pageX) - box.left,
+                    y: (event.pageY === undefined ? event.touches[0].pageY : event.pageY) - box.top
+				};
 			});
 			S.listen("doodle", ["mousemove", "touchmove"], function (event) {
 				if (doodling) {
                     event.preventDefault();
-                    let x = event.clientX === undefined ? event.touches[0].clientX : event.clientX;
-                    let y = event.clientY === undefined ? event.touches[0].clientY : event.clientY;
 					doodled = true;
-					newCoords = { x: x - box.left, y: y - box.top };
+					newCoords = {
+                        x: (event.pageX === undefined ? event.touches[0].pageX : event.pageX) - box.left,
+                        y: (event.pageY === undefined ? event.touches[0].pageY : event.pageY) - box.top
+					};
 					doodle.strokeStyle = "#"
 						+ ("0" + Math.round(newCoords.x / canvas.width * 255).toString(16)).slice(-2)
 						+ ("0" + Math.round(newCoords.y / canvas.height * 255).toString(16)).slice(-2)
