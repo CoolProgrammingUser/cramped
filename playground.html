@@ -21,6 +21,7 @@
 			var canvas;
 			var doodle;
 			var box;
+			var doodleList = [];
 
 			S.listen("playRandomNoises", "click", function () {
 				if (this.textContent.trim() == "Play random noises") {
@@ -80,8 +81,10 @@
 			});
 
 			S.listen("doodle", ["mousedown", "touchstart"], function (event) {
+				event.preventDefault();
 				doodling = true;
 				doodled = false;
+				doodleList.push([]);
                 oldCoords = {  // cursor position within the canvas
                     x: (event.pageX === undefined ? event.touches[0].pageX : event.pageX) - box.left,
                     y: (event.pageY === undefined ? event.touches[0].pageY : event.pageY) - box.top
@@ -103,6 +106,12 @@
 					doodle.moveTo(oldCoords.x, oldCoords.y);
 					doodle.lineTo(newCoords.x, newCoords.y);
 					doodle.stroke();
+					let stroke = {};
+					stroke.type = "line";
+					stroke.width = doodle.lineWidth;
+					stroke.start = { x: oldCoords.x, y: oldCoords.y };
+                    stroke.end = { x: newCoords.x, y: newCoords.y };
+                    doodleList[doodleList.length - 1].push(stroke);
 					oldCoords = newCoords;
 				}
 			});
@@ -116,10 +125,41 @@
 					doodle.beginPath();
 					doodle.arc(oldCoords.x, oldCoords.y, doodle.lineWidth / 2, 0, Math.PI * 2);
 					doodle.fill();
+					let dot = {};
+					dot.type = "dot";
+					dot.point = { x: oldCoords.x, y: oldCoords.y };
+					dot.radius = doodle.lineWidth / 2;
+					doodleList[doodleList.length - 1].push(dot);
 				}
 			});
+			S.listen("penSize", "change", function () {
+				doodle.lineWidth = this.value;
+            });
+			S.listen("undoDoodle", "click", function () {
+				if (doodleList.length > 0) {
+					doodle.strokeStyle = "black";
+					doodle.fillStyle = "black";
+					let currentWidth = doodle.lineWidth;
+					S.forEach(doodleList[doodleList.length - 1], function (stroke) {
+						if (stroke.type == "line") {
+							doodle.lineWidth = stroke.width;
+							doodle.beginPath();
+							doodle.moveTo(stroke.start.x, stroke.start.y);
+							doodle.lineTo(stroke.end.x, stroke.end.y);
+							doodle.stroke();
+                        } else if (stroke.type == "dot") {
+                            doodle.beginPath();
+                            doodle.arc(stroke.point.x, stroke.point.y, stroke.radius, 0, Math.PI * 2);
+                            doodle.fill();
+						}
+					});
+					doodleList.pop(-1);
+					doodle.lineWidth = currentWidth;
+				}
+            });
 			S.listen("clearDoodle", "click", function () {
 				doodle.clearRect(0, 0, canvas.width, canvas.height);
+				doodleList = [];
 			});
 
 			S.onLoad(function () {
@@ -162,6 +202,11 @@
 			<br>
 			<canvas width="500" height="300" id="doodle"></canvas>
 			<br>
+			Pen size: <input type="range" id="penSize" min="1" max="15" value="3">
+			<br>
+			<button id="undoDoodle">
+				Undo
+			</button>
 			<button id="clearDoodle">
 				Clear drawing
 			</button>
