@@ -10,11 +10,13 @@
 		<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase-firestore.js"></script>
 		<script src="https://epicenterprograms.github.io/standards/behavior/firebaseinit.js"></script>
 		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
+		<script src="https://epicenterprograms.github.io/standards/behavior/storage.js"></script>
 		<script src="behavior.js"></script>
 		<script>
 			var S = Standards.general;
-			var server = S.storage.server;
+			var server = Standards.storage.server;
 			server.defaultLocation = "~websites/cramped/comments";
+			server.requireSignIn = false;
 
 			function refreshComments() {
 				server.list().then(function (comments) {
@@ -30,7 +32,7 @@
 							}
 							let comment = document.createElement("td");
 							comment.textContent = data.message;
-							comment.innerHTML = comment.textContent.replace(/\/\/(.+?)\/\//g, "<em>$1</em>").replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/__(.+?)__/g, '<span style="text-decoration:underline">$1</span>');
+							comment.innerHTML = comment.textContent.replace(/\/\/(.+?)\/\//g, "<em>$1</em>").replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/__(.+?)__/g, '<span style="text-decoration:underline">$1</span>').replace(/(https?:\/\/[^. \n]+(?:\.[^. \n]+)+)/g, "<a href='$1'>$1</a>");
 							row.dataset.timestamp = commentKey;
 							row.appendChild(author);
 							row.appendChild(comment);
@@ -97,7 +99,9 @@
 						if (data.message == "<br>") {
 							data.message = "";
 						}
-						data.message = data.message.replace(/<em>(.+?)<\/em>/g, "//$1//").replace(/<strong>(.+?)<\/strong>/g, "**$1**").replace(/<span style="text-decoration:underline">(.+?)<\/span>/g, "__$1__");
+						data.message = data.message.replace(/<em>(.+?)<\/em>/g, "//$1//");
+						data.message = data.message.replace(/<strong>(.+?)<\/strong>/g, "**$1**");
+						data.message = data.message.replace(/<span style="text-decoration:underline">(.+?)<\/span>/g, "__$1__");
 						if (data.message) {
 							server.store(row.dataset.timestamp, data).then(function () {
 								remaining.value--;
@@ -119,15 +123,22 @@
 			});
 
 			S.onLoad(function () {
-				server.signIn("anonymous").then(function () {
-					S.getTag("button")[0].disabled = false;
-					refreshComments();
-				});
+                refreshComments();
+                S.getTag("button")[0].disabled = false;
 			});
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
 		<style>
+			#commentsContainer {
+				margin: 1em auto;
+				max-width: 100%;
+				max-height: 35em;
+				overflow: auto;
+			}
+			#commentsList {
+				margin: auto;
+			}
 			#commentsList tr {
 				margin: .5em;
 				border: .05em solid #ddd;
@@ -164,7 +175,9 @@
 				Leave a comment
 			</button>
 			<br>
-			<table class="labeled-list" id="commentsList"><tr><td>No comments could be loaded.</td></tr></table>
+			<div id="commentsContainer">
+				<table class="labeled-list" id="commentsList"><tr><td>No comments could be loaded.</td></tr></table>
+			</div>
 			<br>
 			<button id="commentEditor">
 				Edit comments
