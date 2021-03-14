@@ -32,7 +32,7 @@
 							}
 							let comment = document.createElement("td");
 							comment.textContent = data.message;
-							comment.innerHTML = comment.textContent.replace(/\/\/(.+?)\/\//g, "<em>$1</em>").replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/__(.+?)__/g, '<span style="text-decoration:underline">$1</span>').replace(/(https?:\/\/[^. \n]+(?:\.[^. \n]+)+)/g, "<a href='$1'>$1</a>");
+							comment.innerHTML = comment.textContent.replace(/(^|[^:])\/\/(.+?)\/\//g, "$1<em>$2</em>").replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/__(.+?)__/g, '<span style="text-decoration:underline">$1</span>').replace(/(https?:\/\/[^. \n]+(?:\.[^. \n]+)+)/g, "<a href='$1'>$1</a>");
 							row.dataset.timestamp = commentKey;
 							row.appendChild(author);
 							row.appendChild(comment);
@@ -102,6 +102,7 @@
 						data.message = data.message.replace(/<em>(.+?)<\/em>/g, "//$1//");
 						data.message = data.message.replace(/<strong>(.+?)<\/strong>/g, "**$1**");
 						data.message = data.message.replace(/<span style="text-decoration:underline">(.+?)<\/span>/g, "__$1__");
+						data.message = data.message.replace(/<a.*?>(.+?)<\/a>/g, "$1");
 						if (data.message) {
 							server.store(row.dataset.timestamp, data).then(function () {
 								remaining.value--;
