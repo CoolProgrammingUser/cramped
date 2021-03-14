@@ -125,7 +125,7 @@
 
 			S.onLoad(function () {
                 refreshComments();
-                S.getTag("button")[0].disabled = false;
+                //// S.getTag("button")[0].disabled = false;
 			});
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
@@ -162,17 +162,38 @@
 			Comments
 		</h1>
 		<main>
-			<p>
+			<section>
 				This allows you to tell me how amazing this website is.
-			</p>
-			<p>
-				//Stuff// = <em>Stuff</em>&emsp;**Stuff** = <strong>Stuff</strong>&emsp;__Stuff__ = <span style="text-decoration:underline">Stuff</span>
-			</p>
+			</section>
+			<section>
+				<span class="elaborate" style="color:blue">[Learn how to make special formatting]</span>
+			</section>
+			<aside data-heading="Formatting help">
+				<h3>Italics</h3>
+				<section>Surround the word or words to be italicized with two slashes.</section>
+				<section>//Stuff// = <em>Stuff</em></section>
+				<h3>Bolding</h3>
+				<section>Surround the word or words to be bolded with two asterisks.</section>
+				<section>**Stuff** = <strong>Stuff</strong></section>
+				<h3>Underlining</h3>
+				<section>Surround the word or words to be underlined with two underscores.</section>
+				<section>__Stuff__ = <span style="text-decoration:underline">Stuff</span></section>
+				<h3>Combining</h3>
+				<section>Text can have more than one type of formatting as long as the markup doesn't have to cross any other markup. (Treat them like parentheses.)</section>
+				<section>//**__Stuff__**// = <em><strong><span style="text-decoration:underline">Stuff</span></strong></em></section>
+				<section><del style="color:red">//**__Stuff//**__</del></section>
+				<section>//**Stuff**// **and stuffity stuff** = <em><strong>Stuff</strong></em> <strong>and stuffity stuff</strong></section>
+				<section>**//Stuff// and stuffity stuff** = <strong><em>Stuff</em> and stuffity stuff</strong></section>
+				<section><del style="color:red">//**Stuff// and stuffity stuff**</del></section>
+				<h3>Other</h3>
+				<section>Full links will become clickable.</section>
+				<section>https://coolprogramminguser.github.io/cramped/ = <a href="https://coolprogramminguser.github.io/cramped/">https://coolprogramminguser.github.io/cramped/</a></section>
+			</aside>
 			<input type="text" id="author" placeholder="Name/username (optional)">
 			<br>
 			<textarea id="commentArea" placeholder="Enter your comment..."></textarea>
 			<br>
-			<button onclick="leaveComment()" disabled>
+			<button onclick="leaveComment()">
 				Leave a comment
 			</button>
 			<br>
