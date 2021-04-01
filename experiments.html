@@ -5,6 +5,7 @@
 			Cramped
 		</title>
 		<link rel="icon" href="images/favicon.ico">
+		<base target="_blank">
 		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
 		<script src="behavior.js"></script>
 		<script>
@@ -68,24 +69,20 @@
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
 		<style>
-			.details {
-				max-width: 100%;
-				overflow: auto;
-			}
 			.details > input:first-child:checked ~ .adjacentTables {
 				display: inline-table;
-				margin: 1rem;
+				margin: 1em;
 			}
 			.smaller th {
-				padding: .4rem .2rem;
+				padding: .4em .2em;
 			}
 			.slim td {
-				padding: .5rem 0rem;
+				padding: .5em 0em;
 				font-size: .9em;
 			}
 			#rawConversationData {
-				border-radius: 0rem 0rem .5rem .5rem;
-				padding: .5rem;
+				border-radius: 0em 0em .5em .5em;
+				padding: .5em;
 				text-align: left;
 				white-space: pre-line;
 			}
@@ -98,12 +95,12 @@
 				background: rgba(255, 255, 255, .75);
 			}
 			#conversationCheckboxes h4 {
-				margin-top: .5rem;
-				margin-bottom: .5rem;
+				margin-top: .5em;
+				margin-bottom: .5em;
 			}
 			#conversationCheckboxes > div:first-of-type {
 				position: absolute;
-				right: 1rem;
+				right: 1em;
 				top: 0rem;
 			}
 			#conversationCheckboxes > div:nth-of-type(2) {
@@ -114,10 +111,16 @@
 				text-align: left;
 			}
 			#topMales {
-				width: 1rem;
+				width: 1em;
 			}
 			#topFemales {
-				width: 1rem;
+				width: 1em;
+			}
+
+			@media (max-width: 1000px) {
+				#conversationCheckboxes h4 {
+					text-align: left;
+				}
 			}
 		</style>
 	</head>
@@ -6065,7 +6068,7 @@
 				<table class="compact">
 					<tr>
 						<th>
-							| Weight (lb) | Pull-ups | Finger-tip pull-ups | Staircase
+							| Weight (lb) | Pull-ups | Finger-tip pull-ups | Stair&shy;case
 						</th>
 					</tr>
 					<tr>
