@@ -7,6 +7,9 @@
 		<link rel="icon" href="images/favicon.ico">
 		<base target="_blank">
 		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
+		<!--
+		<script src="file:///C:/Users/rtben/Documents/GitHub/standards/behavior/general.js"></script>
+		-->
 		<script src="behavior.js"></script>
 		<script>
 			// colors and filters the conversation tables
@@ -67,6 +70,9 @@
 			});
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
+		<!--
+		<link rel="stylesheet" href="file:///C:/Users/rtben/Documents/GitHub/standards/formatting/foundation.css">
+		-->
 		<link rel="stylesheet" href="formatting.css">
 		<style>
 			.details > input:first-child:checked ~ .adjacentTables {
@@ -79,6 +85,9 @@
 			.slim td {
 				padding: .5em 0em;
 				font-size: .9em;
+			}
+			.table-total {
+				background-color: lightsteelblue;
 			}
 			#rawConversationData {
 				border-radius: 0em 0em .5em .5em;
@@ -400,6 +409,9 @@
 							filter top <input type="text" id="topFemales" placeholder="#"> female(s)
 						</div>
 						<br>
+						<input type="checkbox" id="showTotals">
+						<label for="showTotals">Show totals</label>
+						<br>
 						<div>
 							<button id="checkAll">Check all boxes</button>
 							<button id="checkStandard">Use standard filtering</button>
@@ -446,7 +458,7 @@
 							<th colspan="2">Friday</th>
 							<th colspan="2">Saturday</th>
 							<th colspan="2">Sunday</th>
-							<th colspan="2" style="background-color:steelblue">Total</th>
+							<th colspan="2" class="table-total">Total</th>
 						</tr>
 						<tr>
 							<th>Males</th>
@@ -497,7 +509,7 @@
 							<th colspan="2">Wednesday</th>
 							<th colspan="2">Thursday</th>
 							<th colspan="2">Friday</th>
-							<th colspan="2" style="background-color:steelblue">Total</th>
+							<th colspan="2" class="table-total">Total</th>
 						</tr>
 						<tr>
 							<th>Males</th>
@@ -698,7 +710,7 @@
 							<th></th>
 							<th>Me</th>
 							<th>Them</th>
-							<th>Total</th>
+							<th class="table-total">Total</th>
 						</tr>
 						<tr>
 							<th>Males</th>
@@ -713,7 +725,7 @@
 							<td></td>
 						</tr>
 						<tr>
-							<th>Total</th>
+							<th class="table-total">Total</th>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -729,7 +741,7 @@
 							<th></th>
 							<th>Me</th>
 							<th>Them</th>
-							<th>Total</th>
+							<th class="table-total">Total</th>
 						</tr>
 						<tr>
 							<th>Males</th>
@@ -744,7 +756,7 @@
 							<td></td>
 						</tr>
 						<tr>
-							<th>Total</th>
+							<th class="table-total">Total</th>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -759,7 +771,7 @@
 						<tr>
 							<th>Males</th>
 							<th>Females</th>
-							<th>Total</th>
+							<th class="table-total">Total</th>
 						</tr>
 						<tr>
 							<td></td>
@@ -4170,27 +4182,91 @@
 
 
 
+					function showTableTotals(table) {
+						let columns = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+						// get the totals for each column
+						let decimals = 0;
+						S.forEach(table.getElementsByTagName("td"), function (data, index) {
+							data = data.textContent.trim();
+							if (!(data === "" || data == "?" || isNaN(data))) {
+								if (data.indexOf(".") > 0) {
+									decimals = data.slice(data.indexOf(".") + 1).length;
+								}
+								columns[index % 14] += Number(data);
+							}
+						});
+						// add the data to another table row
+						let totalRow = document.createElement("tr");
+						table.appendChild(totalRow);
+						let heading = document.createElement("th");
+						heading.className = "table-total";
+						heading.textContent = "Total";
+						totalRow.appendChild(heading);
+						S.forEach(columns, function (column) {
+							let total = document.createElement("td");
+							total.textContent = Math.round(column * 10 ** decimals) / 10 ** decimals;
+							totalRow.appendChild(total);
+						});
+						S.colorCode(totalRow);
+
+						// totals each row
+						S.forEach(table.getElementsByTagName("tr"), function (row, rowNumber) {
+							if (rowNumber == 0) {
+								let columnHeading = document.createElement("th");
+								columnHeading.className = "table-total";
+								columnHeading.textContent = "Total";
+								columnHeading.colSpan = 2;
+								row.appendChild(columnHeading);
+							} else if (rowNumber == 1) {
+								let male = document.createElement("th");
+								male.textContent = "Male";
+								row.appendChild(male);
+								let female = document.createElement("th");
+								female.textContent = "Female";
+								row.appendChild(female);
+							} else {
+								let sums = [0, 0];
+								S.forEach(row.getElementsByTagName("td"), function (data, index) {
+									data = data.textContent.trim();
+									if (!(data === "" || data == "?" || isNaN(data))) {
+										if (index % 2) {
+											sums[1] += Number(data);
+										} else {
+											sums[0] += Number(data);
+										}
+									}
+								});
+								let maleTotal = document.createElement("td");
+								maleTotal.textContent = Math.round(sums[0] * 10 ** decimals) / 10 ** decimals;
+								row.appendChild(maleTotal);
+								let femaleTotal = document.createElement("td");
+								femaleTotal.textContent = Math.round(sums[1] * 10 ** decimals) / 10 ** decimals;
+								row.appendChild(femaleTotal);
+							}
+						});
+					}
+
 					function updateConversations(setTopFilter) {
 						/**
 						puts information into the conversation tables
 						*/
 						var checkboxes = {
-                            specific: S.getId("specificConversations").checked,
-                            adult: S.getId("adultConversations").checked,
-                            kid: S.getId("kidConversations").checked,
-                            formal: S.getId("formalConversations").checked,
-                            small: S.getId("smallConversations").checked,
-                            other: S.getId("otherConversations").checked,
-                            familiar: S.getId("familiarConversations").checked,
-                            floor: S.getId("floorConversations").checked,
-                            group: S.getId("groupConversations").checked,
-                            individual: S.getId("individualConversations").checked,
-                            affiliated: S.getId("affiliatedConversations").checked,
-                            class: S.getId("classConversations").checked,
-                            anonymous: S.getId("anonymousConversations").checked,
-                            mine: S.getId("myConversations").checked,
-                            theirs: S.getId("theirConversations").checked
-                        }
+							specific: S.getId("specificConversations").checked,
+							adult: S.getId("adultConversations").checked,
+							kid: S.getId("kidConversations").checked,
+							formal: S.getId("formalConversations").checked,
+							small: S.getId("smallConversations").checked,
+							other: S.getId("otherConversations").checked,
+							familiar: S.getId("familiarConversations").checked,
+							floor: S.getId("floorConversations").checked,
+							group: S.getId("groupConversations").checked,
+							individual: S.getId("individualConversations").checked,
+							affiliated: S.getId("affiliatedConversations").checked,
+							class: S.getId("classConversations").checked,
+							anonymous: S.getId("anonymousConversations").checked,
+							mine: S.getId("myConversations").checked,
+							theirs: S.getId("theirConversations").checked
+						}
 
 						var tables = [document.getElementById("conversationLengths"), document.getElementById("uniquePeople"), document.getElementById("averageLengths"), document.getElementById("enjoyability"), document.getElementById("initiatorSkew")],
 							tableModified = [{ m: false, f: false }, { m: false, f: false }, { m: false, f: false }, { m: false, f: false }, { m: false, f: false }],
@@ -4203,6 +4279,15 @@
 								table.deleteRow(-1);
 							}
 							table.getElementsByTagName("tr")[2].innerHTML = table.getElementsByTagName("tr")[2].getElementsByTagName("th")[0].outerHTML;
+							// gets rid of totals
+							let row = table.getElementsByTagName("tr")[0];
+							while (row.children.length > 8) {
+								row.removeChild(row.children[8]);
+							}
+							row = table.getElementsByTagName("tr")[1];
+							while (row.children.length > 14) {
+								row.removeChild(row.children[14]);
+							}
 						});
 						function prepareTables() {
 							male = [];
@@ -5080,13 +5165,13 @@
 								S.forEach(row, function (column, columnIndex) {
 									document.getElementById("initializers").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = column;
 								});
-                            });
+							});
 							// creates totals for the initializerSum table
 							initSum[0][2] = initSum[0][0] + initSum[0][1];
 							initSum[1][2] = initSum[1][0] + initSum[1][1];
 							initSum[2][0] = initSum[0][0] + initSum[1][0];
 							initSum[2][1] = initSum[0][1] + initSum[1][1];
-                            initSum[2][2] = initSum[0][2] + initSum[1][2];
+							initSum[2][2] = initSum[0][2] + initSum[1][2];
 							// puts the initSum information into the initializerSum table
 							S.forEach(initSum, function (row, rowIndex) {
 								S.forEach(row, function (column, columnIndex) {
@@ -5103,6 +5188,11 @@
 							S.colorCode("initiatorSkew");
 							S.colorCode("averageLengths", null, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0]);
 							S.colorCode("enjoyability", null, [255, 255, 0], [85, 255, 0]);
+							if (S.getId("showTotals").checked) {
+								S.forEach(["conversationLengths", "uniquePeople", "initiatorSkew", "averageLengths", "enjoyability"], function (ID) {
+									showTableTotals(S.getId(ID));
+								});
+							}
 						} else {
 							updateConversations(false);
 						}
@@ -5121,20 +5211,20 @@
 										person.name = set[0];
 										person.gender = set[1];
 										person.proximity = set[2] * 3 + 1;
-                                        person.classification = ["c"];
-                                        person.indicators = [];
+										person.classification = ["c"];
+										person.indicators = [];
 										weeklyRoster[day].push(person);
 										leftovers[person.gender]--;
 									});
 									S.forEach(leftovers, function (amount, gender) {  // adds the other people who were present in the classroom
-                                        S.forEach(amount, function () {
-                                            let person = {};
-                                            person.name = "a";
-                                            person.gender = gender;
-                                            person.proximity = 1;
-                                            person.classification = ["c"];
-                                            person.indicators = [];
-                                            weeklyRoster[day].push(person);
+										S.forEach(amount, function () {
+											let person = {};
+											person.name = "a";
+											person.gender = gender;
+											person.proximity = 1;
+											person.classification = ["c"];
+											person.indicators = [];
+											weeklyRoster[day].push(person);
 										});
 									});
 									weeklyRoster[day].push({  // adds the professor
@@ -5151,42 +5241,42 @@
 
 							} else {  // if I messed up
 								console.error("There was a problem recognizing some of the presence data.");
-                            }
-                        });
+							}
+						});
 						S.forEach(weeklyRoster, function (roster, day) {  // adds a guess of exposure to people on my floor
-                            S.forEach(5, function () {
-                                let person = {};
-                                person.name = "a";
-                                person.gender = "m";
-                                person.proximity = 1;
+							S.forEach(5, function () {
+								let person = {};
+								person.name = "a";
+								person.gender = "m";
+								person.proximity = 1;
 								person.classification = ["b"];
 								person.indicators = [];
-                                weeklyRoster[day].push(person);
+								weeklyRoster[day].push(person);
 							});
 						});
 
 						let weeklyTotals = {
-                            monday: { m: 0, f: 0 },
-                            tuesday: { m: 0, f: 0 },
-                            wednesday: { m: 0, f: 0 },
-                            thursday: { m: 0, f: 0 },
-                            friday: { m: 0, f: 0 },
+							monday: { m: 0, f: 0 },
+							tuesday: { m: 0, f: 0 },
+							wednesday: { m: 0, f: 0 },
+							thursday: { m: 0, f: 0 },
+							friday: { m: 0, f: 0 },
 							saturday: { m: 0, f: 0 },
 							sunday: { m: 0, f: 0 },
-                            total: { m: 0, f: 0 }
-                        };
-                        let classTotals = {
-                            monday: { m: 0, f: 0 },
-                            tuesday: { m: 0, f: 0 },
-                            wednesday: { m: 0, f: 0 },
-                            thursday: { m: 0, f: 0 },
-                            friday: { m: 0, f: 0 },
-                            total: { m: 0, f: 0 }
-                        };
+							total: { m: 0, f: 0 }
+						};
+						let classTotals = {
+							monday: { m: 0, f: 0 },
+							tuesday: { m: 0, f: 0 },
+							wednesday: { m: 0, f: 0 },
+							thursday: { m: 0, f: 0 },
+							friday: { m: 0, f: 0 },
+							total: { m: 0, f: 0 }
+						};
 						S.forEach(weeklyRoster, function (roster, day) {
-                            S.forEach(roster, function (person) {
-                                // determines whether the presence should be counted
-                                let desiredInformation;
+							S.forEach(roster, function (person) {
+								// determines whether the presence should be counted
+								let desiredInformation;
 								if (S.getName("filterType", true).id == "anyFail") {  // if the presence should be ignored if any characteristic isn't wanted
 									desiredInformation = true;
 									if (!checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person isn't specifically requested
@@ -5196,53 +5286,53 @@
 									} else if (!checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {  // if the person is or was from my floor
 										desiredInformation = false;
 									} else if (!checkboxes.group && person.indicators.includes("g")) {  // if the conversation was with a group
-                                        desiredInformation = false;
-                                    } else if (!checkboxes.individual && !person.indicators.includes("g")) {  // if the conversation was with an individual
-                                        desiredInformation = false;
-                                    } else if (!checkboxes.class && person.classification.includes("c")) {  // if the conversation was with someone from my class
-                                        desiredInformation = false;
-                                    } else if (!checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
-                                        desiredInformation = false;
-                                    } else if (!checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
-                                        return person.classification.includes(indicator);
-                                    }) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
-                                        desiredInformation = false;
-                                    } else if (!checkboxes.affiliated && peopleAffiliations[person.name] && !unfilteredPeople.includes(peopleAffiliations[person.name])) {  // if I know the person because of someone already filtered out
-                                        desiredInformation = false;
+										desiredInformation = false;
+									} else if (!checkboxes.individual && !person.indicators.includes("g")) {  // if the conversation was with an individual
+										desiredInformation = false;
+									} else if (!checkboxes.class && person.classification.includes("c")) {  // if the conversation was with someone from my class
+										desiredInformation = false;
+									} else if (!checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
+										desiredInformation = false;
+									} else if (!checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
+										return person.classification.includes(indicator);
+									}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
+										desiredInformation = false;
+									} else if (!checkboxes.affiliated && peopleAffiliations[person.name] && !unfilteredPeople.includes(peopleAffiliations[person.name])) {  // if I know the person because of someone already filtered out
+										desiredInformation = false;
 									}
-                                } else {  // if the presence should be ignored only if all characteristics aren't wanted
-                                    desiredInformation = false;
-                                    if (checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person is specifically requested
-                                        desiredInformation = true;
-                                    } else if (checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
-                                        desiredInformation = true;
-                                    } else if (checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {  // if the person is or was from my floor
-                                        desiredInformation = true;
-                                    } else if (checkboxes.group && person.indicators.includes("g")) {  // if the conversation was with a group
-                                        desiredInformation = true;
-                                    } else if (checkboxes.individual && !person.indicators.includes("g")) {  // if the conversation was with an individual
-                                        desiredInformation = true;
-                                    } else if (checkboxes.class && person.classification.includes("c")) {  // if the conversation was with someone from my class
-                                        desiredInformation = true;
-                                    } else if (checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
-                                        desiredInformation = true;
-                                    } else if (checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
-                                        return person.classification.includes(indicator);
-                                    }) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
-                                        desiredInformation = true;
-                                    } else if (checkboxes.affiliated && peopleAffiliations[person.name] && unfilteredPeople.includes(peopleAffiliations[person.name])) {  // if I know the person because of someone who is filtered in
-                                        desiredInformation = true;
+								} else {  // if the presence should be ignored only if all characteristics aren't wanted
+									desiredInformation = false;
+									if (checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person is specifically requested
+										desiredInformation = true;
+									} else if (checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
+										desiredInformation = true;
+									} else if (checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {  // if the person is or was from my floor
+										desiredInformation = true;
+									} else if (checkboxes.group && person.indicators.includes("g")) {  // if the conversation was with a group
+										desiredInformation = true;
+									} else if (checkboxes.individual && !person.indicators.includes("g")) {  // if the conversation was with an individual
+										desiredInformation = true;
+									} else if (checkboxes.class && person.classification.includes("c")) {  // if the conversation was with someone from my class
+										desiredInformation = true;
+									} else if (checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
+										desiredInformation = true;
+									} else if (checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
+										return person.classification.includes(indicator);
+									}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
+										desiredInformation = true;
+									} else if (checkboxes.affiliated && peopleAffiliations[person.name] && unfilteredPeople.includes(peopleAffiliations[person.name])) {  // if I know the person because of someone who is filtered in
+										desiredInformation = true;
 									}
-                                }
+								}
 
 								if (desiredInformation) {
-                                    if (person.classification.includes("c")) {
-                                        classTotals[day][person.gender] += person.proximity;
-                                        classTotals.total[person.gender] += person.proximity;
-                                    }
-                                    weeklyTotals[day][person.gender]++;
+									if (person.classification.includes("c")) {
+										classTotals[day][person.gender] += person.proximity;
+										classTotals.total[person.gender] += person.proximity;
+									}
+									weeklyTotals[day][person.gender]++;
 									weeklyTotals.total[person.gender]++;
-                                }
+								}
 							});
 						});
 
@@ -5250,8 +5340,8 @@
 						let weekMax = -Infinity;
 						let classMin = Infinity;
 						let classMax = -Infinity;
-                        S.forEach(weeklyTotals, function (total, _, __, index) {  // puts the exposure data into the table
-                            S.getId("totalExposure").getElementsByTagName("td")[index * 2].textContent = total.m;
+						S.forEach(weeklyTotals, function (total, _, __, index) {  // puts the exposure data into the table
+							S.getId("totalExposure").getElementsByTagName("td")[index * 2].textContent = total.m;
 							S.getId("totalExposure").getElementsByTagName("td")[index * 2 + 1].textContent = total.f;
 							if (index < 7) {
 								if (total.m < weekMin) {
@@ -5267,7 +5357,7 @@
 									weekMax = total.f;
 								}
 							}
-                        });
+						});
 						S.forEach(classTotals, function (total, _, __, index) {  // puts the exposure data into the table
 							S.getId("nearbyExposure").getElementsByTagName("td")[index * 2].textContent = total.m;
 							S.getId("nearbyExposure").getElementsByTagName("td")[index * 2 + 1].textContent = total.f;
@@ -5292,12 +5382,12 @@
 							if (index < 14) {
 								S.colorCode(data, (Number(data.textContent) - weekMin) / (weekMax - weekMin) * 100);
 							}
-                        });
-                        S.forEach(S.getId("nearbyExposure").getElementsByTagName("td"), function (data, index) {
-                            if (index < 10) {
-                                S.colorCode(data, (Number(data.textContent) - classMin) / (classMax - classMin) * 100, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0]);
-                            }
-                        });
+						});
+						S.forEach(S.getId("nearbyExposure").getElementsByTagName("td"), function (data, index) {
+							if (index < 10) {
+								S.colorCode(data, (Number(data.textContent) - classMin) / (classMax - classMin) * 100, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0]);
+							}
+						});
 					}  // end of updateConversations
 
 
@@ -6492,4 +6582,3 @@
 		</main>
 	</body>
 </html>
-	
