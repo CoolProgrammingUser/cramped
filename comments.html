@@ -20,27 +20,29 @@
 
 			function refreshComments() {
 				server.list().then(function (comments) {
-					S.getId("commentsList").innerHTML = "";
-					S.forEach(comments, function (commentKey) {
-						server.recall(commentKey).then(function (data) {
-							let row = S.getId("commentsList").insertRow(0);
-							let author = document.createElement("th");
-							if (data.author) {
-								author.textContent = data.author;
-							} else {
-								author.textContent = "Anonymous";
-							}
-							let comment = document.createElement("td");
-							comment.textContent = data.message;
-							comment.innerHTML = comment.textContent.replace(/(^|[^:])\/\/(.+?)\/\//g, "$1<em>$2</em>").replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/__(.+?)__/g, '<span style="text-decoration:underline">$1</span>').replace(/(https?:\/\/[^. \n]+(?:\.[^. \n]+)+)/g, "<a href='$1'>$1</a>");
-							row.dataset.timestamp = commentKey;
-							row.appendChild(author);
-							row.appendChild(comment);
-						}).catch(function (error) {
-							console.error("A comment couldn't be recalled.");
-							console.error(error);
+					if (comments.length > 0) {
+						S.getId("commentsList").innerHTML = "";
+						S.forEach(comments, function (commentKey) {
+							server.recall(commentKey).then(function (data) {
+								let row = S.getId("commentsList").insertRow(0);
+								let author = document.createElement("th");
+								if (data.author) {
+									author.textContent = data.author;
+								} else {
+									author.textContent = "Anonymous";
+								}
+								let comment = document.createElement("td");
+								comment.textContent = data.message;
+								comment.innerHTML = comment.textContent.replace(/(^|[^:])\/\/(.+?)\/\//g, "$1<em>$2</em>").replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/__(.+?)__/g, '<span style="text-decoration:underline">$1</span>').replace(/(https?:\/\/[^. \n]+(?:\.[^. \n]+)+)/g, "<a href='$1'>$1</a>");
+								row.dataset.timestamp = commentKey;
+								row.appendChild(author);
+								row.appendChild(comment);
+							}).catch(function (error) {
+								console.error("A comment couldn't be recalled.");
+								console.error(error);
+							});
 						});
-					});
+					}
 				}).catch(function (error) {
 					console.error("The information couldn't be listed.");
 					console.error(error);
