@@ -44,22 +44,15 @@ note:hover {
 .elaborate:hover {
 	text-decoration-style: solid;
 }
-aside::before {
-	content: attr(data-heading);
-	display: block;
-	margin-bottom: 1em;
-	text-align: center;
-	font-size: 1.5em;
-	font-weight: bold;
-}
-button.hide-aside {
-	position: absolute;
-	right: .5rem;
-	top: .5rem;
-	border: none;
-	background: none;
-	color: blue;
-}
-button.hide-aside:hover {
-	text-decoration: underline;
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background: repeating-linear-gradient(#080, #040 100vh, #080 200vh);
+	}
+	body.navigation {
+		background: linear-gradient(#111, #444);
+	}
+	h1.main-title {
+		color: white;
+	}
 }
