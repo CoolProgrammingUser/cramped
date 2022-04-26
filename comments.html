@@ -133,6 +133,9 @@
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
 		<style>
+			.elaborate.colorful {
+				color: blue;
+			}
 			#commentsContainer {
 				margin: 1em auto;
 				max-width: 100%;
@@ -154,6 +157,18 @@
 			#commentsList td {
 				white-space: pre-wrap;
 			}
+
+			@media (prefers-color-scheme: dark) {
+				.elaborate.colorful {
+					color: yellow;
+				}
+				#commentsList tr {
+					background: black;
+				}
+				#commentsList th {
+					border-right-color: #aaa;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -168,7 +183,7 @@
 				This allows you to tell me how amazing this website is.
 			</section>
 			<section>
-				<span class="elaborate" style="color:blue">[Learn how to make special formatting]</span>
+				<span class="elaborate colorful">[Learn how to make special formatting]</span>
 			</section>
 			<aside data-heading="Formatting help">
 				<h3>Italics</h3>

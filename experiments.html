@@ -75,6 +75,9 @@
 		-->
 		<link rel="stylesheet" href="formatting.css">
 		<style>
+			.raw-data {
+				background-color: white;
+			}
 			.details > input:first-child:checked ~ .adjacentTables {
 				display: inline-table;
 				margin: 1em;
@@ -124,6 +127,19 @@
 			}
 			#topFemales {
 				width: 1em;
+			}
+
+			@media (prefers-color-scheme: dark) {
+				.raw-data {
+					background-color: black;
+				}
+                #conversationCheckboxes {
+                    background: rgba(80, 80, 80, .5);
+                }
+				.smaller td, .slim td {
+					background: gray;
+					color: black;
+				}
 			}
 
 			@media (max-width: 1000px) {
@@ -376,7 +392,7 @@
 				<section>
 					I wasn't satisfied with the limited amount of infomation I had to work with in the first study, so when I realized that I was about to have the perfect opportunity to track everything from the very beginning (because I was transferring) with the means of interpreting it (via my newfound programming knowledge), I couldn't pass it up (however grueling it may be). One unit of talking time is roughly equal to one minute. Everything else (and technically that as well) is ranked on a scale of 1-7.
 				</section>
-				<div class="details" style="background-color: white">
+				<div class="details raw-data">
 					<div class="summary">
 						Raw conversation data
 					</div>
@@ -6221,9 +6237,12 @@
 				<h2>
 					Matching attire with weather conditions
 				</h2>
-				<p>
+				<section>
 					Eventually, I got tired of guessing what I should wear based on weather conditions, so I started keeping track of what the weather was and what I thought I'd be comfortable wearing (once I felt what it was like outside). Temperature feeling corresponds to this gauge of what to wear: 1 = super warm clothing; 2 = coat and thick shirt; 3 = jacket and thick shirt; 4 = thick shirt; 5 = only long-sleeve shirt; 6 = short-sleeve shirt; 7 = shorts; 8 = super cool clothing. Results seem to suggest the following equation: temperature feeling = (actual temperature &times; 7.5 - wind &times; 2 + 1.047<sup>humidity</sup> - 2.4<sup>cloud cover</sup>) &divide; 60.375 - 3.07. Since this equation is too complicated for me to memorize (easily), I decided to make a simple app to do the math for me. Although this gives fairly accurate results, I established certain cut-offs to account for the slight discrepancies: 1.4, 2.5, 3.7, 4.5, 5.3, 6.2, 7.9
-				</p>
+				</section>
+				<section>
+					I also now have a website <a href="https://epicenterprograms.github.io/weather/">here</a> that does the same thing more effectively.
+				</section>
 				<div class="details">
 					<div class="summary">
 						Raw data
