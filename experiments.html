@@ -12,8 +12,93 @@
 		-->
 		<script src="behavior.js"></script>
 		<script>
+			function calculateTableAverages(tableId, options) {
+				// get table element
+				const table = document.getElementById(tableId);
+
+				// sets the options
+				if (!options) {
+					options = {};
+				}
+				options.setLength = options.setLength || 1;  // sets how many columns to move over until corresponding data is found
+				let setAverages = [];
+
+				for (let setIndex = 0; setIndex < options.setLength; setIndex++) {
+					// initialize arrays to store row and column totals
+					const rowTotals = [];
+					const colTotals = [];
+					let totalItemCount = 0;
+
+					// loop through rows
+					for (let i = 0; i < table.rows.length; i++) {
+						let colIndex = 0;
+						rowTotals.push({ total: 0, length: 0 });
+
+						// loop through cells in row
+						let values = table.rows[i].getElementsByTagName("td");
+						let rowLength = values.length;
+						for (let j = setIndex; j < rowLength; j += options.setLength) {
+							const cellValue = parseFloat(values[j].textContent);
+							if (!isNaN(cellValue)) { // check if cell value is a number
+								totalItemCount++;
+
+								rowTotals[rowTotals.length - 1].total += cellValue;
+								rowTotals[rowTotals.length - 1].length++;
+
+								// update column total
+								if (colTotals[colIndex]) {
+									colTotals[colIndex].total += cellValue;
+									colTotals[colIndex].length++;
+								} else {
+									colTotals[colIndex] = { total: cellValue, length: 1 };
+								}
+							}
+							colIndex++;
+						}
+					}
+
+					// calculate averages
+					colTotals.filter(Boolean);  // filters out the empty elements
+					let averages = {};
+					averages.rows = rowTotals.map(obj => obj.total / obj.length);
+					averages.cols = colTotals.map(obj => obj.total / obj.length);
+					averages.overall = colTotals.reduce((total, nextItem) => total + nextItem.total, 0) / totalItemCount;
+					setAverages.push(averages);
+				}
+
+				const decimalPlaces = 1;
+
+				// insert averages into table
+				setAverages.forEach(function (_, setIndex) {  // for each set's data within the row
+					for (let rowIndex = 0; rowIndex < setAverages[0].rows.length; rowIndex++) {  // for each row
+						// insert row average
+						const cell = table.rows[rowIndex].insertCell();
+						if (!isNaN(setAverages[setIndex].rows[rowIndex])) { // check if average is a number
+							cell.textContent = setAverages[setIndex].rows[rowIndex].toFixed(decimalPlaces);
+						}
+					}
+				});
+				// insert column average
+				let finalRow = table.insertRow(-1);
+				finalRow.insertCell();
+				for (let colIndex = 0; colIndex < setAverages[0].cols.length; colIndex++) {
+					setAverages.forEach(function (_, setIndex) {  // for each set's data
+						const cell = finalRow.insertCell();
+						if (!isNaN(setAverages[setIndex].cols[colIndex])) { // check if average is a number
+							cell.textContent = setAverages[setIndex].cols[colIndex].toFixed(decimalPlaces);
+						}
+					});
+				}
+
+				// insert overall average
+				setAverages.forEach(function (_, setIndex) {  // for each set's data
+					const overallCell = finalRow.insertCell();
+					overallCell.textContent = setAverages[setIndex].overall.toFixed(decimalPlaces);
+				});
+			}
+		</script>
+		<script>
 			// colors and filters the conversation tables
-			S.colorCode("table1");
 			S.listen("conversationCheckboxesVisibility", "change", function () {
 				if (this.checked) {
 					S.getId("conversationCheckboxes").querySelector("div:nth-of-type(2)").style.display = "inline-block";
@@ -67,6 +152,8 @@
 						date.setDate(date.getDate() + 1);
 					});
 				});
+				calculateTableAverages("table1", { setLength: 2 });
+				S.colorCode("table1");
 			});
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
@@ -95,8 +182,10 @@
 			#rawConversationData {
 				border-radius: 0em 0em .5em .5em;
 				padding: .5em;
+				max-height: 80vh;
 				text-align: left;
 				white-space: pre-line;
+				overflow: auto;
 			}
 			#conversationCheckboxes {
 				position: -webkit-sticky;
@@ -256,7 +345,8 @@
 							<th rowspan="6">
 								Individuals
 							</th>
-							<td colspan="2"></td>
+							<td></td>
+							<td></td>
 							<td>19</td>
 							<td>5</td>
 							<td>11</td>
@@ -289,7 +379,8 @@
 						<tr>
 							<td>25</td>
 							<td>13</td>
-							<td colspan="2">?</td>
+							<td>?</td>
+							<td>?</td>
 							<td>14</td>
 							<td>15</td>
 							<td>20</td>
@@ -320,9 +411,12 @@
 						<tr>
 							<td>14</td>
 							<td>9</td>
-							<td colspan="2">?</td>
-							<td colspan="2">?</td>
-							<td colspan="2">?</td>
+							<td>?</td>
+							<td>?</td>
+							<td>?</td>
+							<td>?</td>
+							<td>?</td>
+							<td>?</td>
 							<td>16</td>
 							<td>8</td>
 							<td>0</td>
@@ -337,10 +431,14 @@
 							<td>10</td>
 							<td>23</td>
 							<td>13</td>
-							<td colspan="2">?</td>
+							<td>?</td>
+							<td>?</td>
 							<td>21</td>
 							<td>12</td>
-							<td colspan="4"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 					</table>
 				</div>
@@ -390,7 +488,7 @@
 					Starting my second year of college
 				</h3>
 				<section>
-					I wasn't satisfied with the limited amount of infomation I had to work with in the first study, so when I realized that I was about to have the perfect opportunity to track everything from the very beginning (because I was transferring) with the means of interpreting it (via my newfound programming knowledge), I couldn't pass it up (however grueling it may be). One unit of talking time is roughly equal to one minute. Everything else (and technically that as well) is ranked on a scale of 1-7.
+					I wasn't satisfied with the limited amount of infomation I had to work with in the first study, so when I realized that I was about to have the perfect opportunity to track everything from the very beginning (because I was transferring) with the means of interpreting it (via my newfound programming knowledge), I couldn't pass it up (however grueling it may be). One unit of talking time is roughly equal to one minute. Everything else (and technically that as well) is ranked on a scale of 1-7. I started off ranking on a scale of 1-5, but I decided that wasn't granular enough, so I switched to the larger scale and converted the data preceding that to a 1-7 scale the best I could. The conversion isn't perfect, and it particularly leaves an imprint in the conversation enjoyability table, but it's reasonably accurate. The awkward columns and rows tacked onto the tables are the averages.
 				</section>
 				<div class="details raw-data">
 					<div class="summary">
@@ -425,8 +523,8 @@
 							filter top <input type="text" id="topFemales" placeholder="#"> female(s)
 						</div>
 						<br>
-						<input type="checkbox" id="showTotals">
-						<label for="showTotals">Show totals</label>
+						<input type="checkbox" id="showTotals" disabled>
+						<label for="showTotals" style="text-decoration:line-through">Show totals</label>
 						<br>
 						<div>
 							<button id="checkAll">Check all boxes</button>
@@ -464,7 +562,12 @@
 					</div>
 					<table class="smaller" id="totalExposure">
 						<tr>
-							<th colspan="17">Total exposure per day (incomplete)</th>
+							<th colspan="17">
+								<span class="elaborate">Estimated</span> total exposure per day
+								<aside data-heading="Explanation">
+									This data isn't as thorough as I wish it would've been, but it's not awful. The biggest assumption at this time is that the especially small amount of easier-to-interpret data I have about who was present in the dining hall applies to every day. Only my classes and the dining hall are considered in this (although those are the main places I would talk to people I don't usually filter out, anyway).
+								</aside>
+							</th>
 						</tr>
 						<tr>
 							<th colspan="2">Monday</th>
@@ -517,7 +620,12 @@
 					<br>
 					<table class="smaller" id="nearbyExposure">
 						<tr>
-							<th colspan="17">Weighted exposure in class</th>
+							<th colspan="17">
+								<span class="elaborate">Weighted</span> exposure in class
+								<aside data-heading="Explanation">
+									People who I was closer to are given larger values here. Naturally, I can influence who I'm closer to, so this can't tell the whole story, but it gives a slightly fuller picture. It's also worth noting that my science classes as a whole are skewed towards a greater proportion of females (and that's not necessarily reflected as well here because I didn't notice that until later, and I didn't specifically tally everyone in my large classes, so I made an estimate on the size of the class and generally assumed the male:female proportion was roughly equal).
+								</aside>
+							</th>
 						</tr>
 						<tr>
 							<th colspan="2">Monday</th>
@@ -654,6 +762,9 @@
 					<div class="summary">
 						Average conversation lengths
 					</div>
+					<section>
+						The averages aren't provided for this table because my current method of finding the averages uses the data populated in the rest of the table, so the resulting averages would be the average of each day's average which can be highly misleading for this table. A more representative accounting of overall average conversation lengths can be found in the aggregate tables section.
+					</section>
 					<table class="smaller" id="averageLengths">
 						<tr>
 							<th rowspan="2"></th>
@@ -716,6 +827,26 @@
 					<div class="summary">
 						Aggregate tables
 					</div>
+					<ul>
+						<li>
+							<strong>Number of started conversations:</strong> The total number of conversations started over the course of the study, broken down by the gender of the person the conversation was with and who started the conversation.
+						</li>
+						<li>
+							<strong>Sum of started conversations:</strong> The approximate number of time units accumulated over the duration of the study, broken down by the gender of the person the conversations were with and who started the conversation.
+						</li>
+						<li>
+							<strong>Average conversation lengths:</strong> The approximate number of time units spent in each conversation. Derived from the sum of started conversations divided by the number of started conversations. Also derivable from the total talk time per person divided by the conversations per person. This differs from the averages in the large average conversation lengths table because these are overall averages per conversation whereas the larger table averages per day.
+						</li>
+						<li>
+							<strong>Conversations per person:</strong> The average number of conversations had with each person present in that category. Derived from the number of started conversations divided by the appropriate total number of people recorded.
+						</li>
+						<li>
+							<strong>Total talk time per person:</strong> The average number of time units accumulated over the course of the study per person. i.e. The average amount of time I talked to each person present in that category by the conclusion of the study. Derived from the sum of started conversations divided by the appropriate total number of people recorded. Also derivable from the average conversation lengths multiplied by the conversations per person.
+						</li>
+						<li>
+							<strong>Approximation of total people recorded:</strong> How many males and females are taken into account to produce the data in the other tables. It's an approximation because weird things happen in fringe cases, but I haven't been motivated to sift through the massive amount of data and processing I have in order to track down the tiny error that sometimes causes the values to be 5% or so less accurate. It may be important to note that these totals don't include random people (people who didn't get a designation because I didn't see them enough and/or I wouldn't be able to recognize them later). Essentially everyone I had a conversation of any length with received a designation, though, so random people shouldn't have too much of an influence.
+						</li>
+					</ul>
 					<table class="adjacentTables" id="initializers">
 						<tr>
 							<th colspan="4">
@@ -778,10 +909,103 @@
 							<td></td>
 						</tr>
 					</table>
+					<table class="adjacentTables" id="aggregateAverages">
+						<tr>
+							<th colspan="4">
+								Average conversation lengths
+							</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th>Me</th>
+							<th>Them</th>
+							<th class="table-total">Total</th>
+						</tr>
+						<tr>
+							<th>Males</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Females</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="table-total">Total</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+					<table class="adjacentTables" id="convPerPerson">
+						<tr>
+							<th colspan="4">
+								Conversations per person
+							</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th>Me</th>
+							<th>Them</th>
+							<th class="table-total">Total</th>
+						</tr>
+						<tr>
+							<th>Males</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Females</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="table-total">Total</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+					<table class="adjacentTables" id="timePerPerson">
+						<tr>
+							<th colspan="4">
+								Total talk time per person
+							</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th>Me</th>
+							<th>Them</th>
+							<th class="table-total">Total</th>
+						</tr>
+						<tr>
+							<th>Males</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Females</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="table-total">Total</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
 					<table class="adjacentTables" id="totalPeople">
 						<tr>
 							<th colspan="3">
-								Approximation of total people recorded<span class="elaborate">*</span><aside data-heading="Elaboration">Random people are excluded. Also, something strange happens with certain people.</aside>
+								Approximation of total people recorded
 							</th>
 						</tr>
 						<tr>
@@ -800,7 +1024,10 @@
 					Conclusions
 				</h3>
 				<section>
-					It's hard to say.
+					The data doesn't support the idea that I display preferential treatment towards girls. With the limitations of my data (most notably in size after filtering), that's technically all I can say with a respectable amount of certainty, but with the trends I've observed in the data, I've formed some dubiously valid ideas on how my data can reveal overarching gender differences in interactions and how those differences can result in my observations of acquiring a disproportionately large number of female friends. (By the way, it's only very late on 3/23/2023 that I've finally gotten around to interpreting enough of the data that I feel confident enough to provide a conclusion.)
+				</section>
+				<section>
+					Although all of the tables provide their own value, and if there were were clear trends in any of them, they would definitely warrant my attention, I find that the aggregate tables provide the greatest insight because they combine enough data that the irregularities start to smooth out. One thing that caught me off-guard (and kind-of impressed me) was the the striking consistency with which I initiated conversations between males and females proportionately to the total number of them recorded. Interestingly, the number of recorded males is greater than the number of females which is in direct contrast to the slightly female skew in the data I collected specifically to tell me the proportions of the people surrounding me. However, I'm more inclined to put my faith in analyses of concrete data from actual conversations than I am in speculating on how an indefinite number of people should've influenced my results; it's definitely thought-provoking, though. Moving forward with the recorded number of males and females, it seems that there's a significantly greater tendency for males to start conversations with me than females, but the total time I talk to them altogether is roughly the same as females. Looking at the average conversation lengths, it seems that this is explained by a shorter average conversation length. In other words, males have more conversations with me, but the conversations don't last as long on average, so I end up talking to them about as much as females in the end. You could try to argue that I'm not as interested in talking to males, so I cause those conversations to end prematurely, but the lack of persistent differences in enjoyment of the conversations (from the enjoyability table) or in the number of conversations I start with males versus females doesn't support that hypothesis. Also, the conversations I start with males tend to last longer than the ones they start with me which could be seen as evidence of a partially successful attempt on my part to extend conversations I'm more invested into. (It could also be seen as evidence of me caring more about the things I want to talk about, but given how a significant fraction of the conversations I start begin by asking about the other person, I don't think that tells the whole story.) If these trends prove to be existent and persistent, they could provide a fairly clear path towards explaining my disproportionately large number of female friends: I don't think I'm alone in believing that stronger bonds are formed over longer, more meaningful conversations, and if males are less likely to provide those kinds of conversations, it's more likely for me to form stronger bonds with females. Moreover, although the data here does nothing to reinforce the presumption, it's commonly observable that females most commonly associate with females (and males with males), so starting to form bonds with one group more than the other can lead to a cascading effect where you're exposed to the friends of your friends who are in the same group, and you therefore become increasingly involved in the group. This can even happen outside of male/female groupings as was the case when I got to know a disproportionately large number of Japanese students after I got to know a few. This has a degree of circular logic to it, though, because I reference the tendency of males and females to stay within their groups in order to help explain why I'm not staying within my own group. If I had to choose a reason for why I tend to diverge (now, as opposed to when I was younger and didn't diverge at all for reasons I consider largely separate), it would probably be because I have a greater appreciation of meaningful conversation and deeper connections than the average male. That's not to say that there aren't plenty of males who do appreciate those things or that most males wouldn't likely end up appreciating those things if presented with the opportunity, but society's expectations of males generally involve some amount of masculine strength at the expense of emotional vulnerability and connection, and either as a result of bending under pressure or of convincing themselves that they actually want that for themselves, they end up supressing their emotions and not talking about them as much, so if I want to open up to people more, I may have better success doing that with females, and over a long period of time of having better luck with connecting to females, it's not hard to imagine how I could have proportions of friends similar to what I had at the end of high school. There are likely more factors at play than just that (not least of which is the heavy skew in my classes and biology club in my later years in college), but up until this point, I've only had theories and biased data to work with; now I can see hard evidence that it's unlikely that I'm giving anyone an unfair advantage, and there are hints at what could be the primary factors at play in what I observe about myself. I strongly suspect that most people think it's ridiculous how much effort I've put into resolving this question, but I'm both proud of my ability to find this answer and comforted by the idea that my efforts to treat everyone fairly have been largely successful even when control of my thoughts hasn't necessarily been as successful. I wish I would've found this out a long time ago, but I'm happy to know it now.
 				</section>
 				<script>
 					var a = "a",
@@ -3705,7 +3932,7 @@
 								[a, m, s],
 								[a, f, s],
 								[a, m, s],
-								["g(Nik KlaethRrmis&a)", m, "ps_s"],
+								["g(Nik KlaethRrmis&a)", m+m, "ps_s"],
 								["2a", m, s],
 								[a, m, s],
 								[a, m, s],
@@ -5194,10 +5421,49 @@
 									document.getElementById("initializerSum").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = Math.round(column);
 								});
 							});
+							// calculates and displays the average conversation lengths
+							S.forEach(initiators, function (row, rowIndex) {
+								S.forEach(row, function (column, columnIndex) {
+									document.getElementById("aggregateAverages").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = (initSum[rowIndex][columnIndex] / column).toFixed(1);
+								});
+							});
+							// calculates and displays the number of conversations per person
+							S.forEach(initiators, function (row, rowIndex) {
+								let total;
+								if (rowIndex == 0) {
+									total = totalPeople.m.length;
+								} else if (rowIndex == 1) {
+									total = totalPeople.f.length;
+								} else {
+									total = totalPeople.m.length + totalPeople.f.length;
+								}
+								S.forEach(row, function (column, columnIndex) {
+									document.getElementById("convPerPerson").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = (column / total).toFixed(1);
+								});
+							});
+							// calculates and displays the average length of conversations per person
+							S.forEach(initSum, function (row, rowIndex) {
+								let total;
+								if (rowIndex == 0) {
+									total = totalPeople.m.length;
+								} else if (rowIndex == 1) {
+									total = totalPeople.f.length;
+								} else {
+									total = totalPeople.m.length + totalPeople.f.length;
+								}
+								S.forEach(row, function (column, columnIndex) {
+									document.getElementById("timePerPerson").getElementsByTagName("tr")[rowIndex + 2].getElementsByTagName("td")[columnIndex].textContent = (column / total).toFixed(1);
+								});
+							});
 							// adds the total people counted to the totalPeople table
 							document.getElementById("totalPeople").getElementsByTagName("td")[0].textContent = totalPeople.m.length;
 							document.getElementById("totalPeople").getElementsByTagName("td")[1].textContent = totalPeople.f.length;
 							document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
+							// adds averages to the tables
+							calculateTableAverages("conversationLengths", { setLength: 2 });
+							calculateTableAverages("uniquePeople", { setLength: 2 });
+							calculateTableAverages("initiatorSkew", { setLength: 2 });
+							calculateTableAverages("enjoyability", { setLength: 2 });
 							// color codes the tables
 							S.colorCode("conversationLengths", null, [255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 0], [0, 255, 0]);
 							S.colorCode("uniquePeople");
@@ -5252,9 +5518,57 @@
 									});
 								});
 							} else if (area.tags.includes("object")) {  // if it was people in the dining hall with data put in an object
-
+								////
 							} else if (area.tags.includes("array")) {  // if it was people in the dining hall with data put in an array
-
+								//// approximates dining hall exposure
+								//// some things will need to be revised if I make this more complete
+								//// some things only work for this data set
+								S.forEach(area.data, function (entry) {
+									if (!isNaN(entry[0][0])) {  // if it's a group of anonymous people
+										let genders = "";
+										if (entry[1].length == 1) {  // if everyone is the same gender
+											genders += entry[1].repeat(Number(entry[0][0]));
+										} else if (entry[1].search(/\d/) > -1) {  // if there are any numbers in the gender designation
+											genders += entry[1][1].repeat(Number(entry[1][0]));
+											genders += entry[1][3].repeat(Number(entry[1][2]));
+										} else {
+											genders = entry[1];
+										}
+										S.forEach(Number(entry[0][0]), function (_, index) {
+											let person = {};
+											person.name = "a";
+											person.gender = genders[index];
+											person.proximity = 1;
+											person.classification = [entry[2]];
+											person.indicators = [];
+											S.forEach(weeklyRoster, function (roster, day) {  //// assumes this person is around every day
+												weeklyRoster[day].push(person);
+											});
+										});
+									} else if (entry[0][0] == "g") {  // if it's a group of specified people
+										S.forEach(entry[0].slice(2, -1).split("&"), function (name, index) {
+											let person = {};
+											person.name = name;
+											person.gender = entry[1][index];
+											person.proximity = 1;
+											person.classification = entry[2].split("_")[index].split("");
+											person.indicators = [];
+											S.forEach(weeklyRoster, function (roster, day) {  //// assumes this person is around every day
+												weeklyRoster[day].push(person);
+											});
+										});
+									} else {  // if it's an individual person (only works for this data set)
+										let person = {};
+										person.name = entry[0];
+										person.gender = entry[1];
+										person.proximity = 1;
+										person.classification = [entry[2]];
+										person.indicators = [];
+										S.forEach(weeklyRoster, function (roster, day) {  //// assumes this person is around every day
+											weeklyRoster[day].push(person);
+										});
+									}
+								});
 							} else {  // if I messed up
 								console.error("There was a problem recognizing some of the presence data.");
 							}

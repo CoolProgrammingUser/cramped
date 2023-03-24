@@ -15,7 +15,7 @@
 		<script>
 			var S = Standards.general;
 			var server = Standards.storage.server;
-			server.defaultLocation = "~websites/cramped/comments";
+			server.defaultLocation = "^websites/cramped/comments";
 			server.requireSignIn = false;
 
 			function refreshComments() {
@@ -80,7 +80,8 @@
 								} else {
 									S.makeDialog("The password was incorrect.");
 								}
-							}]
+							}
+						]
 					);
 				} else {  // if currently editing
 					let remaining = new S.Listenable();
