@@ -903,6 +903,15 @@
 							<th>Males</th><th>Females</th>
 						</tr>
 					</table>
+					<br>
+					<table id="customAggregate">
+						<tr>
+							<th>Males</th><th>Females</th><th>Total</th>
+						</tr>
+						<tr>
+							<td></td><td></td><td></td>
+						</tr>
+					</table>
 				</div>
 				<div class="details">
 					<div class="summary">
@@ -4990,12 +4999,27 @@
 							});
 						}
 
-						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-							initSum = [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-							recordedPeople = { m: [], f: [] },
-							totalPeople = { m: [], f: [] },
-							unfilteredPeople = [],
-							topFilter = { m: [], f: [] };
+						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+						let initSum = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+						let recordedPeople = { m: [], f: [] };
+						let totalPeople = { m: [], f: [] };
+						let unfilteredPeople = [];
+						let topFilter = { m: [], f: [] };
+						let combinedData = {
+							grandTotal: { m: 0, f: 0, t: 0 },
+							uniqueTotal: { m: 0, f: 0, t: 0 },
+							groupTotal: { m: 0, f: 0, t: 0 },
+							individualTotal: { m: 0, f: 0, t: 0 },
+							myConvos: { m: 0, f: 0, t: 0 },
+							theirConvos: { m: 0, f: 0, t: 0 },
+							ourConvos: { m: 0, f: 0, t: 0 },
+							totalLength: { m: 0, f: 0, t: 0 },
+							totalTalkTime: { m: 0, f: 0, t: 0 },
+							averageDensity: { m: 0, f: 0, t: 0 },
+							participation: { m: 0, f: 0, t: 0 },
+							enjoyability: { m: 0, f: 0, t: 0 },
+							exposure: { m: 0, f: 0, t: 0 }
+						};
 						if (setTopFilter === false) {
 							if (topConversationFilter.m.length > 0) {
 								topConversationFilter.m.sort(function (item1, item2) {
@@ -5636,6 +5660,7 @@
 												if (interactionNumbers[person.gender] != undefined) {
 													interactionNumbers[person.gender]++;
 												}
+												combinedData.grandTotal[person.gender]++;
 												if (dayData.grandTotal[person.gender] === "") {
 													dayData.grandTotal[person.gender] = 1;
 												} else {
@@ -5656,18 +5681,21 @@
 												// sets the information for the initiator skew table
 												addInformation(5, person.gender, person.initiator == "m" ? 1 : person.initiator == "t" ? -1 : 0);
 												if (person.initiator == "m") {
+													combinedData.myConvos[person.gender]++;
 													if (dayData.myConvos[person.gender] === "") {
 														dayData.myConvos[person.gender] = 1;
 													} else {
 														dayData.myConvos[person.gender]++;
 													}
 												} else if (person.initiator == "t") {
+													combinedData.theirConvos[person.gender]++;
 													if (dayData.theirConvos[person.gender] === "") {
 														dayData.theirConvos[person.gender] = 1;
 													} else {
 														dayData.theirConvos[person.gender]++;
 													}
 												} else {
+													combinedData.ourConvos[person.gender]++;
 													if (dayData.ourConvos[person.gender] === "") {
 														dayData.ourConvos[person.gender] = 1;
 													} else {
@@ -5677,6 +5705,7 @@
 
 												// sets part of the information for the average enjoyability table
 												addInformation(4, person.gender, person.enjoyability);
+												combinedData.enjoyability[person.gender] += person.enjoyability;
 												if (dayData.enjoyability[person.gender] === "") {
 													dayData.enjoyability[person.gender] = person.enjoyability;
 												} else {
@@ -5684,6 +5713,7 @@
 												}
 
 												// sets part of the information for the average density
+												combinedData.averageDensity[person.gender] += person.density;
 												if (dayData.averageDensity[person.gender] === "") {
 													dayData.averageDensity[person.gender] = person.density;
 												} else {
@@ -5691,6 +5721,7 @@
 												}
 
 												// sets part of the information for the average participation
+												combinedData.participation[person.gender] += person.participation;
 												if (dayData.participation[person.gender] === "") {
 													dayData.participation[person.gender] = person.participation;
 												} else {
@@ -5738,6 +5769,7 @@
 
 												// sets the information for the total talk time table
 												addInformation(1, person.gender, total);
+												combinedData.totalTalkTime[person.gender] += total;
 												if (dayData.totalTalkTime[person.gender] === "") {
 													dayData.totalTalkTime[person.gender] = total;
 												} else {
@@ -5745,6 +5777,7 @@
 												}
 
 												// keeps track of exclusively conversation length
+												combinedData.totalLength[person.gender] += person.length;
 												if (dayData.totalLength[person.gender] === "") {
 													dayData.totalLength[person.gender] = person.length;
 												} else {
@@ -5791,6 +5824,8 @@
 								});
 
 								// keeps track of who's around on the day
+								combinedData.exposure.m += weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].m
+								combinedData.exposure.f += weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].f
 								dayData.exposure.m = weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].m
 								dayData.exposure.f = weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].f
 								
@@ -5962,6 +5997,62 @@
 							document.getElementById("totalPeople").getElementsByTagName("td")[0].textContent = totalPeople.m.length;
 							document.getElementById("totalPeople").getElementsByTagName("td")[1].textContent = totalPeople.f.length;
 							document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
+							// sets the totals or averages of combinedData
+							combinedData.uniqueTotal.m = totalPeople.m.length;
+							combinedData.uniqueTotal.f = totalPeople.f.length;
+							combinedData.grandTotal.t = combinedData.grandTotal.m + combinedData.grandTotal.f;
+							combinedData.uniqueTotal.t = combinedData.uniqueTotal.m + combinedData.uniqueTotal.f;
+							combinedData.myConvos.t = combinedData.myConvos.m + combinedData.myConvos.f;
+							combinedData.theirConvos.t = combinedData.theirConvos.m + combinedData.theirConvos.f;
+							combinedData.ourConvos.t = combinedData.ourConvos.m + combinedData.ourConvos.f;
+							combinedData.totalLength.t = combinedData.totalLength.m + combinedData.totalLength.f;
+							combinedData.totalTalkTime.t = combinedData.totalTalkTime.m + combinedData.totalTalkTime.f;
+							combinedData.averageDensity.t = (combinedData.averageDensity.m + combinedData.averageDensity.f) / (combinedData.grandTotal.m + combinedData.grandTotal.f);
+							combinedData.participation.t = (combinedData.participation.m + combinedData.participation.f) / (combinedData.grandTotal.m + combinedData.grandTotal.f);
+							combinedData.enjoyability.t = (combinedData.enjoyability.m + combinedData.enjoyability.f) / (combinedData.grandTotal.m + combinedData.grandTotal.f);
+							combinedData.exposure.t = combinedData.exposure.m + combinedData.exposure.f;
+							// finishes establishing combinedData
+							combinedData.enjoyability.m /= combinedData.grandTotal.m;
+							combinedData.enjoyability.f /= combinedData.grandTotal.f;
+							combinedData.averageDensity.m /= combinedData.grandTotal.m;
+							combinedData.averageDensity.f /= combinedData.grandTotal.f;
+							combinedData.participation.m /= combinedData.grandTotal.m;
+							combinedData.participation.f /= combinedData.grandTotal.f;
+							// displays the combined data
+							let chosenData = {
+								m: combinedData[S.getId("firstDataCategory").value].m,
+								f: combinedData[S.getId("firstDataCategory").value].f,
+								t: combinedData[S.getId("firstDataCategory").value].t
+							};
+							if (S.getId("secondDataCategory").value !== "" && S.getId("dataOperator").value !== "") {  // if adding calculations to the data
+								switch (S.getId("dataOperator").value) {
+									case "+":
+										chosenData.m += combinedData[S.getId("secondDataCategory").value].m;
+										chosenData.f += combinedData[S.getId("secondDataCategory").value].f;
+										chosenData.t += combinedData[S.getId("secondDataCategory").value].t;
+										break;
+									case "-":
+										chosenData.m -= combinedData[S.getId("secondDataCategory").value].m;
+										chosenData.f -= combinedData[S.getId("secondDataCategory").value].f;
+										chosenData.t -= combinedData[S.getId("secondDataCategory").value].t;
+										break;
+									case "*":
+										chosenData.m *= combinedData[S.getId("secondDataCategory").value].m;
+										chosenData.f *= combinedData[S.getId("secondDataCategory").value].f;
+										chosenData.t *= combinedData[S.getId("secondDataCategory").value].t;
+										break;
+									case "/":
+										chosenData.m /= combinedData[S.getId("secondDataCategory").value].m;
+										chosenData.f /= combinedData[S.getId("secondDataCategory").value].f;
+										chosenData.t /= combinedData[S.getId("secondDataCategory").value].t;
+										break;
+									default:
+										console.error("An unrecognized operator was found.");
+								}
+							}
+							S.getId("customAggregate").getElementsByTagName("td")[0].textContent = Math.round(chosenData.m * 100) / 100;
+							S.getId("customAggregate").getElementsByTagName("td")[1].textContent = Math.round(chosenData.f * 100) / 100;
+							S.getId("customAggregate").getElementsByTagName("td")[2].textContent = Math.round(chosenData.t * 100) / 100;
 							// adds averages to the tables
 							calculateTableAverages("conversationLengths", { setLength: 2 });
 							calculateTableAverages("uniquePeople", { setLength: 2 });
