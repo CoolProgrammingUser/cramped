@@ -507,6 +507,51 @@
 					</section>
 					<div id="rawConversationData"></div>
 				</div>
+				<div class="details">
+					<div class="summary">
+						Explanations of data collection and interpretation
+					</div>
+					<div class="details">
+						<div class="summary">
+							Types of data collected
+						</div>
+						<section>
+
+						</section>
+					</div>
+					<div class="details">
+						<div class="summary">
+							Types of processing done
+						</div>
+						<section>
+
+						</section>
+					</div>
+					<div class="details">
+						<div class="summary">
+							Explanations of filters
+						</div>
+						<section>
+
+						</section>
+					</div>
+					<div class="details">
+						<div class="summary">
+							Advisories for interpreting the displayed data
+						</div>
+						<section>
+							I do heavy processing and filtering of the data because I want my results to be as clear as possible, but because of the strict filtering (and potentially other things) peculiarities can arise in the data if you're not prepared for them. This identifies some of the issues I've come across when trying to validate my results. It's worth noting that, although these may have been the things I found, these same types of issues could be hidden in other aspects of the data. Luckily, the peculiarities are generally small and don't necessarily have a significant impact on my conclusions. I did find a significant impact on the enjoyability, but I took the issues into account when forming my conclusions.
+						</section>
+						<ul>
+							<li>
+								<strong>New filters can change the top male(s) and female(s) filtered out.</strong> When I select the group conversations in the customizable tables with standard filtering, I get certain values, but when I then filter out conversations with individuals, I get slightly lower values. This is because the male and female I talk to most aren't necessarily involved in any group conversations, so when only groups are considered, different people are assigned as the people I talk to most, and upon filtering them out, the displayed values decrease slightly. This can be remedied by not filtering out the people I talk to the most. I'm also interested in adding the ability to filter out specific people to address this kind of problem.
+							</li>
+							<li>
+								<strong>New filters can affect whether someone associated with someone else continues to be considered.</strong> When I select the group conversations in the customizable tables with standard filtering, I get certain values, but when I then filter out conversations with individuals, I get slightly lower values (even if the top male(s) and female(s) aren't filtered out like above). This is because I only had one-on-one conversations (roughly, according to the standards of the study) with a certain person who caused me to meet a number of other people, so when I filter out conversations with individuals, that person is also filtered out, and because the standard filtering also filters out people tracing back to someone who's filtered out, some people involved in group conversations are also filtered out. This can be remedied by checking the box to allow considering people even if their person of origin is filtered out. I'm also interested in adding the ability to filter out specific people to address this kind of problem.
+							</li>
+						</ul>
+					</div>
+				</div>
 				<br>
 				<div id="conversationCheckboxes">
 					<div>
@@ -678,171 +723,411 @@
 				</div>
 				<div class="details">
 					<div class="summary">
-						Total talk time
+						Tables I don't care about
 					</div>
 					<section>
-						This is roughly how much time is spent actually talking to people. The numbers are determined by multiplying the time spent in the conversation by the density of speech within the conversation and by the amount the person contributed to the conversation.
+						I made these tables in an effort to determine what the data was telling me, but they didn't end up being particularly useful, and any utility they do have can be replicated by the customizable tables (which didn't exist originally). I left the tables here in part because it's painful to get rid of things you've worked so hard on but also in large part because it would be a significant time investment to track down each reference in the code and remove it while not breaking everything else.
 					</section>
-					<table class="smaller" id="conversationLengths">
-						<tr>
-							<th rowspan="2"></th>
-							<th colspan="2">Monday</th>
-							<th colspan="2">Tuesday</th>
-							<th colspan="2">Wednesday</th>
-							<th colspan="2">Thursday</th>
-							<th colspan="2">Friday</th>
-							<th colspan="2">Saturday</th>
-							<th colspan="2">Sunday</th>
-						</tr>
-						<tr>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-						</tr>
-						<tr>
-							<th>
-								Amount of<br>conversation
-							</th>
-						</tr>
-					</table>
-				</div>
-				<div class="details">
-					<div class="summary">
-						Unique people who interacted with me
+					<div class="details">
+						<div class="summary">
+							Total talk time
+						</div>
+						<section>
+							This is roughly how much time is spent actually talking to people. The numbers are determined by multiplying the time spent in the conversation by the density of speech within the conversation and by the amount the person contributed to the conversation.
+						</section>
+						<table class="smaller" id="conversationLengths">
+							<tr>
+								<th rowspan="2"></th>
+								<th colspan="2">Monday</th>
+								<th colspan="2">Tuesday</th>
+								<th colspan="2">Wednesday</th>
+								<th colspan="2">Thursday</th>
+								<th colspan="2">Friday</th>
+								<th colspan="2">Saturday</th>
+								<th colspan="2">Sunday</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+							</tr>
+							<tr>
+								<th>
+									Amount of<br>conversation
+								</th>
+							</tr>
+						</table>
 					</div>
-					<table class="smaller" id="uniquePeople">
-						<tr>
-							<th rowspan="2"></th>
-							<th colspan="2">Monday</th>
-							<th colspan="2">Tuesday</th>
-							<th colspan="2">Wednesday</th>
-							<th colspan="2">Thursday</th>
-							<th colspan="2">Friday</th>
-							<th colspan="2">Saturday</th>
-							<th colspan="2">Sunday</th>
-						</tr>
-						<tr>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-						</tr>
-						<tr>
-							<th>
-								Number<br>of<br>people
-							</th>
-						</tr>
-					</table>
-				</div>
-				<div class="details">
-					<div class="summary">
-						Initiator skew<note-><div><div>how many more conversations I started with people than people started with me</div></div></note-> (+ = me)
+					<div class="details">
+						<div class="summary">
+							Unique people who interacted with me
+						</div>
+						<table class="smaller" id="uniquePeople">
+							<tr>
+								<th rowspan="2"></th>
+								<th colspan="2">Monday</th>
+								<th colspan="2">Tuesday</th>
+								<th colspan="2">Wednesday</th>
+								<th colspan="2">Thursday</th>
+								<th colspan="2">Friday</th>
+								<th colspan="2">Saturday</th>
+								<th colspan="2">Sunday</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+							</tr>
+							<tr>
+								<th>
+									Number<br>of<br>people
+								</th>
+							</tr>
+						</table>
 					</div>
-					<table class="smaller" id="initiatorSkew">
-						<tr>
-							<th rowspan="2"></th>
-							<th colspan="2">Monday</th>
-							<th colspan="2">Tuesday</th>
-							<th colspan="2">Wednesday</th>
-							<th colspan="2">Thursday</th>
-							<th colspan="2">Friday</th>
-							<th colspan="2">Saturday</th>
-							<th colspan="2">Sunday</th>
-						</tr>
-						<tr>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-						</tr>
-						<tr>
-							<th>
-								Degree<br>of<br>skew
-							</th>
-						</tr>
-					</table>
+					<div class="details">
+						<div class="summary">
+							Initiator skew<note-><div><div>how many more conversations I started with people than people started with me</div></div></note-> (+ = me)
+						</div>
+						<table class="smaller" id="initiatorSkew">
+							<tr>
+								<th rowspan="2"></th>
+								<th colspan="2">Monday</th>
+								<th colspan="2">Tuesday</th>
+								<th colspan="2">Wednesday</th>
+								<th colspan="2">Thursday</th>
+								<th colspan="2">Friday</th>
+								<th colspan="2">Saturday</th>
+								<th colspan="2">Sunday</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+							</tr>
+							<tr>
+								<th>
+									Degree<br>of<br>skew
+								</th>
+							</tr>
+						</table>
+					</div>
+					<div class="details">
+						<div class="summary">
+							Average conversation lengths
+						</div>
+						<section>
+							The averages aren't provided for this table because my current method of finding the averages uses the data populated in the rest of the table, so the resulting averages would be the average of each day's average which can be highly misleading for this table. A more representative accounting of overall average conversation lengths can be found in the aggregate tables section.
+						</section>
+						<table class="smaller" id="averageLengths">
+							<tr>
+								<th rowspan="2"></th>
+								<th colspan="2">Monday</th>
+								<th colspan="2">Tuesday</th>
+								<th colspan="2">Wednesday</th>
+								<th colspan="2">Thursday</th>
+								<th colspan="2">Friday</th>
+								<th colspan="2">Saturday</th>
+								<th colspan="2">Sunday</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+							</tr>
+							<tr>
+								<th>
+									Average<br>conversation<br>length
+								</th>
+							</tr>
+						</table>
+					</div>
+					<div class="details">
+						<div class="summary">
+							Average conversation enjoyability
+						</div>
+						<table class="smaller" id="enjoyability">
+							<tr>
+								<th rowspan="2"></th>
+								<th colspan="2">Monday</th>
+								<th colspan="2">Tuesday</th>
+								<th colspan="2">Wednesday</th>
+								<th colspan="2">Thursday</th>
+								<th colspan="2">Friday</th>
+								<th colspan="2">Saturday</th>
+								<th colspan="2">Sunday</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+								<th>Males</th>
+								<th>Females</th>
+							</tr>
+							<tr>
+								<th>
+									Enjoyability
+								</th>
+							</tr>
+						</table>
+					</div>
+					<div class="details">
+						<div class="summary">
+							Aggregate tables
+						</div>
+						<ul>
+							<li>
+								<strong>Number of started conversations:</strong> The total number of conversations started over the course of the study, broken down by the gender of the person the conversation was with and who started the conversation. This is actually a little higher than what might be otherwise expected because, when a conversation was started mutually, I counted both myself and the other party into the totals.
+							</li>
+							<li>
+								<strong>Sum of started conversations:</strong> The approximate number of time units accumulated over the duration of the study, broken down by the gender of the person the conversations were with and who started the conversation.
+							</li>
+							<li>
+								<strong>Average conversation lengths:</strong> The approximate number of time units spent in each conversation. Derived from the sum of started conversations divided by the number of started conversations. Also derivable from the total talk time per person divided by the conversations per person. This differs from the averages in the large average conversation lengths table because these are overall averages per conversation whereas the larger table averages per day.
+							</li>
+							<li>
+								<strong>Conversations per person:</strong> The average number of conversations had with each person present in that category. Derived from the number of started conversations divided by the appropriate total number of people recorded.
+							</li>
+							<li>
+								<strong>Total talk time per person:</strong> The average number of time units accumulated over the course of the study per person. i.e. The average amount of time I talked to each person present in that category by the conclusion of the study. Derived from the sum of started conversations divided by the appropriate total number of people recorded. Also derivable from the average conversation lengths multiplied by the conversations per person.
+							</li>
+							<li>
+								<strong>Approximation of total people recorded:</strong> How many males and females are taken into account to produce the data in the other tables. It's an approximation because weird things happen in fringe cases, but I haven't been motivated to sift through the massive amount of data and processing I have in order to track down the tiny error that sometimes causes the values to be 5% or so less accurate. It may be important to note that these totals don't include random people (people who didn't get a designation because I didn't see them enough and/or I wouldn't be able to recognize them later). Essentially everyone I had a conversation of any length with received a designation, though, so random people shouldn't have too much of an influence.
+							</li>
+						</ul>
+						<table class="adjacentTables" id="initializers">
+							<tr>
+								<th colspan="4">
+									Number of started conversations
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th>Me</th>
+								<th>Them</th>
+								<th class="table-total">Total</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>Females</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th class="table-total">Total</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+						<table class="adjacentTables" id="initializerSum">
+							<tr>
+								<th colspan="4">
+									Sum of started conversations
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th>Me</th>
+								<th>Them</th>
+								<th class="table-total">Total</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>Females</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th class="table-total">Total</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+						<table class="adjacentTables" id="aggregateAverages">
+							<tr>
+								<th colspan="4">
+									Average conversation lengths
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th>Me</th>
+								<th>Them</th>
+								<th class="table-total">Total</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>Females</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th class="table-total">Total</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+						<table class="adjacentTables" id="convPerPerson">
+							<tr>
+								<th colspan="4">
+									Conversations per person
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th>Me</th>
+								<th>Them</th>
+								<th class="table-total">Total</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>Females</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th class="table-total">Total</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+						<table class="adjacentTables" id="timePerPerson">
+							<tr>
+								<th colspan="4">
+									Total talk time per person
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th>Me</th>
+								<th>Them</th>
+								<th class="table-total">Total</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>Females</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th class="table-total">Total</th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+						<table class="adjacentTables" id="totalPeople">
+							<tr>
+								<th colspan="3">
+									Approximation of total people recorded
+								</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<th>Females</th>
+								<th class="table-total">Total</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 				<div class="details">
 					<div class="summary">
-						Average conversation lengths
+						Customizable tables
 					</div>
 					<section>
-						The averages aren't provided for this table because my current method of finding the averages uses the data populated in the rest of the table, so the resulting averages would be the average of each day's average which can be highly misleading for this table. A more representative accounting of overall average conversation lengths can be found in the aggregate tables section.
-					</section>
-					<table class="smaller" id="averageLengths">
-						<tr>
-							<th rowspan="2"></th>
-							<th colspan="2">Monday</th>
-							<th colspan="2">Tuesday</th>
-							<th colspan="2">Wednesday</th>
-							<th colspan="2">Thursday</th>
-							<th colspan="2">Friday</th>
-							<th colspan="2">Saturday</th>
-							<th colspan="2">Sunday</th>
-						</tr>
-						<tr>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-						</tr>
-						<tr>
-							<th>
-								Average<br>conversation<br>length
-							</th>
-						</tr>
-					</table>
-				</div>
-				<div class="details">
-					<div class="summary">
-						Average conversation enjoyability
-					</div>
-					<table class="smaller" id="enjoyability">
-						<tr>
-							<th rowspan="2"></th>
-							<th colspan="2">Monday</th>
-							<th colspan="2">Tuesday</th>
-							<th colspan="2">Wednesday</th>
-							<th colspan="2">Thursday</th>
-							<th colspan="2">Friday</th>
-							<th colspan="2">Saturday</th>
-							<th colspan="2">Sunday</th>
-						</tr>
-						<tr>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-							<th>Males</th><th>Females</th>
-						</tr>
-						<tr>
-							<th>
-								Enjoyability
-							</th>
-						</tr>
-					</table>
-				</div>
-				<div class="details">
-					<div class="summary">
-						Customizable table
-					</div>
-					<section>
-						This table allows you to choose from and display basically any of the data I collected. Selecting from only the first box allows you to display whatever you chose whereas also selecting from the other two boxes allows you to do basic math between different types of data. You should should be careful to not assume that these values are the same as other similar tables above; oftentimes it's actually the more fundamental data. For example, the total length of conversations is exclusively the time of the conversation from start to finish in contrast to the total talk time which factors in speech density and participation for each conversation
+						This table allows you to choose from and display basically any of the data I collected. Selecting from only the first box allows you to display whatever you chose whereas also selecting from the other two boxes allows you to do basic math between different types of data. You should should be careful to not assume that these values are the same as other similar tables above (in the tables I don't care about); oftentimes it's actually the more fundamental data. For example, the total length of conversations is exclusively the time of the conversation from start to finish in contrast to the total talk time which factors in speech density and participation for each conversation
 					</section>
 					<select id="firstDataCategory">
 						<option value="grandTotal" selected>Total number of conversations (per day)</option>
@@ -921,210 +1206,48 @@
 				</div>
 				<div class="details">
 					<div class="summary">
-						Aggregate tables
+						March 2023 conclusions
 					</div>
+					<section>
+						The data doesn't support the idea that I display preferential treatment towards girls. With the limitations of my data (most notably in size after filtering), that's technically all I can say with a respectable amount of certainty, but with the trends I've observed in the data, I've formed some dubiously valid ideas on how my data can reveal overarching gender differences in interactions and how those differences can result in my observations of acquiring a disproportionately large number of female friends. (By the way, it's only very late on 3/23/2023 that I've finally gotten around to interpreting enough of the data that I feel confident enough to provide a conclusion.)
+					</section>
+					<section>
+						Although all of the tables provide their own value, and if there were were clear trends in any of them, they would definitely warrant my attention, I find that the aggregate tables provide the greatest insight because they combine enough data that the irregularities start to smooth out. One thing that caught me off-guard (and kind-of impressed me) was the the striking consistency with which I initiated conversations between males and females proportionately to the total number of them recorded. Interestingly, the number of recorded males is greater than the number of females which is in direct contrast to the slightly female skew in the data I collected specifically to tell me the proportions of the people surrounding me. However, I'm more inclined to put my faith in analyses of concrete data from actual conversations than I am in speculating on how an indefinite number of people should've influenced my results; it's definitely thought-provoking, though. Moving forward with the recorded number of males and females, it seems that there's a significantly greater tendency for males to start conversations with me than females, but the total time I talk to them altogether is roughly the same as females. Looking at the average conversation lengths, it seems that this is explained by a shorter average conversation length. In other words, males have more conversations with me, but the conversations don't last as long on average, so I end up talking to them about as much as females in the end. You could try to argue that I'm not as interested in talking to males, so I cause those conversations to end prematurely, but the lack of persistent differences in enjoyment of the conversations (from the enjoyability table) or in the number of conversations I start with males versus females doesn't support that hypothesis. Also, the conversations I start with males tend to last longer than the ones they start with me which could be seen as evidence of a partially successful attempt on my part to extend conversations I'm more invested into. (It could also be seen as evidence of me caring more about the things I want to talk about, but given how a significant fraction of the conversations I start begin by asking about the other person, I don't think that tells the whole story.) If these trends prove to be existent and persistent, they could provide a fairly clear path towards explaining my disproportionately large number of female friends: I don't think I'm alone in believing that stronger bonds are formed over longer, more meaningful conversations, and if males are less likely to provide those kinds of conversations, it's more likely for me to form stronger bonds with females. Moreover, although the data here does nothing to reinforce the presumption, it's commonly observable that females most commonly associate with females (and males with males), so starting to form bonds with one group more than the other can lead to a cascading effect where you're exposed to the friends of your friends who are in the same group, and you therefore become increasingly involved in the group. This can even happen outside of male/female groupings as was the case when I got to know a disproportionately large number of Japanese students after I got to know a few. This has a degree of circular logic to it, though, because I reference the tendency of males and females to stay within their groups in order to help explain why I'm not staying within my own group. If I had to choose a reason for why I tend to diverge (now, as opposed to when I was younger and didn't diverge at all for reasons I consider largely separate), it would probably be because I have a greater appreciation of meaningful conversation and deeper connections than the average male. That's not to say that there aren't plenty of males who do appreciate those things or that most males wouldn't likely end up appreciating those things if presented with the opportunity, but society's expectations of males generally involve some amount of masculine strength at the expense of emotional vulnerability and connection, and either as a result of bending under pressure or of convincing themselves that they actually want that for themselves, they end up supressing their emotions and not talking about them as much, so if I want to open up to people more, I may have better success doing that with females, and over a long period of time of having better luck with connecting to females, it's not hard to imagine how I could have proportions of friends similar to what I had at the end of high school. There are likely more factors at play than just that (not least of which is the heavy skew in my classes and biology club in my later years in college), but up until this point, I've only had theories and biased data to work with; now I can see hard evidence that it's unlikely that I'm giving anyone an unfair advantage, and there are hints at what could be the primary factors at play in what I observe about myself. I strongly suspect that most people think it's ridiculous how much effort I've put into resolving this question, but I'm both proud of my ability to find this answer and comforted by the idea that my efforts to treat everyone fairly have been largely successful even when control of my thoughts hasn't necessarily been as successful. I wish I would've found this out a long time ago, but I'm happy to know it now.
+					</section>
+				</div>
+				<div class="details">
+					<div class="summary">
+						June 2023 conclusions
+					</div>
+					<h3>
+						Findings
+					</h3>
 					<ul>
 						<li>
-							<strong>Number of started conversations:</strong> The total number of conversations started over the course of the study, broken down by the gender of the person the conversation was with and who started the conversation. This is actually a little higher than what might be otherwise expected because, when a conversation was started mutually, I counted both myself and the other party into the totals.
+							I talk more in conversations I start with females compared to males.
 						</li>
 						<li>
-							<strong>Sum of started conversations:</strong> The approximate number of time units accumulated over the duration of the study, broken down by the gender of the person the conversations were with and who started the conversation.
-						</li>
-						<li>
-							<strong>Average conversation lengths:</strong> The approximate number of time units spent in each conversation. Derived from the sum of started conversations divided by the number of started conversations. Also derivable from the total talk time per person divided by the conversations per person. This differs from the averages in the large average conversation lengths table because these are overall averages per conversation whereas the larger table averages per day.
-						</li>
-						<li>
-							<strong>Conversations per person:</strong> The average number of conversations had with each person present in that category. Derived from the number of started conversations divided by the appropriate total number of people recorded.
-						</li>
-						<li>
-							<strong>Total talk time per person:</strong> The average number of time units accumulated over the course of the study per person. i.e. The average amount of time I talked to each person present in that category by the conclusion of the study. Derived from the sum of started conversations divided by the appropriate total number of people recorded. Also derivable from the average conversation lengths multiplied by the conversations per person.
-						</li>
-						<li>
-							<strong>Approximation of total people recorded:</strong> How many males and females are taken into account to produce the data in the other tables. It's an approximation because weird things happen in fringe cases, but I haven't been motivated to sift through the massive amount of data and processing I have in order to track down the tiny error that sometimes causes the values to be 5% or so less accurate. It may be important to note that these totals don't include random people (people who didn't get a designation because I didn't see them enough and/or I wouldn't be able to recognize them later). Essentially everyone I had a conversation of any length with received a designation, though, so random people shouldn't have too much of an influence.
+							More findings to be added.
 						</li>
 					</ul>
-					<table class="adjacentTables" id="initializers">
-						<tr>
-							<th colspan="4">
-								Number of started conversations
-							</th>
-						</tr>
-						<tr>
-							<th></th>
-							<th>Me</th>
-							<th>Them</th>
-							<th class="table-total">Total</th>
-						</tr>
-						<tr>
-							<th>Males</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>Females</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th class="table-total">Total</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-					<table class="adjacentTables" id="initializerSum">
-						<tr>
-							<th colspan="4">
-								Sum of started conversations
-							</th>
-						</tr>
-						<tr>
-							<th></th>
-							<th>Me</th>
-							<th>Them</th>
-							<th class="table-total">Total</th>
-						</tr>
-						<tr>
-							<th>Males</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>Females</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th class="table-total">Total</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-					<table class="adjacentTables" id="aggregateAverages">
-						<tr>
-							<th colspan="4">
-								Average conversation lengths
-							</th>
-						</tr>
-						<tr>
-							<th></th>
-							<th>Me</th>
-							<th>Them</th>
-							<th class="table-total">Total</th>
-						</tr>
-						<tr>
-							<th>Males</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>Females</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th class="table-total">Total</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-					<table class="adjacentTables" id="convPerPerson">
-						<tr>
-							<th colspan="4">
-								Conversations per person
-							</th>
-						</tr>
-						<tr>
-							<th></th>
-							<th>Me</th>
-							<th>Them</th>
-							<th class="table-total">Total</th>
-						</tr>
-						<tr>
-							<th>Males</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>Females</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th class="table-total">Total</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-					<table class="adjacentTables" id="timePerPerson">
-						<tr>
-							<th colspan="4">
-								Total talk time per person
-							</th>
-						</tr>
-						<tr>
-							<th></th>
-							<th>Me</th>
-							<th>Them</th>
-							<th class="table-total">Total</th>
-						</tr>
-						<tr>
-							<th>Males</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>Females</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th class="table-total">Total</th>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-					<table class="adjacentTables" id="totalPeople">
-						<tr>
-							<th colspan="3">
-								Approximation of total people recorded
-							</th>
-						</tr>
-						<tr>
-							<th>Males</th>
-							<th>Females</th>
-							<th class="table-total">Total</th>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
+					<h3>
+						Theories
+					</h3>
+					<ul>
+						<li>
+							When I'm approached by a female, I become primed to talk to them and am therefore more likely to place the conversation into the "other" category.
+						</li>
+						<li>
+							More theories to be added.
+						</li>
+					</ul>
+					<h3>
+						Narrative
+					</h3>
+					<section>
+						Although I have more conversations with males and those conversations generally last longer than with females, females tend to be associated with denser conversations which end up resulting in a greater overall talk time. Moreover, I tend to have more conversations per recorded female than per recorded male. Interestingly, the "other" category frequently follows different trends than the "me" and "them" category, although it tends to be more similar to the "me" category. One of the most notable differences is how the enjoyability of "other" conversations is higher than the rest, and also unlike the rest, it seems like there might be a small skew towards a higher enjoyability of female conversations. The overall higher values are consistent with two people primed to talk to each other having a more favorable conversation, but that wouldn't explain any skew. Complementing that fact is that the "other" conversations constitute a higher proportion of the female conversations than the males conversations do. It's also of note that I seem to start more conversations per female than per male, and it's further interesting that the number of conversations started by females is the lowest in all regards. A possible explanation for that trend is that, when I'm approached by a female, I become primed to talk to them and am therefore more likely to place the conversation into the "other" category. It seems likely that my propensity for acquiring female friends is linked to a greater amount of conversation with them (individually), but whether it's a cause or effect is difficult if not impossible to determine with the available data. More evaluation to come.
+					</section>
 				</div>
-				<h3>
-					Conclusions
-				</h3>
-				<section>
-					The data doesn't support the idea that I display preferential treatment towards girls. With the limitations of my data (most notably in size after filtering), that's technically all I can say with a respectable amount of certainty, but with the trends I've observed in the data, I've formed some dubiously valid ideas on how my data can reveal overarching gender differences in interactions and how those differences can result in my observations of acquiring a disproportionately large number of female friends. (By the way, it's only very late on 3/23/2023 that I've finally gotten around to interpreting enough of the data that I feel confident enough to provide a conclusion.)
-				</section>
-				<section>
-					Although all of the tables provide their own value, and if there were were clear trends in any of them, they would definitely warrant my attention, I find that the aggregate tables provide the greatest insight because they combine enough data that the irregularities start to smooth out. One thing that caught me off-guard (and kind-of impressed me) was the the striking consistency with which I initiated conversations between males and females proportionately to the total number of them recorded. Interestingly, the number of recorded males is greater than the number of females which is in direct contrast to the slightly female skew in the data I collected specifically to tell me the proportions of the people surrounding me. However, I'm more inclined to put my faith in analyses of concrete data from actual conversations than I am in speculating on how an indefinite number of people should've influenced my results; it's definitely thought-provoking, though. Moving forward with the recorded number of males and females, it seems that there's a significantly greater tendency for males to start conversations with me than females, but the total time I talk to them altogether is roughly the same as females. Looking at the average conversation lengths, it seems that this is explained by a shorter average conversation length. In other words, males have more conversations with me, but the conversations don't last as long on average, so I end up talking to them about as much as females in the end. You could try to argue that I'm not as interested in talking to males, so I cause those conversations to end prematurely, but the lack of persistent differences in enjoyment of the conversations (from the enjoyability table) or in the number of conversations I start with males versus females doesn't support that hypothesis. Also, the conversations I start with males tend to last longer than the ones they start with me which could be seen as evidence of a partially successful attempt on my part to extend conversations I'm more invested into. (It could also be seen as evidence of me caring more about the things I want to talk about, but given how a significant fraction of the conversations I start begin by asking about the other person, I don't think that tells the whole story.) If these trends prove to be existent and persistent, they could provide a fairly clear path towards explaining my disproportionately large number of female friends: I don't think I'm alone in believing that stronger bonds are formed over longer, more meaningful conversations, and if males are less likely to provide those kinds of conversations, it's more likely for me to form stronger bonds with females. Moreover, although the data here does nothing to reinforce the presumption, it's commonly observable that females most commonly associate with females (and males with males), so starting to form bonds with one group more than the other can lead to a cascading effect where you're exposed to the friends of your friends who are in the same group, and you therefore become increasingly involved in the group. This can even happen outside of male/female groupings as was the case when I got to know a disproportionately large number of Japanese students after I got to know a few. This has a degree of circular logic to it, though, because I reference the tendency of males and females to stay within their groups in order to help explain why I'm not staying within my own group. If I had to choose a reason for why I tend to diverge (now, as opposed to when I was younger and didn't diverge at all for reasons I consider largely separate), it would probably be because I have a greater appreciation of meaningful conversation and deeper connections than the average male. That's not to say that there aren't plenty of males who do appreciate those things or that most males wouldn't likely end up appreciating those things if presented with the opportunity, but society's expectations of males generally involve some amount of masculine strength at the expense of emotional vulnerability and connection, and either as a result of bending under pressure or of convincing themselves that they actually want that for themselves, they end up supressing their emotions and not talking about them as much, so if I want to open up to people more, I may have better success doing that with females, and over a long period of time of having better luck with connecting to females, it's not hard to imagine how I could have proportions of friends similar to what I had at the end of high school. There are likely more factors at play than just that (not least of which is the heavy skew in my classes and biology club in my later years in college), but up until this point, I've only had theories and biased data to work with; now I can see hard evidence that it's unlikely that I'm giving anyone an unfair advantage, and there are hints at what could be the primary factors at play in what I observe about myself. I strongly suspect that most people think it's ridiculous how much effort I've put into resolving this question, but I'm both proud of my ability to find this answer and comforted by the idea that my efforts to treat everyone fairly have been largely successful even when control of my thoughts hasn't necessarily been as successful. I wish I would've found this out a long time ago, but I'm happy to know it now.
-				</section>
 				<script>
 					var a = "a",
 						b = "b",
@@ -4597,6 +4720,7 @@
 						setTopFilter = whether the function should be used to find the people talked to most
 							default: true on first run, false on second run
 						*/
+						console.log("Updating conversations");
 						var checkboxes = {
 							specific: S.getId("specificConversations").checked,
 							adult: S.getId("adultConversations").checked,
@@ -5007,8 +5131,13 @@
 
 						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 						let initSum = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-						let recordedPeople = { m: [], f: [] };
-						let totalPeople = { m: [], f: [] };
+						let recordedPeople = { m: [], f: [] };  // keeps track or everyone recorded (especially for identifying first contact)
+						let totalPeople = { m: [], f: [] };  // keeps track of everyone who passed the filtering requirements
+						let uniquePeopleLists = {  // totalPeople further divided by who started the conversation
+							m: { m: [], t: [], b: [], n: [], a: [] },
+							f: { m: [], t: [], b: [], n: [], a: [] },
+							a: { m: [], t: [], b: [], n: [], a: [] }
+						};
 						let unfilteredPeople = [];
 						let topFilter = { m: [], f: [] };
 						let combinedData = {  // (male/female/all): { me, them, other, all }
@@ -5118,6 +5247,8 @@
 								let uniquePeople = { m: [], f: [] };
 								let interactionNumbers = { m: 0, f: 0, total: 0 };
 								let rawData = { m: [], f: [] };
+								let groupNumber = 1;
+								let foundGroups = { m: [], f: [], u: [], a: [] };  // a list of the group IDs which have been found (because they haven't been filtered out)
 								let dayData = {
 									grandTotal: { m: "", f: "" },
 									uniqueTotal: { m: "", f: "" },
@@ -5134,8 +5265,8 @@
 									exposure: { m: "", f: "" }
 								};
 								S.forEach(day.data, function(conversation, number) {
-									let me = {},
-										them = [];
+									let me = {};
+									let them = [];
 									if (conversation.length == 8) {
 										// converts things from base 5 to base 7
 										// (I know this isn't an exact conversion; I'm trying to convert the intended values, not the literal numbers.)
@@ -5180,7 +5311,7 @@
 									} else if (conversation.length > 9) {
 										console.error("Conversation number " + (number+1) + " on " + day.date + " has too many data points.");
 									}
-									if (conversation[0].slice(0, 2) == "g(") {
+									if (conversation[0].slice(0, 2) == "g(") {  // if the conversation was with a group of specific people
 										conversation[0].slice(2, conversation[0].length - 1).split("&").forEach(function (person, index) {
 											let data = {};
 											// sets the name
@@ -5201,6 +5332,7 @@
 											data.initiator = conversation[3];
 											// sets the indicators
 											data.indicators = conversation[4].split("");
+											data.indicators.push("g");  // adds a group indicator (if not already present)
 											// sets the length
 											data.length = (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
@@ -5289,9 +5421,12 @@
 											data.enjoyability = conversation[8];
 											// sets the total effective talk time
 											data.total = data.length * data.density * data.participation;
+											// identifies what group they were a part of
+											data.groupId = groupNumber;
 											// adds the data to the person list
 											them.push(data);
 										});
+										groupNumber++;
 										// set my total effective talk time
 										let participations = [];
 										them.forEach(function (dataSet) {
@@ -5317,7 +5452,7 @@
 										if (me.total < .25) {
 											me.total = .25;
 										}
-									} else if (conversation[0] == "group") {
+									} else if (conversation[0] == "group") {  // if the conversation was with a generic group
 										let people = [];
 										S.forEach(conversation[1], function () {
 											people.push(null);
@@ -5350,6 +5485,7 @@
 											data.initiator = conversation[3];
 											// sets the indicators
 											data.indicators = conversation[4].split("");
+											data.indicators.push("g");  // adds a group indicator (if not already present)
 											// sets the length
 											data.length = (function () {
 												if (conversation[5] == 1 && conversation[6] == 7) {
@@ -5438,9 +5574,12 @@
 											data.enjoyability = conversation[8];
 											// sets the total effective talk time
 											data.total = data.length * data.density * data.participation
+											// identifies what group they were a part of
+											data.groupId = groupNumber;
 											// adds the data to the person list
 											them.push(data);
 										});
+										groupNumber++;
 										// sets my total effective talk time
 										let participations = [];
 										them.forEach(function (dataSet) {
@@ -5525,12 +5664,51 @@
 														return conversation[7] / 7;
 												}
 											})(),
-											enjoyability: conversation[8]
+											enjoyability: conversation[8],
+											groupId: 0
 										};
 										data.total = data.length * data.density * data.participation;
 										me.total = data.length * data.density * (1 - data.participation);
 										them.push(data);
 									}
+
+									/* possible ending data values:
+									name:
+										[A-Z]name = a person's phonetic name
+										p# = a person's numerical designation (when they don't have a listed name)
+										a# = an anonymous person (someone I wouldn't recognize or likely see again)
+										"" = someone from a conversation labeled as "group" (potentially only represents group proportions)
+									gender:
+										"m" = male
+										"f" = female
+										"u" = unknown
+									classification:
+										"a" = adult (above my age range)
+										"k" = kid (below my age range)
+										"f" = formal conversation
+										"p" = previously known (ignores my parents who are classified as "a")
+										"b" = from my building (may or may not count people not from my floor)
+										"r" = roommate
+										"p-b" = previously a "b"
+										"p-r" = previously a "r"
+										"c" = from my class
+										"s" = a filler for someone at school/SEMO
+									initiator:
+										"m" = me
+										"t" = them
+										"b" = both
+										"n" = neither
+									indicators:
+										"n" = nothing special
+										"g" = part of a group (doesn't necessarily catch every time)
+										- more indicators
+									length: > 0
+									density: 1 >= # >= 0
+									participation: 1 >= # >= 0
+									enjoyability: 1-7
+									total (total talk time): > 0
+									groupId: >= 0
+									*/
 									
 									let index = them.length;
 									while (index--) {  // adds information to the tables
@@ -5618,7 +5796,7 @@
 											desiredInteraction = false;
 										}
 										
-										if (desiredInteraction) {  // if the interaction should be counted
+										if (desiredInteraction && person.gender != "u") {  // if the interaction should be counted
 
 											if (setTopFilter !== false) {
 												// if setting the top people I had conversations with
@@ -5649,7 +5827,7 @@
 													}
 												}
 
-											} else {
+											} else {  // if actually populating the tables
 
 												// keeps track of people who haven't been filtered out (for affiliation filtering)
 												if (!unfilteredPeople.includes(person.name)) {
@@ -5678,6 +5856,54 @@
 													dayData.grandTotal[person.gender] = 1;
 												} else {
 													dayData.grandTotal[person.gender]++;
+												}
+
+												// counts the group and individual conversations (per conversation, not per person)
+												if (person.groupId > 0) {  // if the person was part of a group
+													if (foundGroups.a.indexOf(person.groupId) == -1) {  // if the group hasn't been counted
+														combinedData.groupTotal.a.a++;
+														if (person.initiator == "m") {
+															combinedData.groupTotal.a.m++;
+														} else if (person.initiator == "t") {
+															combinedData.groupTotal.a.t++;
+														} else {
+															combinedData.groupTotal.a.o++;
+														}
+														foundGroups.a.push(person.groupId);
+													}
+													if (foundGroups[person.gender].indexOf(person.groupId) == -1) {  // if a certain gender hasn't been counted from the group
+														if (person.gender == "m" && person.initiator == "m") {
+															console.log(person);
+														}
+														combinedData.groupTotal[person.gender].a++;
+														if (person.initiator == "m") {
+															combinedData.groupTotal[person.gender].m++;
+														} else if (person.initiator == "t") {
+															combinedData.groupTotal[person.gender].t++;
+														} else {
+															combinedData.groupTotal[person.gender].o++;
+														}
+														if (dayData.groupTotal[person.gender] === "") {
+															dayData.groupTotal[person.gender] = 1;
+														} else {
+															dayData.groupTotal[person.gender]++;
+														}
+														foundGroups[person.gender].push(person.groupId);
+													}
+												} else {  // if the conversation only involved the one other person
+													combinedData.individualTotal[person.gender].a++;
+													if (person.initiator == "m") {
+														combinedData.individualTotal[person.gender].m++;
+													} else if (person.initiator == "t") {
+														combinedData.individualTotal[person.gender].t++;
+													} else {
+														combinedData.individualTotal[person.gender].o++;
+													}
+													if (dayData.individualTotal[person.gender] === "") {
+														dayData.individualTotal[person.gender] = 1;
+													} else {
+														dayData.individualTotal[person.gender]++;
+													}
 												}
 
 												// sets the information for the unique people who interacted with me table
@@ -5791,9 +6017,26 @@
 												}
 
 												// keeps track of information for the total people recorded table
-												if (recordedPeople[person.gender] != undefined && person.name.charAt(0).search(/[A-Zp]/) > -1 && recordedPeople[person.gender].indexOf(person.name) == -1) {
-													recordedPeople[person.gender].push(person.name);
-													totalPeople[person.gender].push(person.name);
+												if (person.name.charAt(0).search(/[A-Zp]/) > -1) {
+													if (recordedPeople[person.gender] != undefined && recordedPeople[person.gender].indexOf(person.name) == -1) {
+														recordedPeople[person.gender].push(person.name);
+													}
+													if (totalPeople[person.gender].indexOf(person.name) == -1) {
+														totalPeople[person.gender].push(person.name);
+														/// this used to be in the recoredPeople if-statement and had very different values
+													}
+													if (uniquePeopleLists.a.a.indexOf(person.name) == -1) {
+														uniquePeopleLists.a.a.push(person.name);
+													}
+													if (uniquePeopleLists.a[person.initiator].indexOf(person.name) == -1) {
+														uniquePeopleLists.a[person.initiator].push(person.name);
+													}
+													if (uniquePeopleLists[person.gender].a.indexOf(person.name) == -1) {
+														uniquePeopleLists[person.gender].a.push(person.name);
+													}
+													if (uniquePeopleLists[person.gender][person.initiator].indexOf(person.name) == -1) {
+														uniquePeopleLists[person.gender][person.initiator].push(person.name);
+													}
 												}
 
 												// decides which totals should be used
@@ -6049,24 +6292,26 @@
 							document.getElementById("totalPeople").getElementsByTagName("td")[1].textContent = totalPeople.f.length;
 							document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
 							// sets the totals or averages of combinedData
-							combinedData.uniqueTotal.m.a = totalPeople.m.length;
-							combinedData.uniqueTotal.f.a = totalPeople.f.length;
-							//*  //// should have their own values
-							combinedData.uniqueTotal.m.m = combinedData.uniqueTotal.m.a;
-							combinedData.uniqueTotal.f.m = combinedData.uniqueTotal.f.a;
-							combinedData.uniqueTotal.m.t = combinedData.uniqueTotal.m.a;
-							combinedData.uniqueTotal.f.t = combinedData.uniqueTotal.f.a;
-							combinedData.uniqueTotal.m.o = combinedData.uniqueTotal.m.a;
-							combinedData.uniqueTotal.f.o = combinedData.uniqueTotal.f.a;
-							// */
+							combinedData.uniqueTotal.m.a = uniquePeopleLists.m.a.length;
+							combinedData.uniqueTotal.f.a = uniquePeopleLists.f.a.length;
+							combinedData.uniqueTotal.m.m = uniquePeopleLists.m.m.length;
+							combinedData.uniqueTotal.f.m = uniquePeopleLists.f.m.length;
+							combinedData.uniqueTotal.m.t = uniquePeopleLists.m.t.length;
+							combinedData.uniqueTotal.f.t = uniquePeopleLists.f.t.length;
+							combinedData.uniqueTotal.m.o = Array.from(new Set(uniquePeopleLists.m.b.concat(uniquePeopleLists.m.n))).length;
+							combinedData.uniqueTotal.f.o = Array.from(new Set(uniquePeopleLists.f.b.concat(uniquePeopleLists.f.n))).length;
 							combinedData.grandTotal.a.a = combinedData.grandTotal.m.a + combinedData.grandTotal.f.a;
 							combinedData.grandTotal.a.m = combinedData.grandTotal.m.m + combinedData.grandTotal.f.m;
 							combinedData.grandTotal.a.t = combinedData.grandTotal.m.t + combinedData.grandTotal.f.t;
 							combinedData.grandTotal.a.o = combinedData.grandTotal.m.o + combinedData.grandTotal.f.o;
-							combinedData.uniqueTotal.a.a = combinedData.uniqueTotal.m.a + combinedData.uniqueTotal.f.a;
-							combinedData.uniqueTotal.a.m = combinedData.uniqueTotal.m.m + combinedData.uniqueTotal.f.m;
-							combinedData.uniqueTotal.a.t = combinedData.uniqueTotal.m.t + combinedData.uniqueTotal.f.t;
-							combinedData.uniqueTotal.a.o = combinedData.uniqueTotal.m.o + combinedData.uniqueTotal.f.o;
+							combinedData.individualTotal.a.a = combinedData.individualTotal.m.a + combinedData.individualTotal.f.a;
+							combinedData.individualTotal.a.m = combinedData.individualTotal.m.m + combinedData.individualTotal.f.m;
+							combinedData.individualTotal.a.t = combinedData.individualTotal.m.t + combinedData.individualTotal.f.t;
+							combinedData.individualTotal.a.o = combinedData.individualTotal.m.o + combinedData.individualTotal.f.o;
+							combinedData.uniqueTotal.a.a = uniquePeopleLists.a.a.length;
+							combinedData.uniqueTotal.a.m = uniquePeopleLists.a.m.length;
+							combinedData.uniqueTotal.a.t = uniquePeopleLists.a.t.length;
+							combinedData.uniqueTotal.a.o = Array.from(new Set(uniquePeopleLists.a.b.concat(uniquePeopleLists.a.n))).length;
 							combinedData.myConvos.a.m = combinedData.myConvos.m.m + combinedData.myConvos.f.m;
 							combinedData.theirConvos.a.t = combinedData.theirConvos.m.t + combinedData.theirConvos.f.t;
 							combinedData.ourConvos.a.o = combinedData.ourConvos.m.o + combinedData.ourConvos.f.o;
