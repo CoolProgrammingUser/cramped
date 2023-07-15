@@ -529,6 +529,37 @@
 					</div>
 					<div class="details">
 						<div class="summary">
+							Notable considerations
+						</div>
+						<ul>
+							<li>
+								Collecting the data was so grueling that I became less inspired to get involved in a conversation; however, I tried to fight this because I generally like talking to people, and I wanted accurate data. Also, once I was already involved in a conversation, I'd have to collect the same data no matter what, so there was no further influence after that.
+							</li>
+							<li>
+								I started designing the program to interpret the data before the study was concluded because I was impatient, and I knew it would take a really long time to design a respectable interpreter. Perhaps halfway though the study or so, I had preliminary data suggesting that I demonstrated a preference for females, but I knew the data was far from conclusive, and I didn't want to (intentionally) change my behavior because I wanted to have accurate data.
+							</li>
+							<li>
+								I became good friends with one female and consequentially talked to them a lot. Not filtering out this person by filtering out at least the first top female causes many of the trends to be substantially different.
+							</li>
+							<li>
+								I definitely feel more drawn to females, but I don't want to be biased, so I fight it. Determining the exact reason why I'm drawn to them and how effective I am at fighting the impulse are two of the major reasons for conducting this study.
+							</li>
+							<li>
+								I'm more drawn to attractive people, especially (but not exclusively) females, but I don't want to be biased, so I fight it. Both out of potential ethical issues and the ease with which ratings of favorable appearance can be influenced by the situation, no such ratings are recorded.
+							</li>
+							<li>
+								I tend to be more awkward in group settings.
+							</li>
+							<li>
+								I'm generally quiet, although I like talking to people, and I frequently make an active effort to get to know people.
+							</li>
+							<li>
+								When forming my conclusions, I tend to focus on trends than span multiple categories because it's easier for me to make sense of that than when all of the categories vary. For example, I'm more inclined to make note of when all conversations with females show a trend or when all mutually started conversations show a trend as opposed to when data varies by gender and initiator simultaneously.
+							</li>
+						</ul>
+					</div>
+					<div class="details">
+						<div class="summary">
 							Explanations of filters
 						</div>
 						<section>
@@ -543,6 +574,9 @@
 							I do heavy processing and filtering of the data because I want my results to be as clear as possible, but because of the strict filtering (and potentially other things) peculiarities can arise in the data if you're not prepared for them. This identifies some of the issues I've come across when trying to validate my results. It's worth noting that, although these may have been the things I found, these same types of issues could be hidden in other aspects of the data. Luckily, the peculiarities are generally small and don't necessarily have a significant impact on my conclusions. I did find a significant impact on the enjoyability, but I took the issues into account when forming my conclusions.
 						</section>
 						<ul>
+							<li>
+								<strong>Group conversations are complicated.</strong> As I was debating how best to represent groups, I generally settled on the method of counting each participant of the group individually. This allows the size and gender composition of the group to be accurately represented, but it also results in the same conversation being counted multiple times. You can filter groups in or out in an effort to account for this, and in the custom tables, you can select for the number of group conversations which counts each group conversation once; however, due to many conversations having both male and female participants, a group conversation can be counted up to twice with that selection: once for any males and once for any females. This may or may not be adjusted in the future.
+							</li>
 							<li>
 								<strong>New filters can change the top male(s) and female(s) filtered out.</strong> When I select the group conversations in the customizable tables with standard filtering, I get certain values, but when I then filter out conversations with individuals, I get slightly lower values. This is because the male and female I talk to most aren't necessarily involved in any group conversations, so when only groups are considered, different people are assigned as the people I talk to most, and upon filtering them out, the displayed values decrease slightly. This can be remedied by not filtering out the people I talk to the most. I'm also interested in adding the ability to filter out specific people to address this kind of problem.
 							</li>
@@ -1130,15 +1164,15 @@
 						This table allows you to choose from and display basically any of the data I collected. Selecting from only the first box allows you to display whatever you chose whereas also selecting from the other two boxes allows you to do basic math between different types of data. You should should be careful to not assume that these values are the same as other similar tables above (in the tables I don't care about); oftentimes it's actually the more fundamental data. For example, the total length of conversations is exclusively the time of the conversation from start to finish in contrast to the total talk time which factors in speech density and participation for each conversation
 					</section>
 					<select id="firstDataCategory">
-						<option value="grandTotal" selected>Total number of conversations (per day)</option>
+						<option value="grandTotal" selected>Total number of conversations</option>
 						<option value="uniqueTotal">Number of unique people</option>
 						<option value="groupTotal">Number of group conversations</option>
 						<option value="individualTotal">Number of conversations with individuals</option>
 						<option value="myConvos">Number of conversations I started</option>
 						<option value="theirConvos">Number of conversations they started</option>
 						<option value="ourConvos">Number of conversations no one or everyone started</option>
-						<option value="totalLength">Total length of conversations (per day)</option>
-						<option value="totalTalkTime">Total talk time (per day)</option>
+						<option value="totalLength">Total length of conversations</option>
+						<option value="totalTalkTime">Total talk time</option>
 						<option value="averageDensity">Average conversation density</option>
 						<option value="participation">Average % of the time the other person talked</option>
 						<option value="enjoyability">Average enjoyability</option>
@@ -1153,15 +1187,15 @@
 					</select>
 					<select id="secondDataCategory">
 						<option value="" selected></option>
-						<option value="grandTotal">Total number of conversations (per day)</option>
+						<option value="grandTotal">Total number of conversations</option>
 						<option value="uniqueTotal">Number of unique people</option>
 						<option value="groupTotal">Number of group conversations</option>
 						<option value="individualTotal">Number of conversations with individuals</option>
 						<option value="myConvos">Number of conversations I started</option>
 						<option value="theirConvos">Number of conversations they started</option>
 						<option value="ourConvos">Number of conversations no one or everyone started</option>
-						<option value="totalLength">Total length of conversations (per day)</option>
-						<option value="totalTalkTime">Total talk time (per day)</option>
+						<option value="totalLength">Total length of conversations</option>
+						<option value="totalTalkTime">Total talk time</option>
 						<option value="averageDensity">Average conversation density</option>
 						<option value="participation">Average % of the time the other person talked</option>
 						<option value="enjoyability">Average enjoyability</option>
@@ -1191,16 +1225,67 @@
 					<br>
 					<table id="customAggregate">
 						<tr>
-							<th></th><th>Me</th><th>Them</th><th>Other</th><th>Total or<br>average</th>
+							<th></th>
+							<th>Me</th>
+							<th>Them</th>
+							<th>Both</th>
+							<th>Neither</th>
+							<th>B or N</th>
+							<th>Total or<br>average</th>
 						</tr>
 						<tr>
-							<th>Males</th><td></td><td></td><td></td><td></td>
+							<th>Males</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
-							<th>Females</th><td></td><td></td><td></td><td></td>
+							<th>Females</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
-							<th>Total or<br>average</th><td></td><td></td><td></td><td></td>
+							<th>Total or<br>average</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+					<br>
+					<table id="smallCustomAggregate">
+						<tr>
+							<th></th>
+							<th>Me</th>
+							<th>Them</th>
+							<th>Total or<br>average</th>
+						</tr>
+						<tr>
+							<th>Males</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Females</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Total or<br>average</th>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 					</table>
 				</div>
@@ -1246,6 +1331,290 @@
 					</h3>
 					<section>
 						Although I have more conversations with males and those conversations generally last longer than with females, females tend to be associated with denser conversations which end up resulting in a greater overall talk time. Moreover, I tend to have more conversations per recorded female than per recorded male. Interestingly, the "other" category frequently follows different trends than the "me" and "them" category, although it tends to be more similar to the "me" category. One of the most notable differences is how the enjoyability of "other" conversations is higher than the rest, and also unlike the rest, it seems like there might be a small skew towards a higher enjoyability of female conversations. The overall higher values are consistent with two people primed to talk to each other having a more favorable conversation, but that wouldn't explain any skew. Complementing that fact is that the "other" conversations constitute a higher proportion of the female conversations than the males conversations do. It's also of note that I seem to start more conversations per female than per male, and it's further interesting that the number of conversations started by females is the lowest in all regards. A possible explanation for that trend is that, when I'm approached by a female, I become primed to talk to them and am therefore more likely to place the conversation into the "other" category. It seems likely that my propensity for acquiring female friends is linked to a greater amount of conversation with them (individually), but whether it's a cause or effect is difficult if not impossible to determine with the available data. More evaluation to come.
+					</section>
+				</div>
+				<div class="details">
+					<div class="summary">
+						July 2023 conclusions
+					</div>
+					<h3>
+						Results
+					</h3>
+					<table>
+						<tr>
+							<th>Finding</th>
+							<th>Evidence</th>
+							<th>Notes</th>
+						</tr>
+						<tr>
+							<td>
+								Mutually started conversations are much more likely to occur in group settings.
+							</td>
+							<td>
+								Much higher number and percentage of "both" conversations when filtering out conversations with individuals compared to filtering out conversations with groups
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								Group conversations compose approximately 50% of all conversations (per person) for both males and females.
+							</td>
+							<td>
+								Number of conversations with individuals filtered out compared to the standard filtering.
+							</td>
+							<td>
+								Filtering peculiarities can obscure this.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Per conversation, there are a higher proportion of group conversations involving females than males (about 2/5 of the respective total compared to about 1/3).
+							</td>
+							<td>
+								Comparing the number of group conversations and the number of individual conversations with each other and the grand totals
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								Groups containing males have more participants compared to groups containing females.
+							</td>
+							<td>
+								With group filtering, dividing the total number of conversations (in this case, the number of group participants) by the number of group conversations (which only counts a group once).
+							</td>
+							<td>
+								Filtering peculiarities can obscure this trend. Also, the small aggregate table doesn't necessarily demonstrate this trend because the number of groups and participants in the "both" category for females is so much larger than the "them" category that adding "both" to "them" in that table causes the absolute values to be vastly different. Also again, the absolute values of the larger aggregate table are going to be closer to 1 than it seems like they should be because some members of the groups are filtered out, so it's possible to have a group conversation which seems to involve only one other person. Also again agin, it's theoretically possible that just more females are being filtered out than males, but I see no reason to believe why that would be the case.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Males start conversations with me &ge; twice as often as females start conversations with me, both individually and as a group.
+							</td>
+							<td>
+								Total number of conversations with and without group or individual filtering, as well as by counting each group individually
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								I start just about as many conversations with males as I do females.
+							</td>
+							<td>
+								Number of group conversations + number of individual conversations, as well as each of those individually
+							</td>
+							<td>
+								This contrasts to the total number of conversations because that individually counts each person from a group.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								I have more conversations per female than per male, and the total talk time is also greater.
+							</td>
+							<td>
+								Conversations per unique person recorded and total talk time per unique person recorded
+							</td>
+							<td>
+								When focusing on conversations with individuals started by them, there doesn't seem to be a difference in the number of conversations per person.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Group conversations have generally similar talk times to conversations with individuals, but they last longer and have lower densities and participation values
+							</td>
+							<td>
+								Comparison of group and individual conversations on total talk time, total length, average density, and average participation
+							</td>
+							<td>
+								Lower participation could be a result of how I recorded participation along with more people needing to share conversation time.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Conversations might generally involve similar amounts of talking between males and females, but there might be more talking in mutual conversations containing females than males, and it might be due to higher conversation density (and maybe not participation differences).
+							</td>
+							<td>
+								Standard filtering with total talk time per conversation and comparisons between conversation length per conversation, average conversation density, and average participation
+							</td>
+							<td>
+								These results aren't as strong as other results because the trends aren't necessarily as uniform, and particularly when isolating groups or individuals, there aren't enough conversations under consideration to eliminate sampling error. When considered as a whole, there's enough data and trends start to emerge, but it's debatable how valid the trends are if they can't be reliably replicated in the division that has the biggest impact on trends (groups versus individuals). That division may exhibit (potentially conflicting) trends in this area, but it's hard to make sense of it.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								There's limited evidence to support the idea that females are more talkative than males.
+							</td>
+							<td>
+								Conversation length, density, and participation across groups, individuals, and combined
+							</td>
+							<td>
+								Some evidence appears for conversations with females exhibiting a higher density, but when isolating groups or individuals, the number of conversations recorded becomes too low to be trusted (and the trend may not be present). There's also no significant difference when considering all recorded conversations in the study (more than the standard filtering). This contrasts with third-party studies demonstrating females speaking more words per minute than males.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Conversations initiated by both/all participants involve more talking, probably because of conversation density, and maybe because of conversation length.
+							</td>
+							<td>
+								Total talk time per conversation, as well as investigations into length per conversation, average density, and average participation
+							</td>
+							<td>
+								Conversations with individuals don't necessarily show this trend due to the low number of mutual conversations. Also, when groups and individuals are considered together, it's hard to recognize any difference in density because the group values are lower overall, so density differences are washed out when added to the conversations with individuals which have higher density but limited mutual conversations.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Mutually started conversations are a little more enjoyable than conversations with a specific initiator.
+							</td>
+							<td>
+								All forms of enjoyability
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								There's no reliable, discernable difference between how much I enjoy male conversations versus female conversations.
+							</td>
+							<td>
+								Enjoyablity altogether, in groups, and individually
+							</td>
+							<td>
+								The "neither" category can slightly obscure this, and there are some values which seem to conflict with this trend, but those values can be shown to be based on very few conversations (and are therefore subject to sampling error). Improper filtering can affect this.
+							</td>
+						</tr>
+					</table>
+					<h3>
+						Theories
+					</h3>
+					<table>
+						<tr>
+							<th>Hypothesis</th>
+							<th>Support</th>
+							<th>Notes</th>
+						</tr>
+						<tr>
+							<td>
+								Mutually started conversations have a higher enjoyability because they isolate when both participants are eager to talk.
+							</td>
+							<td>
+								Enjoyability and reason
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+								I'm awkward in groups, so I cause the density of group conversations to be smaller than with individuals.
+							</td>
+							<td>
+								Smaller group densities along with preexisting knowledge of me being awkward in groups
+							</td>
+							<td>
+								This can't explain the longer length of group conversations.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								I'm less awkward in groups containing females because those groups are smaller.
+							</td>
+							<td>
+								A smaller number of participants in female group conversations, a highly dubious increase in conversation density in female group conversations, a highly dubious decrease in female participation (suggesting I spoke more), and a preexisting knowledge of me feeling less awkward in smaller groups
+							</td>
+							<td>
+								The "me" and "them" categories of the female group conversations have so few conversations that any trends should be viewed with heavy skepticism, but they and the "both" category which has better data all would support this hypothesis.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Males are more inclined to talk to males, and females are more inclined to talk to females.
+							</td>
+							<td>
+								The vast male/female differences in "them" conversations in number of conversations, total talk time per conversation, and number of unique people, in addition to general observations of more frequent same-gender associations
+							</td>
+							<td>
+								The "both" category doesn't necessarily follow this trend, but there are other considerations for those conversations.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								I'm likely reasonably successful at regulating how much I talk to people
+							</td>
+							<td>
+								The similarities between the number of group and individual conversations I started, as well as the talk time per conversation.
+							</td>
+							<td>
+								My presumed success is based on the assumption that the male/female ratio should be equal. This contrasts to the greater number of males recorded which, itself, contrasts with the greater number of females present in my classes and perhaps the dining hall. Maybe those two conflicting factors even out or maybe I'm not quite totally successful, but the lack of a definitive difference suggests a fair amount of success.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Talking to the same females more frequently than males and feeling less awkward in the smaller groups containing females promotes deeper levels of friendship and leads to the observation that I acquire more female friends.
+							</td>
+							<td>
+								The larger number of conversations per female, the previous hypothesis that I feel less awkward in female groups, and the knowledge that increased voluntary exposure facilitates the establishment of relationships
+							</td>
+							<td>
+								If it was confirmed that females were associated with a higher conversation density and/or that they had a higher tendency to result in mutually started conversations, those things would also factor into the establishment of friendships because they would respectively increase the opportunity for getting to know them or increase the average enjoyment of conversations with them. However, this hypothesis doesn't disentangle cause and effect: It could be that I seek out repeat conversations with females rather than that it's just a peculiarity of circumstances, and it could be that I feel less awkward in group female conversations also specifically because they're female (although I don't need a study to tell me that the large group awkwardness is real). Moreover, if it was determined that I was seeking out repeat conversations with females, for instance, it would still be unknown whether that was because I was subconsciously (or consciously) attracted to them or whether it was because they just provide better conversation (or any other variety of explanation).
+							</td>
+						</tr>
+					</table>
+					<h3>
+						Remaining questions
+					</h3>
+					<table>
+						<tr>
+							<th>Question</th>
+							<th>Implications</th>
+							<th>Why no answer</th>
+						</tr>
+						<tr>
+							<td>
+								Am I more likely to put conversations into the "both" category under certain conditions?
+							</td>
+							<td>
+								Besides skewing the data, this could also indicate my attitude towards the conversation: For example, if I'm more likely to consider conversations started by females to be mutually started, it could be that I'm more eager to talk when approached by a female.
+							</td>
+							<td>
+								A lack of substantial trends, no other conversation classifications to compare to, and an inability to disprove less-likely variations of related hypotheses
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Do females have a higher proportion of "both" conversations?
+							</td>
+							<td>
+								This could be caused by females being more receptive to conversations with me or by me getting comfortable with females more quickly. Also, mutually started conversations have a higher enjoyability and could therefore lead to a higher likelihood of establishing a closer friendship.
+							</td>
+							<td>
+								Insufficient data to validate the slight and disputably inconsistent trend
+							</td>
+						</tr>
+						<tr>
+							<td>
+								(How) do these trends change over time?
+							</td>
+							<td>
+								It's possible that nothing would change using the standard filtering because people I knew previously (such as from a previous study) are filtered out, but if it did change, it would beg the question of why, and when it comes to tracking the changes of the interactions with the people I met in this study, it could help indicate which factors are associated with the formation of lasting friendships, and it could help indicate how the data from this study and that one could be applied to my study in high school.
+							</td>
+							<td>
+								The COVID-19 pandemic unexpectedly shut down school before I had a chance to do a follow-up, and then I graduated.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Why are certain trends observed?
+							</td>
+							<td>
+								Although I was originally interested in seeing whether any trends existed at all, I'm perhaps actually more interested in the reasons behind the trends. The reason for a trend can determine whether I should take action to change it, and the degree to which I'm to blame can change what course of action I should take.
+							</td>
+							<td>
+								Insufficient experimental design for most explanations
+							</td>
+						</tr>
+					</table>
+					<h3>
+						Narrative
+					</h3>
+					<section>
+						I'm proud of this study.
 					</section>
 				</div>
 				<script>
@@ -4720,7 +5089,6 @@
 						setTopFilter = whether the function should be used to find the people talked to most
 							default: true on first run, false on second run
 						*/
-						console.log("Updating conversations");
 						var checkboxes = {
 							specific: S.getId("specificConversations").checked,
 							adult: S.getId("adultConversations").checked,
@@ -5140,20 +5508,139 @@
 						};
 						let unfilteredPeople = [];
 						let topFilter = { m: [], f: [] };
-						let combinedData = {  // (male/female/all): { me, them, other, all }
-							grandTotal: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							uniqueTotal: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							groupTotal: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							individualTotal: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							myConvos: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							theirConvos: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							ourConvos: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							totalLength: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							totalTalkTime: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							averageDensity: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							participation: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							enjoyability: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } },
-							exposure: { m: { m: 0, t: 0, o: 0, a: 0 }, f: { m: 0, t: 0, o: 0, a: 0 }, a: { m: 0, t: 0, o: 0, a: 0 } }
+						let combinedData = {  // (male/female/all): { me, them, both, neither, other, all }
+							grandTotal: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							uniqueTotal: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							groupTotal: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							individualTotal: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							myConvos: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							theirConvos: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							ourConvos: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							totalLength: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							totalTalkTime: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							averageDensity: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							participation: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							enjoyability: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							},
+							exposure: {
+								m: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								f: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 },
+								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
+							}
+						};
+						let scd = {  // small combined data (male/female/all): { me, them, all }
+							grandTotal: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							uniqueTotal: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							groupTotal: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							individualTotal: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							myConvos: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							theirConvos: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							ourConvos: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							totalLength: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							totalTalkTime: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							averageDensity: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							participation: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							enjoyability: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							},
+							exposure: {
+								m: { m: 0, t: 0, a: 0 },
+								f: { m: 0, t: 0, a: 0 },
+								a: { m: 0, t: 0, a: 0 }
+							}
 						};
 						if (setTopFilter === false) {
 							if (topConversationFilter.m.length > 0) {
@@ -5845,12 +6332,20 @@
 													interactionNumbers[person.gender]++;
 												}
 												combinedData.grandTotal[person.gender].a++;
+												combinedData.grandTotal[person.gender][person.initiator]++;
 												if (person.initiator == "m") {
-													combinedData.grandTotal[person.gender].m++;
+													scd.grandTotal[person.gender].m++;
+													scd.grandTotal[person.gender].a++;
 												} else if (person.initiator == "t") {
-													combinedData.grandTotal[person.gender].t++;
+													scd.grandTotal[person.gender].t++;
+													scd.grandTotal[person.gender].a++;
 												} else {
 													combinedData.grandTotal[person.gender].o++;
+													if (person.initiator == "b") {
+														scd.grandTotal[person.gender].m++;
+														scd.grandTotal[person.gender].t++;
+														scd.grandTotal[person.gender].a++;
+													}
 												}
 												if (dayData.grandTotal[person.gender] === "") {
 													dayData.grandTotal[person.gender] = 1;
@@ -5862,26 +6357,39 @@
 												if (person.groupId > 0) {  // if the person was part of a group
 													if (foundGroups.a.indexOf(person.groupId) == -1) {  // if the group hasn't been counted
 														combinedData.groupTotal.a.a++;
+														combinedData.groupTotal.a[person.initiator]++;
 														if (person.initiator == "m") {
-															combinedData.groupTotal.a.m++;
+															scd.groupTotal.a.m++;
+															scd.groupTotal.a.a++;
 														} else if (person.initiator == "t") {
-															combinedData.groupTotal.a.t++;
+															scd.groupTotal.a.t++;
+															scd.groupTotal.a.a++;
 														} else {
 															combinedData.groupTotal.a.o++;
+															if (person.initiator == "b") {
+																scd.groupTotal.a.m++;
+																scd.groupTotal.a.t++;
+																scd.groupTotal.a.a++;
+															}
 														}
 														foundGroups.a.push(person.groupId);
 													}
 													if (foundGroups[person.gender].indexOf(person.groupId) == -1) {  // if a certain gender hasn't been counted from the group
-														if (person.gender == "m" && person.initiator == "m") {
-															console.log(person);
-														}
 														combinedData.groupTotal[person.gender].a++;
+														combinedData.groupTotal[person.gender][person.initiator]++;
 														if (person.initiator == "m") {
-															combinedData.groupTotal[person.gender].m++;
+															scd.groupTotal[person.gender].m++;
+															scd.groupTotal[person.gender].a++;
 														} else if (person.initiator == "t") {
-															combinedData.groupTotal[person.gender].t++;
+															scd.groupTotal[person.gender].t++;
+															scd.groupTotal[person.gender].a++;
 														} else {
 															combinedData.groupTotal[person.gender].o++;
+															if (person.initiator == "b") {
+																scd.groupTotal[person.gender].m++;
+																scd.groupTotal[person.gender].t++;
+																scd.groupTotal[person.gender].a++;
+															}
 														}
 														if (dayData.groupTotal[person.gender] === "") {
 															dayData.groupTotal[person.gender] = 1;
@@ -5892,12 +6400,20 @@
 													}
 												} else {  // if the conversation only involved the one other person
 													combinedData.individualTotal[person.gender].a++;
+													combinedData.individualTotal[person.gender][person.initiator]++;
 													if (person.initiator == "m") {
-														combinedData.individualTotal[person.gender].m++;
+														scd.individualTotal[person.gender].m++;
+														scd.individualTotal[person.gender].a++;
 													} else if (person.initiator == "t") {
-														combinedData.individualTotal[person.gender].t++;
+														scd.individualTotal[person.gender].t++;
+														scd.individualTotal[person.gender].a++;
 													} else {
 														combinedData.individualTotal[person.gender].o++;
+														if (person.initiator == "b") {
+															scd.individualTotal[person.gender].m++;
+															scd.individualTotal[person.gender].t++;
+															scd.individualTotal[person.gender].a++;
+														}
 													}
 													if (dayData.individualTotal[person.gender] === "") {
 														dayData.individualTotal[person.gender] = 1;
@@ -5922,6 +6438,8 @@
 												if (person.initiator == "m") {
 													combinedData.myConvos[person.gender].m++;
 													combinedData.myConvos[person.gender].a++;
+													scd.myConvos[person.gender].m++;
+													scd.myConvos[person.gender].a++;
 													if (dayData.myConvos[person.gender] === "") {
 														dayData.myConvos[person.gender] = 1;
 													} else {
@@ -5930,6 +6448,8 @@
 												} else if (person.initiator == "t") {
 													combinedData.theirConvos[person.gender].t++;
 													combinedData.theirConvos[person.gender].a++;
+													scd.theirConvos[person.gender].t++;
+													scd.theirConvos[person.gender].a++;
 													if (dayData.theirConvos[person.gender] === "") {
 														dayData.theirConvos[person.gender] = 1;
 													} else {
@@ -5938,6 +6458,13 @@
 												} else {
 													combinedData.ourConvos[person.gender].o++;
 													combinedData.ourConvos[person.gender].a++;
+													scd.ourConvos[person.gender].m++;
+													scd.ourConvos[person.gender].t++;
+													scd.ourConvos[person.gender].a += 1;
+													scd.myConvos[person.gender].m++;
+													scd.myConvos[person.gender].a++;
+													scd.theirConvos[person.gender].t++;
+													scd.theirConvos[person.gender].a++;
 													if (dayData.ourConvos[person.gender] === "") {
 														dayData.ourConvos[person.gender] = 1;
 													} else {
@@ -5948,12 +6475,20 @@
 												// sets part of the information for the average enjoyability table
 												addInformation(4, person.gender, person.enjoyability);
 												combinedData.enjoyability[person.gender].a += person.enjoyability;
+												combinedData.enjoyability[person.gender][person.initiator] += person.enjoyability;
 												if (person.initiator == "m") {
-													combinedData.enjoyability[person.gender].m += person.enjoyability;
+													scd.enjoyability[person.gender].m += person.enjoyability;
+													scd.enjoyability[person.gender].a += person.enjoyability;
 												} else if (person.initiator == "t") {
-													combinedData.enjoyability[person.gender].t += person.enjoyability;
+													scd.enjoyability[person.gender].t += person.enjoyability;
+													scd.enjoyability[person.gender].a += person.enjoyability;
 												} else {
 													combinedData.enjoyability[person.gender].o += person.enjoyability;
+													if (person.initiator == "b") {
+														scd.enjoyability[person.gender].m += person.enjoyability;
+														scd.enjoyability[person.gender].t += person.enjoyability;
+														scd.enjoyability[person.gender].a += person.enjoyability;
+													}
 												}
 												if (dayData.enjoyability[person.gender] === "") {
 													dayData.enjoyability[person.gender] = person.enjoyability;
@@ -5963,12 +6498,20 @@
 
 												// sets part of the information for the average density
 												combinedData.averageDensity[person.gender].a += person.density;
+												combinedData.averageDensity[person.gender][person.initiator] += person.density;
 												if (person.initiator == "m") {
-													combinedData.averageDensity[person.gender].m += person.density;
+													scd.averageDensity[person.gender].m += person.density;
+													scd.averageDensity[person.gender].a += person.density;
 												} else if (person.initiator == "t") {
-													combinedData.averageDensity[person.gender].t += person.density;
+													scd.averageDensity[person.gender].t += person.density;
+													scd.averageDensity[person.gender].a += person.density;
 												} else {
 													combinedData.averageDensity[person.gender].o += person.density;
+													if (person.initiator == "b") {
+														scd.averageDensity[person.gender].m += person.density;
+														scd.averageDensity[person.gender].t += person.density;
+														scd.averageDensity[person.gender].a += person.density;
+													}
 												}
 												if (dayData.averageDensity[person.gender] === "") {
 													dayData.averageDensity[person.gender] = person.density;
@@ -5978,12 +6521,20 @@
 
 												// sets part of the information for the average participation
 												combinedData.participation[person.gender].a += person.participation;
+												combinedData.participation[person.gender][person.initiator] += person.participation;
 												if (person.initiator == "m") {
-													combinedData.participation[person.gender].m += person.participation;
+													scd.participation[person.gender].m += person.participation;
+													scd.participation[person.gender].a += person.participation;
 												} else if (person.initiator == "t") {
-													combinedData.participation[person.gender].t += person.participation;
+													scd.participation[person.gender].t += person.participation;
+													scd.participation[person.gender].a += person.participation;
 												} else {
 													combinedData.participation[person.gender].o += person.participation;
+													if (person.initiator == "b") {
+														scd.participation[person.gender].m += person.participation;
+														scd.participation[person.gender].t += person.participation;
+														scd.participation[person.gender].a += person.participation;
+													}
 												}
 												if (dayData.participation[person.gender] === "") {
 													dayData.participation[person.gender] = person.participation;
@@ -6050,12 +6601,20 @@
 												// sets the information for the total talk time table
 												addInformation(1, person.gender, total);
 												combinedData.totalTalkTime[person.gender].a += total;
+												combinedData.totalTalkTime[person.gender][person.initiator] += total;
 												if (person.initiator == "m") {
-													combinedData.totalTalkTime[person.gender].m += total;
+													scd.totalTalkTime[person.gender].m += total;
+													scd.totalTalkTime[person.gender].a += total;
 												} else if (person.initiator == "t") {
-													combinedData.totalTalkTime[person.gender].t += total;
+													scd.totalTalkTime[person.gender].t += total;
+													scd.totalTalkTime[person.gender].a += total;
 												} else {
 													combinedData.totalTalkTime[person.gender].o += total;
+													if (person.initiator == "b") {
+														scd.totalTalkTime[person.gender].m += total;
+														scd.totalTalkTime[person.gender].t += total;
+														scd.totalTalkTime[person.gender].a += total;
+													}
 												}
 												if (dayData.totalTalkTime[person.gender] === "") {
 													dayData.totalTalkTime[person.gender] = total;
@@ -6065,12 +6624,20 @@
 
 												// keeps track of exclusively conversation length
 												combinedData.totalLength[person.gender].a += person.length;
+												combinedData.totalLength[person.gender][person.initiator] += person.length;
 												if (person.initiator == "m") {
-													combinedData.totalLength[person.gender].m += person.length;
+													scd.totalLength[person.gender].m += person.length;
+													scd.totalLength[person.gender].a += person.length;
 												} else if (person.initiator == "t") {
-													combinedData.totalLength[person.gender].t += person.length;
+													scd.totalLength[person.gender].t += person.length;
+													scd.totalLength[person.gender].a += person.length;
 												} else {
 													combinedData.totalLength[person.gender].o += person.length;
+													if (person.initiator == "b") {
+														scd.totalLength[person.gender].m += person.length;
+														scd.totalLength[person.gender].t += person.length;
+														scd.totalLength[person.gender].a += person.length;
+													}
 												}
 												if (dayData.totalLength[person.gender] === "") {
 													dayData.totalLength[person.gender] = person.length;
@@ -6120,6 +6687,8 @@
 								// keeps track of who's around on the day
 								combinedData.exposure.m.a += weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].m
 								combinedData.exposure.f.a += weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].f
+								scd.exposure.m.a += weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].m
+								scd.exposure.f.a += weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].f
 								dayData.exposure.m = weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].m
 								dayData.exposure.f = weeklyTotals[["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][new Date(day.date).getDay()]].f
 								
@@ -6292,151 +6861,148 @@
 							document.getElementById("totalPeople").getElementsByTagName("td")[1].textContent = totalPeople.f.length;
 							document.getElementById("totalPeople").getElementsByTagName("td")[2].textContent = totalPeople.m.length + totalPeople.f.length;
 							// sets the totals or averages of combinedData
-							combinedData.uniqueTotal.m.a = uniquePeopleLists.m.a.length;
-							combinedData.uniqueTotal.f.a = uniquePeopleLists.f.a.length;
-							combinedData.uniqueTotal.m.m = uniquePeopleLists.m.m.length;
-							combinedData.uniqueTotal.f.m = uniquePeopleLists.f.m.length;
-							combinedData.uniqueTotal.m.t = uniquePeopleLists.m.t.length;
-							combinedData.uniqueTotal.f.t = uniquePeopleLists.f.t.length;
+							S.forEach(["m", "f", "a"], function (group) {
+								S.forEach(["m", "t", "b", "n", "a"], function (initiator) {
+									combinedData.uniqueTotal[group][initiator] = uniquePeopleLists[group][initiator].length;
+								});
+							});
 							combinedData.uniqueTotal.m.o = Array.from(new Set(uniquePeopleLists.m.b.concat(uniquePeopleLists.m.n))).length;
 							combinedData.uniqueTotal.f.o = Array.from(new Set(uniquePeopleLists.f.b.concat(uniquePeopleLists.f.n))).length;
-							combinedData.grandTotal.a.a = combinedData.grandTotal.m.a + combinedData.grandTotal.f.a;
-							combinedData.grandTotal.a.m = combinedData.grandTotal.m.m + combinedData.grandTotal.f.m;
-							combinedData.grandTotal.a.t = combinedData.grandTotal.m.t + combinedData.grandTotal.f.t;
-							combinedData.grandTotal.a.o = combinedData.grandTotal.m.o + combinedData.grandTotal.f.o;
-							combinedData.individualTotal.a.a = combinedData.individualTotal.m.a + combinedData.individualTotal.f.a;
-							combinedData.individualTotal.a.m = combinedData.individualTotal.m.m + combinedData.individualTotal.f.m;
-							combinedData.individualTotal.a.t = combinedData.individualTotal.m.t + combinedData.individualTotal.f.t;
-							combinedData.individualTotal.a.o = combinedData.individualTotal.m.o + combinedData.individualTotal.f.o;
-							combinedData.uniqueTotal.a.a = uniquePeopleLists.a.a.length;
-							combinedData.uniqueTotal.a.m = uniquePeopleLists.a.m.length;
-							combinedData.uniqueTotal.a.t = uniquePeopleLists.a.t.length;
 							combinedData.uniqueTotal.a.o = Array.from(new Set(uniquePeopleLists.a.b.concat(uniquePeopleLists.a.n))).length;
+							S.forEach(["grandTotal", "individualTotal", "totalLength", "totalTalkTime"], function (total) {
+								S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator) {
+									combinedData[total].a[initiator] = combinedData[total].m[initiator] + combinedData[total].f[initiator];
+								});
+							});
 							combinedData.myConvos.a.m = combinedData.myConvos.m.m + combinedData.myConvos.f.m;
 							combinedData.theirConvos.a.t = combinedData.theirConvos.m.t + combinedData.theirConvos.f.t;
 							combinedData.ourConvos.a.o = combinedData.ourConvos.m.o + combinedData.ourConvos.f.o;
-							combinedData.totalLength.a.a = combinedData.totalLength.m.a + combinedData.totalLength.f.a;
-							combinedData.totalLength.a.m = combinedData.totalLength.m.m + combinedData.totalLength.f.m;
-							combinedData.totalLength.a.t = combinedData.totalLength.m.t + combinedData.totalLength.f.t;
-							combinedData.totalLength.a.o = combinedData.totalLength.m.o + combinedData.totalLength.f.o;
-							combinedData.totalTalkTime.a.a = combinedData.totalTalkTime.m.a + combinedData.totalTalkTime.f.a;
-							combinedData.totalTalkTime.a.m = combinedData.totalTalkTime.m.m + combinedData.totalTalkTime.f.m;
-							combinedData.totalTalkTime.a.t = combinedData.totalTalkTime.m.t + combinedData.totalTalkTime.f.t;
-							combinedData.totalTalkTime.a.o = combinedData.totalTalkTime.m.o + combinedData.totalTalkTime.f.o;
-							combinedData.averageDensity.a.a = (combinedData.averageDensity.m.a + combinedData.averageDensity.f.a) / (combinedData.grandTotal.m.a + combinedData.grandTotal.f.a);
-							combinedData.averageDensity.a.m = (combinedData.averageDensity.m.m + combinedData.averageDensity.f.m) / (combinedData.grandTotal.m.m + combinedData.grandTotal.f.m);
-							combinedData.averageDensity.a.t = (combinedData.averageDensity.m.t + combinedData.averageDensity.f.t) / (combinedData.grandTotal.m.t + combinedData.grandTotal.f.t);
-							combinedData.averageDensity.a.o = (combinedData.averageDensity.m.o + combinedData.averageDensity.f.o) / (combinedData.grandTotal.m.o + combinedData.grandTotal.f.o);
-							combinedData.participation.a.a = (combinedData.participation.m.a + combinedData.participation.f.a) / (combinedData.grandTotal.m.a + combinedData.grandTotal.f.a);
-							combinedData.participation.a.m = (combinedData.participation.m.m + combinedData.participation.f.m) / (combinedData.grandTotal.m.m + combinedData.grandTotal.f.m);
-							combinedData.participation.a.t = (combinedData.participation.m.t + combinedData.participation.f.t) / (combinedData.grandTotal.m.t + combinedData.grandTotal.f.t);
-							combinedData.participation.a.o = (combinedData.participation.m.o + combinedData.participation.f.o) / (combinedData.grandTotal.m.o + combinedData.grandTotal.f.o);
-							combinedData.enjoyability.a.a = (combinedData.enjoyability.m.a + combinedData.enjoyability.f.a) / (combinedData.grandTotal.m.a + combinedData.grandTotal.f.a);
-							combinedData.enjoyability.a.m = (combinedData.enjoyability.m.m + combinedData.enjoyability.f.m) / (combinedData.grandTotal.m.m + combinedData.grandTotal.f.m);
-							combinedData.enjoyability.a.t = (combinedData.enjoyability.m.t + combinedData.enjoyability.f.t) / (combinedData.grandTotal.m.t + combinedData.grandTotal.f.t);
-							combinedData.enjoyability.a.o = (combinedData.enjoyability.m.o + combinedData.enjoyability.f.o) / (combinedData.grandTotal.m.o + combinedData.grandTotal.f.o);
+							S.forEach(["averageDensity", "participation", "enjoyability"], function (average) {
+								S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator) {
+									combinedData[average].a[initiator] = (combinedData[average].m[initiator] + combinedData[average].f[initiator]) / (combinedData.grandTotal.m[initiator] + combinedData.grandTotal.f[initiator]);
+								});
+							});
 							combinedData.exposure.a.a = combinedData.exposure.m.a + combinedData.exposure.f.a;
 							combinedData.exposure.a.m = combinedData.exposure.a.a;
 							combinedData.exposure.a.t = combinedData.exposure.a.a;
+							combinedData.exposure.a.b = combinedData.exposure.a.a;
+							combinedData.exposure.a.n = combinedData.exposure.a.a;
 							combinedData.exposure.a.o = combinedData.exposure.a.a;
 							combinedData.exposure.m.a = combinedData.exposure.m.a;
 							combinedData.exposure.m.m = combinedData.exposure.m.a;
 							combinedData.exposure.m.t = combinedData.exposure.m.a;
+							combinedData.exposure.m.b = combinedData.exposure.m.a;
+							combinedData.exposure.m.n = combinedData.exposure.m.a;
 							combinedData.exposure.m.o = combinedData.exposure.m.a;
 							combinedData.exposure.f.a = combinedData.exposure.f.a;
 							combinedData.exposure.f.m = combinedData.exposure.f.a;
 							combinedData.exposure.f.t = combinedData.exposure.f.a;
+							combinedData.exposure.f.b = combinedData.exposure.f.a;
+							combinedData.exposure.f.n = combinedData.exposure.f.a;
 							combinedData.exposure.f.o = combinedData.exposure.f.a;
+							// sets the totals or averages of scd
+							scd.uniqueTotal.m.m = Array.from(new Set(uniquePeopleLists.m.m.concat(uniquePeopleLists.m.b))).length;
+							scd.uniqueTotal.m.t = Array.from(new Set(uniquePeopleLists.m.t.concat(uniquePeopleLists.m.b))).length;
+							scd.uniqueTotal.m.a = uniquePeopleLists.m.a.length;
+							scd.uniqueTotal.f.m = Array.from(new Set(uniquePeopleLists.f.m.concat(uniquePeopleLists.f.b))).length;
+							scd.uniqueTotal.f.t = Array.from(new Set(uniquePeopleLists.f.t.concat(uniquePeopleLists.f.b))).length;
+							scd.uniqueTotal.f.a = uniquePeopleLists.f.a.length;
+							scd.uniqueTotal.a.m = Array.from(new Set(uniquePeopleLists.a.m.concat(uniquePeopleLists.a.b))).length;
+							scd.uniqueTotal.a.t = Array.from(new Set(uniquePeopleLists.a.t.concat(uniquePeopleLists.a.b))).length;
+							scd.uniqueTotal.a.a = uniquePeopleLists.a.a.length;
+							S.forEach(["grandTotal", "individualTotal", "totalLength", "totalTalkTime"], function (total) {
+								S.forEach(["m", "t", "a"], function (initiator) {
+									scd[total].a[initiator] = scd[total].m[initiator] + scd[total].f[initiator];
+								});
+							});
+							scd.myConvos.a.m = scd.myConvos.m.m + scd.myConvos.f.m;
+							scd.theirConvos.a.t = scd.theirConvos.m.t + scd.theirConvos.f.t;
+							scd.ourConvos.a.m = scd.ourConvos.m.m + scd.ourConvos.f.m;
+							scd.ourConvos.a.t = scd.ourConvos.m.t + scd.ourConvos.f.t;
+							S.forEach(["averageDensity", "participation", "enjoyability"], function (average) {
+								S.forEach(["m", "t", "a"], function (initiator) {
+									scd[average].a[initiator] = (scd[average].m[initiator] + scd[average].f[initiator]) / (scd.grandTotal.m[initiator] + scd.grandTotal.f[initiator]);
+								});
+							});
+							scd.exposure.a.a = scd.exposure.m.a + scd.exposure.f.a;
+							scd.exposure.a.m = scd.exposure.a.a;
+							scd.exposure.a.t = scd.exposure.a.a;
+							scd.exposure.m.a = scd.exposure.m.a;
+							scd.exposure.m.m = scd.exposure.m.a;
+							scd.exposure.m.t = scd.exposure.m.a;
+							scd.exposure.f.a = scd.exposure.f.a;
+							scd.exposure.f.m = scd.exposure.f.a;
+							scd.exposure.f.t = scd.exposure.f.a;
 							// finishes establishing combinedData
-							combinedData.enjoyability.m.a /= combinedData.grandTotal.m.a;
-							combinedData.enjoyability.m.m /= combinedData.grandTotal.m.m;
-							combinedData.enjoyability.m.t /= combinedData.grandTotal.m.t;
-							combinedData.enjoyability.m.o /= combinedData.grandTotal.m.o;
-							combinedData.enjoyability.f.a /= combinedData.grandTotal.f.a;
-							combinedData.enjoyability.f.m /= combinedData.grandTotal.f.m;
-							combinedData.enjoyability.f.t /= combinedData.grandTotal.f.t;
-							combinedData.enjoyability.f.o /= combinedData.grandTotal.f.o;
-							combinedData.averageDensity.m.a /= combinedData.grandTotal.m.a;
-							combinedData.averageDensity.m.m /= combinedData.grandTotal.m.m;
-							combinedData.averageDensity.m.t /= combinedData.grandTotal.m.t;
-							combinedData.averageDensity.m.o /= combinedData.grandTotal.m.o;
-							combinedData.averageDensity.f.a /= combinedData.grandTotal.f.a;
-							combinedData.averageDensity.f.m /= combinedData.grandTotal.f.m;
-							combinedData.averageDensity.f.t /= combinedData.grandTotal.f.t;
-							combinedData.averageDensity.f.o /= combinedData.grandTotal.f.o;
-							combinedData.participation.m.a /= combinedData.grandTotal.m.a;
-							combinedData.participation.m.m /= combinedData.grandTotal.m.m;
-							combinedData.participation.m.t /= combinedData.grandTotal.m.t;
-							combinedData.participation.m.o /= combinedData.grandTotal.m.o;
-							combinedData.participation.f.a /= combinedData.grandTotal.f.a;
-							combinedData.participation.f.m /= combinedData.grandTotal.f.m;
-							combinedData.participation.f.t /= combinedData.grandTotal.f.t;
-							combinedData.participation.f.o /= combinedData.grandTotal.f.o;
+							S.forEach(["averageDensity", "participation", "enjoyability"], function (average) {
+								S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator) {
+									combinedData[average].m[initiator] /= combinedData.grandTotal.m[initiator];
+									combinedData[average].f[initiator] /= combinedData.grandTotal.f[initiator];
+								});
+							});
+							// finishes establishing scd
+							S.forEach(["averageDensity", "participation", "enjoyability"], function (average) {
+								S.forEach(["m", "t", "a"], function (initiator) {
+									scd[average].m[initiator] /= scd.grandTotal.m[initiator];
+									scd[average].f[initiator] /= scd.grandTotal.f[initiator];
+								});
+							});
 							// sets the custom aggregate data to use
 							let firstData = combinedData[S.getId("firstDataCategory").value];
+							let smallFD = scd[S.getId("firstDataCategory").value];
 							let chosenData = {
-								m: { m: firstData.m.m, t: firstData.m.t, o: firstData.m.o, a: firstData.m.a },
-								f: { m: firstData.f.m, t: firstData.f.t, o: firstData.f.o, a: firstData.f.a },
-								a: { m: firstData.a.m, t: firstData.a.t, o: firstData.a.o, a: firstData.a.a }
+								m: { m: firstData.m.m, t: firstData.m.t, b: firstData.m.b, n: firstData.m.n, o: firstData.m.o, a: firstData.m.a },
+								f: { m: firstData.f.m, t: firstData.f.t, b: firstData.f.b, n: firstData.f.n, o: firstData.f.o, a: firstData.f.a },
+								a: { m: firstData.a.m, t: firstData.a.t, b: firstData.a.b, n: firstData.a.n, o: firstData.a.o, a: firstData.a.a }
+							};
+							let smallCD = {
+								m: { m: smallFD.m.m, t: smallFD.m.t, a: smallFD.m.a },
+								f: { m: smallFD.f.m, t: smallFD.f.t, a: smallFD.f.a },
+								a: { m: smallFD.a.m, t: smallFD.a.t, a: smallFD.a.a }
 							};
 							if (S.getId("secondDataCategory").value !== "" && S.getId("dataOperator").value !== "") {  // if adding calculations to the data
 								let secondData = combinedData[S.getId("secondDataCategory").value];
+								let smallSD = combinedData[S.getId("secondDataCategory").value];
 								switch (S.getId("dataOperator").value) {
 									case "+":
-										chosenData.m.m += secondData.m.m;
-										chosenData.m.t += secondData.m.t;
-										chosenData.m.o += secondData.m.o;
-										chosenData.m.a += secondData.m.a;
-										chosenData.f.m += secondData.f.m;
-										chosenData.f.t += secondData.f.t;
-										chosenData.f.o += secondData.f.o;
-										chosenData.f.a += secondData.f.a;
-										chosenData.a.m += secondData.a.m;
-										chosenData.a.t += secondData.a.t;
-										chosenData.a.o += secondData.a.o;
-										chosenData.a.a += secondData.a.a;
+										S.forEach(["m", "f", "a"], function (group) {
+											S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator) {
+												chosenData[group][initiator] += secondData[group][initiator];
+											});
+											S.forEach(["m", "t", "a"], function (initiator) {
+												smallCD[group][initiator] += smallSD[group][initiator];
+											});
+										});
 										break;
 									case "-":
-										chosenData.m.m -= secondData.m.m;
-										chosenData.m.t -= secondData.m.t;
-										chosenData.m.o -= secondData.m.o;
-										chosenData.m.a -= secondData.m.a;
-										chosenData.f.m -= secondData.f.m;
-										chosenData.f.t -= secondData.f.t;
-										chosenData.f.o -= secondData.f.o;
-										chosenData.f.a -= secondData.f.a;
-										chosenData.a.m -= secondData.a.m;
-										chosenData.a.t -= secondData.a.t;
-										chosenData.a.o -= secondData.a.o;
-										chosenData.a.a -= secondData.a.a;
+										S.forEach(["m", "f", "a"], function (group) {
+											S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator) {
+												chosenData[group][initiator] -= secondData[group][initiator];
+											});
+											S.forEach(["m", "t", "a"], function (initiator) {
+												smallCD[group][initiator] -= smallSD[group][initiator];
+											});
+										});
 										break;
 									case "*":
-										chosenData.m.m *= secondData.m.m;
-										chosenData.m.t *= secondData.m.t;
-										chosenData.m.o *= secondData.m.o;
-										chosenData.m.a *= secondData.m.a;
-										chosenData.f.m *= secondData.f.m;
-										chosenData.f.t *= secondData.f.t;
-										chosenData.f.o *= secondData.f.o;
-										chosenData.f.a *= secondData.f.a;
-										chosenData.a.m *= secondData.a.m;
-										chosenData.a.t *= secondData.a.t;
-										chosenData.a.o *= secondData.a.o;
-										chosenData.a.a *= secondData.a.a;
+										S.forEach(["m", "f", "a"], function (group) {
+											S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator) {
+												chosenData[group][initiator] *= secondData[group][initiator];
+											});
+											S.forEach(["m", "t", "a"], function (initiator) {
+												smallCD[group][initiator] *= smallSD[group][initiator];
+											});
+										});
 										break;
 									case "/":
-										chosenData.m.m /= secondData.m.m;
-										chosenData.m.t /= secondData.m.t;
-										chosenData.m.o /= secondData.m.o;
-										chosenData.m.a /= secondData.m.a;
-										chosenData.f.m /= secondData.f.m;
-										chosenData.f.t /= secondData.f.t;
-										chosenData.f.o /= secondData.f.o;
-										chosenData.f.a /= secondData.f.a;
-										chosenData.a.m /= secondData.a.m;
-										chosenData.a.t /= secondData.a.t;
-										chosenData.a.o /= secondData.a.o;
-										chosenData.a.a /= secondData.a.a;
+										S.forEach(["m", "f", "a"], function (group) {
+											S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator) {
+												chosenData[group][initiator] /= secondData[group][initiator];
+											});
+											S.forEach(["m", "t", "a"], function (initiator) {
+												smallCD[group][initiator] /= smallSD[group][initiator];
+											});
+										});
 										break;
 									default:
 										console.error("An unrecognized operator was found.");
@@ -6446,16 +7012,32 @@
 							let aggregateTds = S.getId("customAggregate").getElementsByTagName("td");
 							aggregateTds[0].textContent = Math.round(chosenData.m.m * 100) / 100;
 							aggregateTds[1].textContent = Math.round(chosenData.m.t * 100) / 100;
-							aggregateTds[2].textContent = Math.round(chosenData.m.o * 100) / 100;
-							aggregateTds[3].textContent = Math.round(chosenData.m.a * 100) / 100;
-							aggregateTds[4].textContent = Math.round(chosenData.f.m * 100) / 100;
-							aggregateTds[5].textContent = Math.round(chosenData.f.t * 100) / 100;
-							aggregateTds[6].textContent = Math.round(chosenData.f.o * 100) / 100;
-							aggregateTds[7].textContent = Math.round(chosenData.f.a * 100) / 100;
-							aggregateTds[8].textContent = Math.round(chosenData.a.m * 100) / 100;
-							aggregateTds[9].textContent = Math.round(chosenData.a.t * 100) / 100;
-							aggregateTds[10].textContent = Math.round(chosenData.a.o * 100) / 100;
-							aggregateTds[11].textContent = Math.round(chosenData.a.a * 100) / 100;
+							aggregateTds[2].textContent = Math.round(chosenData.m.b * 100) / 100;
+							aggregateTds[3].textContent = Math.round(chosenData.m.n * 100) / 100;
+							aggregateTds[4].textContent = Math.round(chosenData.m.o * 100) / 100;
+							aggregateTds[5].textContent = Math.round(chosenData.m.a * 100) / 100;
+							aggregateTds[6].textContent = Math.round(chosenData.f.m * 100) / 100;
+							aggregateTds[7].textContent = Math.round(chosenData.f.t * 100) / 100;
+							aggregateTds[8].textContent = Math.round(chosenData.f.b * 100) / 100;
+							aggregateTds[9].textContent = Math.round(chosenData.f.n * 100) / 100;
+							aggregateTds[10].textContent = Math.round(chosenData.f.o * 100) / 100;
+							aggregateTds[11].textContent = Math.round(chosenData.f.a * 100) / 100;
+							aggregateTds[12].textContent = Math.round(chosenData.a.m * 100) / 100;
+							aggregateTds[13].textContent = Math.round(chosenData.a.t * 100) / 100;
+							aggregateTds[14].textContent = Math.round(chosenData.a.b * 100) / 100;
+							aggregateTds[15].textContent = Math.round(chosenData.a.n * 100) / 100;
+							aggregateTds[16].textContent = Math.round(chosenData.a.o * 100) / 100;
+							aggregateTds[17].textContent = Math.round(chosenData.a.a * 100) / 100;
+							let smallATs = S.getId("smallCustomAggregate").getElementsByTagName("td");
+							smallATs[0].textContent = Math.round(smallCD.m.m * 100) / 100;
+							smallATs[1].textContent = Math.round(smallCD.m.t * 100) / 100;
+							smallATs[2].textContent = Math.round(smallCD.m.a * 100) / 100;
+							smallATs[3].textContent = Math.round(smallCD.f.m * 100) / 100;
+							smallATs[4].textContent = Math.round(smallCD.f.t * 100) / 100;
+							smallATs[5].textContent = Math.round(smallCD.f.a * 100) / 100;
+							smallATs[6].textContent = Math.round(smallCD.a.m * 100) / 100;
+							smallATs[7].textContent = Math.round(smallCD.a.t * 100) / 100;
+							smallATs[8].textContent = Math.round(smallCD.a.a * 100) / 100;
 							// adds averages to the tables
 							calculateTableAverages("conversationLengths", { setLength: 2 });
 							calculateTableAverages("uniquePeople", { setLength: 2 });
