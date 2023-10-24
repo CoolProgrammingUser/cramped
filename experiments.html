@@ -6,6 +6,8 @@
 		</title>
 		<link rel="icon" href="images/favicon.ico">
 		<base target="_blank">
+		<script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+		<script src="https://unpkg.com/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
 		<script src="https://epicenterprograms.github.io/standards/behavior/general.js"></script>
 		<!--
 		<script src="file:///C:/Users/rtben/Documents/GitHub/standards/behavior/general.js"></script>
@@ -108,6 +110,202 @@
 					overallCell.style.borderTopWidth = "thick";
 					overallCell.style.borderLeftWidth = "thick";
 				});
+			}
+
+
+			function pointsToLineVal(point1, point2, x) {
+				/*
+				creates a linear function from two points and then finds the value of a given x
+				*/
+				let slope = 0;
+				let yIntercept = point1[1];
+				if (point1[1] != point2[1]) {
+					slope = (point2[1] - point1[1]) / (point2[0] - point1[0]);
+					yIntercept = point1[1] - slope * point1[0];
+				}
+				return slope * x + yIntercept;
+			}
+
+
+			function findSimilarity(array1, array2) {
+				//// console.log(jStat(array1));
+				//// let tscore = Math.abs(jStat.tscore(jStat(array1), jStat(array2)));
+				//// console.log(tscore);
+				//// return jStat.studentt.cdf(-tscore, array2.length - 1) * 2;
+				//// return jStat.ttest([array1, array2]);
+				/*
+				let mean1 = array1.reduce((total, num) => total + num, 0) / array1.length;
+				let mean2 = array2.reduce((total, num) => total + num, 0) / array2.length;
+				if (array1.length > 1 && array2.length > 1) {
+					return ss.tTestTwoSample({ x: array1, y: array2 });
+				}
+				*/
+				/*
+				console.log(new jStat);
+				console.log(jStat.turkey(array1, array2));
+				return jStat.turkey(array1, array2)[0][1];
+				return jStat.wilcoxonranksum(array1, array2);
+				*/
+
+				// makes sure calculations can be done to the arrays
+				if (array1.length <= 1 || array2.length <= 1) {
+					console.error("One of the provided arrays didn't contain enough data.");
+					return NaN;
+				}
+				// determines which array contains the higher or lower values
+				let mean1 = array1.reduce((acc, val) => acc + val, 0) / array1.length;
+				let mean2 = array2.reduce((acc, val) => acc + val, 0) / array2.length;
+				let lowerDist = {};
+				let higherDist = {};
+				if (Math.abs(mean1 - mean2) < .001) {  // if the averages are essentially the same
+					return 1;  // there's no chance of the groups being different
+				} else if (mean1 < mean2) {
+					lowerDist.array = array1;
+					lowerDist.mean = mean1;
+					higherDist.array = array2;
+					higherDist.mean = mean2;
+				} else {
+					lowerDist.array = array2;
+					lowerDist.mean = mean2;
+					higherDist.array = array1;
+					higherDist.mean = mean1;
+				}
+				// determines the sample standard deviations
+				lowerDist.std = Math.sqrt(lowerDist.array.map(x => (x - lowerDist.mean) ** 2).reduce((a, b) => a + b) / (lowerDist.array.length - 1));
+				higherDist.std = Math.sqrt(higherDist.array.map(x => (x - higherDist.mean) ** 2).reduce((a, b) => a + b) / (higherDist.array.length - 1));
+				lowerDist.lowerBound = lowerDist.mean - lowerDist.std;
+				lowerDist.upperBound = lowerDist.mean + lowerDist.std;
+				higherDist.lowerBound = higherDist.mean - higherDist.std;
+				higherDist.upperBound = higherDist.mean + higherDist.std;
+				lowerDist.strictLowerBound = lowerDist.mean - lowerDist.std / 2;
+				lowerDist.strictUpperBound = lowerDist.mean + lowerDist.std / 2;
+				higherDist.strictLowerBound = higherDist.mean - higherDist.std / 2;
+				higherDist.strictUpperBound = higherDist.mean + higherDist.std / 2;
+				// decides whether the values are close enough together to bother continuing
+				if (lowerDist.upperBound <= higherDist.lowerBound) {  // if the standard deviations don't overlap
+					return 0;  // they're surely distinct distributions
+				}
+				// finds theoretical values near the mean
+				// (allows finer-detail similarities in coarse and/or categorized data)
+				// (adds a value for what would theoretically be found between 2 existing values if they transitioned linearly)
+				function setCorrection(distribution, value) {
+					if (distribution.array.indexOf(value) > -1) {  // if the exact value is found in the data
+						return distribution.array.filter(x => x == value).length;
+					} else {  // if no recorded value is equal to the value
+						let lowerArr = distribution.array.slice(0).filter(x => x < value).sort();  // the set of values lower than the value
+						if (lowerArr.length == 0) {
+							return 0;
+						}
+						let lowerVal = lowerArr[lowerArr.length - 1];  // the value directly below the value
+						let lowerCount = lowerArr.filter(x => x == lowerVal).length;  // the number of items with the value below the value
+						let higherArr = distribution.array.slice(0).filter(x => x > value).sort(); // the set of values higher than the value
+						if (higherArr.length == 0) {
+							return 0;
+						}
+						let higherVal = higherArr[0];  // the value directly above the value
+						let higherCount = higherArr.filter(x => x == higherVal).length;  // the number of items with the value above the value
+						return pointsToLineVal([lowerVal, lowerCount], [higherVal, higherCount], value);
+					}
+				}
+				/*
+				function setRefinedCorrection(distribution, firstBound, secondBound) {
+					//// prevent summed corrections from being higher than the higher and lower values combined
+					if (distribution.array.indexOf(value) > -1) {  // if the exact value is found in the data
+						return distribution.array.filter(x => x == value).length;
+					} else {  // if no recorded value is equal to the value
+						let lowerArr = distribution.array.slice(0).filter(x => x < value).sort();  // the set of values lower than the value
+						if (lowerArr.length == 0) {
+							return 0;
+						}
+						let lowerVal = lowerArr[lowerArr.length - 1];  // the value directly below the value
+						let lowerCount = lowerArr.filter(x => x == lowerVal).length;  // the number of items with the value below the value
+						let higherArr = distribution.array.slice(0).filter(x => x > value).sort(); // the set of values higher than the value
+						if (higherArr.length == 0) {
+							return 0;
+						}
+						let higherVal = higherArr[0];  // the value directly above the value
+						let higherCount = higherArr.filter(x => x == higherVal).length;  // the number of items with the value above the value
+						return pointsToLineVal([lowerVal, lowerCount], [higherVal, higherCount], value);
+					}
+				}
+				*/
+				lowerDist.correction = setCorrection(lowerDist, higherDist.lowerBound) + setCorrection(lowerDist, lowerDist.upperBound);
+				lowerDist.strictCorrection = setCorrection(lowerDist, higherDist.strictLowerBound) + setCorrection(lowerDist, lowerDist.strictUpperBound);
+				higherDist.correction = setCorrection(higherDist, higherDist.lowerBound) + setCorrection(higherDist, lowerDist.upperBound);
+				higherDist.strictCorrection = setCorrection(higherDist, higherDist.strictLowerBound) + setCorrection(higherDist, lowerDist.strictUpperBound);
+				// finds the similarities
+				// (determines what proportions of the distributions overlap)
+				lowerDist.overlapArr = lowerDist.array.filter(x => x > higherDist.lowerBound && x < lowerDist.upperBound);
+				lowerDist.similarity = (lowerDist.overlapArr.length + lowerDist.correction) / (lowerDist.array.filter(x => x > lowerDist.lowerBound && x < lowerDist.upperBound).length + lowerDist.correction);
+				higherDist.overlapArr = higherDist.array.filter(x => x > higherDist.lowerBound && x < lowerDist.upperBound);
+				higherDist.similarity = (higherDist.overlapArr.length + higherDist.correction) / (higherDist.array.filter(x => x > higherDist.lowerBound && x < higherDist.upperBound).length + higherDist.correction);
+				lowerDist.strictOverlapArr = lowerDist.array.filter(x => x > higherDist.strictLowerBound && x < lowerDist.strictUpperBound);
+				lowerDist.strictSimilarity = (lowerDist.strictOverlapArr.length + lowerDist.strictCorrection) / (lowerDist.array.filter(x => x > lowerDist.strictLowerBound && x < lowerDist.strictUpperBound).length + lowerDist.strictCorrection);
+				higherDist.strictOverlapArr = higherDist.array.filter(x => x > higherDist.strictLowerBound && x < lowerDist.strictUpperBound);
+				higherDist.strictSimilarity = (higherDist.strictOverlapArr.length + higherDist.strictCorrection) / (higherDist.array.filter(x => x > higherDist.strictLowerBound && x < higherDist.strictUpperBound).length + higherDist.strictCorrection);
+				//// lowerDist.similarity = (lowerDist.array.filter(x => x >= higherDist.mean).length + lowerDist.correction) / (lowerDist.array.filter(x => x >= lowerDist.mean).length + lowerDist.correction);
+				//// higherDist.similarity = (higherDist.array.filter(x => x <= lowerDist.mean).length + higherDist.correction) / (higherDist.array.filter(x => x <= higherDist.mean).length + higherDist.correction);
+				let lowerStrictProportion = Math.min((lowerDist.strictOverlapArr.length + lowerDist.strictCorrection) / (lowerDist.overlapArr.length + lowerDist.correction), .9);
+				let higherStrictProportion = Math.min((higherDist.strictOverlapArr.length + higherDist.strictCorrection) / (higherDist.overlapArr.length + higherDist.correction), .9);
+				let result = (lowerDist.strictSimilarity * lowerStrictProportion + lowerDist.similarity * (1 - lowerStrictProportion)) * (higherDist.strictSimilarity * higherStrictProportion + higherDist.similarity * (1 - higherStrictProportion));
+				// semi-arbitrarily modifies the result to better mirror p-values
+				//// result = Math.log(result);
+				//// result = (result + .25) ** 1 - .25;  // pushes values smaller than .75 closer to 0 and larger than .75 closer to 1
+				result = Math.min(1, Math.max(0, result));  // makes sure the result isn't below 0 or above 1
+				return result;
+
+				/*
+				// Calculate means and variances
+				const mean1 = array1.reduce((acc, val) => acc + val, 0) / array1.length;
+				const mean2 = array2.reduce((acc, val) => acc + val, 0) / array2.length;
+
+				const variance1 = array1.reduce((acc, val) => acc + Math.pow(val - mean1, 2), 0) / (array1.length - 1);
+				const variance2 = array2.reduce((acc, val) => acc + Math.pow(val - mean2, 2), 0) / (array2.length - 1);
+
+				// Calculate the t-statistic
+				const n1 = array1.length;
+				const n2 = array2.length;
+				const pooledVariance = ((n1 - 1) * variance1 + (n2 - 1) * variance2) / (n1 + n2 - 2);
+				const t = (mean1 - mean2) / Math.sqrt(pooledVariance * (1 / n1 + 1 / n2));
+
+				// Calculate the degrees of freedom
+				const df = n1 + n2 - 2;
+
+				// Calculate the p-value using the t-distribution
+				const pValue = 2 * (1 - tCDF(Math.abs(t), df));
+
+				return pValue;
+				*/
+			}
+
+			// Error function (erf) approximation for cumulative distribution function (CDF)
+			function erf(x) {
+				const a1 = 0.254829592;
+				const a2 = -0.284496736;
+				const a3 = 1.421413741;
+				const a4 = -1.453152027;
+				const a5 = 1.061405429;
+				const p = 0.3275911;
+
+				const sign = (x < 0) ? -1 : 1;
+				x = Math.abs(x);
+
+				const t = 1.0 / (1.0 + p * x);
+				const y = ((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t;
+
+				return sign * (1 - y * Math.exp(-x * x));
+			}
+
+			// CDF for the t-distribution
+			function tCDF(t, df) {
+				const x = t / Math.sqrt(2);
+				const df2 = df / 2;
+
+				if (t < 0) {
+					return 0.5 * (1 + erf(x));
+				} else {
+					return 1 - 0.5 * (1 + erf(x));
+				}
 			}
 		</script>
 		<script>
@@ -523,9 +721,17 @@
 						<div class="summary">
 							Types of processing done
 						</div>
-						<section>
-
-						</section>
+						<table class="labeled-list">
+							<tr>
+								<th>Chance of overlap</th>
+								<td>
+									The average and standard deviation of both the male and female data is calculated, and then it's determined how much overlap there is within one standard deviation of the average and how much overlap there is within half a standard deviation of the average. Corrections are made for the boundaries by assigning a theoretical value for how much data should be there based on a linear approximation from the neighboring values; this prevents small changes in average or standard deviation from having no effect on the chance of overlap, especially when the data occupies a narrow range of specific values. <span class="elaborate">Example</span>
+									<aside data-heading="Example">
+										
+									</aside>
+								</td>
+							</tr>
+						</table>
 					</div>
 					<div class="details">
 						<div class="summary">
@@ -534,6 +740,12 @@
 						<ul>
 							<li>
 								Collecting the data was so grueling that I became less inspired to get involved in a conversation; however, I tried to fight this because I generally like talking to people, and I wanted accurate data. Also, once I was already involved in a conversation, I'd have to collect the same data no matter what, so there was no further influence after that.
+							</li>
+							<li>
+								I have a tendency to rate things on an exponential (or similar) scale, so I'm much less likely to chose an extreme value on a scale; however, considering how I collected all of the data consistently, trends should still be apparent if given enough data.
+							</li>
+							<li>
+								When it comes to the length of the conversations, the values were determined only by my impression of the length of the conversation, not by any objective measurement of time. I had general expectations for what I wanted each value to represent, and I calibrated the interpretation accordingly, but I could be off by a full value (on the 1-7 scale), and particularly when it comes to the higher values, that could amount to a very substantial amount of time (due to my exponential categorization). The length data isn't meaningless, but it's definitely the least accurate (and therefore the total talk time isn't very accurate either).
 							</li>
 							<li>
 								I started designing the program to interpret the data before the study was concluded because I was impatient, and I knew it would take a really long time to design a respectable interpreter. Perhaps halfway though the study or so, I had preliminary data suggesting that I demonstrated a preference for females, but I knew the data was far from conclusive, and I didn't want to (intentionally) change my behavior because I wanted to have accurate data.
@@ -554,7 +766,7 @@
 								I'm generally quiet, although I like talking to people, and I frequently make an active effort to get to know people.
 							</li>
 							<li>
-								When forming my conclusions, I tend to focus on trends than span multiple categories because it's easier for me to make sense of that than when all of the categories vary. For example, I'm more inclined to make note of when all conversations with females show a trend or when all mutually started conversations show a trend as opposed to when data varies by gender and initiator simultaneously.
+								When forming my conclusions, I tend to focus on trends that span multiple categories because it's easier for me to make sense of that than when all of the categories vary. For example, I'm more inclined to make note of when all conversations with females show a trend or when all mutually started conversations show a trend as opposed to when data varies by gender and initiator simultaneously.
 							</li>
 						</ul>
 					</div>
@@ -1161,7 +1373,7 @@
 						Customizable tables
 					</div>
 					<section>
-						This table allows you to choose from and display basically any of the data I collected. Selecting from only the first box allows you to display whatever you chose whereas also selecting from the other two boxes allows you to do basic math between different types of data. You should should be careful to not assume that these values are the same as other similar tables above (in the tables I don't care about); oftentimes it's actually the more fundamental data. For example, the total length of conversations is exclusively the time of the conversation from start to finish in contrast to the total talk time which factors in speech density and participation for each conversation
+						This table allows you to choose from and display basically any of the data I collected. Selecting from only the first box allows you to display whatever you chose whereas also selecting from the other two boxes allows you to do basic math between different types of data. The chance of overlap in the aggregate tables describes the chance of the distributions of male and female data overlapping. I originally tried to implement p-values which are a scientific measure of the likelihood of two distributions being the same, but it's apparently much more difficult to do that than it should be, so I designed my own measure of similarity and allowed the displaying of the reference data in case you want to copy and paste it into an online p-value calculator. Despite my best efforts, low chances of overlap (&lt;80%) are only really good for identifying places where it's worth calculating a p-value due to the very loose association between the measures; however, chances of overlap below 50% have a pretty good chance of being significant (not being considered to be due to random chance). Chance of overlap isn't available for all options. Upon finding some of the p-values on my own with an online calculator, it seems that few things are technically significant, largely because of the sample size (which can be verified by duplicating the data), but I'm generally persuaded to believe the trends/differences that come close. I acknowledge that more data would be required to be certain of the results, but this is the best I could do; this isn't getting published in a scientific journal; and most people base their personal beliefs about themselves on far, far less evidence. Also, changing the filtering to include more conversations and/or leaving out the data using a 5-point scale (setting the start date to 9/22) increases the chances of producing a significant result.
 					</section>
 					<select id="firstDataCategory">
 						<option value="grandTotal" selected>Total number of conversations</option>
@@ -1235,30 +1447,39 @@
 						</tr>
 						<tr>
 							<th>Males</th>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
 						</tr>
 						<tr>
 							<th>Females</th>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
 						</tr>
 						<tr>
 							<th>Total or<br>average</th>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+						</tr>
+						<tr>
+							<th>Chance of<br>overlap</th>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
 						</tr>
 					</table>
 					<br>
@@ -1271,21 +1492,27 @@
 						</tr>
 						<tr>
 							<th>Males</th>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
 						</tr>
 						<tr>
 							<th>Females</th>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
 						</tr>
 						<tr>
 							<th>Total or<br>average</th>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+						</tr>
+						<tr>
+							<th>Chance of<br>overlap</th>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
+							<td class="trigger"></td>
 						</tr>
 					</table>
 				</div>
@@ -1357,7 +1584,7 @@
 						</tr>
 						<tr>
 							<td>
-								Group conversations compose approximately 50% of all conversations (per person) for both males and females.
+								For both males and females, there's approximately a 50% chance that a given interaction with someone was in a group setting.
 							</td>
 							<td>
 								Number of conversations with individuals filtered out compared to the standard filtering.
@@ -1430,6 +1657,50 @@
 						</tr>
 						<tr>
 							<td>
+								Other people talk more in conversations they start.
+							</td>
+							<td>
+								Consistent higher participation values for conversations initiated by "them"
+							</td>
+							<td>
+
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Males and females have very similar levels of participation in conversations with me.
+							</td>
+							<td>
+								Similar participation values between males and females in almost all categories and filters
+							</td>
+							<td>
+								Group conversations in standard filtering diverge somewhat in this regard, but that could likely be error from the very few number of conversations considered. Also, these results wouldn't necessarily be the same for other male subjects.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Conversations with females contain more words for a given unit of time.
+							</td>
+							<td>
+								Largely consistent higher density values for females
+							</td>
+							<td>
+								This is consistent with third-party studies which assert that females use a higher density of words while speaking.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								I generally keep pace with the amount the other person or people talk.
+							</td>
+							<td>
+								Differing density values between males and females yet similar participation values between genders
+							</td>
+							<td>
+								If I used as many words per minute with females as I did with males, the participation values would have to increase if the density increased since the female would have to be talking more to raise the density. Likewise, if I was hardcore flirting with every girl I met and raising the conversation density as a result, there would have to be a decrease in the participation values because they would be talking for a smaller percentage of the time. Since the participation values stay the same even though the density increases, I must be increasing my rate of speech by the same amount as females speak more than males.
+							</td>
+						</tr>
+						<tr>
+							<td>
 								Conversations might generally involve similar amounts of talking between males and females, but there might be more talking in mutual conversations containing females than males, and it might be due to higher conversation density (and maybe not participation differences).
 							</td>
 							<td>
@@ -1437,17 +1708,6 @@
 							</td>
 							<td>
 								These results aren't as strong as other results because the trends aren't necessarily as uniform, and particularly when isolating groups or individuals, there aren't enough conversations under consideration to eliminate sampling error. When considered as a whole, there's enough data and trends start to emerge, but it's debatable how valid the trends are if they can't be reliably replicated in the division that has the biggest impact on trends (groups versus individuals). That division may exhibit (potentially conflicting) trends in this area, but it's hard to make sense of it.
-							</td>
-						</tr>
-						<tr>
-							<td>
-								There's limited evidence to support the idea that females are more talkative than males.
-							</td>
-							<td>
-								Conversation length, density, and participation across groups, individuals, and combined
-							</td>
-							<td>
-								Some evidence appears for conversations with females exhibiting a higher density, but when isolating groups or individuals, the number of conversations recorded becomes too low to be trusted (and the trend may not be present). There's also no significant difference when considering all recorded conversations in the study (more than the standard filtering). This contrasts with third-party studies demonstrating females speaking more words per minute than males.
 							</td>
 						</tr>
 						<tr>
@@ -1614,7 +1874,10 @@
 						Narrative
 					</h3>
 					<section>
-						I'm proud of this study.
+						Gathering and interpreting all of this data may have been an arduous process, but I got some respectable data out of it, and I'm proud of my ability to conduct this study.
+					</section>
+					<section>
+						When using the standard filtering of the data and taking many other things under consideration, I can't dismiss the idea that I demonstrate any kind of bias, but the data suggests that any such bias is kept relatively reined in. [Unfinished]
 					</section>
 				</div>
 				<script>
@@ -5575,6 +5838,73 @@
 								a: { m: 0, t: 0, b: 0, n: 0, o: 0, a: 0 }
 							}
 						};
+						let fineSignificance = {  // (male/female/all): { me, them, both, neither, other, all }
+							grandTotal: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							uniqueTotal: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							groupTotal: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							individualTotal: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							myConvos: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							theirConvos: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							ourConvos: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							totalLength: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							totalTalkTime: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							averageDensity: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							participation: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							enjoyability: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							},
+							exposure: {
+								m: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								f: { m: [], t: [], b: [], n: [], o: [], a: [] },
+								a: { m: [], t: [], b: [], n: [], o: [], a: [] }
+							}
+						};
 						let scd = {  // small combined data (male/female/all): { me, them, all }
 							grandTotal: {
 								m: { m: 0, t: 0, a: 0 },
@@ -5640,6 +5970,73 @@
 								m: { m: 0, t: 0, a: 0 },
 								f: { m: 0, t: 0, a: 0 },
 								a: { m: 0, t: 0, a: 0 }
+							}
+						};
+						let coarseSignificance = {  // (male/female/all): { me, them, all }
+							grandTotal: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							uniqueTotal: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							groupTotal: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							individualTotal: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							myConvos: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							theirConvos: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							ourConvos: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							totalLength: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							totalTalkTime: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							averageDensity: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							participation: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							enjoyability: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
+							},
+							exposure: {
+								m: { m: [], t: [], a: [] },
+								f: { m: [], t: [], a: [] },
+								a: { m: [], t: [], a: [] }
 							}
 						};
 						if (setTopFilter === false) {
@@ -6476,18 +6873,28 @@
 												addInformation(4, person.gender, person.enjoyability);
 												combinedData.enjoyability[person.gender].a += person.enjoyability;
 												combinedData.enjoyability[person.gender][person.initiator] += person.enjoyability;
+												fineSignificance.enjoyability[person.gender].a.push(person.enjoyability);
+												fineSignificance.enjoyability[person.gender][person.initiator].push(person.enjoyability);
 												if (person.initiator == "m") {
 													scd.enjoyability[person.gender].m += person.enjoyability;
 													scd.enjoyability[person.gender].a += person.enjoyability;
+													coarseSignificance.enjoyability[person.gender].m.push(person.enjoyability);
+													coarseSignificance.enjoyability[person.gender].a.push(person.enjoyability);
 												} else if (person.initiator == "t") {
 													scd.enjoyability[person.gender].t += person.enjoyability;
 													scd.enjoyability[person.gender].a += person.enjoyability;
+													coarseSignificance.enjoyability[person.gender].t.push(person.enjoyability);
+													coarseSignificance.enjoyability[person.gender].a.push(person.enjoyability);
 												} else {
 													combinedData.enjoyability[person.gender].o += person.enjoyability;
+													fineSignificance.enjoyability[person.gender].o.push(person.enjoyability);
 													if (person.initiator == "b") {
 														scd.enjoyability[person.gender].m += person.enjoyability;
 														scd.enjoyability[person.gender].t += person.enjoyability;
 														scd.enjoyability[person.gender].a += person.enjoyability;
+														coarseSignificance.enjoyability[person.gender].m.push(person.enjoyability);
+														coarseSignificance.enjoyability[person.gender].t.push(person.enjoyability);
+														coarseSignificance.enjoyability[person.gender].a.push(person.enjoyability);
 													}
 												}
 												if (dayData.enjoyability[person.gender] === "") {
@@ -6499,18 +6906,28 @@
 												// sets part of the information for the average density
 												combinedData.averageDensity[person.gender].a += person.density;
 												combinedData.averageDensity[person.gender][person.initiator] += person.density;
+												fineSignificance.averageDensity[person.gender].a.push(person.density);
+												fineSignificance.averageDensity[person.gender][person.initiator].push(person.density);
 												if (person.initiator == "m") {
 													scd.averageDensity[person.gender].m += person.density;
 													scd.averageDensity[person.gender].a += person.density;
+													coarseSignificance.averageDensity[person.gender].m.push(person.density);
+													coarseSignificance.averageDensity[person.gender].a.push(person.density);
 												} else if (person.initiator == "t") {
 													scd.averageDensity[person.gender].t += person.density;
 													scd.averageDensity[person.gender].a += person.density;
+													coarseSignificance.averageDensity[person.gender].t.push(person.density);
+													coarseSignificance.averageDensity[person.gender].a.push(person.density);
 												} else {
 													combinedData.averageDensity[person.gender].o += person.density;
+													fineSignificance.averageDensity[person.gender].o.push(person.density);
 													if (person.initiator == "b") {
 														scd.averageDensity[person.gender].m += person.density;
 														scd.averageDensity[person.gender].t += person.density;
 														scd.averageDensity[person.gender].a += person.density;
+														coarseSignificance.averageDensity[person.gender].m.push(person.density);
+														coarseSignificance.averageDensity[person.gender].t.push(person.density);
+														coarseSignificance.averageDensity[person.gender].a.push(person.density);
 													}
 												}
 												if (dayData.averageDensity[person.gender] === "") {
@@ -6522,18 +6939,28 @@
 												// sets part of the information for the average participation
 												combinedData.participation[person.gender].a += person.participation;
 												combinedData.participation[person.gender][person.initiator] += person.participation;
+												fineSignificance.participation[person.gender].a.push(person.participation);
+												fineSignificance.participation[person.gender][person.initiator].push(person.participation);
 												if (person.initiator == "m") {
 													scd.participation[person.gender].m += person.participation;
 													scd.participation[person.gender].a += person.participation;
+													coarseSignificance.participation[person.gender].m.push(person.participation);
+													coarseSignificance.participation[person.gender].a.push(person.participation);
 												} else if (person.initiator == "t") {
 													scd.participation[person.gender].t += person.participation;
 													scd.participation[person.gender].a += person.participation;
+													coarseSignificance.participation[person.gender].t.push(person.participation);
+													coarseSignificance.participation[person.gender].a.push(person.participation);
 												} else {
 													combinedData.participation[person.gender].o += person.participation;
+													fineSignificance.participation[person.gender].o.push(person.participation);
 													if (person.initiator == "b") {
 														scd.participation[person.gender].m += person.participation;
 														scd.participation[person.gender].t += person.participation;
 														scd.participation[person.gender].a += person.participation;
+														coarseSignificance.participation[person.gender].m.push(person.participation);
+														coarseSignificance.participation[person.gender].t.push(person.participation);
+														coarseSignificance.participation[person.gender].a.push(person.participation);
 													}
 												}
 												if (dayData.participation[person.gender] === "") {
@@ -6949,17 +7376,21 @@
 							});
 							// sets the custom aggregate data to use
 							let firstData = combinedData[S.getId("firstDataCategory").value];
+							let firstFineSig = fineSignificance[S.getId("firstDataCategory").value];
 							let smallFD = scd[S.getId("firstDataCategory").value];
+							let firstCoarseSig = coarseSignificance[S.getId("firstDataCategory").value];
 							let chosenData = {
 								m: { m: firstData.m.m, t: firstData.m.t, b: firstData.m.b, n: firstData.m.n, o: firstData.m.o, a: firstData.m.a },
 								f: { m: firstData.f.m, t: firstData.f.t, b: firstData.f.b, n: firstData.f.n, o: firstData.f.o, a: firstData.f.a },
 								a: { m: firstData.a.m, t: firstData.a.t, b: firstData.a.b, n: firstData.a.n, o: firstData.a.o, a: firstData.a.a }
 							};
+							let chosenFineSig = JSON.parse(JSON.stringify(firstFineSig));
 							let smallCD = {
 								m: { m: smallFD.m.m, t: smallFD.m.t, a: smallFD.m.a },
 								f: { m: smallFD.f.m, t: smallFD.f.t, a: smallFD.f.a },
 								a: { m: smallFD.a.m, t: smallFD.a.t, a: smallFD.a.a }
 							};
+							let chosenCoarseSig = JSON.parse(JSON.stringify(firstCoarseSig));
 							if (S.getId("secondDataCategory").value !== "" && S.getId("dataOperator").value !== "") {  // if adding calculations to the data
 								let secondData = combinedData[S.getId("secondDataCategory").value];
 								let smallSD = combinedData[S.getId("secondDataCategory").value];
@@ -7010,6 +7441,61 @@
 							}
 							// displays the custom aggregate data
 							let aggregateTds = S.getId("customAggregate").getElementsByTagName("td");
+							function showSimilarity(maleArray, femaleArray, sigTd, maleTd, femaleTd, smallAggregate) {
+								let aggTable = smallAggregate ? smallATs : aggregateTds;
+								// show the similarity
+								if (maleArray.length > 0 && femaleArray.length > 0) {
+									let similarity = "?";
+									if (maleArray.length > 1 && femaleArray.length > 1) {
+										similarity = Math.round(findSimilarity(maleArray, femaleArray) * 10000) / 100 + "%";
+									}
+									aggTable[sigTd].textContent = similarity;
+								} else {
+									aggTable[sigTd].textContent = "";
+								}
+								// make boxes show data when clicked on
+								let maleClicked = false;
+								let femaleClicked = false;
+								let maleData;
+								let femaleData;
+								if (aggTable[maleTd].children.length > 1) {
+									aggTable[maleTd].removeChild(aggTable[maleTd].children[1]);
+								}
+								aggTable[maleTd].addEventListener("click", function () {
+									if (maleClicked) {
+										this.innerHTML = this.childNodes[0].nodeValue;
+										/// this.removeChild(this.children[0]) causes an error for some reason (although still functions)
+										maleClicked = false;
+									} else {
+										this.innerHTML = this.childNodes[0].nodeValue;
+										/// The table data accumulates "click" listeners,
+										/// so the value needs to keep getting reset so only the most recent listener displays.
+										maleData = document.createElement("div");
+										maleData.style.textAlign = "left";
+										maleData.style.opacity = 1;
+										maleData.textContent = maleArray.join(", ");
+										this.appendChild(maleData);
+										maleClicked = true;
+									}
+								});
+								aggTable[femaleTd].addEventListener("click", function () {
+									if (femaleClicked) {
+										this.innerHTML = this.childNodes[0].nodeValue;
+										/// this.removeChild(this.children[0]) causes an error for some reason (although still functions)
+										femaleClicked = false;
+									} else {
+										this.innerHTML = this.childNodes[0].nodeValue;
+										/// The table data accumulates "click" listeners,
+										/// so the value needs to keep getting reset so only the most recent listener displays.
+										femaleData = document.createElement("div");
+										femaleData.style.textAlign = "left";
+										femaleData.style.opacity = 1;
+										femaleData.textContent = femaleArray.join(", ");
+										this.appendChild(femaleData);
+										femaleClicked = true;
+									}
+								});
+							}
 							aggregateTds[0].textContent = Math.round(chosenData.m.m * 100) / 100;
 							aggregateTds[1].textContent = Math.round(chosenData.m.t * 100) / 100;
 							aggregateTds[2].textContent = Math.round(chosenData.m.b * 100) / 100;
@@ -7028,6 +7514,21 @@
 							aggregateTds[15].textContent = Math.round(chosenData.a.n * 100) / 100;
 							aggregateTds[16].textContent = Math.round(chosenData.a.o * 100) / 100;
 							aggregateTds[17].textContent = Math.round(chosenData.a.a * 100) / 100;
+							if (chosenFineSig.m.m.length > 0) {  // if a fine significance list exists
+								showSimilarity(chosenFineSig.m.m, chosenFineSig.f.m, 18, 0, 6);
+								showSimilarity(chosenFineSig.m.t, chosenFineSig.f.t, 19, 1, 7);
+								showSimilarity(chosenFineSig.m.b, chosenFineSig.f.b, 20, 2, 8);
+								showSimilarity(chosenFineSig.m.n, chosenFineSig.f.n, 21, 3, 9);
+								showSimilarity(chosenFineSig.m.o, chosenFineSig.f.o, 22, 4, 10);
+								showSimilarity(chosenFineSig.m.a, chosenFineSig.f.a, 23, 5, 11);
+							} else {
+								showSimilarity([], [], 18, 0, 6);
+								showSimilarity([], [], 19, 1, 7);
+								showSimilarity([], [], 20, 2, 8);
+								showSimilarity([], [], 21, 3, 9);
+								showSimilarity([], [], 22, 4, 10);
+								showSimilarity([], [], 23, 5, 11);
+							}
 							let smallATs = S.getId("smallCustomAggregate").getElementsByTagName("td");
 							smallATs[0].textContent = Math.round(smallCD.m.m * 100) / 100;
 							smallATs[1].textContent = Math.round(smallCD.m.t * 100) / 100;
@@ -7038,6 +7539,15 @@
 							smallATs[6].textContent = Math.round(smallCD.a.m * 100) / 100;
 							smallATs[7].textContent = Math.round(smallCD.a.t * 100) / 100;
 							smallATs[8].textContent = Math.round(smallCD.a.a * 100) / 100;
+							if (chosenCoarseSig.m.m.length > 0) {  // if a coarse significance list exists
+								showSimilarity(chosenCoarseSig.m.m, chosenCoarseSig.f.m, 9, 0, 3, true);
+								showSimilarity(chosenCoarseSig.m.t, chosenCoarseSig.f.t, 10, 1, 4, true);
+								showSimilarity(chosenCoarseSig.m.a, chosenCoarseSig.f.a, 11, 2, 5, true);
+							} else {
+								showSimilarity([], [], 9, 0, 3, true);
+								showSimilarity([], [], 10, 1, 4, true);
+								showSimilarity([], [], 11, 2, 5, true);
+							}
 							// adds averages to the tables
 							calculateTableAverages("conversationLengths", { setLength: 2 });
 							calculateTableAverages("uniquePeople", { setLength: 2 });
