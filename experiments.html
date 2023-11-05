@@ -113,6 +113,33 @@
 			}
 
 
+			function makeBellCurveFn(m, sd) {
+				if (Standards.general.getType(m) == "Array") {
+					if (m.length <= 1) {
+						throw new Error("The provided array must have at least two items.");
+					}
+					if (Standards.general.getType(m[0]) != "Number") {
+						throw new TypeError("The provided array doesn't contain numbers.");
+					}
+					let mean = m.reduce((acc, val) => acc + val, 0) / m.length;
+					let standardDeviation = Math.sqrt(m.map(x => (x - mean) ** 2).reduce((a, b) => a + b) / (m.length - 1));
+					return function (x) {
+						return 1 / (standardDeviation * (2 * Math.PI) ** .5) * Math.E ** (-.5 * ((x - mean) / standardDeviation) ** 2)
+					};
+				} else if (Standards.general.getType(m) == "Number") {
+					if (Standardards.general.getType(sd) == "Number") {
+						return function (x) {
+							return 1 / (sd * (2 * Math.PI) ** .5) * Math.E ** (-.5 * ((x - m) / sd) ** 2)
+						};
+					} else {
+						throw new TypeError("A proper standard deviation wasn't provided.");
+					}
+				} else {
+					throw new TypeError("The first argument wasn't an array or a number.");
+				}
+			}
+
+
 			function pointsToLineVal(point1, point2, x) {
 				/*
 				creates a linear function from two points and then finds the value of a given x
@@ -326,7 +353,7 @@
 				});
 				updateConversations();
 			});
-			S.listen("checkStandard", "click", function () {
+			S.listen("checkOldStandard", "click", function () {
 				["groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
@@ -338,6 +365,34 @@
 				document.getElementById("conversationDateRange").value = "8/22";
 				document.getElementById("topMales").value = 1;
 				document.getElementById("topFemales").value = 1;
+				updateConversations();
+			});
+			S.listen("checkStandard", "click", function () {
+				["smallConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+					document.getElementById(ID).checked = true;
+				});
+				["adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations", "affiliatedConversations"].forEach(function (ID) {
+					document.getElementById(ID).checked = false;
+				});
+				document.getElementById("anyFail").checked = true;
+				document.getElementById("allFail").checked = false;
+				document.getElementById("conversationDateRange").value = "9/22";
+				document.getElementById("topMales").value = 1;
+				document.getElementById("topFemales").value = 1;
+				updateConversations();
+			});
+			S.listen("groupFiltering", "click", function () {
+				["smallConversations", "groupConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+					document.getElementById(ID).checked = true;
+				});
+				["adultConversations", "kidConversations", "formalConversations", "familiarConversations", "individualConversations", "floorConversations"].forEach(function (ID) {
+					document.getElementById(ID).checked = false;
+				});
+				document.getElementById("anyFail").checked = true;
+				document.getElementById("allFail").checked = false;
+				document.getElementById("conversationDateRange").value = "9/22";
+				document.getElementById("topMales").value = 0;
+				document.getElementById("topFemales").value = 0;
 				updateConversations();
 			});
 			S.listen("checkNone", "click", function () {
@@ -417,11 +472,8 @@
 				display: inline-table;
 				text-align: left;
 			}
-			#topMales {
-				width: 1em;
-			}
-			#topFemales {
-				width: 1em;
+			#topMales, #topFemales {
+				width: 1.5em;
 			}
 
 			@media (prefers-color-scheme: dark) {
@@ -830,7 +882,9 @@
 						<br>
 						<div>
 							<button id="checkAll">Check all boxes</button>
+							<button id="checkOldStandard">Use old standard</button>
 							<button id="checkStandard">Use standard filtering</button>
+							<button id="groupFiltering">Use group filtering</button>
 							<button id="checkNone">Uncheck all boxes</button>
 						</div>
 						<br>
