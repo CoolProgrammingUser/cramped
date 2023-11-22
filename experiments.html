@@ -334,6 +334,20 @@
 					return 1 - 0.5 * (1 + erf(x));
 				}
 			}
+
+			function findChiSquare() {
+				let index = 0;
+				let expected = 0;
+				for (index; index < arguments.length; index++) {
+					expected += arguments[index];
+				}
+				expected /= arguments.length;
+				let result = 0;
+				for (index = 0; index < arguments.length; index++) {
+					result += (arguments[index] - expected) ** 2 / expected;
+				}
+				return result;
+			}
 		</script>
 		<script>
 			// colors and filters the conversation tables
@@ -348,13 +362,13 @@
 				updateConversations();
 			});
 			S.listen("checkAll", "click", function () {
-				["adultConversations", "kidConversations", "formalConversations", "smallConversations", "otherConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["adultConversations", "kidConversations", "formalConversations", "smallConversations", "mediumConversations", "longConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "myConversations", "theirConversations", "otherConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
 				updateConversations();
 			});
 			S.listen("checkOldStandard", "click", function () {
-				["groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["mediumConversations", "longConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
 				["smallConversations", "adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations", "affiliatedConversations"].forEach(function (ID) {
@@ -368,7 +382,7 @@
 				updateConversations();
 			});
 			S.listen("checkStandard", "click", function () {
-				["smallConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["smallConversations", "mediumConversations", "longConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
 				["adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations", "affiliatedConversations"].forEach(function (ID) {
@@ -382,7 +396,7 @@
 				updateConversations();
 			});
 			S.listen("groupFiltering", "click", function () {
-				["smallConversations", "groupConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["smallConversations", "mediumConversations", "longConversations", "groupConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
 				["adultConversations", "kidConversations", "formalConversations", "familiarConversations", "individualConversations", "floorConversations"].forEach(function (ID) {
@@ -396,7 +410,7 @@
 				updateConversations();
 			});
 			S.listen("checkNone", "click", function () {
-				["adultConversations", "kidConversations", "formalConversations", "smallConversations", "otherConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["adultConversations", "kidConversations", "formalConversations", "smallConversations", "mediumConversations", "longConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = false;
 				});
 				updateConversations();
@@ -893,7 +907,8 @@
 							<input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
 							<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
 							<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label><br>
-							<input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label>
+							<input type="checkbox" id="mediumConversations" checked><label for="mediumConversations">medium conversations</label><br>
+							<input type="checkbox" id="longConversations" checked><label for="longConversations">long conversations</label>
 						</div>
 						<div>
 							<input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
@@ -905,6 +920,7 @@
 						<div>
 							<input type="checkbox" id="classConversations" checked><label for="classConversations">conversations with people from class</label><br>
 							<input type="checkbox" id="anonymousConversations" checked><label for="anonymousConversations">conversations with random people</label><br>
+							<input type="checkbox" id="otherConversations" checked><label for="otherConversations">any left-over conversations</label><br>
 							<input type="checkbox" id="myConversations" checked><label for="myConversations">conversations I started</label><br>
 							<input type="checkbox" id="theirConversations" checked><label for="theirConversations">conversations someone else started</label>
 						</div>
@@ -1427,7 +1443,7 @@
 						Customizable tables
 					</div>
 					<section>
-						This table allows you to choose from and display basically any of the data I collected. Selecting from only the first box allows you to display whatever you chose whereas also selecting from the other two boxes allows you to do basic math between different types of data. The chance of overlap in the aggregate tables describes the chance of the distributions of male and female data overlapping. I originally tried to implement p-values which are a scientific measure of the likelihood of two distributions being the same, but it's apparently much more difficult to do that than it should be, so I designed my own measure of similarity and allowed the displaying of the reference data in case you want to copy and paste it into an online p-value calculator. Despite my best efforts, low chances of overlap (&lt;80%) are only really good for identifying places where it's worth calculating a p-value due to the very loose association between the measures; however, chances of overlap below 50% have a pretty good chance of being significant (not being considered to be due to random chance). Chance of overlap isn't available for all options. Upon finding some of the p-values on my own with an online calculator, it seems that few things are technically significant, largely because of the sample size (which can be verified by duplicating the data), but I'm generally persuaded to believe the trends/differences that come close. I acknowledge that more data would be required to be certain of the results, but this is the best I could do; this isn't getting published in a scientific journal; and most people base their personal beliefs about themselves on far, far less evidence. Also, changing the filtering to include more conversations and/or leaving out the data using a 5-point scale (setting the start date to 9/22) increases the chances of producing a significant result.
+						This table allows you to choose from and display basically any of the data I collected. Selecting from only the first box allows you to display whatever you chose whereas also selecting from the other two boxes allows you to do basic math between different types of data. The bottom row attempts to determine whether the differences in values are significant, but it's apparently unnecessarily difficult to convert into a likelihood of the differences being due to random chance (a p-value for all of those statisticians out there), so I've cut some corners to try to still allow me to determine whether the differences are scientifically significant: If a percentage is displayed, the value is almost useless, but if it's relatively low (<strong>&lt;80%</strong>), it could be worth clicking on the values above it and copying and pasting the lists into an online p-value calculator. If an ordinary number is displayed, that's a &chi;<sup>2</sup> value (chi square) which you could also paste into a (different) online calculator, but since it's a little more straightforward, you could just look for a number greater than or equal to <strong>3.841</strong> to determine whether the difference is meaningful (using the standard significance threshold of 0.05 and 1 degree of freedom). Please note that a &chi;<sup>2</sup> value may be displayed even when that wouldn't be a valid test for significance e.g. the values for the total lengths of conversations should be ignored because &chi;<sup>2</sup> only works when you're counting up how many of something there is (whereas the total lengths is adding together values of varying sizes). You should also mostly ignore any values displayed in the last row when math is applied to the data (by selecting 2 categories) because the statistical tests wouldn't necessarily continue being valid after that. The current standard filtering generally provides the highest chance of finding significant (and meaningful) results because it turns out that trying to factor in when I used a 5-point scale for the first month actually messes everything up, and adding in the small conversations provides much more data with relatively small changes in distribution, but you can feel free to play around with the old filtering if you'd like, particularly if you only care about things that aren't rated on a scale (like the number of conversations), and there are times when getting rid of the small conversations can be beneficial.
 					</section>
 					<select id="firstDataCategory">
 						<option value="grandTotal" selected>Total number of conversations</option>
@@ -1527,7 +1543,7 @@
 							<td class="trigger"></td>
 						</tr>
 						<tr>
-							<th>Chance of<br>overlap</th>
+							<th>Similarity<br>or &chi;<sup>2</sup></th>
 							<td class="trigger"></td>
 							<td class="trigger"></td>
 							<td class="trigger"></td>
@@ -1563,7 +1579,7 @@
 							<td class="trigger"></td>
 						</tr>
 						<tr>
-							<th>Chance of<br>overlap</th>
+							<th>Similarity<br>or &chi;<sup>2</sup></th>
 							<td class="trigger"></td>
 							<td class="trigger"></td>
 							<td class="trigger"></td>
@@ -5412,7 +5428,8 @@
 							kid: S.getId("kidConversations").checked,
 							formal: S.getId("formalConversations").checked,
 							small: S.getId("smallConversations").checked,
-							other: S.getId("otherConversations").checked,
+							medium: S.getId("mediumConversations").checked,
+							long: S.getId("longConversations").checked,
 							familiar: S.getId("familiarConversations").checked,
 							floor: S.getId("floorConversations").checked,
 							group: S.getId("groupConversations").checked,
@@ -5420,6 +5437,7 @@
 							affiliated: S.getId("affiliatedConversations").checked,
 							class: S.getId("classConversations").checked,
 							anonymous: S.getId("anonymousConversations").checked,
+							other: S.getId("otherConversations").checked,
 							mine: S.getId("myConversations").checked,
 							theirs: S.getId("theirConversations").checked
 						}
@@ -5812,6 +5830,61 @@
 									}
 								});
 							});
+						}
+
+						function personShouldBeCounted(person) {
+							// determines whether the presence should be counted
+							let filteringIn;
+							let desiredInformation;
+							if (S.getName("filterType", true).id == "anyFail") {  // if the presence should be ignored if any characteristic isn't wanted
+								filteringIn = false;
+								desiredInformation = true;
+							} else {  // if the presence should be ignored only if all characteristics aren't wanted
+								filteringIn = true;
+								desiredInformation = false;
+							}
+
+							if (filteringIn === checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person isn't specifically requested
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.small && person.length <= 2.1) {  // if the conversation is small
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.medium && 2.1 < person.length && person.length <= 15) {  // if the conversation is medium-length
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.long && person.length > 15) {  // if the conversation is long
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.kid && person.classification.includes("k")) {  // if the person is a kid (below my age range)
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.formal && person.classification.includes("f")) {  // if the conversation was formal
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {  // if the person is or was from my floor
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.group && person.indicators.includes("g")) {  // if the conversation was with a group
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.individual && !person.indicators.includes("g")) {  // if the conversation was with an individual
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.class && person.classification.includes("c")) {  // if the conversation was with someone from my class
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.familiar && (person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I knew before the start of this study
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.anonymous && !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad")) {  // if the conversation was with someone I didn't already know
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.mine && person.initiator == "m") {  // if I started the conversation
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.theirs && person.initiator == "t") {  // if someone else started the conversation
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === (checkboxes.mine || checkboxes.theirs) && person.initiator == "b") {  // if the conversation was started mutually
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.other && !(["a", "k", "f", "b", "r", "p-b", "p-r", "c", "p"].some(function (indicator) {
+								return person.classification.includes(indicator);
+							}) || !(recordedPeople[person.gender] && recordedPeople[person.gender].includes(person.name) || person.classification.includes("p") || person.name == "Mom" || person.name == "Dad") || person.initiator == "n")) {  // if it was any other conversation
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.affiliated && peopleAffiliations[person.name] && !unfilteredPeople.includes(peopleAffiliations[person.name])) {  // if I know the person because of someone who was already filtered out
+								desiredInteraction = !desiredInformation;
+							}
+
+							return desiredInformation;
 						}
 
 						let initiators = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
@@ -6655,11 +6728,16 @@
 										
 										// determines whether the interaction should be counted
 										let desiredInteraction;
+										//*  ////
 										if (S.getName("filterType", true).id == "anyFail") {  // if the interaction should fail if any characteristic isn't wanted
 											desiredInteraction = true;
 											if (!checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person isn't specifically requested
 												desiredInteraction = false;
 											} else if (!checkboxes.small && person.length <= 2.1) {  // if the conversation is small
+												desiredInteraction = false;
+											} else if (!checkboxes.medium && 2.1 < person.length && person.length <= 15) {  // if the conversation is medium-length
+												desiredInteraction = false;
+											} else if (!checkboxes.long && person.length > 15) {  // if the conversation is long
 												desiredInteraction = false;
 											} else if (!checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
 												desiredInteraction = false;
@@ -6669,9 +6747,9 @@
 												desiredInteraction = false;
 											} else if (!checkboxes.floor && (person.classification.includes("b") || person.classification.includes("r") || person.classification.includes("p-b") || person.classification.includes("p-r"))) {  // if the person is or was from my floor
 												desiredInteraction = false;
-											} else if (!checkboxes.group && (conversation[0][0] == "g" || person.indicators.includes("g"))) {  // if the conversation was with a group
+											} else if (!checkboxes.group && person.indicators.includes("g")) {  // if the conversation was with a group
 												desiredInteraction = false;
-											} else if (!checkboxes.individual && conversation[0][0] != "g" && !person.indicators.includes("g")) {  // if the conversation was with an individual
+											} else if (!checkboxes.individual && !person.indicators.includes("g")) {  // if the conversation was with an individual
 												desiredInteraction = false;
 											} else if (!checkboxes.class && person.classification.includes("c")) {  // if the conversation was with someone from my class
 												desiredInteraction = false;
@@ -6697,6 +6775,10 @@
 											if (checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person is specifically requested
 												desiredInteraction = true;
 											} else if (checkboxes.small && person.length <= 2.1) {  // if the conversation is small
+												desiredInteraction = true;
+											} else if (checkboxes.medium && 2.1 < person.length && person.length <= 15) {  // if the conversation is medium-length
+												desiredInteraction = true;
+											} else if (checkboxes.long && person.length > 15) {  // if the conversation is long
 												desiredInteraction = true;
 											} else if (checkboxes.adult && person.classification.includes("a")) {  // if the person is an adult (above my age range)
 												desiredInteraction = true;
@@ -6730,6 +6812,9 @@
 												desiredInteraction = true;
 											}
 										}
+										/*/
+										desiredInteraction = personShouldBeCounted(person, checkboxes);
+										//*/
 										if (setTopFilter === false && topFilter[person.gender] && topFilter[person.gender].includes(person.name)) {
 											desiredInteraction = false;
 										}
@@ -7582,6 +7667,12 @@
 								showSimilarity([], [], 21, 3, 9);
 								showSimilarity([], [], 22, 4, 10);
 								showSimilarity([], [], 23, 5, 11);
+								aggregateTds[18].textContent = Math.round(findChiSquare(chosenData.m.m, chosenData.f.m) * 100) / 100;
+								aggregateTds[19].textContent = Math.round(findChiSquare(chosenData.m.t, chosenData.f.t) * 100) / 100;
+								aggregateTds[20].textContent = Math.round(findChiSquare(chosenData.m.b, chosenData.f.b) * 100) / 100;
+								aggregateTds[21].textContent = Math.round(findChiSquare(chosenData.m.n, chosenData.f.n) * 100) / 100;
+								aggregateTds[22].textContent = Math.round(findChiSquare(chosenData.m.o, chosenData.f.o) * 100) / 100;
+								aggregateTds[23].textContent = Math.round(findChiSquare(chosenData.m.a, chosenData.f.a) * 100) / 100;
 							}
 							let smallATs = S.getId("smallCustomAggregate").getElementsByTagName("td");
 							smallATs[0].textContent = Math.round(smallCD.m.m * 100) / 100;
@@ -7601,6 +7692,9 @@
 								showSimilarity([], [], 9, 0, 3, true);
 								showSimilarity([], [], 10, 1, 4, true);
 								showSimilarity([], [], 11, 2, 5, true);
+								smallATs[9].textContent = Math.round(findChiSquare(smallCD.m.m, smallCD.f.m) * 100) / 100;
+								smallATs[10].textContent = Math.round(findChiSquare(smallCD.m.t, smallCD.f.t) * 100) / 100;
+								smallATs[11].textContent = Math.round(findChiSquare(smallCD.m.a, smallCD.f.a) * 100) / 100;
 							}
 							// adds averages to the tables
 							calculateTableAverages("conversationLengths", { setLength: 2 });
