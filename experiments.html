@@ -362,7 +362,7 @@
 				updateConversations();
 			});
 			S.listen("checkAll", "click", function () {
-				["adultConversations", "kidConversations", "formalConversations", "smallConversations", "mediumConversations", "longConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "myConversations", "theirConversations", "otherConversations"].forEach(function (ID) {
+				["adultConversations", "kidConversations", "formalConversations", "tinyConversations", "smallConversations", "mediumConversations", "longConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "myConversations", "theirConversations", "otherConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
 				updateConversations();
@@ -371,7 +371,7 @@
 				["mediumConversations", "longConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
-				["smallConversations", "adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations", "affiliatedConversations"].forEach(function (ID) {
+				["tinyConversations", "smallConversations", "adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations", "affiliatedConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = false;
 				});
 				document.getElementById("anyFail").checked = true;
@@ -385,21 +385,22 @@
 				["smallConversations", "mediumConversations", "longConversations", "groupConversations", "individualConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
-				["adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations", "affiliatedConversations"].forEach(function (ID) {
+				["tinyConversations", "adultConversations", "kidConversations", "formalConversations", "familiarConversations", "floorConversations", "affiliatedConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = false;
 				});
 				document.getElementById("anyFail").checked = true;
 				document.getElementById("allFail").checked = false;
 				document.getElementById("conversationDateRange").value = "9/22";
-				document.getElementById("topMales").value = 1;
-				document.getElementById("topFemales").value = 1;
+				document.getElementById("topMales").value = "";
+				document.getElementById("topFemales").value = "";
+				document.getElementById("personFinder").value = "Emuelee Hamrr&Naythin";
 				updateConversations();
 			});
 			S.listen("groupFiltering", "click", function () {
 				["smallConversations", "mediumConversations", "longConversations", "groupConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = true;
 				});
-				["adultConversations", "kidConversations", "formalConversations", "familiarConversations", "individualConversations", "floorConversations"].forEach(function (ID) {
+				["tinyConversations", "adultConversations", "kidConversations", "formalConversations", "familiarConversations", "individualConversations", "floorConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = false;
 				});
 				document.getElementById("anyFail").checked = true;
@@ -410,7 +411,7 @@
 				updateConversations();
 			});
 			S.listen("checkNone", "click", function () {
-				["adultConversations", "kidConversations", "formalConversations", "smallConversations", "mediumConversations", "longConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
+				["adultConversations", "kidConversations", "formalConversations", "tinyConversations", "smallConversations", "mediumConversations", "longConversations", "familiarConversations", "floorConversations", "groupConversations", "individualConversations", "affiliatedConversations", "classConversations", "anonymousConversations", "otherConversations", "myConversations", "theirConversations"].forEach(function (ID) {
 					document.getElementById(ID).checked = false;
 				});
 				updateConversations();
@@ -905,12 +906,13 @@
 						<div>
 							<input type="checkbox" id="adultConversations" checked><label for="adultConversations">conversations with adults</label><br>
 							<input type="checkbox" id="kidConversations" checked><label for="kidConversations">conversations with kids</label><br>
-							<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
+							<input type="checkbox" id="tinyConversations" checked><label for="tinyConversations">tiny conversations</label><br>
 							<input type="checkbox" id="smallConversations" checked><label for="smallConversations">small conversations</label><br>
 							<input type="checkbox" id="mediumConversations" checked><label for="mediumConversations">medium conversations</label><br>
 							<input type="checkbox" id="longConversations" checked><label for="longConversations">long conversations</label>
 						</div>
 						<div>
+							<input type="checkbox" id="formalConversations" checked><label for="formalConversations">formal conversations</label><br>
 							<input type="checkbox" id="familiarConversations" checked><label for="familiarConversations">conversations with people I knew previously</label><br>
 							<input type="checkbox" id="floorConversations" checked><label for="floorConversations">conversations with people from my floor</label><br>
 							<input type="checkbox" id="groupConversations" checked><label for="groupConversations">group conversations</label><br>
@@ -5427,6 +5429,7 @@
 							adult: S.getId("adultConversations").checked,
 							kid: S.getId("kidConversations").checked,
 							formal: S.getId("formalConversations").checked,
+							tiny: S.getId("tinyConversations").checked,
 							small: S.getId("smallConversations").checked,
 							medium: S.getId("mediumConversations").checked,
 							long: S.getId("longConversations").checked,
@@ -5846,7 +5849,9 @@
 
 							if (filteringIn === checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person isn't specifically requested
 								desiredInteraction = !desiredInformation;
-							} else if (filteringIn === checkboxes.small && person.length <= 2.1) {  // if the conversation is small
+							} else if (filteringIn === checkboxes.tiny && person.length <= 0.3) {  // if the conversation is tiny
+								desiredInteraction = !desiredInformation;
+							} else if (filteringIn === checkboxes.small && 0.3 < person.length && person.length <= 2.1) {  // if the conversation is small
 								desiredInteraction = !desiredInformation;
 							} else if (filteringIn === checkboxes.medium && 2.1 < person.length && person.length <= 15) {  // if the conversation is medium-length
 								desiredInteraction = !desiredInformation;
@@ -6733,7 +6738,9 @@
 											desiredInteraction = true;
 											if (!checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person isn't specifically requested
 												desiredInteraction = false;
-											} else if (!checkboxes.small && person.length <= 2.1) {  // if the conversation is small
+											} else if (!checkboxes.tiny && person.length <= .3) {  // if the conversation is tiny
+												desiredInteraction = false;
+											} else if (!checkboxes.small && .3 < person.length && person.length <= 2.1) {  // if the conversation is small
 												desiredInteraction = false;
 											} else if (!checkboxes.medium && 2.1 < person.length && person.length <= 15) {  // if the conversation is medium-length
 												desiredInteraction = false;
@@ -6774,7 +6781,9 @@
 											desiredInteraction = false;
 											if (checkboxes.specific && S.getId("personFinder").value && S.getId("personFinder").value.replace(" ", "").split("&").includes(person.name.replace(" ", ""))) {  // if the person is specifically requested
 												desiredInteraction = true;
-											} else if (checkboxes.small && person.length <= 2.1) {  // if the conversation is small
+											} else if (checkboxes.tiny && person.length <= .3) {  // if the conversation is tiny
+												desiredInteraction = true;
+											} else if (checkboxes.small && .3 < person.length && person.length <= 2.1) {  // if the conversation is small
 												desiredInteraction = true;
 											} else if (checkboxes.medium && 2.1 < person.length && person.length <= 15) {  // if the conversation is medium-length
 												desiredInteraction = true;
@@ -7580,6 +7589,29 @@
 							}
 							// displays the custom aggregate data
 							let aggregateTds = S.getId("customAggregate").getElementsByTagName("td");
+							function showMoreData(td, dataArray) {
+								let tdClicked = false;
+								if (td.children.length > 1) {
+									td.removeChild(td.children[1]);
+								}
+								td.addEventListener("click", function () {
+									if (tdClicked) {
+										this.innerHTML = this.childNodes[0].nodeValue;
+										/// this.removeChild(this.children[0]) causes an error for some reason (although still functions)
+										tdClicked = false;
+									} else {
+										this.innerHTML = this.childNodes[0].nodeValue;
+										/// The table data accumulates "click" listeners,
+										/// so the value needs to keep getting reset so only the most recent listener displays.
+										extraData = document.createElement("div");
+										extraData.style.textAlign = "left";
+										extraData.style.opacity = 1;
+										extraData.textContent = dataArray.join(", ");
+										this.appendChild(extraData);
+										tdClicked = true;
+									}
+								});
+							}
 							function showSimilarity(maleArray, femaleArray, sigTd, maleTd, femaleTd, smallAggregate) {
 								let aggTable = smallAggregate ? smallATs : aggregateTds;
 								// show the similarity
@@ -7661,12 +7693,24 @@
 								showSimilarity(chosenFineSig.m.o, chosenFineSig.f.o, 22, 4, 10);
 								showSimilarity(chosenFineSig.m.a, chosenFineSig.f.a, 23, 5, 11);
 							} else {
-								showSimilarity([], [], 18, 0, 6);
-								showSimilarity([], [], 19, 1, 7);
-								showSimilarity([], [], 20, 2, 8);
-								showSimilarity([], [], 21, 3, 9);
-								showSimilarity([], [], 22, 4, 10);
-								showSimilarity([], [], 23, 5, 11);
+								if (S.getId("firstDataCategory").value == "uniqueTotal") {
+									S.forEach(["m", "f", "a"], function (gender, gi) {
+										S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator, ii) {
+											if (initiator == "o") {
+												showMoreData(aggregateTds[gi * 6 + ii], Array.from(new Set(uniquePeopleLists[gender].b.concat(uniquePeopleLists[gender].n))));
+											} else {
+												showMoreData(aggregateTds[gi * 6 + ii], uniquePeopleLists[gender][initiator]);
+											}
+										});
+									});
+								} else {
+									showSimilarity([], [], 18, 0, 6);
+									showSimilarity([], [], 19, 1, 7);
+									showSimilarity([], [], 20, 2, 8);
+									showSimilarity([], [], 21, 3, 9);
+									showSimilarity([], [], 22, 4, 10);
+									showSimilarity([], [], 23, 5, 11);
+								}
 								aggregateTds[18].textContent = Math.round(findChiSquare(chosenData.m.m, chosenData.f.m) * 100) / 100;
 								aggregateTds[19].textContent = Math.round(findChiSquare(chosenData.m.t, chosenData.f.t) * 100) / 100;
 								aggregateTds[20].textContent = Math.round(findChiSquare(chosenData.m.b, chosenData.f.b) * 100) / 100;
@@ -7689,9 +7733,18 @@
 								showSimilarity(chosenCoarseSig.m.t, chosenCoarseSig.f.t, 10, 1, 4, true);
 								showSimilarity(chosenCoarseSig.m.a, chosenCoarseSig.f.a, 11, 2, 5, true);
 							} else {
-								showSimilarity([], [], 9, 0, 3, true);
-								showSimilarity([], [], 10, 1, 4, true);
-								showSimilarity([], [], 11, 2, 5, true);
+								if (false && S.getId("firstDataCategory").value == "uniqueTotal") {
+									S.forEach(["m", "f", "a"], function (gender, gi) {
+										S.forEach(["m", "t", "a"], function (initiator, ii) {
+											//// this doesn't provide an array yet
+											showMoreData(aggregateTds[gi * 3 + ii], scd["uniqueTotal"][gender][initiator]);
+										});
+									});
+								} else {
+									showSimilarity([], [], 9, 0, 3, true);
+									showSimilarity([], [], 10, 1, 4, true);
+									showSimilarity([], [], 11, 2, 5, true);
+								}
 								smallATs[9].textContent = Math.round(findChiSquare(smallCD.m.m, smallCD.f.m) * 100) / 100;
 								smallATs[10].textContent = Math.round(findChiSquare(smallCD.m.t, smallCD.f.t) * 100) / 100;
 								smallATs[11].textContent = Math.round(findChiSquare(smallCD.m.a, smallCD.f.a) * 100) / 100;
