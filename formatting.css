@@ -45,6 +45,16 @@ note:hover {
 	text-decoration-style: solid;
 }
 
+.horiz-media {
+	width: 50%;
+}
+.vert-media {
+	width: 30%;
+}
+.square-media {
+	width: 40%;
+}
+
 @media (prefers-color-scheme: dark) {
 	body {
 		background: repeating-linear-gradient(#080, #040 100vh, #080 200vh);
@@ -54,5 +64,17 @@ note:hover {
 	}
 	h1.main-title {
 		color: white;
+	}
+}
+
+@media (max-width: 1000px) {
+	.horiz-media {
+		width: 100%;
+	}
+	.vert-media {
+		width: 60%;
+	}
+	.square-media {
+		width: 80%;
 	}
 }
