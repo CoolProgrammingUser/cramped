@@ -46,12 +46,15 @@ note:hover {
 }
 
 .horiz-media {
+	margin: 1em;
 	width: 50%;
 }
 .vert-media {
+	margin: 1em;
 	width: 30%;
 }
 .square-media {
+	margin: 1em;
 	width: 40%;
 }
 
