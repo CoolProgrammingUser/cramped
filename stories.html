@@ -16,6 +16,15 @@
 		</script>
 		<link rel="stylesheet" href="https://epicenterprograms.github.io/standards/formatting/foundation.css">
 		<link rel="stylesheet" href="formatting.css">
+		<style>
+			.email {
+				padding: 0em 1em;
+			}
+			.email section {
+				text-align: left;
+				text-align-last: left;
+			}
+		</style>
 	</head>
 	<body>
 		<nav class="hidden-left-nav">
@@ -54,7 +63,46 @@
 					Having endured years of pestering about solving my code, the band teacher wasn't satisfied with just figuring out what my messages said; she needed to find a way to try to get back at me. As such, she made her own encoded message which she tasked me with deciphering. I vowed to conquer her code, but with the end of the year so near, there was other stuff going on and not much time for me to demonstrate my victory to her. I wasn't able to find a solution before I graduated from middle school, but I refused to be beaten, and I continued to work on it afterwards. What I inevitably discovered, though, was that there wasn't enough context for me to work with: When approaching the decryption of codes, it's typically helpful to use the frequency of appearance of certain symbols to guide your guesses of the correct letter. Moreover, you can use the placement of symbols within words (assuming the spaces are obvious) to help eliminate some potential options. With the code the band teacher provided, the spaces were obvious, but there were only 4 words. If you were to arbitrarily assign a unique letter to each unique symbol (besides the exclamation point and what's obviously a space), the message would be "abcde fgh ij kflme!" A frequency analysis with 4 words is completely meaningless, and there are very few opportunities to narrow down potential options based on symbol placement. To worsen the situation, it was possible that the first symbol was a capital with a different symbol from its lowercase equivalent since she may have wanted to provide me with the same level of difficulty as my own code. That isn't a problem if the letter isn't used elsewhere, but it becomes a significant problem if one of the other letters is the same as the first one. I spent a lot of time trying to systematically eliminate possible symbol decryptions, and I racked my brain for possible word combinations that would make sense in this context, but there are just too many words, so I couldn't go through every possiblity, and I couldn't narrow down what letters never appear in a certain place in a word very well at all. I could've gone through the dictionary and kept track of how every word might fit into the code, but that would've taken months if not years of intense work, and I still might not have been able to get the information that I needed. With seemingly insurmountable obstacles surrounding me on all sides, I reluctantly had to set the code aside... for a while, that is...
 				</section>
 				<section>
-					Since I can't copy and paste the rest of the story like I did for everything before this, I'm going to leave you with a cliffhanger. I'd say I'm sorry, but I enjoy leaving people with cliffhangers too much for that to actually be true. If it makes you feel any better, though, this story is still ongoing, and during the part I couldn't copy and paste, I made <a href="https://coolprogramminguser.github.io/decoder/">this website</a>.
+					I was originally going to leave you with a cliffhanger because I couldn't copy and paste the rest of the story, but I dug up a relevant email I sent to the band teacher which I think explains a lot, so I'll provide that for you here.
+				</section>
+				<div class="generic-background email">
+					<section>
+						<strong>My message sent in the early morning hours of May 12, 2017:</strong>
+					</section>
+					<section>
+						Hello, this is Robbie Benson, the crazy red-headed person who wrote you a bunch of encoded messages between the years of 2009 and 2012. If you recall, after pestering you for years and giving you tons of hints, you finally figured out my code, and as revenge, you gave me a message in a code of your own (included as an attachment in this email). I refused hints and told you I'd figure it out myself. I email you today to admit defeat. However, this surrender doesn't come without a significant effort to prevent it. Before I go into that, though, I'd like to enlighten you on some facts regarding the message you gave me:
+					</section>
+					<section>
+						First off, I'd like to point out how you only gave me <em>four words</em> to work with. Given such a small sample, it's impossible to use statistical methods to effectively fill in some of the most-used symbols and guess at words. As such, I was left to try every possibility until I came across a valid solution. Assuming that the second and fourth symbols are different (as I do for all of these figures), if I tried systematically substituting in every letter of the alphabet for each of the symbols (excluding the ones which are obviously spaces), I would have to try up to 6.476&times;10^16 different possibilities before I reached an answer. If it took me 1 second to go through each of those possibilities, it would take me over 2.05 billion years (that's 45% of the age of the earth). But let's assume I didn't do things that way (which I didn't). Instead, let's assume I have a list of all English words, and I only have to figure out which ones fit the code. Let's also say that I managed to organize every word according to length and letter pattern, so I only had to go through the words of the correct length and with the correct number and placement of repeating letters. With these assumptions, the first word would have 946 possibilities, the second would have 268, the third would have 33, and the fourth would also have 946. Together, this comes to a grand total of 7,914,637,104 possibilities. For this, let's assume I can go through each possibility in 0.1 seconds because some words just wouldn't make sense together, and I'd skip a bunch of possibilities (although it's still a stretch). If I worked non-stop, it would still take me 25.1 years to cover every possibility. Suddenly your "simple" code doesn't seem so simple anymore now does it?
+					</section>
+					<section>
+						So the question arises, how did I even go about finding a solution? Well, knowing that such an imposing number of possibilities was well beyond my abilities, I was deterred for quite some time. However, after taking a computer science class, I rediscovered your code and was gripped with inspiration. Although I went through a number of redesigns, I finally designed a website (found <a href="https://coolprogramminguser.github.io/decoder/">here</a>) with the ability to take on your code. Despite it's ability to go through each possibility in 1.28 microseconds, it still takes my website about 2.8 hours to come up with the possible solutions. In the end, with solutions only comprising of English words (along with a few nonsense words because of the word list I used) which correctly match the symbol pattern throughout the entire message, I'm left with 384,926 solutions. If it took me 0.1 seconds to go through each solution, it would have taken me 44.55 days to get to the end. Not liking that time, I designed faster and faster ways of sifting through the results until I arrived at a speed of about 100,000 solutions every 30 minutes. In my search through the solutions, I came across some that just didn't make sense grammatically (and skipping those is how I managed to go so fast); others, however, are valid sentences, but I don't think they make sense in context. Some of those include, "Blame our TV noise!", "Flush and go march!", and "Slide out by force!". Once I reached the end of the solutions, I tried assuming the second and fourth letters were the same, and after 9.4 minutes, I got results such as, "Never sit by Oscar!" but none which I could believe were the intended sentence. Maybe I misjudged what words would be in the message and accidentally skipped over where the result would be; maybe I somehow managed to filter out the real solution by some mistake in my program; maybe the first letter is actually a capital of a letter used elsewhere, and my program doesn't know how to deal with it yet. Regardless of the reason, I was unable to pinpoint the solution to your message, and I'm at a loss to come up with any other means of arriving at the answer (which be accomplished any time soon). With this statement of defeat, I ask for the solution to this code which has plagued me for five years (if you can still remember).
+					</section>
+					<hr>
+					<section>
+						<strong>The band teacher's response later the same day:</strong>
+					</section>
+					<section>
+						Robbie,
+					</section>
+					<section>
+						I can only begin to tell you the shock I was in when I opened my email this morning and found an email from you!  I absolutely remember you...and your incessant middle school codes!!  :) Not only did I never expected to hear from you...I would have never guessed that you still had that code, let alone tried to figure it out!  Ha!  That's awesome!
+					</section>
+					<section>
+						So, first, before I attempt to put your mind at rest about the solution...let me say this.  I think it's absolutely hilarious that you came up with all those statistics about some goofy cryptic response I gave to you as a middle schooler.  I remember you walking into my office, almost on a daily basis, asking if I figured out your code.  Sometimes you would just walk by in silence, making sure I was aware that you were patiently waiting for my solution.  In all honesty, many times I wouldn't even have had a chance to look at it yet, but I would tell you that I was close to solving it.  I actually thought it was pretty clever that you came up with your codes in the first place. And...I must admit...I was pretty stellar at solving them.
+					</section>
+					<section>
+						Second...you probably didn't know this, but before I was a band director, I was a math major in college. I love numbers and statistics and find great "geeky humor" in your very thorough explanation of your attempt at the solution. I understand your statistical dilemma and impressively applaud your problem solving skills. Bravo!
+					</section>
+					<section>
+						Third, and probably most unfortunate, is that I have no recollection of what I was actually trying to say. I am sure I was trying to come up with something humorous in response to your codes...but it's been quite a while and I cannot say that I remember!!!! I am so sorry!!! I feel terrible that I cannot provide better closure!
+					</section>
+					<section>
+						By the way...you should know that I was absolutely delighted to hear from you and got a real kick out of reading your "code saga". I've shared this story with several people at school today. It brought a smile to my face. It's always great to hear how former students are doing. :)
+					</section>
+				</div>
+				<section>
+					As you can imagine, I wasn't satisfied by this resolution, but there's only so much time in the day. Not knowing what the encoded message said is not an option, so I'll be revisiting and refining my decoder website, but I've had other priorities in the meantime. This isn't over, though.
 				</section>
 				<br>
 				<h2>
