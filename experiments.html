@@ -468,7 +468,7 @@
 			.table-total {
 				background-color: lightsteelblue;
 			}
-			#rawConversationData {
+			#rawConversationData, #rawPizzaConversations {
 				border-radius: 0em 0em .5em .5em;
 				padding: .5em;
 				max-height: 80vh;
@@ -1947,6 +1947,172 @@
 					<section>
 						This is still a work in progress.
 					</section>
+					<div class="details raw-data">
+						<div class="summary">
+							Raw data
+						</div>
+						<section>
+							This is close to what I would type into my phone to record the conversation data, and it's from this data (as displayed) where the conversation display table figures out what to fill in. I recorded the following data points for every interaction: the person's name or identifier, their gender, roughly how old they were, who started the conversation, what the purpose of the conversation was, the circumstances of the conversation (usually nothing special), the length of the conversation, how much the talking was broken up over time, how much I contributed to the conversation, how favorably I felt during the conversation (mood), how favorable I think the topic(s) objectively should've been (topic), how much they were smiling, and how much I was smiling. The gender and age information can be associated with a name (and stored elsewhere), so you don't necessarily see that information here. I increased the amount of data I was collecting over time, and the beginning of the data traded in the two favorability aspects for a general enjoyability aspect and a measure of how uncomfortable I was. I was annoyed with myself for changing my data collection along the way again during this study, but luckily, I primarily added things rather than changed how other data is collected, so the earlier data is largely compatible with the later data. More details of the meanings of the data is located in the "Data details" section.
+						</section>
+						<div id="rawPizzaConversations">[Currently empty]</div>
+					</div>
+					<div class="details">
+						<div class="summary">
+							Data details
+						</div>
+						<ol>
+							<li>
+								Name:
+								<ul>
+									<li>Typically a phonetic spelling</li>
+									<li>a = anonymous (a person I wouldn't recognize again)</li>
+									<li>c = a coworker I wouldn't recognize again</li>
+									<li>p = a person I would recognize but whose name I don't know</li>
+								</ul>
+							</li>
+							<li>
+								Gender:
+								<ul>
+									<li>m = male</li>
+									<li>f = female</li>
+									<li>u = unknown</li>
+								</ul>
+							</li>
+							<li>
+								Age:
+								<ol start="0">
+									<li>no clue</li>
+									<li>much younger (around middle school and younger)</li>
+									<li>somewhat younger than me (around high school; the upper age for this ended up being around 18)</li>
+									<li>around my age (I was 25 during this study; the range ended up being around 19-30 or so)</li>
+									<li>somewhat older than me; generally the generation above me (I included my parents in the upper range despite being around 65)</li>
+									<li>particularly old people (older than my parents)</li>
+								</ol>
+							</li>
+							<li>
+								Initiator:
+								<ul>
+									<li>m = me</li>
+									<li>t = them</li>
+									<li>b = both (we both were about to say something)</li>
+									<li>
+										c = combination; followed by the number:
+										<ol>
+											<li>mostly them</li>
+											<li>roughly even</li>
+											<li>mostly me</li>
+											<li>me, them, and both of us</li>
+										</ol>
+									</li>
+									<li>a = arranged (we expected to be talking to each other)</li>
+									<li>i = induced (someone else was the reason we started talking)</li>
+								</ul>
+							</li>
+							<li>
+								Purpose:
+								<ul>
+									<li>n = none (casually talking just because)</li>
+									<li>g = greeting</li>
+									<li>a = apology or "excuse me"</li>
+									<li>t = thanks or "you're welcome"</li>
+									<li>h = providing help, support, or advice (when not getting pressured)</li>
+									<li>c = convincing to do or believe something</li>
+									<li>i = informational (learning something for a practical purpose)</li>
+									<li>p = practical (a required interaction to fulfill an immediate purpose)</li>
+									<li>o = other</li>
+								</ul>
+							</li>
+							<li>
+								Circumstances:
+								<ul>
+									<li>n = normal / nothing special</li>
+									<li>b = broadcast (said out loud to no one in particular)</li>
+									<li>j = joined a conversation</li>
+									<li>c = continued a conversation from before</li>
+									<li>p = on the phone (with talking; no texts or similar were recorded)</li>
+									<li>u = I felt uncomfortable</li>
+									<li>s = serious (not meant to be taken lightly at all, although not necessarily bad)</li>
+									<li>
+										r = recognition; followed by the letter:
+										<ul>
+											<li>m = me recognizing them</li>
+											<li>t = them recognizing me</li>
+											<li>b = both or us recognizing each other</li>
+											<li>h = I recognized the house I delivered to (I'm not sure if I actually used this)</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								Length:
+								<ol start="0">
+
+								</ol>
+							</li>
+							<li>
+								Density:
+								<ol>
+
+								</ol>
+							</li>
+							<li>
+								Participation:
+								<ol start="0">
+
+								</ol>
+							</li>
+							<li>
+								Mood:
+								<ol>
+
+								</ol>
+							</li>
+							<li>
+								Topic quality:
+								<ol>
+
+								</ol>
+							</li>
+							<li>
+								Their facial expression:
+								<ol start="0">
+
+								</ol>
+							</li>
+							<li>
+								My facial expression:
+								<ol>
+
+								</ol>
+							</li>
+						</ol>
+						<section>
+							Then there's the stuff that stopped getting used fairly early on.
+						</section>
+						<ul>
+							<li>
+								Enjoyability:
+								<ol>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+								</ol>
+							</li>
+							<li>
+								Comfort:
+								<ol>
+									<li></li>
+									<li></li>
+									<li></li>
+								</ol>
+							</li>
+						</ul>
+					</div>
+					<br>
 					<div id="pizzaConversationCheckboxes">
 						<div>
 							<input type="checkbox" id="pizzaConversationCheckboxesVisibility">
@@ -1983,8 +2149,19 @@
 					<br>
 					<div class="details">
 						<div class="summary">
-							Data
+							Presence
 						</div>
+						<section>
+							The "uniquePeople" aspect in the "Results" section is currently the best you can get for this. More to come later.
+						</section>
+					</div>
+					<div class="details">
+						<div class="summary">
+							Results
+						</div>
+						<section>
+							&chi;<sup>2</sup> values &ge; 3.841 are significant. Similarity percentages &lt; 80% might be worth testing for statistical significance by clicking on the bottom row to retrieve the list of values.
+						</section>
 						<select id="pizzaAspectSelector">
 							<option value="grandTotal" selected>
 								grandTotal

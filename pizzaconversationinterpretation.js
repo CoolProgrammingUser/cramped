@@ -157,14 +157,20 @@ function setPizzaSignificance(sigLists) {
 				let sigContainer = document.createElement("div");
 				sigContainer.style.cursor = "pointer";
 				let sigText = document.createElement("div");
-				sigText.textContent = findSimilarity(sigLists[firstValue].m[initiator], sigLists[firstValue].f[initiator]) * 100 + "%";
+				let maleList = sigLists[firstValue].m[initiator];
+				let femaleList = sigLists[firstValue].f[initiator];
+				if (["mood", "topic", "theirSmile", "mySmile"].includes(firstValue)) {  // if the zeros should be filtered out
+					maleList = maleList.filter(x => x);
+					femaleList = femaleList.filter(x => x);
+				}
+				sigText.textContent = findSimilarity(maleList, femaleList) * 100 + "%";
 				sigContainer.appendChild(sigText);
 				let sigListDisplay = document.createElement("div");
 				sigListDisplay.className = "pop-up";
 				sigListDisplay.style.display = "none";
 				sigListDisplay.style.textAlign = "left";
 				sigListDisplay.style.opacity = 1;
-				sigListDisplay.innerHTML = "Males: [" + sigLists[firstValue].m[initiator].join(", ") + "]<br><br>Females: [" + sigLists[firstValue].f[initiator].join(", ") + "]";
+				sigListDisplay.innerHTML = "Males: [" + maleList.join(", ") + "]<br><br>Females: [" + femaleList.join(", ") + "]";
 				sigContainer.appendChild(sigListDisplay);
 				row.cells[index + 1].appendChild(sigContainer);
 				sigContainer.addEventListener("click", function () {
