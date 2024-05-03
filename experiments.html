@@ -358,6 +358,13 @@
 					S.getId("conversationCheckboxes").querySelector("div:nth-of-type(2)").style.display = "none";
 				}
 			});
+			S.listen("pizzaConversationCheckboxesVisibility", "change", function () {
+				if (this.checked) {
+					S.getId("pizzaConversationCheckboxes").querySelector("div:nth-of-type(2)").style.display = "inline-block";
+				} else {
+					S.getId("pizzaConversationCheckboxes").querySelector("div:nth-of-type(2)").style.display = "none";
+				}
+			});
 			S.listen(["personFinder", "topMales", "topFemales", "firstDataCategory", "secondDataCategory", "dataOperator"], "change", function () {
 				updateConversations();
 			});
@@ -469,7 +476,7 @@
 				white-space: pre-line;
 				overflow: auto;
 			}
-			#conversationCheckboxes {
+			#conversationCheckboxes, #pizzaConversationCheckboxes {
 				position: -webkit-sticky;
 				position: sticky;
 				top: 0rem;
@@ -477,19 +484,19 @@
 				width: 100%;
 				background: rgba(255, 255, 255, .75);
 			}
-			#conversationCheckboxes h4 {
+			#conversationCheckboxes h4, #pizzaConversationCheckboxes h4 {
 				margin-top: .5em;
 				margin-bottom: .5em;
 			}
-			#conversationCheckboxes > div:first-of-type {
+			#conversationCheckboxes > div:first-of-type, #pizzaConversationCheckboxes > div:first-of-type {
 				position: absolute;
 				right: 1em;
 				top: 0rem;
 			}
-			#conversationCheckboxes > div:nth-of-type(2) {
+			#conversationCheckboxes > div:nth-of-type(2), #pizzaConversationCheckboxes > div:nth-of-type(2) {
 				display: none;
 			}
-			#conversationCheckboxes > div:nth-of-type(2) div {
+			#conversationCheckboxes > div:nth-of-type(2) div, #pizzaConversationCheckboxes > div:nth-of-type(2) div {
 				display: inline-table;
 				text-align: left;
 			}
@@ -497,13 +504,21 @@
 				width: 1.5em;
 			}
 
+			#pizzaAggregate td {
+				position: relative;
+			}
+			#pizzaAggregate td div {  /* //// This doesn't work */
+				width: 100%;
+				height: 100%;
+			}
+
 			@media (prefers-color-scheme: dark) {
 				.raw-data {
 					background-color: black;
 				}
-                #conversationCheckboxes {
-                    background: rgba(80, 80, 80, .5);
-                }
+				#conversationCheckboxes, #pizzaConversationCheckboxes {
+					background: rgba(80, 80, 80, .5);
+				}
 				.smaller td, .slim td {
 					background: gray;
 					color: black;
@@ -511,7 +526,7 @@
 			}
 
 			@media (max-width: 1000px) {
-				#conversationCheckboxes h4 {
+				#conversationCheckboxes h4, #pizzaConversationCheckboxes {
 					text-align: left;
 				}
 			}
@@ -714,19 +729,19 @@
 								<td>212</td>
 								<td>191</td>
 								<td>403</td>
-								<td>&asymp; 1.10995:1</td>
+								<td>&asymp; 1.11:1 &asymp; 1:0.90</td>
 							</tr>
 							<tr>
 								<th>Total</th>
 								<td>308</td>
 								<td>335</td>
 								<td>643</td>
-								<td></td>
+								<td>&asymp; 0.92:1 &asymp; 1:1.09</td>
 							<tr>
 								<th>Boys:Girls</th>
-								<td><mark style="background-color:red">1:2.208<over>3</over></mark></td>
+								<td><mark style="background-color:red">1:2.208<over>3</over> &asymp; 3:6.6</mark></td>
 								<td><mark>1:1.3263<over>8</over> &asymp; <div class="circle" style="border-color:black">3:4</div></mark></td>
-								<td></td>
+								<td>1:1.6791<over>6</over></td>
 								<td></td>
 							</tr>
 						</table>
@@ -1604,39 +1619,6 @@
 					</div>
 					<div class="details">
 						<div class="summary">
-							June 2023 conclusions
-						</div>
-						<h3>
-							Findings
-						</h3>
-						<ul>
-							<li>
-								I talk more in conversations I start with females compared to males.
-							</li>
-							<li>
-								More findings to be added.
-							</li>
-						</ul>
-						<h3>
-							Theories
-						</h3>
-						<ul>
-							<li>
-								When I'm approached by a female, I become primed to talk to them and am therefore more likely to place the conversation into the "other" category.
-							</li>
-							<li>
-								More theories to be added.
-							</li>
-						</ul>
-						<h3>
-							Narrative
-						</h3>
-						<section>
-							Although I have more conversations with males and those conversations generally last longer than with females, females tend to be associated with denser conversations which end up resulting in a greater overall talk time. Moreover, I tend to have more conversations per recorded female than per recorded male. Interestingly, the "other" category frequently follows different trends than the "me" and "them" category, although it tends to be more similar to the "me" category. One of the most notable differences is how the enjoyability of "other" conversations is higher than the rest, and also unlike the rest, it seems like there might be a small skew towards a higher enjoyability of female conversations. The overall higher values are consistent with two people primed to talk to each other having a more favorable conversation, but that wouldn't explain any skew. Complementing that fact is that the "other" conversations constitute a higher proportion of the female conversations than the males conversations do. It's also of note that I seem to start more conversations per female than per male, and it's further interesting that the number of conversations started by females is the lowest in all regards. A possible explanation for that trend is that, when I'm approached by a female, I become primed to talk to them and am therefore more likely to place the conversation into the "other" category. It seems likely that my propensity for acquiring female friends is linked to a greater amount of conversation with them (individually), but whether it's a cause or effect is difficult if not impossible to determine with the available data. More evaluation to come.
-						</section>
-					</div>
-					<div class="details">
-						<div class="summary">
 							July 2023 conclusions
 						</div>
 						<h3>
@@ -1957,12 +1939,134 @@
 					<script src="collegeconversationinterpretation.js"></script>
 				</div>
 				<br>
-				<h3>
-					Working at a local pizzeria
-				</h3>
-				<section>
-					Coming soon
-				</section>
+				<br>
+				<div style="display:block">
+					<h3>
+						Working at a local pizzeria
+					</h3>
+					<section>
+						This is still a work in progress.
+					</section>
+					<div id="pizzaConversationCheckboxes">
+						<div>
+							<input type="checkbox" id="pizzaConversationCheckboxesVisibility">
+							<label for="pizzaConversationCheckboxesVisibility">show options</label>
+						</div>
+						<h4>
+							Take into account...
+						</h4>
+						<div>
+							<div>
+								Conversations at:<br>
+								<input type="checkbox" id="workPizzaConvos" checked> <label for="workPizzaConvos">work</label><br>
+								<input type="checkbox" id="homePizzaConvos"> <label for="homePizzaConvos">home</label><br>
+								<input type="checkbox" id="otherPizzaConvos"> <label for="otherPizzaConvos">other</label>
+							</div>
+							&emsp;
+							<div>
+								Conversations for:<br>
+								<input type="checkbox" id="casualPizzaConvos" checked> <label for="casualPizzaConvos">no reason</label><br>
+								<input type="checkbox" id="greetingPizzaConvos" checked> <label for="greetingPizzaConvos">greeting</label><br>
+								<input type="checkbox" id="practicalPizzaConvos"> <label for="practicalPizzaConvos">practical purposes</label>
+							</div>
+							&emsp;
+							<div>
+								Length of:<br>
+								<input type="checkbox" id="length0PizzaConvos"> <label for="length0PizzaConvos">0</label><br>
+								<input type="checkbox" id="length1PizzaConvos" checked> <label for="length1PizzaConvos">1</label><br>
+								<input type="checkbox" id="length2PizzaConvos" checked> <label for="length2PizzaConvos">2</label><br>
+								<input type="checkbox" id="length3PizzaConvos" checked> <label for="length3PizzaConvos">3</label>
+							</div>
+						</div>
+					</div>
+					<br>
+					<br>
+					<div class="details">
+						<div class="summary">
+							Data
+						</div>
+						<select id="pizzaAspectSelector">
+							<option value="grandTotal" selected>
+								grandTotal
+							</option>
+							<option value="uniqueTotal">
+								uniqueTotal
+							</option>
+							<option value="length">
+								length
+							</option>
+							<option value="density">
+								density
+							</option>
+							<option value="participation">
+								participation
+							</option>
+							<option value="mood">
+								mood
+							</option>
+							<option value="topic">
+								topic
+							</option>
+							<option value="theirSmile">
+								theirSmile
+							</option>
+							<option value="mySmile">
+								mySmile
+							</option>
+						</select>
+						<br>
+						<input type="text" id="mathematicalPie" placeholder="+, -, *, or / aspect(s)">
+						<table id="pizzaAggregate">
+							<tr>
+								<th></th>
+								<th>Me</th>
+								<th>Them</th>
+								<th>Both</th>
+								<th>Arranged</th>
+								<th>Induced</th>
+								<th>Total or<br>average</th>
+							</tr>
+							<tr>
+								<th>Males</th>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>Females</th>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>Total or<br>average</th>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th>Similarity<br>or &chi;<sup>2</sup></th>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+					<script src="pizzaconversationdata.js"></script>
+					<script src="pizzaconversationinterpretation.js"></script>
+				</div>
 				<br>
 				<br>
 				<h2>
