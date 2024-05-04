@@ -48,9 +48,13 @@ function parsePizzaConvo(dataList) {
 		convo.initiator = dataList[1];
 		convo.purpose = dataList[2];
 		if (dataList[3].length == 1) {
-			convo.circumstances = [dataList[3]];
+			if (dataList[3] == "-") {
+				convo.circumstances = [];
+			} else {
+				convo.circumstances = [dataList[3]];
+			}
 		} else {
-			convo.circumstances = dataList[3].replace(/&/g, "").split("");  //// this needs refinement
+			convo.circumstances = dataList[3].match(/r(?:m|t|b|h)|n|b|j|c|p|u|s/g);
 		}
 		convo.length = Number(dataList[4]);
 		convo.density = Number(dataList[5]);
@@ -118,6 +122,17 @@ function filterPizzaConvo(convo) {
 			shouldCountConvo = false;
 		}
 		if (!S.getId("practicalPizzaConvos").checked && convo.purpose.includes("p")) {
+			shouldCountConvo = false;
+		}
+	}
+	if (convo.circumstances) {
+		if (!S.getId("broadcastedPizzaConvos").checked && convo.circumstances.includes("b")) {
+			shouldCountConvo = false;
+		}
+		if (!S.getId("joinedPizzaConvos").checked && convo.circumstances.includes("j")) {
+			shouldCountConvo = false;
+		}
+		if (!S.getId("continuedPizzaConvos").checked && convo.circumstances.includes("c")) {
 			shouldCountConvo = false;
 		}
 	}
@@ -469,6 +484,7 @@ reheatPizza();
 S.listen([
 	"workPizzaConvos", "homePizzaConvos", "otherPizzaConvos",
 	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
+	"broadcastedPizzaConvos", "joinedPizzaConvos", "continuedPizzaConvos",
 	"length0PizzaConvos", "length1PizzaConvos", "length2PizzaConvos", "length3PizzaConvos",
 	"pizzaAspectSelector", "mathematicalPie"
 ], "change", function () {
