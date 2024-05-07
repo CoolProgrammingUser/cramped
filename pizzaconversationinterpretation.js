@@ -112,6 +112,18 @@ function filterPizzaConvo(convo) {
 	if (!convo.initiator || convo.initiator == "-") {
 		shouldCountConvo = false;
 	}
+	if (S.getId("pizzaPersonFilterList").value.trim()) {
+		let peopleListed = S.getId("pizzaPersonFilterList").value.trim().replace(/,? +and +|, *|,? *& */g, "&").split("&");
+		if (S.getId("pizzaPersonFilterCheckbox").checked) {
+			if (!convo.people.every(person => peopleListed.includes(person.name))) {  // if not all of the people in the conversation are desired
+				shouldCountConvo = false;
+			}
+		} else {
+			if (convo.people.some(person => peopleListed.includes(person.name))) {  // if any of the people are supposed to be filtered out
+				shouldCountConvo = false;
+			}
+		}
+	}
 	if (!convo.purpose) {
 		shouldCountConvo = false;
 	} else {
@@ -237,7 +249,7 @@ function reheatPizza() {
 				if (filterPizzaPlace(place)) {  //// if the place should be counted
 					S.forEach(place.convos, function (convo) {
 						let c = parsePizzaConvo(convo);
-						if (filterPizzaConvo(c)) {  //// if the conversation should be counted
+						if (Object.keys(c).length > 0 && filterPizzaConvo(c)) {  //// if the conversation should be counted
 							if (false && c.density) {  //// if adjusting the number of conversations
 								//// adjusts the conversation count and length
 								let adjConvos = [];
@@ -482,6 +494,7 @@ function reheatPizza() {
 reheatPizza();
 
 S.listen([
+	"pizzaPersonFilterCheckbox", "pizzaPersonFilterList",
 	"workPizzaConvos", "homePizzaConvos", "otherPizzaConvos",
 	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
 	"broadcastedPizzaConvos", "joinedPizzaConvos", "continuedPizzaConvos",
