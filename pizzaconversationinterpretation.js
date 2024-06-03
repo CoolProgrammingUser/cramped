@@ -112,6 +112,7 @@ function filterPizzaConvo(convo) {
 	if (!convo.initiator || convo.initiator == "-") {
 		shouldCountConvo = false;
 	}
+	// filters specific people in or out
 	if (S.getId("pizzaPersonFilterList").value.trim()) {
 		let peopleListed = S.getId("pizzaPersonFilterList").value.trim().replace(/,? +and +|, *|,? *& */g, "&").split("&");
 		if (S.getId("pizzaPersonFilterCheckbox").checked) {
@@ -124,6 +125,7 @@ function filterPizzaConvo(convo) {
 			}
 		}
 	}
+	// filters based on the purpose of the conversation (incomplete)
 	if (!convo.purpose) {
 		shouldCountConvo = false;
 	} else {
@@ -137,6 +139,7 @@ function filterPizzaConvo(convo) {
 			shouldCountConvo = false;
 		}
 	}
+	// filters based on the circumstances of the conversation (incomplete)
 	if (convo.circumstances) {
 		if (!S.getId("broadcastedPizzaConvos").checked && convo.circumstances.includes("b")) {
 			shouldCountConvo = false;
@@ -148,6 +151,7 @@ function filterPizzaConvo(convo) {
 			shouldCountConvo = false;
 		}
 	}
+	// filters based on the length of the conversation
 	if (isNaN(convo.length)) {
 		shouldCountConvo = false;
 	} else {
@@ -163,6 +167,16 @@ function filterPizzaConvo(convo) {
 		if (!S.getId("length3PizzaConvos").checked && convo.length == 3) {
 			shouldCountConvo = false;
 		}
+	}
+	// filters based on the expression of the other person
+	if (!S.getId("theirSmile1PizzaConvos").checked && convo.theirSmile == 1) {
+		shouldCountConvo = false;
+	} else if (!S.getId("theirSmile2PizzaConvos").checked && convo.theirSmile == 2) {
+		shouldCountConvo = false;
+	} else if (!S.getId("theirSmile3PizzaConvos").checked && convo.theirSmile == 3) {
+		shouldCountConvo = false;
+	} else if (!S.getId("theirSmile0PizzaConvos").checked && ![1, 2, 3].includes(convo.theirSmile)) {  // if unknown expressions aren't wanted
+		shouldCountConvo = false;
 	}
 	return shouldCountConvo;
 }
@@ -499,6 +513,7 @@ S.listen([
 	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
 	"broadcastedPizzaConvos", "joinedPizzaConvos", "continuedPizzaConvos",
 	"length0PizzaConvos", "length1PizzaConvos", "length2PizzaConvos", "length3PizzaConvos",
+	"theirSmile0PizzaConvos", "theirSmile1PizzaConvos", "theirSmile2PizzaConvos", "theirSmile3PizzaConvos",
 	"pizzaAspectSelector", "mathematicalPie"
 ], "change", function () {
 	reheatPizza();

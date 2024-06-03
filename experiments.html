@@ -2046,43 +2046,69 @@
 							<li>
 								Length:
 								<ol start="0">
-
+									<li>extremely brief</li>
+									<li>short</li>
+									<li>not too long</li>
+									<li>moderately long or more</li>
 								</ol>
 							</li>
 							<li>
 								Density:
 								<ol>
-
+									<li>very little talking</li>
+									<li>intermittent talking</li>
+									<li>average or a lot of talking / all at once</li>
 								</ol>
 							</li>
 							<li>
 								Participation:
 								<ol start="0">
-
+									<li>I don't talk at all</li>
+									<li>I talk very little</li>
+									<li>we both talk a decent amount</li>
+									<li>I do most of the talking</li>
+									<li>I do all of the talking</li>
 								</ol>
 							</li>
 							<li>
 								Mood:
 								<ol>
-
+									<li>extremely upset</li>
+									<li>rather unhappy</li>
+									<li>somewhat unhappy</li>
+									<li>neutral</li>
+									<li>reasonably happy</li>
+									<li>quite happy</li>
+									<li>ecstatic</li>
 								</ol>
 							</li>
 							<li>
 								Topic quality:
 								<ol>
-
+									<li>terrible</li>
+									<li>quite undesirable</li>
+									<li>undesirable</li>
+									<li>neutral</li>
+									<li>enjoyable</li>
+									<li>quite enjoyable</li>
+									<li>amazing</li>
 								</ol>
 							</li>
 							<li>
 								Their facial expression:
 								<ol start="0">
-
+									<li>unknown</li>
+									<li>unhappy</li>
+									<li>neutral</li>
+									<li>smiling</li>
 								</ol>
 							</li>
 							<li>
 								My facial expression:
 								<ol>
-
+									<li>unhappy</li>
+									<li>neutral</li>
+									<li>smiling</li>
 								</ol>
 							</li>
 						</ol>
@@ -2093,21 +2119,21 @@
 							<li>
 								Enjoyability:
 								<ol>
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
+									<li>terrible experience</li>
+									<li>not happy</li>
+									<li>undesirable</li>
+									<li>neutral</li>
+									<li>pretty good</li>
+									<li>rather nice</li>
+									<li>amazing</li>
 								</ol>
 							</li>
 							<li>
 								Comfort:
 								<ol>
-									<li></li>
-									<li></li>
-									<li></li>
+									<li>not very comfortable</li>
+									<li>reasonably comfortable</li>
+									<li>very comfortable</li>
 								</ol>
 							</li>
 						</ul>
@@ -2155,6 +2181,14 @@
 								<input type="checkbox" id="length2PizzaConvos" checked> <label for="length2PizzaConvos">2</label><br>
 								<input type="checkbox" id="length3PizzaConvos" checked> <label for="length3PizzaConvos">3</label>
 							</div>
+							&emsp;
+							<div>
+								Others' expression of:<br>
+								<input type="checkbox" id="theirSmile1PizzaConvos" checked> <label for="theirSmile1PizzaConvos">unhappy</label><br>
+								<input type="checkbox" id="theirSmile2PizzaConvos" checked> <label for="theirSmile2PizzaConvos">neutral</label><br>
+								<input type="checkbox" id="theirSmile3PizzaConvos" checked> <label for="theirSmile3PizzaConvos">smiling</label><br>
+								<input type="checkbox" id="theirSmile0PizzaConvos" checked> <label for="theirSmile0PizzaConvos">unknown</label>
+							</div>
 						</div>
 					</div>
 					<br>
@@ -2172,7 +2206,7 @@
 							Results
 						</div>
 						<section>
-							&chi;<sup>2</sup> values &ge; 3.841 are significant. Similarity percentages &lt; 80% might be worth testing for statistical significance by clicking on the bottom row to retrieve the list of values. The box underneath the dropdown allows you to do math to the dropdown aspect by typing in operations followed by other aspects or numbers. The math applies only left-to-right, <strong>not</strong> according to the typical order of operations.
+							&chi;<sup>2</sup> values &ge; 3.841 are significant. Lower similarity percentages are more likely to be significant, but I've found similarities of 100% to be significant, so the value of the percentages are questionable. Clicking on values in the bottom row will display the datasets to use in significance-testing software. The box underneath the dropdown allows you to do math to the dropdown aspect by typing in operations followed by other aspects or numbers. The math applies only left-to-right, <strong>not</strong> according to the typical order of operations.
 						</section>
 						<select id="pizzaAspectSelector">
 							<option value="grandTotal" selected>
