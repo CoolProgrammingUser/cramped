@@ -5712,6 +5712,7 @@ function updateConversations(setTopFilter) {
 				}
 			});
 		}
+		/*
 		aggregateTds[0].textContent = Math.round(chosenData.m.m * 100) / 100;
 		aggregateTds[1].textContent = Math.round(chosenData.m.t * 100) / 100;
 		aggregateTds[2].textContent = Math.round(chosenData.m.b * 100) / 100;
@@ -5730,6 +5731,26 @@ function updateConversations(setTopFilter) {
 		aggregateTds[15].textContent = Math.round(chosenData.a.n * 100) / 100;
 		aggregateTds[16].textContent = Math.round(chosenData.a.o * 100) / 100;
 		aggregateTds[17].textContent = Math.round(chosenData.a.a * 100) / 100;
+		*/
+		S.forEach(["m", "f", "a"], function (gender, gi) {
+			S.forEach(["m", "t", "b", "n", "o", "a"], function (initiator, ii) {
+				let cell = S.getId("customAggregate").rows[gi + 1].cells[ii + 1];
+				cell.textContent = Math.round(chosenData[gender][initiator] * 100) / 100;
+				if (combinedData.grandTotal[gender][initiator] < 5) {
+					cell.style.background = "red";
+					cell.style.color = "white";
+				} else if (combinedData.grandTotal[gender][initiator] < 10) {
+					cell.style.background = "orange";
+					cell.style.color = "white";
+				} else if (combinedData.grandTotal[gender][initiator] < 15) {
+					cell.style.background = "yellow";
+					cell.style.color = "black";
+				} else {
+					cell.style.background = "#0f0";
+					cell.style.color = "black";
+				}
+			});
+		});
 		if (chosenFineSig.m.m.length > 0) {  // if a fine significance list exists
 			showSimilarity(chosenFineSig.m.m, chosenFineSig.f.m, 18, 0, 6);
 			showSimilarity(chosenFineSig.m.t, chosenFineSig.f.t, 19, 1, 7);
@@ -5764,6 +5785,7 @@ function updateConversations(setTopFilter) {
 			aggregateTds[23].textContent = Math.round(findChiSquare(chosenData.m.a, chosenData.f.a) * 100) / 100;
 		}
 		let smallATs = S.getId("smallCustomAggregate").getElementsByTagName("td");
+		/*
 		smallATs[0].textContent = Math.round(smallCD.m.m * 100) / 100;
 		smallATs[1].textContent = Math.round(smallCD.m.t * 100) / 100;
 		smallATs[2].textContent = Math.round(smallCD.m.a * 100) / 100;
@@ -5773,6 +5795,26 @@ function updateConversations(setTopFilter) {
 		smallATs[6].textContent = Math.round(smallCD.a.m * 100) / 100;
 		smallATs[7].textContent = Math.round(smallCD.a.t * 100) / 100;
 		smallATs[8].textContent = Math.round(smallCD.a.a * 100) / 100;
+		*/
+		S.forEach(["m", "f", "a"], function (gender, gi) {
+			S.forEach(["m", "t", "a"], function (initiator, ii) {
+				let cell = S.getId("smallCustomAggregate").rows[gi + 1].cells[ii + 1];
+				cell.textContent = Math.round(smallCD[gender][initiator] * 100) / 100;
+				if (scd.grandTotal[gender][initiator] < 5) {
+					cell.style.background = "red";
+					cell.style.color = "white";
+				} else if (scd.grandTotal[gender][initiator] < 10) {
+					cell.style.background = "orange";
+					cell.style.color = "white";
+				} else if (scd.grandTotal[gender][initiator] < 15) {
+					cell.style.background = "yellow";
+					cell.style.color = "black";
+				} else {
+					cell.style.background = "#0f0";
+					cell.style.color = "black";
+				}
+			});
+		});
 		if (chosenCoarseSig.m.m.length > 0) {  // if a coarse significance list exists
 			showSimilarity(chosenCoarseSig.m.m, chosenCoarseSig.f.m, 9, 0, 3, true);
 			showSimilarity(chosenCoarseSig.m.t, chosenCoarseSig.f.t, 10, 1, 4, true);

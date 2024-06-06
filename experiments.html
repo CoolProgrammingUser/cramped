@@ -481,12 +481,23 @@
 				position: sticky;
 				top: 0rem;
 				z-index: 1;
+				padding-bottom: .5em;
 				width: 100%;
 				background: rgba(255, 255, 255, .75);
 			}
 			#conversationCheckboxes h4, #pizzaConversationCheckboxes h4 {
 				margin-top: .5em;
 				margin-bottom: .5em;
+			}
+			#pizzaConversationCheckboxes details {
+				display: inline-block;
+				margin: .5em;
+				padding-left: 1em;
+				text-align: left;
+				vertical-align: top;
+			}
+			#pizzaConversationCheckboxes summary {
+				margin-left: -1em;
 			}
 			#conversationCheckboxes > div:first-of-type, #pizzaConversationCheckboxes > div:first-of-type {
 				position: absolute;
@@ -2148,47 +2159,50 @@
 							Take into account...
 						</h4>
 						<div>
-							<div>
+							<details>
+								<summary>Certain people</summary>
 								<input type="checkbox" id="pizzaPersonFilterCheckbox">
-								<input type="text" id="pizzaPersonFilterList" placeholder="Filter people">
-							</div>
-							<br>
-							<div>
-								Conversations at:<br>
+								<input type="text" id="pizzaPersonFilterList" placeholder="people names">
+							</details>
+							<details>
+								<summary>Conversations at</summary>
 								<input type="checkbox" id="workPizzaConvos" checked> <label for="workPizzaConvos">work</label><br>
 								<input type="checkbox" id="homePizzaConvos"> <label for="homePizzaConvos">home</label><br>
 								<input type="checkbox" id="otherPizzaConvos"> <label for="otherPizzaConvos">other</label>
-							</div>
-							&emsp;
-							<div>
-								Conversations for:<br>
+							</details>
+							<details>
+								<summary>Conversations for</summary>
 								<input type="checkbox" id="casualPizzaConvos" checked> <label for="casualPizzaConvos">no reason</label><br>
 								<input type="checkbox" id="greetingPizzaConvos" checked> <label for="greetingPizzaConvos">greeting</label><br>
 								<input type="checkbox" id="practicalPizzaConvos"> <label for="practicalPizzaConvos">practical purposes</label>
-							</div>
-							&emsp;
-							<div>
-								Conversations that are:<br>
+							</details>
+							<details>
+								<summary>Conversations that are</summary>
 								<input type="checkbox" id="broadcastedPizzaConvos" checked> <label for="broadcastedPizzaConvos">broadcasted</label><br>
 								<input type="checkbox" id="joinedPizzaConvos" checked> <label for="joinedPizzaConvos">joined</label><br>
 								<input type="checkbox" id="continuedPizzaConvos"> <label for="continuedPizzaConvos">continuations</label>
-							</div>
-							&emsp;
-							<div>
-								Length of:<br>
+							</details>
+							<details>
+								<summary>Length of</summary>
 								<input type="checkbox" id="length0PizzaConvos"> <label for="length0PizzaConvos">0</label><br>
 								<input type="checkbox" id="length1PizzaConvos" checked> <label for="length1PizzaConvos">1</label><br>
 								<input type="checkbox" id="length2PizzaConvos" checked> <label for="length2PizzaConvos">2</label><br>
 								<input type="checkbox" id="length3PizzaConvos" checked> <label for="length3PizzaConvos">3</label>
-							</div>
-							&emsp;
-							<div>
-								Others' expression of:<br>
+							</details>
+							<details>
+								<summary>Others' expression of</summary>
 								<input type="checkbox" id="theirSmile1PizzaConvos" checked> <label for="theirSmile1PizzaConvos">unhappy</label><br>
 								<input type="checkbox" id="theirSmile2PizzaConvos" checked> <label for="theirSmile2PizzaConvos">neutral</label><br>
 								<input type="checkbox" id="theirSmile3PizzaConvos" checked> <label for="theirSmile3PizzaConvos">smiling</label><br>
 								<input type="checkbox" id="theirSmile0PizzaConvos" checked> <label for="theirSmile0PizzaConvos">unknown</label>
-							</div>
+							</details>
+							<details>
+								<summary>My expression of</summary>
+								<input type="checkbox" id="mySmile1PizzaConvos" checked> <label for="mySmile1PizzaConvos">unhappy</label><br>
+								<input type="checkbox" id="mySmile2PizzaConvos" checked> <label for="mySmile2PizzaConvos">neutral</label><br>
+								<input type="checkbox" id="mySmile3PizzaConvos" checked> <label for="mySmile3PizzaConvos">smiling</label><br>
+								<input type="checkbox" id="mySmile0PizzaConvos" checked> <label for="mySmile0PizzaConvos">not recorded</label>
+							</details>
 						</div>
 					</div>
 					<br>
@@ -2206,7 +2220,13 @@
 							Results
 						</div>
 						<section>
-							&chi;<sup>2</sup> values &ge; 3.841 are significant. Lower similarity percentages are more likely to be significant, but I've found similarities of 100% to be significant, so the value of the percentages are questionable. Clicking on values in the bottom row will display the datasets to use in significance-testing software. The box underneath the dropdown allows you to do math to the dropdown aspect by typing in operations followed by other aspects or numbers. The math applies only left-to-right, <strong>not</strong> according to the typical order of operations.
+							&chi;<sup>2</sup> values &ge; 3.841 are significant. Lower similarity percentages are more likely to be significant, but I've found similarities of 100% to be significant, so the value of the percentages are questionable. Clicking on values in the bottom row will display the datasets to use in significance-testing software. The box underneath the dropdown allows you to do math to the dropdown aspect by typing in operations followed by other aspects or numbers. The math applies only left-to-right, <strong>not</strong> according to the typical order of operations. Color coding of the cells indicates how many interactions are considered while calculating the values according to <span class="elaborate">this system</span>. More red = less interactions = less reliable data.
+							<aside data-heading="Color coding">
+								<section>&lt;5: red</section>
+								<section>&lt;10: orange</section>
+								<section>&lt;15: yellow</section>
+								<section>&ge;15: green</section>
+							</aside>
 						</section>
 						<select id="pizzaAspectSelector">
 							<option value="grandTotal" selected>

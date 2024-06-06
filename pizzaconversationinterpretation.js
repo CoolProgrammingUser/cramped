@@ -178,6 +178,16 @@ function filterPizzaConvo(convo) {
 	} else if (!S.getId("theirSmile0PizzaConvos").checked && ![1, 2, 3].includes(convo.theirSmile)) {  // if unknown expressions aren't wanted
 		shouldCountConvo = false;
 	}
+	// filters based on my expression
+	if (!S.getId("mySmile1PizzaConvos").checked && convo.mySmile == 1) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mySmile2PizzaConvos").checked && convo.mySmile == 2) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mySmile3PizzaConvos").checked && convo.mySmile == 3) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mySmile0PizzaConvos").checked && ![1, 2, 3].includes(convo.mySmile)) {  // if knowing my expression is required
+		shouldCountConvo = false;
+	}
 	return shouldCountConvo;
 }
 
@@ -480,7 +490,21 @@ function reheatPizza() {
 	S.forEach(dataTotals, function (set, gender) {
 		let row = pizzaAggregate.getElementsByTagName("tr")[["m", "f", "e"].indexOf(gender) + 1];
 		S.forEach(set, function (value, initiator) {
-			row.getElementsByTagName("td")[["m", "t", "b", "a", "i", "e"].indexOf(initiator)].textContent = value;
+			let cell = row.getElementsByTagName("td")[["m", "t", "b", "a", "i", "e"].indexOf(initiator)];
+			cell.textContent = value;
+			if (combinedData.grandTotal[gender][initiator] < 5) {
+				cell.style.background = "red";
+				cell.style.color = "white";
+			} else if (combinedData.grandTotal[gender][initiator] < 10) {
+				cell.style.background = "orange";
+				cell.style.color = "white";
+			} else if (combinedData.grandTotal[gender][initiator] < 15) {
+				cell.style.background = "yellow";
+				cell.style.color = "black";
+			} else {
+				cell.style.background = "#0f0";
+				cell.style.color = "black";
+			}
 		});
 	});
 
@@ -514,6 +538,7 @@ S.listen([
 	"broadcastedPizzaConvos", "joinedPizzaConvos", "continuedPizzaConvos",
 	"length0PizzaConvos", "length1PizzaConvos", "length2PizzaConvos", "length3PizzaConvos",
 	"theirSmile0PizzaConvos", "theirSmile1PizzaConvos", "theirSmile2PizzaConvos", "theirSmile3PizzaConvos",
+	"mySmile0PizzaConvos", "mySmile1PizzaConvos", "mySmile2PizzaConvos", "mySmile3PizzaConvos",
 	"pizzaAspectSelector", "mathematicalPie"
 ], "change", function () {
 	reheatPizza();
