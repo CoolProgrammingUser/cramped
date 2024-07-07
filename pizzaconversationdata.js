@@ -190,7 +190,7 @@ var pizzaPeople = {
 // name | (gender) | (age) | initiator | purpose | circumstances | length | density | participation | mood | topic | their smile | my smile
 var pizzaConvos = [
 	{
-		date: "11/27/23 (Monday) 90%",
+		date: "11/27/2023 (Monday) 90%",
 		places: [
 			{
 				coverage: "95%",
@@ -248,7 +248,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "11/28/23 20% (90% at home; 1% at work)",
+		date: "11/28/2023 20% (90% at home; 1% at work)",
 		places: [
 			{
 				coverage: "95%",
@@ -294,7 +294,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "11/29/23 92%",
+		date: "11/29/2023 92%",
 		places: [
 			{
 				coverage: "92%",
@@ -334,7 +334,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "11/30/23 50% (5% at home; 65% at work)",
+		date: "11/30/2023 50% (5% at home; 65% at work)",
 		places: [
 			{
 				coverage: "50%",
@@ -373,7 +373,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/1/23 40%",
+		date: "12/1/2023 40%",
 		places: [
 			{
 				coverage: "40%",
@@ -395,7 +395,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/2/23 45% (0% at home; 75% at work)",
+		date: "12/2/2023 45% (0% at home; 75% at work)",
 		places: [
 			{
 				coverage: "0%",
@@ -434,7 +434,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/3/23 30% (2% at home; 70% at work)",
+		date: "12/3/2023 30% (2% at home; 70% at work)",
 		places: [
 			{
 				coverage: "30%",
@@ -465,7 +465,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/4/23 (Monday) 95%",
+		date: "12/4/2023 (Monday) 95%",
 		places: [
 			{
 				coverage: "95%",
@@ -493,7 +493,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/5/23 75% (15% at home; 85% at work)",
+		date: "12/5/2023 75% (15% at home; 85% at work)",
 		places: [
 			{
 				coverage: "50%",
@@ -548,7 +548,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/6/23 30%",
+		date: "12/6/2023 30%",
 		places: [
 			{
 				coverage: "30%",
@@ -567,7 +567,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/7/23 40% (15% at home; 50% at work)",
+		date: "12/7/2023 40% (15% at home; 50% at work)",
 		places: [
 			{
 				coverage: "50%",
@@ -606,7 +606,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/8/23 0% (0% at home; 0% at work)",
+		date: "12/8/2023 0% (0% at home; 0% at work)",
 		places: [
 			{
 				coverage: "0%",
@@ -626,7 +626,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/9/23 35% (15% at home; 75% at work)",
+		date: "12/9/2023 35% (15% at home; 75% at work)",
 		places: [
 			{
 				coverage: "30%",
@@ -667,7 +667,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/10/23 10%? (0% at home; 15% at work?)",
+		date: "12/10/2023 10%? (0% at home; 15% at work?)",
 		places: [
 			{
 				coverage: "0%",
@@ -693,7 +693,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/11/23 (Mon) 2% (8% at home; 0% at work)",
+		date: "12/11/2023 (Mon) 2% (8% at home; 0% at work)",
 		places: [
 			{
 				coverage: "0%",
@@ -715,7 +715,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/12/23",
+		date: "12/12/2023",
 		places: [
 			{
 				coverage: "100%",
@@ -770,7 +770,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/13/23 (changed enjoyability and comfort)",
+		date: "12/13/2023 (changed enjoyability and comfort)",
 		places: [
 			{
 				coverage: "92%",
@@ -793,7 +793,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/14/23",
+		date: "12/14/2023",
 		places: [
 			{
 				coverage: "0%",
@@ -849,7 +849,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/15/23 66%",
+		date: "12/15/2023 66%",
 		places: [
 			{
 				coverage: "72%",
@@ -894,7 +894,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/16/23 (10%)",
+		date: "12/16/2023 (10%)",
 		places: [
 			{
 				coverage: "10%",
@@ -913,7 +913,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/17/23",
+		date: "12/17/2023",
 		places: [
 			{
 				coverage: "0%",
@@ -944,7 +944,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/18/23",
+		date: "12/18/2023",
 		places: [
 			{
 				coverage: "0%",
@@ -973,7 +973,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/19/23",
+		date: "12/19/2023",
 		places: [
 			{
 				coverage: "33%",
@@ -1019,7 +1019,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/20/23 0%",
+		date: "12/20/2023 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1029,7 +1029,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/21/23",
+		date: "12/21/2023",
 		places: [
 			{
 				coverage: "40%",
@@ -1068,7 +1068,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/22/23",
+		date: "12/22/2023",
 		places: [
 			{
 				coverage: "0%",
@@ -1101,7 +1101,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/23/23",
+		date: "12/23/2023",
 		places: [
 			{
 				coverage: "10%",
@@ -1146,7 +1146,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/24/23",
+		date: "12/24/2023",
 		places: [
 			{
 				coverage: "2%",
@@ -1160,7 +1160,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/25/23",
+		date: "12/25/2023",
 		places: [
 			{
 				coverage: "1%",
@@ -1173,7 +1173,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/26/23",
+		date: "12/26/2023",
 		places: [
 			{
 				coverage: "10%",
@@ -1197,7 +1197,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/27/23",
+		date: "12/27/2023",
 		places: [
 			{
 				coverage: "1%",
@@ -1213,7 +1213,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/28/23",
+		date: "12/28/2023",
 		places: [
 			{
 				coverage: "4%",
@@ -1249,7 +1249,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/29/23",
+		date: "12/29/2023",
 		places: [
 			{
 				coverage: "0%",
@@ -1276,7 +1276,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/30/23",
+		date: "12/30/2023",
 		places: [
 			{
 				coverage: "0%",
@@ -1286,7 +1286,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "12/31/23",
+		date: "12/31/2023",
 		places: [
 			{
 				coverage: "0%",
@@ -1296,7 +1296,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/1/24 (Monday) 4%",
+		date: "1/1/2024 (Monday) 4%",
 		places: [
 			{
 				coverage: "4%",
@@ -1315,7 +1315,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/2/24 15%",
+		date: "1/2/2024 15%",
 		places: [
 			{
 				coverage: "0%",
@@ -1345,7 +1345,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/3/24 1%",
+		date: "1/3/2024 1%",
 		places: [
 			{
 				coverage: "1%",
@@ -1357,7 +1357,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/4/24 25%",
+		date: "1/4/2024 25%",
 		places: [
 			{
 				coverage: "0%",
@@ -1395,7 +1395,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/5/24 25%",
+		date: "1/5/2024 25%",
 		places: [
 			{
 				coverage: "15%",
@@ -1434,7 +1434,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/6/24 4%",
+		date: "1/6/2024 4%",
 		places: [
 			{
 				coverage: "0%",
@@ -1461,7 +1461,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/7/24 35%",
+		date: "1/7/2024 35%",
 		places: [
 			{
 				coverage: "0%",
@@ -1492,7 +1492,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/8/24 12%",
+		date: "1/8/2024 12%",
 		places: [
 			{
 				coverage: "0%",
@@ -1525,7 +1525,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/9/24 50%",
+		date: "1/9/2024 50%",
 		places: [
 			{
 				coverage: "0%",
@@ -1562,7 +1562,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/10/24 0%",
+		date: "1/10/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1577,7 +1577,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/11/24 33%",
+		date: "1/11/2024 33%",
 		places: [
 			{
 				coverage: "100%",
@@ -1612,7 +1612,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/12/24 0%",
+		date: "1/12/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1632,7 +1632,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/13/24 0%",
+		date: "1/13/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1652,7 +1652,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/14/24 0%",
+		date: "1/14/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1662,7 +1662,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/15/24 0%",
+		date: "1/15/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1687,7 +1687,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/16/24 20%",
+		date: "1/16/2024 20%",
 		places: [
 			{
 				coverage: "0%",
@@ -1714,7 +1714,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/17/24 18%",
+		date: "1/17/2024 18%",
 		places: [
 			{
 				coverage: "100%",
@@ -1744,7 +1744,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/18/24 32%",
+		date: "1/18/2024 32%",
 		places: [
 			{
 				coverage: "0%",
@@ -1787,7 +1787,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/19/24 1%",
+		date: "1/19/2024 1%",
 		places: [
 			{
 				coverage: "0%",
@@ -1815,7 +1815,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/20/24 0%",
+		date: "1/20/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1825,7 +1825,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/21/24 1%",
+		date: "1/21/2024 1%",
 		places: [
 			{
 				coverage: "5%",
@@ -1850,7 +1850,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/22/24 0%",
+		date: "1/22/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1860,7 +1860,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/23/24 60%",
+		date: "1/23/2024 60%",
 		places: [
 			{
 				coverage: "0%",
@@ -1895,7 +1895,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/24/24 4%",
+		date: "1/24/2024 4%",
 		places: [
 			{
 				coverage: "5%",
@@ -1919,7 +1919,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/25/24 0%",
+		date: "1/25/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1939,7 +1939,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/26/24 0%",
+		date: "1/26/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1959,7 +1959,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/27/24 0%",
+		date: "1/27/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -1979,7 +1979,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/28/24 75%",
+		date: "1/28/2024 75%",
 		places: [
 			{
 				coverage: "0%",
@@ -2003,7 +2003,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/29/24 0%",
+		date: "1/29/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2023,7 +2023,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/30/24 15%",
+		date: "1/30/2024 15%",
 		places: [
 			{
 				coverage: "0%",
@@ -2046,7 +2046,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "1/31/24 0%",
+		date: "1/31/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2056,7 +2056,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/1/24 7%",
+		date: "2/1/2024 7%",
 		places: [
 			{
 				coverage: "0%",
@@ -2082,7 +2082,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/2/24 16%",
+		date: "2/2/2024 16%",
 		places: [
 			{
 				coverage: "0%",
@@ -2107,7 +2107,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/3/24 10%",
+		date: "2/3/2024 10%",
 		places: [
 			{
 				coverage: "50%",
@@ -2136,7 +2136,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/4/24 0%",
+		date: "2/4/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2156,7 +2156,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/5/24 0%",
+		date: "2/5/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2166,27 +2166,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/6/24 0%",
-		places: [
-			{
-				coverage: "0%",
-				category: "home",
-				convos: []
-			},
-			{
-				coverage: "0%",
-				category: "work",
-				convos: []
-			},
-			{
-				coverage: "0%",
-				category: "home",
-				convos: []
-			}
-		]
-	},
-	{
-		date: "2/7/24 0%",
+		date: "2/6/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2206,7 +2186,27 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/8/24 10%",
+		date: "2/7/2024 0%",
+		places: [
+			{
+				coverage: "0%",
+				category: "home",
+				convos: []
+			},
+			{
+				coverage: "0%",
+				category: "work",
+				convos: []
+			},
+			{
+				coverage: "0%",
+				category: "home",
+				convos: []
+			}
+		]
+	},
+	{
+		date: "2/8/2024 10%",
 		places: [
 			{
 				coverage: "0%",
@@ -2236,7 +2236,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/9/24 6%",
+		date: "2/9/2024 6%",
 		places: [
 			{
 				coverage: "0%",
@@ -2267,7 +2267,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/10/24 0%",
+		date: "2/10/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2292,7 +2292,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/11/24 4%",
+		date: "2/11/2024 4%",
 		places: [
 			{
 				coverage: "0%",
@@ -2328,7 +2328,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/12/24 0%",
+		date: "2/12/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2338,7 +2338,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/13/24 78%",
+		date: "2/13/2024 78%",
 		places: [
 			{
 				coverage: "0%",
@@ -2374,7 +2374,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/14/24 0%",
+		date: "2/14/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2394,7 +2394,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/15/24 20%",
+		date: "2/15/2024 20%",
 		places: [
 			{
 				coverage: "0%",
@@ -2423,7 +2423,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/16/24 0%",
+		date: "2/16/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2443,7 +2443,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/17/24 0%",
+		date: "2/17/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2463,7 +2463,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/18/24 0%",
+		date: "2/18/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2473,7 +2473,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/19/24 60%",
+		date: "2/19/2024 60%",
 		places: [
 			{
 				coverage: "0%",
@@ -2498,7 +2498,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/20/24 1%",
+		date: "2/20/2024 1%",
 		places: [
 			{
 				coverage: "1%",
@@ -2510,7 +2510,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/21/24 0%",
+		date: "2/21/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2520,7 +2520,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/22/24 0%",
+		date: "2/22/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2530,7 +2530,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/23/24 0%",
+		date: "2/23/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2540,7 +2540,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/24/24 0%",
+		date: "2/24/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2550,7 +2550,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/25/24 0%",
+		date: "2/25/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2560,7 +2560,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/26/24 0%",
+		date: "2/26/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2580,7 +2580,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/27/24 0%",
+		date: "2/27/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2590,7 +2590,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/28/24 0%",
+		date: "2/28/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2600,7 +2600,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "2/29/24 0%",
+		date: "2/29/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2610,7 +2610,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/1/24 0%",
+		date: "3/1/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2620,7 +2620,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/2/24 0%",
+		date: "3/2/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2630,7 +2630,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/3/24 0%",
+		date: "3/3/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2640,7 +2640,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/4/24 0%",
+		date: "3/4/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2650,7 +2650,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/5/24 12%",
+		date: "3/5/2024 12%",
 		places: [
 			{
 				coverage: "12%",
@@ -2666,7 +2666,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/6/24 0%",
+		date: "3/6/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2676,7 +2676,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/7/24 0%",
+		date: "3/7/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2696,7 +2696,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/8/24 0%",
+		date: "3/8/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2706,7 +2706,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/9/24 6%",
+		date: "3/9/2024 6%",
 		places: [
 			{
 				coverage: "6%",
@@ -2722,7 +2722,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/10/24 1%",
+		date: "3/10/2024 1%",
 		places: [
 			{
 				coverage: "0%",
@@ -2745,7 +2745,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/11/24 0%",
+		date: "3/11/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2755,7 +2755,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/12/24 0%",
+		date: "3/12/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2765,7 +2765,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/13/24 40%",
+		date: "3/13/2024 40%",
 		places: [
 			{
 				coverage: "40%",
@@ -2785,7 +2785,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/14/24 10%",
+		date: "3/14/2024 10%",
 		places: [
 			{
 				coverage: "10%",
@@ -2797,7 +2797,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/15/24 0%",
+		date: "3/15/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2817,7 +2817,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/16/24 0%",
+		date: "3/16/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2837,7 +2837,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/17/24 0%",
+		date: "3/17/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2847,7 +2847,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/18/24 15%",
+		date: "3/18/2024 15%",
 		places: [
 			{
 				coverage: "15%",
@@ -2861,7 +2861,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/19/24 70%",
+		date: "3/19/2024 70%",
 		places: [
 			{
 				coverage: "0%",
@@ -2886,7 +2886,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/20/24 6%",
+		date: "3/20/2024 6%",
 		places: [
 			{
 				coverage: "6%",
@@ -2900,7 +2900,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/21/24 0%",
+		date: "3/21/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2910,7 +2910,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/22/24 0%",
+		date: "3/22/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2920,7 +2920,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/23/24 0%",
+		date: "3/23/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2930,7 +2930,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/24/24 0%",
+		date: "3/24/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2940,7 +2940,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/25/24 0%",
+		date: "3/25/2024 0%",
 		places: [
 			{
 				coverage: "0%",
@@ -2950,7 +2950,7 @@ var pizzaConvos = [
 		]
 	},
 	{
-		date: "3/26/24 20%",
+		date: "3/26/2024 20%",
 		places: [
 			{
 				coverage: "20%",

@@ -4255,7 +4255,7 @@ function updateConversations(setTopFilter) {
 			}
 			let studyStart = new Date("8/21/2017").getTime(),
 				studyEnd = new Date("11/19/2017").getTime();
-			if (dateRange.indexOf("-") > -1) {
+			if (dateRange.indexOf("-") > -1) {  // if it's a date range
 				if (dateRange.search(/[\d\/]-[\d\/]/) == -1) {
 					alert("An invalid date range was given.");
 					throw "An invalid date range was given.";
@@ -4286,7 +4286,7 @@ function updateConversations(setTopFilter) {
 				if (dateMilliseconds < date1 || dateMilliseconds > date2) {
 					dayIsCountable = false;
 				}
-			} else {
+			} else {  // if it's a start date
 				if (dateRange.search(/\d{1,2}\/\d{1,2}\/\d{4}/) > -1) {
 					dateRange = new Date(dateRange).getTime();
 				} else if (dateRange.search(/\d{1,2}\/d{1,2}\/\d{2}/) > -1) {

@@ -476,6 +476,11 @@
 				white-space: pre-line;
 				overflow: auto;
 			}
+			#rawPizzaConversations {
+				background: black;
+				color: white;
+				white-space: pre;
+			}
 			#conversationCheckboxes, #pizzaConversationCheckboxes {
 				position: -webkit-sticky;
 				position: sticky;
@@ -1956,16 +1961,16 @@
 						Working at a local pizzeria
 					</h3>
 					<section>
-						This is still a work in progress.
+						This is still a work in progress. This was conducted from November 27, 2023 to March 26, 2024 while I worked at a local pizzeria.
 					</section>
-					<div class="details raw-data">
+					<div class="details">
 						<div class="summary">
 							Raw data
 						</div>
 						<section>
 							This is close to what I would type into my phone to record the conversation data, and it's from this data (as displayed) where the conversation display table figures out what to fill in. I recorded the following data points for every interaction: the person's name or identifier, their gender, roughly how old they were, who started the conversation, what the purpose of the conversation was, the circumstances of the conversation (usually nothing special), the length of the conversation, how much the talking was broken up over time, how much I contributed to the conversation, how favorably I felt during the conversation (mood), how favorable I think the topic(s) objectively should've been (topic), how much they were smiling, and how much I was smiling. The gender and age information can be associated with a name (and stored elsewhere), so you don't necessarily see that information here. I increased the amount of data I was collecting over time, and the beginning of the data traded in the two favorability aspects for a general enjoyability aspect and a measure of how uncomfortable I was. I was annoyed with myself for changing my data collection along the way again during this study, but luckily, I primarily added things rather than changed how other data is collected, so the earlier data is largely compatible with the later data. More details of the meanings of the data is located in the "Data details" section.
 						</section>
-						<div id="rawPizzaConversations">[Currently empty]</div>
+						<div id="rawPizzaConversations">[An error occurred while trying to display the data.]</div>
 					</div>
 					<div class="details">
 						<div class="summary">
@@ -2159,6 +2164,10 @@
 							Take into account...
 						</h4>
 						<div>
+							<details>
+								<summary>Certain dates</summary>
+								<input type="text" id="pizzaConvoDateRange" placeholder="Start date or range">
+							</details>
 							<details>
 								<summary>Certain people</summary>
 								<input type="checkbox" id="pizzaPersonFilterCheckbox">

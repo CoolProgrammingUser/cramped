@@ -1,3 +1,5 @@
+S.getId("rawPizzaConversations").textContent = JSON.stringify(pizzaConvos, null, "\t").replace(/\n\t\t\t\t\t\t/g, "").replace(/\n\t\t\t\t\t]/g, "]");
+
 function parsePizzaConvo(dataList) {
 	/**
 	turns a list of data on an interaction into an object
@@ -87,7 +89,78 @@ function parsePizzaConvo(dataList) {
 
 
 function filterPizzaDay(day) {
-	return true;
+	let shouldCountDay = true;
+	if (day.date.includes(" ")) {
+		day.date = day.date.split(" ")[0];
+	}
+	if (document.getElementById("pizzaConvoDateRange").value) {
+		let dateRange = document.getElementById("pizzaConvoDateRange").value.trim();
+		if (dateRange.search(/[^\d\/-]/) > -1) {
+			alert("An invalid date (range) was given.");
+			throw "An invalid date (range) was given.";
+		}
+		let studyStart = new Date("11/27/2023").getTime();
+		let studyEnd = new Date("3/26/2024").getTime();
+		if (dateRange.indexOf("-") > -1) {  // if it's a date range
+			if (dateRange.search(/[\d\/]-[\d\/]/) == -1) {
+				alert("An invalid date range was given.");
+				throw "An invalid date range was given.";
+			}
+			let date1 = dateRange.split("-")[0];
+			let date2 = dateRange.split("-")[1];
+			if (date1.search(/\d{1,2}\/\d{1,2}\/\d{4}/) > -1) {
+				date1 = new Date(date1).getTime();
+			} else if (date1.search(/\d{1,2}\/d{1,2}\/\d{2}/) > -1) {
+				date1 = new Date(date1.splice(date1.lastIndexOf("/") + 1, 0, "20" + date1.slice(-2))).getTime();
+			} else if (date1.search(/\d{1,2}\/\d{1,2}/) > -1) {
+				if (Number(date1.match(/\d+/)[0]) > 10) {
+					date1 = new Date(date1 + "/2023").getTime();
+				} else {
+					date1 = new Date(date1 + "/2024").getTime();
+				}
+			} else {
+				alert("The date wasn't formatted properly.");
+				throw "The date wasn't formatted properly.";
+			}
+			if (date2.search(/\d{1,2}\/\d{1,2}\/\d{4}/) > -1) {
+				date2 = new Date(date2).getTime();
+			} else if (date2.search(/\d{1,2}\/d{1,2}\/\d{2}/) > -1) {
+				date2 = new Date(date2.splice(date2.lastIndexOf("/") + 1, 0, "20" + date2.slice(-2))).getTime();
+			} else if (date2.search(/\d{1,2}\/\d{1,2}/) > -1) {
+				if (Number(date2.match(/\d+/)[0]) > 10) {
+					date2 = new Date(date2 + "/2023").getTime();
+				} else {
+					date2 = new Date(date2 + "/2024").getTime();
+				}
+			} else {
+				alert("The date wasn't formatted properly.");
+				throw "The date wasn't formatted properly.";
+			}
+			let dateMilliseconds = new Date(day.date).getTime();
+			if (dateMilliseconds < date1 || dateMilliseconds > date2) {
+				shouldCountDay = false;
+			}
+		} else {  // if it's a start date
+			if (dateRange.search(/\d{1,2}\/\d{1,2}\/\d{4}/) > -1) {
+				dateRange = new Date(dateRange).getTime();
+			} else if (dateRange.search(/\d{1,2}\/d{1,2}\/\d{2}/) > -1) {
+				dateRange = new Date(dateRange.splice(dateRange.lastIndexOf("/") + 1, 0, "20" + dateRange.slice(-2))).getTime();
+			} else if (dateRange.search(/\d{1,2}\/\d{1,2}/) > -1) {
+				if (Number(dateRange.match(/\d+/)[0]) > 10) {
+					dateRange = new Date(dateRange + "/2023").getTime();
+				} else {
+					dateRange = new Date(dateRange + "/2024").getTime();
+				}
+			} else {
+				alert("The date wasn't formatted properly.");
+				throw "The date wasn't formatted properly.";
+			}
+			if (new Date(day.date).getTime() < dateRange) {
+				shouldCountDay = false;
+			}
+		}
+	}
+	return shouldCountDay;
 }
 
 function filterPizzaPlace(place) {
@@ -532,6 +605,7 @@ function reheatPizza() {
 reheatPizza();
 
 S.listen([
+	"pizzaConvoDateRange",
 	"pizzaPersonFilterCheckbox", "pizzaPersonFilterList",
 	"workPizzaConvos", "homePizzaConvos", "otherPizzaConvos",
 	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
