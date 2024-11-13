@@ -182,6 +182,11 @@ var pizzaPeople = {
 		gender: "m",
 		age: 3,
 		yearsOld: 21
+	},
+	rich: {
+		gender: "m",
+		age: 4,
+		yearsOld: "?"
 	}
 };
 

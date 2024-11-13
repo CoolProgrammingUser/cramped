@@ -185,6 +185,16 @@ function filterPizzaConvo(convo) {
 	if (!convo.initiator || convo.initiator == "-") {
 		shouldCountConvo = false;
 	}
+	// filters types of people in or out
+	let coworkerList = Object.keys(pizzaPeople);
+	coworkerList.splice(coworkerList.indexOf("mahm"), 1);
+	coworkerList.splice(coworkerList.indexOf("dad"), 1);
+	let isACoworker = convo.people.some(person => coworkerList.includes(person.name));
+	if (!S.getId("coworkerPizzaConvos").checked && isACoworker) {  // if coworkers aren't desired
+		shouldCountConvo = false;
+	} else if (!S.getId("otherPeoplePizzaConvos").checked && !isACoworker) {  // if everyone else isn't desired
+		shouldCountConvo = false;
+	}
 	// filters specific people in or out
 	if (S.getId("pizzaPersonFilterList").value.trim()) {
 		let peopleListed = S.getId("pizzaPersonFilterList").value.trim().replace(/,? +and +|, *|,? *& */g, "&").split("&");
@@ -659,6 +669,7 @@ S.listen("lastHalfOfPizzaConvoData", "click", function () {
 
 S.listen([
 	"pizzaConvoDateRange",
+	"coworkerPizzaConvos", "otherPeoplePizzaConvos",
 	"pizzaPersonFilterCheckbox", "pizzaPersonFilterList",
 	"workPizzaConvos", "homePizzaConvos", "otherPizzaConvos",
 	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
