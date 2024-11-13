@@ -241,6 +241,28 @@ function filterPizzaConvo(convo) {
 			shouldCountConvo = false;
 		}
 	}
+	// filters based on how I feel during the conversation
+	if (!S.getId("mood1PizzaConvos").checked && convo.mood == 1) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mood2PizzaConvos").checked && convo.mood == 2) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mood3PizzaConvos").checked && convo.mood == 3) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mood4PizzaConvos").checked && convo.mood == 4) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mood5PizzaConvos").checked && convo.mood == 5) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mood6PizzaConvos").checked && convo.mood == 6) {
+		shouldCountConvo = false;
+	} else if (!S.getId("mood7PizzaConvos").checked && convo.mood == 7) {
+		shouldCountConvo = false;
+	}
+	// filters based on how I think I should feel during the conversation
+	S.forEach([1, 2, 3, 4, 5, 6, 7], function (number) {
+		if (!S.getId("topic" + number + "PizzaConvos").checked && convo.topic == number) {
+			shouldCountConvo = false;
+		}
+	});
 	// filters based on the expression of the other person
 	if (!S.getId("theirSmile1PizzaConvos").checked && convo.theirSmile == 1) {
 		shouldCountConvo = false;
@@ -565,18 +587,28 @@ function reheatPizza() {
 		S.forEach(set, function (value, initiator) {
 			let cell = row.getElementsByTagName("td")[["m", "t", "b", "a", "i", "e"].indexOf(initiator)];
 			cell.textContent = value;
-			if (combinedData.grandTotal[gender][initiator] < 5) {
-				cell.style.background = "red";
-				cell.style.color = "white";
-			} else if (combinedData.grandTotal[gender][initiator] < 10) {
-				cell.style.background = "orange";
-				cell.style.color = "white";
-			} else if (combinedData.grandTotal[gender][initiator] < 15) {
-				cell.style.background = "yellow";
+			let total = combinedData.grandTotal[gender][initiator];
+			let yellowThreshold = 12;
+			let greenThreshold = 20;
+			let red;
+			if (total <= yellowThreshold) {
+				red = 255;
+			} else if (total >= greenThreshold) {
+				red = 0;
+			} else {
+				red = Math.round(255 - (total - yellowThreshold) / (greenThreshold - yellowThreshold) * 255);
+			}
+			let green;
+			if (total >= yellowThreshold) {
+				green = 255;
+			} else {
+				green = Math.round(total / yellowThreshold * 255);
+			}
+			cell.style.background = "rgb(" + red + ", " + green + ", 0)";
+			if (green > 150) {
 				cell.style.color = "black";
 			} else {
-				cell.style.background = "#0f0";
-				cell.style.color = "black";
+				cell.style.color = "white";
 			}
 		});
 	});
@@ -604,6 +636,27 @@ function reheatPizza() {
 
 reheatPizza();
 
+S.listen("fullPizzaConvoDateRange", "click", function () {
+	S.getId("pizzaConvoDateRange").value = "";
+	reheatPizza();
+});
+S.listen("firstHalfOfPizzaConvoDateRange", "click", function () {
+	S.getId("pizzaConvoDateRange").value = "11/27-1/25";
+	reheatPizza();
+});
+S.listen("lastHalfOfPizzaConvoDateRange", "click", function () {
+	S.getId("pizzaConvoDateRange").value = "1/26";
+	reheatPizza();
+});
+S.listen("firstHalfOfPizzaConvoData", "click", function () {
+	S.getId("pizzaConvoDateRange").value = "11/27-1/5";
+	reheatPizza();
+});
+S.listen("lastHalfOfPizzaConvoData", "click", function () {
+	S.getId("pizzaConvoDateRange").value = "1/6";
+	reheatPizza();
+});
+
 S.listen([
 	"pizzaConvoDateRange",
 	"pizzaPersonFilterCheckbox", "pizzaPersonFilterList",
@@ -611,6 +664,8 @@ S.listen([
 	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
 	"broadcastedPizzaConvos", "joinedPizzaConvos", "continuedPizzaConvos",
 	"length0PizzaConvos", "length1PizzaConvos", "length2PizzaConvos", "length3PizzaConvos",
+	"mood1PizzaConvos", "mood2PizzaConvos", "mood3PizzaConvos", "mood4PizzaConvos", "mood5PizzaConvos", "mood6PizzaConvos", "mood7PizzaConvos",
+	"topic1PizzaConvos", "topic2PizzaConvos", "topic3PizzaConvos", "topic4PizzaConvos", "topic5PizzaConvos", "topic6PizzaConvos", "topic7PizzaConvos",
 	"theirSmile0PizzaConvos", "theirSmile1PizzaConvos", "theirSmile2PizzaConvos", "theirSmile3PizzaConvos",
 	"mySmile0PizzaConvos", "mySmile1PizzaConvos", "mySmile2PizzaConvos", "mySmile3PizzaConvos",
 	"pizzaAspectSelector", "mathematicalPie"

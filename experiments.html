@@ -447,6 +447,9 @@
 		-->
 		<link rel="stylesheet" href="formatting.css">
 		<style>
+			h2 {
+				text-decoration: underline;
+			}
 			over {
 				text-decoration: overline;
 			}
@@ -2166,7 +2169,24 @@
 						<div>
 							<details>
 								<summary>Certain dates</summary>
-								<input type="text" id="pizzaConvoDateRange" placeholder="Start date or range">
+								<input type="text" id="pizzaConvoDateRange" placeholder="Start date or range"><br>
+								<button id="fullPizzaConvoDateRange">
+									The whole time
+								</button>
+								<br>
+								<button id="firstHalfOfPizzaConvoDateRange">
+									First half of days
+								</button>
+								<button id="lastHalfOfPizzaConvoDateRange">
+									Last half of days
+								</button>
+								<br>
+								<button id="firstHalfOfPizzaConvoData">
+									First half of data
+								</button>
+								<button id="lastHalfOfPizzaConvoData">
+									Last half of data
+								</button>
 							</details>
 							<details>
 								<summary>Certain people</summary>
@@ -2199,6 +2219,26 @@
 								<input type="checkbox" id="length3PizzaConvos" checked> <label for="length3PizzaConvos">3</label>
 							</details>
 							<details>
+								<summary>When I feel</summary>
+								<input type="checkbox" id="mood1PizzaConvos" checked> <label for="mood1PizzaConvos">extremely upset</label><br>
+								<input type="checkbox" id="mood2PizzaConvos" checked> <label for="mood2PizzaConvos">rather unhappy</label><br>
+								<input type="checkbox" id="mood3PizzaConvos" checked> <label for="mood3PizzaConvos">somewhat unhappy</label><br>
+								<input type="checkbox" id="mood4PizzaConvos" checked> <label for="mood4PizzaConvos">neutral</label><br>
+								<input type="checkbox" id="mood5PizzaConvos" checked> <label for="mood5PizzaConvos">reasonably happy</label><br>
+								<input type="checkbox" id="mood6PizzaConvos" checked> <label for="mood6PizzaConvos">quite happy</label><br>
+								<input type="checkbox" id="mood7PizzaConvos" checked> <label for="mood7PizzaConvos">ecstatic</label>
+							</details>
+							<details>
+								<summary>When I should feel</summary>
+								<input type="checkbox" id="topic1PizzaConvos" checked> <label for="topic1PizzaConvos">extremely upset</label><br>
+								<input type="checkbox" id="topic2PizzaConvos" checked> <label for="topic2PizzaConvos">rather unhappy</label><br>
+								<input type="checkbox" id="topic3PizzaConvos" checked> <label for="topic3PizzaConvos">somewhat unhappy</label><br>
+								<input type="checkbox" id="topic4PizzaConvos" checked> <label for="topic4PizzaConvos">neutral</label><br>
+								<input type="checkbox" id="topic5PizzaConvos" checked> <label for="topic5PizzaConvos">reasonably happy</label><br>
+								<input type="checkbox" id="topic6PizzaConvos" checked> <label for="topic6PizzaConvos">quite happy</label><br>
+								<input type="checkbox" id="topic7PizzaConvos" checked> <label for="topic7PizzaConvos">ecstatic</label>
+							</details>
+							<details>
 								<summary>Others' expression of</summary>
 								<input type="checkbox" id="theirSmile1PizzaConvos" checked> <label for="theirSmile1PizzaConvos">unhappy</label><br>
 								<input type="checkbox" id="theirSmile2PizzaConvos" checked> <label for="theirSmile2PizzaConvos">neutral</label><br>
@@ -2229,13 +2269,7 @@
 							Results
 						</div>
 						<section>
-							&chi;<sup>2</sup> values &ge; 3.841 are significant. Lower similarity percentages are more likely to be significant, but I've found similarities of 100% to be significant, so the value of the percentages are questionable. Clicking on values in the bottom row will display the datasets to use in significance-testing software. The box underneath the dropdown allows you to do math to the dropdown aspect by typing in operations followed by other aspects or numbers. The math applies only left-to-right, <strong>not</strong> according to the typical order of operations. Color coding of the cells indicates how many interactions are considered while calculating the values according to <span class="elaborate">this system</span>. More red = less interactions = less reliable data.
-							<aside data-heading="Color coding">
-								<section>&lt;5: red</section>
-								<section>&lt;10: orange</section>
-								<section>&lt;15: yellow</section>
-								<section>&ge;15: green</section>
-							</aside>
+							&chi;<sup>2</sup> values &ge; 3.841 are significant. Lower similarity percentages are more likely to be significant, but I've found similarities of 100% to be significant, so the value of the percentages are questionable. Clicking on values in the bottom row will display the datasets to use in significance-testing software. The box underneath the dropdown allows you to do math to the dropdown aspect by typing in operations followed by other aspects or numbers. The math applies only left-to-right, <strong>not</strong> according to the typical order of operations. Color coding of the cells indicates how many interactions are considered while calculating the values. More red = less interactions = less reliable data.
 						</section>
 						<select id="pizzaAspectSelector">
 							<option value="grandTotal" selected>
