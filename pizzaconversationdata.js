@@ -521,7 +521,7 @@ var pizzaConvos = [
 					["kAshmeer", "t", "g", "n", 0, 3, 0, 4, 2],
 					["kAshmeer", "t", "h", "n", 1, 3, 2, 4, 2],
 					["maek", "t", "n", "j", 0, 3, 0, 4, 2],
-					["maek", "m", "n", "n", 0, 4, 2, 4, 2],
+					["maek", "m", "n", "n", 0, 3, 2, 4, 2],
 					["maek", "t", "h", "n", 1, 3, 2, 4, 2],
 					["am4", "a", "p", "n", 0, 3, 2, 4, 2],
 					["af5", "a", "p", "n", 1, 2, 2, 4, 2],
@@ -3005,7 +3005,7 @@ dad.tnn13132, dad.tin03042, mahm.tin13242, mahm.mij13242, mahm.mnb12552, mahm.tn
 
 12/5/23    75% (15% at home; 85% at work)
 dad.tnn13042, dad.tnn03242, dad-
-Emuhlee.tgn03052, dAhnol.tin03242, Emuhlee.tnn13252, rAelee.tan03042, Emuhlee.tan03042, kAshmeer.tgn03042, kAshmeer.thn13242, maek.tnj03042, maek.mnn04242, maek.thn13242, am4apn03242, af5apn12242, rOzmeree.tgn03042, maek.tin13242, rOzmeree.mpn03242, maek.mpn13242, af4apn13242, am4apn03242, rOzmeree.tnn13251, kAyluhb s.mnn03442, maek.tpn23342
+Emuhlee.tgn03052, dAhnol.tin03242, Emuhlee.tnn13252, rAelee.tan03042, Emuhlee.tan03042, kAshmeer.tgn03042, kAshmeer.thn13242, maek.tnj03042, maek.mnn03242, maek.thn13242, am4apn03242, af5apn12242, rOzmeree.tgn03042, maek.tin13242, rOzmeree.mpn03242, maek.mpn13242, af4apn13242, am4apn03242, rOzmeree.tnn13251, kAyluhb s.mnn03442, maek.tpn23342
 p1mpn12242
 mahm.tin-
 

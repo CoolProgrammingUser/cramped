@@ -218,7 +218,7 @@ function filterPizzaConvo(convo) {
 		if (!S.getId("greetingPizzaConvos").checked && convo.purpose.includes("g")) {
 			shouldCountConvo = false;
 		}
-		if (!S.getId("practicalPizzaConvos").checked && convo.purpose.includes("p")) {
+		if (!S.getId("practicalPizzaConvos").checked && (convo.purpose.includes("p") || convo.purpose.includes("i"))) {
 			shouldCountConvo = false;
 		}
 	}
@@ -343,6 +343,128 @@ function setPizzaSignificance(sigLists) {
 	}
 }
 
+// establishes default information
+var combinedData = {};
+var corrections = {};
+var significance = {};
+
+function addToppings(c) {
+	// sets the grand total information
+	S.forEach(c.people, function (p) {
+		combinedData.grandTotal.e.e++;
+		combinedData.grandTotal[p.gender].e++;
+		significance.grandTotal.e.e.push(1);
+		significance.grandTotal[p.gender].e.push(1);
+		if (c.initiator == "c4") {
+			combinedData.grandTotal.e.m++;
+			combinedData.grandTotal.e.t++;
+			combinedData.grandTotal.e.b++;
+			combinedData.grandTotal[p.gender].m++;
+			combinedData.grandTotal[p.gender].t++;
+			combinedData.grandTotal[p.gender].b++;
+			significance.grandTotal.e.m.push(1);
+			significance.grandTotal.e.t.push(1);
+			significance.grandTotal.e.b.push(1);
+			significance.grandTotal[p.gender].m.push(1);
+			significance.grandTotal[p.gender].t.push(1);
+			significance.grandTotal[p.gender].b.push(1);
+		} else if (c.initiator.includes("c")) {  ////
+			combinedData.grandTotal.e.m++;
+			combinedData.grandTotal.e.t++;
+			combinedData.grandTotal[p.gender].m++;
+			combinedData.grandTotal[p.gender].t++;
+			significance.grandTotal.e.m.push(1);
+			significance.grandTotal.e.t.push(1);
+			significance.grandTotal[p.gender].m.push(1);
+			significance.grandTotal[p.gender].t.push(1);
+		} else {
+			combinedData.grandTotal.e[c.initiator]++;
+			combinedData.grandTotal[p.gender][c.initiator]++;
+			significance.grandTotal.e[c.initiator].push(1);
+			significance.grandTotal[p.gender][c.initiator].push(1);
+		}
+		// sets the unique total information
+		if (p.name.search(/^a\d*$|^c\d*$/) == -1) {  // if I would recognize the person
+			significance.uniqueTotal.e.e.push(p.name);
+			significance.uniqueTotal[p.gender].e.push(p.name);
+			if (c.initiator == "c4") {
+				significance.uniqueTotal.e.m.push(p.name);
+				significance.uniqueTotal.e.t.push(p.name);
+				significance.uniqueTotal.e.b.push(p.name);
+				significance.uniqueTotal[p.gender].m.push(p.name);
+				significance.uniqueTotal[p.gender].t.push(p.name);
+				significance.uniqueTotal[p.gender].b.push(p.name);
+			} else if (c.initiator.includes("c")) {  ////
+				significance.uniqueTotal.e.m.push(p.name);
+				significance.uniqueTotal.e.t.push(p.name);
+				significance.uniqueTotal[p.gender].m.push(p.name);
+				significance.uniqueTotal[p.gender].t.push(p.name);
+			} else {
+				significance.uniqueTotal.e[c.initiator].push(p.name);
+				significance.uniqueTotal[p.gender][c.initiator].push(p.name);
+			}
+		}
+		// sets many other aspects
+		S.forEach(["length", "density", "participation", "mood", "topic", "theirSmile", "mySmile"], function (aspect) {
+			combinedData[aspect].e.e += c[aspect];
+			combinedData[aspect][p.gender].e += c[aspect];
+			significance[aspect].e.e.push(c[aspect]);
+			significance[aspect][p.gender].e.push(c[aspect]);
+			if (c.initiator == "c4") {
+				combinedData[aspect].e.m += c[aspect];
+				combinedData[aspect].e.t += c[aspect];
+				combinedData[aspect].e.b += c[aspect];
+				combinedData[aspect][p.gender].m += c[aspect];
+				combinedData[aspect][p.gender].t += c[aspect];
+				combinedData[aspect][p.gender].b += c[aspect];
+				significance[aspect].e.m.push(c[aspect]);
+				significance[aspect].e.t.push(c[aspect]);
+				significance[aspect].e.b.push(c[aspect]);
+				significance[aspect][p.gender].m.push(c[aspect]);
+				significance[aspect][p.gender].t.push(c[aspect]);
+				significance[aspect][p.gender].b.push(c[aspect]);
+			} else if (c.initiator.includes("c")) {  ////
+				combinedData[aspect].e.m += c[aspect];
+				combinedData[aspect].e.t += c[aspect];
+				combinedData[aspect][p.gender].m += c[aspect];
+				combinedData[aspect][p.gender].t += c[aspect];
+				significance[aspect].e.m.push(c[aspect]);
+				significance[aspect].e.t.push(c[aspect]);
+				significance[aspect][p.gender].m.push(c[aspect]);
+				significance[aspect][p.gender].t.push(c[aspect]);
+			} else {
+				combinedData[aspect].e[c.initiator] += c[aspect];
+				combinedData[aspect][p.gender][c.initiator] += c[aspect];
+				significance[aspect].e[c.initiator].push(c[aspect]);
+				significance[aspect][p.gender][c.initiator].push(c[aspect]);
+			}
+		});
+		// determines corrections for averages containing incomplete/inconsistent data
+		S.forEach(["density", "participation", "mood", "topic", "theirSmile", "mySmile"], function (aspect) {
+			if (aspect == "-" || ["topic", "theirSmile", "mySmile"].includes(aspect) && c[aspect] == 0) {
+				corrections[aspect].e.e++;
+				corrections[aspect][p.gender].e++;
+				if (c.initiator == "c4") {
+					corrections[aspect].e.m++;
+					corrections[aspect].e.t++;
+					corrections[aspect].e.b++;
+					corrections[aspect][p.gender].m++;
+					corrections[aspect][p.gender].t++;
+					corrections[aspect][p.gender].b++;
+				} else if (c.initiator.includes("c")) {  ////
+					corrections[aspect].e.m++;
+					corrections[aspect].e.t++;
+					corrections[aspect][p.gender].m++;
+					corrections[aspect][p.gender].t++;
+				} else {
+					corrections[aspect].e[c.initiator]++;
+					corrections[aspect][p.gender][c.initiator]++;
+				}
+			}
+		});
+	});
+}
+
 
 
 function reheatPizza() {
@@ -351,10 +473,8 @@ function reheatPizza() {
 	*/
 	//// retrieves filtering information
 	let checkboxes = {};
-	// establishes default information
-	let combinedData = {};
-	let corrections = {};
-	let significance = {};
+
+	// resets conversation data
 	S.forEach(["grandTotal", "uniqueTotal", "length", "density", "participation", "mood", "topic", "theirSmile", "mySmile"], function (infoName) {
 		combinedData[infoName] = {};
 		corrections[infoName] = {};
@@ -379,141 +499,90 @@ function reheatPizza() {
 					S.forEach(place.convos, function (convo) {
 						let c = parsePizzaConvo(convo);
 						if (Object.keys(c).length > 0 && filterPizzaConvo(c)) {  //// if the conversation should be counted
-							if (false && c.density) {  //// if adjusting the number of conversations
-								//// adjusts the conversation count and length
+							if (!isNaN(c.density) && c.density < 3) {  //// if adjusting the number of conversations
+								// adjusts the conversation count and length
 								let adjConvos = [];
+								let newCount = 0;
+								let newLength = 0;
 								if (c.density == 2) {
 									if (c.length < 2) {
-										
+										newCount = 2;
+										newLength = 0;
 									} else if (c.length == 2) {
-
+										newCount = 3;
+										newLength = 1;
 									} else if (c.length == 3) {
-
+										newCount = 4;
+										newLength = 2;
 									}
 								} else if (c.density == 1) {
 									if (c.length < 2) {
-										
+										newCount = 2;
+										newLength = 0;
 									} else if (c.length == 2) {
-
+										newCount = 2;
+										newLength = 1
 									} else if (c.length == 3) {
-
+										newCount = 4;
+										newLength = 1;
 									}
 								}
-							} else {
-								// sets the grand total information
-								S.forEach(c.people, function (p) {
-									combinedData.grandTotal.e.e++;
-									combinedData.grandTotal[p.gender].e++;
-									significance.grandTotal.e.e.push(1);
-									significance.grandTotal[p.gender].e.push(1);
-									if (c.initiator == "c4") {
-										combinedData.grandTotal.e.m++;
-										combinedData.grandTotal.e.t++;
-										combinedData.grandTotal.e.b++;
-										combinedData.grandTotal[p.gender].m++;
-										combinedData.grandTotal[p.gender].t++;
-										combinedData.grandTotal[p.gender].b++;
-										significance.grandTotal.e.m.push(1);
-										significance.grandTotal.e.t.push(1);
-										significance.grandTotal.e.b.push(1);
-										significance.grandTotal[p.gender].m.push(1);
-										significance.grandTotal[p.gender].t.push(1);
-										significance.grandTotal[p.gender].b.push(1);
-									} else if (c.initiator.includes("c")) {  ////
-										combinedData.grandTotal.e.m++;
-										combinedData.grandTotal.e.t++;
-										combinedData.grandTotal[p.gender].m++;
-										combinedData.grandTotal[p.gender].t++;
-										significance.grandTotal.e.m.push(1);
-										significance.grandTotal.e.t.push(1);
-										significance.grandTotal[p.gender].m.push(1);
-										significance.grandTotal[p.gender].t.push(1);
-									} else {
-										combinedData.grandTotal.e[c.initiator]++;
-										combinedData.grandTotal[p.gender][c.initiator]++;
-										significance.grandTotal.e[c.initiator].push(1);
-										significance.grandTotal[p.gender][c.initiator].push(1);
+								//// should better help correct c initiator conversations
+								if (c.initiator.includes("c")) {  // if there were multiple initiators
+									if (c.initiator != "c2" && newCount < 3) {
+										newCount = 3;
 									}
-									// sets the unique total information
-									if (p.name.search(/^a\d*$|^c\d*$/) == -1) {  // if I would recognize the person
-										significance.uniqueTotal.e.e.push(p.name);
-										significance.uniqueTotal[p.gender].e.push(p.name);
-										if (c.initiator == "c4") {
-											significance.uniqueTotal.e.m.push(p.name);
-											significance.uniqueTotal.e.t.push(p.name);
-											significance.uniqueTotal.e.b.push(p.name);
-											significance.uniqueTotal[p.gender].m.push(p.name);
-											significance.uniqueTotal[p.gender].t.push(p.name);
-											significance.uniqueTotal[p.gender].b.push(p.name);
-										} else if (c.initiator.includes("c")) {  ////
-											significance.uniqueTotal.e.m.push(p.name);
-											significance.uniqueTotal.e.t.push(p.name);
-											significance.uniqueTotal[p.gender].m.push(p.name);
-											significance.uniqueTotal[p.gender].t.push(p.name);
-										} else {
-											significance.uniqueTotal.e[c.initiator].push(p.name);
-											significance.uniqueTotal[p.gender][c.initiator].push(p.name);
-										}
-									}
-									// sets many other aspects
-									S.forEach(["length", "density", "participation", "mood", "topic", "theirSmile", "mySmile"], function (aspect) {
-										combinedData[aspect].e.e += c[aspect];
-										combinedData[aspect][p.gender].e += c[aspect];
-										significance[aspect].e.e.push(c[aspect]);
-										significance[aspect][p.gender].e.push(c[aspect]);
-										if (c.initiator == "c4") {
-											combinedData[aspect].e.m += c[aspect];
-											combinedData[aspect].e.t += c[aspect];
-											combinedData[aspect].e.b += c[aspect];
-											combinedData[aspect][p.gender].m += c[aspect];
-											combinedData[aspect][p.gender].t += c[aspect];
-											combinedData[aspect][p.gender].b += c[aspect];
-											significance[aspect].e.m.push(c[aspect]);
-											significance[aspect].e.t.push(c[aspect]);
-											significance[aspect].e.b.push(c[aspect]);
-											significance[aspect][p.gender].m.push(c[aspect]);
-											significance[aspect][p.gender].t.push(c[aspect]);
-											significance[aspect][p.gender].b.push(c[aspect]);
-										} else if (c.initiator.includes("c")) {  ////
-											combinedData[aspect].e.m += c[aspect];
-											combinedData[aspect].e.t += c[aspect];
-											combinedData[aspect][p.gender].m += c[aspect];
-											combinedData[aspect][p.gender].t += c[aspect];
-											significance[aspect].e.m.push(c[aspect]);
-											significance[aspect].e.t.push(c[aspect]);
-											significance[aspect][p.gender].m.push(c[aspect]);
-											significance[aspect][p.gender].t.push(c[aspect]);
-										} else {
-											combinedData[aspect].e[c.initiator] += c[aspect];
-											combinedData[aspect][p.gender][c.initiator] += c[aspect];
-											significance[aspect].e[c.initiator].push(c[aspect]);
-											significance[aspect][p.gender][c.initiator].push(c[aspect]);
-										}
-									});
-									// determines corrections for averages containing incomplete/inconsistent data
-									S.forEach(["density", "participation", "mood", "topic", "theirSmile", "mySmile"], function (aspect) {
-										if (aspect == "-" || ["topic", "theirSmile", "mySmile"].includes(aspect) && c[aspect] == 0) {
-											corrections[aspect].e.e++;
-											corrections[aspect][p.gender].e++;
-											if (c.initiator == "c4") {
-												corrections[aspect].e.m++;
-												corrections[aspect].e.t++;
-												corrections[aspect].e.b++;
-												corrections[aspect][p.gender].m++;
-												corrections[aspect][p.gender].t++;
-												corrections[aspect][p.gender].b++;
-											} else if (c.initiator.includes("c")) {  ////
-												corrections[aspect].e.m++;
-												corrections[aspect].e.t++;
-												corrections[aspect][p.gender].m++;
-												corrections[aspect][p.gender].t++;
-											} else {
-												corrections[aspect].e[c.initiator]++;
-												corrections[aspect][p.gender][c.initiator]++;
+								}
+								S.forEach(newCount, function (_, index) {
+									let convoCopy = JSON.parse(JSON.stringify(c));
+									convoCopy.length = newLength;
+									if (c.initiator.includes("c")) {  // if there were multiple initiators
+										//// tries to reduce initiator repetition
+										if (c.initiator == "c1") {
+											if (newCount == 2) {
+												convoCopy.initiator = ["t", "c2"][index];
+											} else if (newCount == 3) {
+												convoCopy.initiator = ["t", "t", "m"][index];
+											} else if (newCount == 4) {
+												convoCopy.initiator = ["t", "t", "t", "m"][index];
+											} else if (newCount == 5) {
+												convoCopy.initiator = ["t", "t", "t", "m", "m"][index];
+											}
+										} else if (c.initiator == "c2") {
+											if (newCount % 2 == 0) {
+												convoCopy.initiator = ["m", "t"][index % 2];
+											} else if (index < newCount - 1) {
+												convoCopy.initiator = ["m", "t"][index % 2];
+											}
+										} else if (c.initiator == "c3") {
+											if (newCount == 2) {
+												convoCopy.initiator = ["m", "c2"][index];
+											} else if (newCount == 3) {
+												convoCopy.initiator = ["m", "m", "t"][index];
+											} else if (newCount == 4) {
+												convoCopy.initiator = ["m", "m", "m", "t"][index];
+											} else if (newCount == 5) {
+												convoCopy.initiator = ["m", "m", "m", "t", "t"][index];
+											}
+										} else if (c.initiator == "c4") {
+											if (newCount == 2) {
+												convoCopy.initiator = ["c2", "c4"][index];
+											} else if (newCount == 3) {
+												convoCopy.initiator = ["m", "t", "b"][index];
+											} else if (newCount == 4) {
+												convoCopy.initiator = ["m", "t", "b", "c4"][index];
+											} else if (newCount == 5) {
+												convoCopy.initiator = ["m", "m", "t", "t", "b"][index];
 											}
 										}
-									});
+									}
+									adjConvos.push(convoCopy);
 								});
+								S.forEach(adjConvos, function (c2) {
+									addToppings(c2);
+								});
+							} else {
+								addToppings(c);
 							}
 						}
 					});
