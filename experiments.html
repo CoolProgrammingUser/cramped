@@ -176,7 +176,9 @@
 
 				// makes sure calculations can be done to the arrays
 				if (array1.length <= 1 || array2.length <= 1) {
-					console.error("One of the provided arrays didn't contain enough data.");
+					console.warn("One of the provided arrays didn't contain enough data.");
+					console.log(array1);
+					console.log(array2);
 					return NaN;
 				}
 				// determines which array contains the higher or lower values
@@ -2274,7 +2276,7 @@
 							Results
 						</div>
 						<section>
-							&chi;<sup>2</sup> values &ge; 3.841 are significant. Lower similarity percentages are more likely to be significant, but I've found similarities of 100% to be significant, so the value of the percentages are questionable. Clicking on values in the bottom row will display the datasets to use in significance-testing software. The box underneath the dropdown allows you to do math to the dropdown aspect by typing in operations followed by other aspects or numbers. The math applies only left-to-right, <strong>not</strong> according to the typical order of operations. Color coding of the cells indicates how many interactions are considered while calculating the values. More red = less interactions = less reliable data. Yellow is centered on 12 interactions, and pure green starts at 20.
+							&chi;<sup>2</sup> values &ge; 3.841 are significant. Lower similarity percentages are more likely to be significant, but I've found similarities of 100% to be significant, so the value of the percentages are questionable. Clicking on values in the bottom row will display the datasets to use in significance-testing software. The box underneath the dropdown allows you to do math to the dropdown aspect by typing in operations followed by other aspects or numbers. The math applies only left-to-right, <strong>not</strong> according to the typical order of operations. Color coding of the cells indicates how many interactions are considered while calculating the values (according to the grand total which occasionally doesn't correspond). More red = less interactions = less reliable data. Yellow is centered on 12 interactions, and pure green starts at 20.
 						</section>
 						<select id="pizzaAspectSelector">
 							<option value="grandTotal" selected>

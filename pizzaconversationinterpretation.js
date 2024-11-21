@@ -63,7 +63,10 @@ function parsePizzaConvo(dataList) {
 		convo.participation = Number(dataList[6]);
 		if (dataList.length == 9) {
 			convo.mood = Number(dataList[7]);  //// this may not be proper
-			if (true) {  //// if should guess at the other values
+			convo.topic = 0;
+			convo.theirSmile = 0;
+			convo.mySmile = 0;
+			if (false) {  //// if should guess at the other values
 				convo.topic = 2 + Number(dataList[8]);
 				convo.theirSmile = 0;
 				convo.mySmile = 0;
@@ -441,7 +444,7 @@ function addToppings(c) {
 		});
 		// determines corrections for averages containing incomplete/inconsistent data
 		S.forEach(["density", "participation", "mood", "topic", "theirSmile", "mySmile"], function (aspect) {
-			if (aspect == "-" || ["topic", "theirSmile", "mySmile"].includes(aspect) && c[aspect] == 0) {
+			if (aspect == "-" || ["mood", "topic", "theirSmile", "mySmile"].includes(aspect) && c[aspect] == 0) {
 				corrections[aspect].e.e++;
 				corrections[aspect][p.gender].e++;
 				if (c.initiator == "c4") {
@@ -665,7 +668,11 @@ function reheatPizza() {
 		let row = pizzaAggregate.getElementsByTagName("tr")[["m", "f", "e"].indexOf(gender) + 1];
 		S.forEach(set, function (value, initiator) {
 			let cell = row.getElementsByTagName("td")[["m", "t", "b", "a", "i", "e"].indexOf(initiator)];
-			cell.textContent = value;
+			if (value === null) {
+				cell.textContent = "-";
+			} else {
+				cell.textContent = value;
+			}
 			let total = combinedData.grandTotal[gender][initiator];
 			let yellowThreshold = 12;
 			let greenThreshold = 20;
