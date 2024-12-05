@@ -67,7 +67,7 @@ function parsePizzaConvo(dataList) {
 			convo.theirSmile = 0;
 			convo.mySmile = 0;
 			if (false) {  //// if should guess at the other values
-				convo.topic = 2 + Number(dataList[8]);
+				convo.topic = 2 + Number(dataList[8]);  // 2.5 or 3 or a different algorithm would probably be more accurate but still biasing
 				convo.theirSmile = 0;
 				convo.mySmile = 0;
 			}
@@ -271,7 +271,7 @@ function filterPizzaConvo(convo) {
 		shouldCountConvo = false;
 	}
 	// filters based on how I think I should feel during the conversation
-	S.forEach([1, 2, 3, 4, 5, 6, 7], function (number) {
+	S.forEach([0, 1, 2, 3, 4, 5, 6, 7], function (number) {
 		if (!S.getId("topic" + number + "PizzaConvos").checked && convo.topic == number) {
 			shouldCountConvo = false;
 		}
@@ -722,6 +722,48 @@ function reheatPizza() {
 
 reheatPizza();
 
+
+
+var pizzaConvoCheckboxes = [
+	"coworkerPizzaConvos", "otherPeoplePizzaConvos",
+	"pizzaPersonFilterCheckbox",
+	"workPizzaConvos", "homePizzaConvos", "otherPizzaConvos",
+	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
+	"broadcastedPizzaConvos", "joinedPizzaConvos", "continuedPizzaConvos",
+	"length0PizzaConvos", "length1PizzaConvos", "length2PizzaConvos", "length3PizzaConvos",
+	"mood1PizzaConvos", "mood2PizzaConvos", "mood3PizzaConvos", "mood4PizzaConvos", "mood5PizzaConvos", "mood6PizzaConvos", "mood7PizzaConvos",
+	"topic0PizzaConvos", "topic1PizzaConvos", "topic2PizzaConvos", "topic3PizzaConvos", "topic4PizzaConvos", "topic5PizzaConvos", "topic6PizzaConvos", "topic7PizzaConvos",
+	"theirSmile0PizzaConvos", "theirSmile1PizzaConvos", "theirSmile2PizzaConvos", "theirSmile3PizzaConvos",
+	"mySmile0PizzaConvos", "mySmile1PizzaConvos", "mySmile2PizzaConvos", "mySmile3PizzaConvos"
+]
+
+S.listen("theUsual", "click", function () {  // to bring up the standard filtering for the best comparison of gender differences
+	S.getId("pizzaConvoDateRange").value = "";
+	S.getId("pizzaPersonFilterList").value = "";
+	S.forEach(pizzaConvoCheckboxes, function (box) {
+		S.getId(box).checked = true;
+	});
+	S.forEach([
+		"otherPeoplePizzaConvos", "pizzaPersonFilterCheckbox", "homePizzaConvos", "otherPizzaConvos", "practicalPizzaConvos", "continuedPizzaConvos", "length0PizzaConvos"
+	], function (box) {
+		S.getId(box).checked = false;
+	});
+	reheatPizza();
+});
+S.listen("theUsual", ["dblclick", "touchhold"], function () {  // to bring up filtering to highlight my home life
+	S.getId("pizzaConvoDateRange").value = "";
+	S.getId("pizzaPersonFilterList").value = "";
+	S.forEach(pizzaConvoCheckboxes, function (box) {
+		S.getId(box).checked = true;
+	});
+	S.forEach([
+		"coworkerPizzaConvos", "pizzaPersonFilterCheckbox", "workPizzaConvos", "otherPizzaConvos", "practicalPizzaConvos", "continuedPizzaConvos"
+	], function (box) {
+		S.getId(box).checked = false;
+	});
+	reheatPizza();
+});
+
 S.listen("fullPizzaConvoDateRange", "click", function () {
 	S.getId("pizzaConvoDateRange").value = "";
 	reheatPizza();
@@ -744,18 +786,7 @@ S.listen("lastHalfOfPizzaConvoData", "click", function () {
 });
 
 S.listen([
-	"pizzaConvoDateRange",
-	"coworkerPizzaConvos", "otherPeoplePizzaConvos",
-	"pizzaPersonFilterCheckbox", "pizzaPersonFilterList",
-	"workPizzaConvos", "homePizzaConvos", "otherPizzaConvos",
-	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
-	"broadcastedPizzaConvos", "joinedPizzaConvos", "continuedPizzaConvos",
-	"length0PizzaConvos", "length1PizzaConvos", "length2PizzaConvos", "length3PizzaConvos",
-	"mood1PizzaConvos", "mood2PizzaConvos", "mood3PizzaConvos", "mood4PizzaConvos", "mood5PizzaConvos", "mood6PizzaConvos", "mood7PizzaConvos",
-	"topic1PizzaConvos", "topic2PizzaConvos", "topic3PizzaConvos", "topic4PizzaConvos", "topic5PizzaConvos", "topic6PizzaConvos", "topic7PizzaConvos",
-	"theirSmile0PizzaConvos", "theirSmile1PizzaConvos", "theirSmile2PizzaConvos", "theirSmile3PizzaConvos",
-	"mySmile0PizzaConvos", "mySmile1PizzaConvos", "mySmile2PizzaConvos", "mySmile3PizzaConvos",
-	"pizzaAspectSelector", "mathematicalPie"
-], "change", function () {
+	"pizzaConvoDateRange", "pizzaPersonFilterList", "pizzaAspectSelector", "mathematicalPie"
+].concat(pizzaConvoCheckboxes), "change", function () {
 	reheatPizza();
 });
