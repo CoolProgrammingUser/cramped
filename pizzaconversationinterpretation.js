@@ -211,6 +211,12 @@ function filterPizzaConvo(convo) {
 			}
 		}
 	}
+	// filters people based on age
+	S.forEach(convo.people, function (person) {
+		if (!S.getId("age" + person.age + "PizzaConvos").checked) {
+			shouldCountConvo = false;
+		}
+	});
 	// filters based on the purpose of the conversation (incomplete)
 	if (!convo.purpose) {
 		shouldCountConvo = false;
@@ -725,9 +731,10 @@ reheatPizza();
 
 
 var pizzaConvoCheckboxes = [
+	"workPizzaConvos", "homePizzaConvos", "otherPizzaConvos",
 	"coworkerPizzaConvos", "otherPeoplePizzaConvos",
 	"pizzaPersonFilterCheckbox",
-	"workPizzaConvos", "homePizzaConvos", "otherPizzaConvos",
+	"age0PizzaConvos", "age1PizzaConvos", "age2PizzaConvos", "age3PizzaConvos", "age4PizzaConvos", "age5PizzaConvos",
 	"casualPizzaConvos", "greetingPizzaConvos", "practicalPizzaConvos",
 	"broadcastedPizzaConvos", "joinedPizzaConvos", "continuedPizzaConvos",
 	"length0PizzaConvos", "length1PizzaConvos", "length2PizzaConvos", "length3PizzaConvos",
@@ -744,7 +751,7 @@ S.listen("theUsual", "click", function () {  // to bring up the standard filteri
 		S.getId(box).checked = true;
 	});
 	S.forEach([
-		"otherPeoplePizzaConvos", "pizzaPersonFilterCheckbox", "homePizzaConvos", "otherPizzaConvos", "practicalPizzaConvos", "continuedPizzaConvos", "length0PizzaConvos"
+		"homePizzaConvos", "otherPizzaConvos", "otherPeoplePizzaConvos", "pizzaPersonFilterCheckbox", "practicalPizzaConvos", "continuedPizzaConvos", "length0PizzaConvos"
 	], function (box) {
 		S.getId(box).checked = false;
 	});
@@ -757,7 +764,7 @@ S.listen("theUsual", ["dblclick", "touchhold"], function () {  // to bring up fi
 		S.getId(box).checked = true;
 	});
 	S.forEach([
-		"coworkerPizzaConvos", "pizzaPersonFilterCheckbox", "workPizzaConvos", "otherPizzaConvos", "practicalPizzaConvos", "continuedPizzaConvos"
+		"workPizzaConvos", "otherPizzaConvos", "coworkerPizzaConvos", "pizzaPersonFilterCheckbox", "practicalPizzaConvos", "continuedPizzaConvos"
 	], function (box) {
 		S.getId(box).checked = false;
 	});
