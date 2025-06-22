@@ -5,6 +5,9 @@ body {
 	background: -moz-repeating-linear-gradient(#0e0, white 100vh, #0e0 200vh);  /* Firefox 3.6 to 15 */
 	background: repeating-linear-gradient(#0e0, white 100vh, #0e0 200vh);  /* standard syntax */
 }
+body::before, body::after {
+	display: none;  /* hides any weird stuff from seasonal styling */
+}
 body.navigation {
 	background: #5ee; /* For browsers that do not support gradients */
 	background: -webkit-repeating-radial-gradient(circle, #5ee, white 15%, #5ee 30%);  /* For Safari 5.1 to 6.0 */
